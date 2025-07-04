@@ -176,6 +176,8 @@ def generate_index_html(directory):
     for item in items:
         if item == "index.html":
             continue
+        if item in [".git", "assets"]:
+            continue
         path = os.path.join(directory, item)
         if os.path.isdir(path):
             icon = "📁"
