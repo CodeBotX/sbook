@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập A: Sửa Lỗi Từ/Cụm Từ</title>
+    <!-- Các thư viện bên ngoài (Bootstrap, Font Awesome, Google Fonts) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Liên kết đến tệp CSS chung của bạn (giả định nằm trong assets/css/) -->
+    <!-- Đường dẫn này giả định tệp HTML này nằm trong thư mục con cấp 2 (e.g., folder_cap_1/folder_cap_2/bai_tap_A.html) -->
+    <link rel="stylesheet" href="../../assets/css/style.css"> 
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập A: Sửa Lỗi Từ/Cụm Từ</h1>
+        </div>
+        <h2>Các từ và cụm từ in đậm trong mỗi câu là sai. Viết từ hoặc cụm từ đúng.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> The words and phrases in bold in each sentence are wrong. Write the correct word or phrase.
+            <br>
+            <strong>Hướng dẫn:</strong> Điền từ hoặc cụm từ đúng vào chỗ trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="fillInTheBlanksForm">
+            <!-- Câu hỏi 1 -->
+            <div class="question-item">
+                <p class="question-text">1. Every year, several prizes <input type="text" id="q1" name="q1" class="form-control d-inline-block w-auto"> to the best students.</p>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <!-- Câu hỏi 2 -->
+            <div class="question-item">
+                <p class="question-text">2. When the pizza was <input type="text" id="q2" name="q2" class="form-control d-inline-block w-auto">, it was cold.</p>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <!-- Câu hỏi 3 -->
+            <div class="question-item">
+                <p class="question-text">3. You will be <input type="text" id="q3" name="q3" class="form-control d-inline-block w-auto"> when you can come in.</p>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <!-- Câu hỏi 4 -->
+            <div class="question-item">
+                <p class="question-text">4. That song <input type="text" id="q4" name="q4" class="form-control d-inline-block w-auto"> on the radio very often, is it?</p>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <!-- Câu hỏi 5 -->
+            <div class="question-item">
+                <p class="question-text">5. Your money was <input type="text" id="q5" name="q5" class="form-control d-inline-block w-auto"> out of your bag?</p>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <!-- Câu hỏi 6 -->
+            <div class="question-item">
+                <p class="question-text">6. We <input type="text" id="q6" name="q6" class="form-control d-inline-block w-auto"> to use a dictionary in the exam yesterday.</p>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <!-- Câu hỏi 7 -->
+            <div class="question-item">
+                <p class="question-text">7. That film won't <input type="text" id="q7" name="q7" class="form-control d-inline-block w-auto"> in our local cinema for a long time.</p>
+                <i class="feedback-icon fa-solid" id="icon7"></i>
+            </div>
+
+            <!-- Câu hỏi 8 -->
+            <div class="question-item">
+                <p class="question-text">8. <input type="text" id="q8" name="q8" class="form-control d-inline-block w-auto"> up from the station on Saturday?</p>
+                <i class="feedback-icon fa-solid" id="icon8"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Liên kết đến các tệp JavaScript logic chung -->
+    <script src="../../assets/js/data-handler.js"></script>
+    <script src="../../assets/js/fill-in-the-blank-handler.js"></script>
+    <script src="../../assets/js/exercise-logic.js"></script>
+
+    <!-- Script định nghĩa dữ liệu cụ thể cho bài tập này -->
+    <script>
+        // Thêm type cho mỗi câu hỏi để xác định handler
+        const exerciseAData = {
+            'q1': {
+                type: 'fill_in_the_blank',
+                text_parts: ['Every year, several prizes ', ' to the best students.'],
+                correct_answer: 'are given',
+                fullSentence: 'Every year, several prizes are given to the best students.',
+                translation: 'Hàng năm, một số giải thưởng được trao cho những học sinh giỏi nhất.',
+                explanation: 'Câu này cần thì hiện tại đơn dạng bị động (Present Simple Passive) vì "prizes" (giải thưởng) là đối tượng nhận hành động "give" (trao), và hành động này diễn ra hàng năm (thường xuyên).',
+                grammar_note: 'Cấu trúc: S + am/is/are + V3/ed.'
+            },
+            'q2': {
+                type: 'fill_in_the_blank',
+                text_parts: ['When the pizza was ', ', it was cold.'],
+                correct_answer: 'delivered',
+                fullSentence: 'When the pizza was delivered, it was cold.',
+                translation: 'Khi bánh pizza được giao, nó đã bị nguội.',
+                explanation: 'Câu này cần thì quá khứ đơn dạng bị động (Past Simple Passive) vì "pizza" là đối tượng nhận hành động "deliver" (giao), và hành động đã xảy ra trong quá khứ.',
+                grammar_note: 'Cấu trúc: S + was/were + V3/ed.'
+            },
+            'q3': {
+                type: 'fill_in_the_blank',
+                text_parts: ['You will be ', ' when you can come in.'],
+                correct_answer: 'told',
+                fullSentence: 'You will be told when you can come in.',
+                translation: 'Bạn sẽ được cho biết khi nào bạn có thể vào.',
+                explanation: 'Câu này cần thì tương lai đơn dạng bị động (Future Simple Passive) vì "you" là đối tượng nhận hành động "tell" (nói/cho biết).',
+                grammar_note: 'Cấu trúc: S + will be + V3/ed.'
+            },
+            'q4': {
+                type: 'fill_in_the_blank',
+                text_parts: ['That song ', ' on the radio very often, is it?'],
+                correct_answer: 'isn\'t played',
+                fullSentence: 'That song isn\'t played on the radio very often, is it?',
+                translation: 'Bài hát đó không thường được phát trên đài, phải không?',
+                explanation: 'Câu này cần thì hiện tại đơn dạng bị động (Present Simple Passive) ở thể phủ định vì "song" là đối tượng nhận hành động "play" (phát), và hành động này diễn ra không thường xuyên. "doesn\'t played" là cấu trúc sai.',
+                grammar_note: 'Cấu trúc phủ định hiện tại đơn bị động: S + am/is/are + not + V3/ed.'
+            },
+            'q5': {
+                type: 'fill_in_the_blank',
+                text_parts: ['Your money was ', ' out of your bag?'],
+                correct_answer: 'stolen',
+                fullSentence: 'Your money was stolen out of your bag?',
+                translation: 'Tiền của bạn đã bị trộm khỏi túi phải không?',
+                explanation: 'Câu này cần thì quá khứ đơn dạng bị động (Past Simple Passive) vì "money" là đối tượng nhận hành động "steal" (trộm), và hành động đã xảy ra trong quá khứ. "was stealing" là dạng chủ động.',
+                grammar_note: 'Cấu trúc: S + was/were + V3/ed.'
+            },
+            'q6': {
+                type: 'fill_in_the_blank',
+                text_parts: ['We ', ' to use a dictionary in the exam yesterday.'],
+                correct_answer: 'weren\'t allowed',
+                fullSentence: 'We weren\'t allowed to use a dictionary in the exam yesterday.',
+                translation: 'Chúng tôi không được phép sử dụng từ điển trong kỳ thi ngày hôm qua.',
+                explanation: 'Câu này cần thì quá khứ đơn dạng bị động (Past Simple Passive) ở thể phủ định vì có từ "yesterday" chỉ thời gian trong quá khứ, và "we" là đối tượng nhận sự cho phép. "haven\'t allowed" là thì hiện tại hoàn thành chủ động, không phù hợp với ngữ cảnh.',
+                grammar_note: 'Cấu trúc phủ định quá khứ đơn bị động: S + wasn\'t/weren\'t + V3/ed.'
+            },
+            'q7': {
+                type: 'fill_in_the_blank',
+                text_parts: ['That film won\'t ', ' in our local cinema for a long time.'],
+                correct_answer: 'be shown',
+                fullSentence: 'That film won\'t be shown in our local cinema for a long time.',
+                translation: 'Bộ phim đó sẽ không được chiếu ở rạp chiếu phim địa phương của chúng ta trong một thời gian dài.',
+                explanation: 'Câu này cần thì tương lai đơn dạng bị động (Future Simple Passive) ở thể phủ định vì "film" là đối tượng nhận hành động "show" (chiếu), và hành động này sẽ không xảy ra trong tương lai.',
+                grammar_note: 'Cấu trúc phủ định tương lai đơn bị động: S + won\'t be + V3/ed.'
+            },
+            'q8': {
+                type: 'fill_in_the_blank',
+                text_parts: [' ', ' up from the station on Saturday?'],
+                correct_answer: 'Will I be picked',
+                fullSentence: 'Will I be picked up from the station on Saturday?',
+                translation: 'Tôi sẽ được đón từ nhà ga vào thứ Bảy chứ?',
+                explanation: 'Câu này là câu hỏi ở thì tương lai đơn dạng bị động (Future Simple Passive) vì "I" là đối tượng nhận hành động "pick up" (đón). Cần đảo "Will" lên đầu câu để tạo câu hỏi.',
+                grammar_note: 'Cấu trúc câu hỏi tương lai đơn bị động: Will + S + be + V3/ed?'
+            }
+        };
+        // Gán dữ liệu câu hỏi cho biến toàn cục
+        setQuestionsData(exerciseAData);
+        
+        // Hàm wrapper để tương thích với code hiện tại
+        function submitAnswers() {
+            submitAnswersLogic('fillInTheBlanksForm', 'scoreDisplay', 'detailedSolution');
+        }
+        
+        function resetExercise() {
+            resetExerciseLogic('fillInTheBlanksForm', 'scoreDisplay', 'detailedSolution');
+        }
+    </script>
+</body>
+</html>

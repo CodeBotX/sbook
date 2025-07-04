@@ -220,6 +220,9 @@ def generate_index_html(directory):
 
 def walk_and_generate(root="."):
     for dirpath, _, _ in os.walk(root):
+        # Bỏ qua thư mục assets và git
+        if "assets" in dirpath.split(os.sep) or ".git" in dirpath.split(os.sep):
+            continue
         generate_index_html(dirpath)
 
 if __name__ == "__main__":

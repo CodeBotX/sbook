@@ -1,0 +1,337 @@
+/* General body styling */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f2f5;
+    line-height: 1.6;
+    color: #333;
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+/* Main container for the exercise */
+.container-main {
+    max-width: 900px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background-color: #ffffff;
+    padding: 35px 45px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* Instruction section styling */
+.instruction {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #555;
+    text-align: center;
+    line-height: 1.5;
+    background-color: #e8f5e9;
+    border-left: 6px solid #4CAF50;
+    padding: 20px 25px;
+    border-radius: 10px;
+    color: #388e3c;
+}
+
+/* Styling for each exercise question */
+.question-item {
+    margin-bottom: 30px; /* Increased margin for better separation */
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fdfdfd;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.question-item .question-text {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center; /* Align input with text */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+.question-item .question-text input[type="text"] {
+    display: inline-block;
+    width: 150px; /* Adjust width as needed */
+    margin: 0 5px;
+    padding: 0 5px; /* Reduced padding for underline effect */
+    border: none; /* Remove all borders */
+    border-bottom: 1px solid #ced4da; /* Only bottom border */
+    border-radius: 0; /* Remove border-radius for a clean underline */
+    font-size: 1em;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: transparent; /* Ensure background is transparent */
+}
+.question-item .question-text input[type="text"]:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: none; /* Remove box-shadow on focus for underline effect */
+    border-bottom-width: 2px; /* Thicker underline on focus */
+}
+/* Styles for correct and incorrect input feedback */
+.question-item .question-text input[type="text"].is-correct {
+    border-color: #198754;
+    box-shadow: none; /* Remove box-shadow */
+    border-bottom-width: 2px; /* Thicker underline for correct */
+}
+.question-item .question-text input[type="text"].is-incorrect {
+    border-color: #dc3545;
+    box-shadow: none; /* Remove box-shadow */
+    border-bottom-width: 2px; /* Thicker underline for incorrect */
+}
+
+
+/* Feedback icons */
+.feedback-icon {
+    margin-left: 10px;
+    font-size: 1.2em;
+    display: none; /* Hidden by default, shown by JS */
+    vertical-align: middle;
+}
+.feedback-icon.text-success { color: #198754; }
+.feedback-icon.text-danger { color: #dc3545; }
+
+/* Buttons styling */
+.buttons .btn {
+    padding: 12px 30px;
+    font-size: 1.1em;
+    margin: 0 15px;
+    border-radius: 30px; /* Pill-shaped buttons */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Score display styling */
+.score-display {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: #007bff;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #e6f7ff;
+    border: 1px solid #b3e0ff;
+    display: none; /* Hidden by default */
+}
+/* Score display color coding */
+.score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+.score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+.score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+/* Detailed solution section styling */
+.solution-section {
+    margin-top: 40px;
+    padding-top: 25px;
+    border-top: 1px dashed #ced4da;
+    display: none; /* Hidden by default */
+}
+.solution-section h2 {
+    color: #007bff;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-align: center;
+}
+.solution-list .solution-item {
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-left: 5px solid #007bff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.solution-list .solution-item .question-text-solution {
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 8px;
+}
+.solution-list .solution-item .correct-answer-text {
+    font-weight: 700;
+    color: #198754;
+    text-decoration: underline;
+    margin-right: 5px;
+}
+.solution-list .solution-item .grammar-explanation {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-top: 5px;
+    background-color: #e9ecef;
+    padding: 8px 12px;
+    border-radius: 5px;
+    border-left: 3px solid #6c757d;
+}
+.solution-list .solution-item .translation {
+    font-style: italic;
+    color: #6c757d;
+    font-size: 0.95em;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #e0e0e0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .container-main {
+        padding: 25px;
+        margin: 20px auto;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    .instruction {
+        font-size: 0.95em;
+        padding: 15px;
+    }
+    .question-item {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    .question-item .question-text {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    .question-item .question-text input[type="text"] {
+        width: 100px; /* Smaller width for inputs on small screens */
+        margin: 0 3px;
+        padding: 0 4px; /* Adjusted padding */
+    }
+    .buttons .btn {
+        font-size: 1.1em;
+        padding: 10px 25px;
+        margin: 0 8px;
+    }
+    .score-display {
+        font-size: 1.3em;
+        padding: 12px;
+    }
+    .solution-list .solution-item {
+        padding: 10px 15px;
+    }
+    .solution-list .solution-item .grammar-explanation,
+    .solution-list .solution-item .translation {
+        font-size: 0.85em;
+    }
+}
+
+/* For multiple choice questions */
+.question-item .blank-for-mc {
+    font-weight: bold; /* Make the blank number stand out */
+    color: #007bff; /* A distinct color for the blank number */
+    padding: 0 5px;
+}
+
+.options-group {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px; /* Row gap, column gap */
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.option-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+}
+
+.option-label:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.option-label input[type="radio"] {
+    margin-right: 8px;
+    /* Có thể tùy chỉnh kiểu radio button nếu muốn, ví dụ: */
+    /* appearance: none; */
+    /* -webkit-appearance: none; */
+    /* width: 18px; */
+    /* height: 18px; */
+    /* border: 2px solid #ced4da; */
+    /* border-radius: 50%; */
+    /* outline: none; */
+    /* cursor: pointer; */
+    /* position: relative; */
+    /* top: 1px; */
+    /* background-color: #fff; */
+}
+
+/* Style for the text of the option */
+.option-label .option-text {
+    font-weight: 500;
+    color: #34495e;
+}
+
+/* Selected state for multiple choice */
+.option-label input[type="radio"]:checked + .option-text {
+    font-weight: 700;
+    color: #007bff; /* Blue for selected */
+}
+
+/* Feedback styles for multiple choice */
+.option-label.is-correct {
+    background-color: #d1e7dd; /* Light green */
+    border-color: #198754; /* Green border */
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+.option-label.is-incorrect {
+    background-color: #f8d7da; /* Light red */
+    border-color: #dc3545; /* Red border */
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+/* To show the correct answer when user chose incorrectly */
+.option-label.correct-but-not-selected {
+    background-color: #e6f7ff; /* Light blue */
+    border-color: #007bff; /* Blue border */
+    font-weight: 700;
+    color: #007bff;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+/* Responsive adjustments for smaller screens (add/adjust as needed for new elements) */
+@media (max-width: 768px) {
+    /* ... (giữ nguyên các điều chỉnh hiện có của bạn) ... */
+    .options-group {
+        flex-direction: column; /* Stack options vertically on small screens */
+        gap: 8px;
+    }
+    .option-label {
+        width: 100%; /* Full width for options */
+        padding: 6px 10px;
+    }
+} 

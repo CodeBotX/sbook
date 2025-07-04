@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp: Thể Bị Động (Bài 10)</title>
+    <!-- Các thư viện bên ngoài (Bootstrap, Font Awesome, Google Fonts) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Liên kết đến tệp CSS chung của bạn (đường dẫn đã được cập nhật) -->
+    <link rel="stylesheet" href="../../assets/css/style.css"> 
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp: Thể Bị Động</h1>
+        </div>
+        <h2>Hoàn thành bằng cách sử dụng dạng bị động đúng của động từ trong ngoặc.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Complete using the correct passive form of the verbs in brackets.
+            <br>
+            <strong>Hướng dẫn:</strong> Hoàn thành bằng cách sử dụng dạng bị động đúng của động từ trong ngoặc.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="fillInTheBlanksForm">
+            <!-- Câu hỏi 1 -->
+            <div class="question-item">
+                <p class="question-text">1. When people <input type="text" id="q1a" name="q1a" class="form-control d-inline-block w-auto"> (arrest), they <input type="text" id="q1b" name="q1b" class="form-control d-inline-block w-auto"> (take) to the police station.</p>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <!-- Câu hỏi 2 -->
+            <div class="question-item">
+                <p class="question-text">2. Milk <input type="text" id="q2" name="q2" class="form-control d-inline-block w-auto"> (usually / keep) in the fridge.</p>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <!-- Câu hỏi 3 -->
+            <div class="question-item">
+                <p class="question-text">3. <input type="text" id="q3a" name="q3a" class="form-control d-inline-block w-auto"> (we / tell) what's in next week's test?</p>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <!-- Câu hỏi 4 -->
+            <div class="question-item">
+                <p class="question-text">4. How did people communicate over long distances before the phone <input type="text" id="q4" name="q4" class="form-control d-inline-block w-auto"> (invent)?</p>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <!-- Câu hỏi 5 -->
+            <div class="question-item">
+                <p class="question-text">5. <input type="text" id="q5a" name="q5a" class="form-control d-inline-block w-auto"> (you / allow) to come to the party next Saturday?</p>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <!-- Câu hỏi 6 -->
+            <div class="question-item">
+                <p class="question-text">6. You <input type="text" id="q6" name="q6" class="form-control d-inline-block w-auto"> (give) your exam results next Monday.</p>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <!-- Câu hỏi 7 -->
+            <div class="question-item">
+                <p class="question-text">7. <input type="text" id="q7a" name="q7a" class="form-control d-inline-block w-auto"> (Aidan's bike / find) yesterday?</p>
+                <i class="feedback-icon fa-solid" id="icon7"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Liên kết đến các tệp JavaScript logic chung -->
+    <script src="../../assets/js/data-handler.js"></script>
+    <script src="../../assets/js/fill-in-the-blank-handler.js"></script>
+    <script src="../../assets/js/exercise-logic.js"></script>
+
+    <!-- Script định nghĩa dữ liệu cụ thể cho bài tập này -->
+    <script>
+        // Thêm type cho mỗi câu hỏi để xác định handler
+        const passiveVoiceExerciseData = {
+            'q1a': {
+                type: 'fill_in_the_blank',
+                text_parts: ['When people ', ' (arrest), they ', ' (take) to the police station.'],
+                correct_answer_parts: ['are arrested', 'are taken'],
+                fullSentence: 'When people are arrested, they are taken to the police station.',
+                translation: 'Khi người ta bị bắt, họ được đưa đến đồn cảnh sát.',
+                explanation: 'Cả hai mệnh đề đều ở thì hiện tại đơn dạng bị động (Present Simple Passive) vì diễn tả hành động mang tính thường xuyên hoặc sự thật. "People" là chủ ngữ số nhiều, nên dùng "are arrested" và "are taken".',
+                grammar_note: 'Cấu trúc Hiện tại đơn bị động: S + am/is/are + V3/ed.'
+            },
+            'q2': {
+                type: 'fill_in_the_blank',
+                text_parts: ['Milk ', ' (usually / keep) in the fridge.'],
+                correct_answer: 'is usually kept',
+                fullSentence: 'Milk is usually kept in the fridge.',
+                translation: 'Sữa thường được giữ trong tủ lạnh.',
+                explanation: 'Thì hiện tại đơn dạng bị động (Present Simple Passive) với trạng từ "usually" vì diễn tả một hành động thường xuyên hoặc một quy tắc. "Milk" là danh từ không đếm được, dùng "is".',
+                grammar_note: 'Cấu trúc Hiện tại đơn bị động với trạng từ: S + am/is/are + trạng từ + V3/ed.'
+            },
+            'q3a': {
+                type: 'fill_in_the_blank',
+                text_parts: [' ', ' (we / tell) what\'s in next week\'s test?'],
+                correct_answer: 'Will we be told',
+                fullSentence: 'Will we be told what\'s in next week\'s test?',
+                translation: 'Chúng ta sẽ được cho biết những gì có trong bài kiểm tra tuần tới chứ?',
+                explanation: 'Thì tương lai đơn dạng bị động (Future Simple Passive) vì câu hỏi về một hành động sẽ xảy ra trong tương lai ("next week\'s test"). "We" là chủ ngữ, dùng "will be told".',
+                grammar_note: 'Cấu trúc Tương lai đơn bị động: S + will be + V3/ed.'
+            },
+            'q4': {
+                type: 'fill_in_the_blank',
+                text_parts: ['How did people communicate over long distances before the phone ', ' (invent)?'],
+                correct_answer: 'was invented',
+                fullSentence: 'How did people communicate over long distances before the phone was invented?',
+                translation: 'Mọi người liên lạc đường dài bằng cách nào trước khi điện thoại được phát minh?',
+                explanation: 'Thì quá khứ đơn dạng bị động (Past Simple Passive) vì hành động "invent" (phát minh) đã xảy ra trong quá khứ và điện thoại là đối tượng nhận hành động. "The phone" là chủ ngữ số ít, dùng "was invented".',
+                grammar_note: 'Cấu trúc Quá khứ đơn bị động: S + was/were + V3/ed.'
+            },
+            'q5a': {
+                type: 'fill_in_the_blank',
+                text_parts: [' ', ' (you / allow) to come to the party next Saturday?'],
+                correct_answer: 'Are you allowed',
+                fullSentence: 'Are you allowed to come to the party next Saturday?',
+                translation: 'Bạn có được phép đến bữa tiệc vào thứ Bảy tới không?',
+                explanation: 'Thì hiện tại đơn dạng bị động (Present Simple Passive) dùng để hỏi về việc được phép hay không (cũng có thể hiểu là quy tắc hoặc sự cho phép ở hiện tại/tương lai gần). "You" là chủ ngữ, dùng "are allowed".',
+                grammar_note: 'Cấu trúc Hiện tại đơn bị động cho câu hỏi: Am/Is/Are + S + V3/ed?'
+            },
+            'q6': {
+                type: 'fill_in_the_blank',
+                text_parts: ['You ', ' (give) your exam results next Monday.'],
+                correct_answer: 'will be given',
+                fullSentence: 'You will be given your exam results next Monday.',
+                translation: 'Bạn sẽ được trao kết quả thi vào thứ Hai tới.',
+                explanation: 'Thì tương lai đơn dạng bị động (Future Simple Passive) vì hành động "give" (trao) sẽ xảy ra trong tương lai ("next Monday") và "you" là người nhận hành động. Dùng "will be given".',
+                grammar_note: 'Cấu trúc Tương lai đơn bị động: S + will be + V3/ed.'
+            },
+            'q7a': {
+                type: 'fill_in_the_blank',
+                text_parts: [' ', ' (Aidan\'s bike / find) yesterday?'],
+                correct_answer: 'Was Aidan\'s bike found',
+                fullSentence: 'Was Aidan\'s bike found yesterday?',
+                translation: 'Chiếc xe đạp của Aidan được tìm thấy hôm qua phải không?',
+                explanation: 'Thì quá khứ đơn dạng bị động (Past Simple Passive) cho câu hỏi vì hành động "find" (tìm thấy) đã xảy ra trong quá khứ ("yesterday") và "Aidan\'s bike" là đối tượng nhận hành động. "Aidan\'s bike" là chủ ngữ số ít, dùng "Was".',
+                grammar_note: 'Cấu trúc Quá khứ đơn bị động cho câu hỏi: Was/Were + S + V3/ed?'
+            }
+        };
+        // Gán dữ liệu câu hỏi cho biến toàn cục
+        setQuestionsData(passiveVoiceExerciseData);
+        
+        // Hàm wrapper để tương thích với code hiện tại
+        function submitAnswers() {
+            submitAnswersLogic('fillInTheBlanksForm', 'scoreDisplay', 'detailedSolution');
+        }
+        
+        function resetExercise() {
+            resetExerciseLogic('fillInTheBlanksForm', 'scoreDisplay', 'detailedSolution');
+        }
+    </script>
+</body>
+</html>

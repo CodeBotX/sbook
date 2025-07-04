@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập D & E: Trả Lời & Hoàn Thành Câu</title>
+    <!-- Các thư viện bên ngoài (Bootstrap, Font Awesome, Google Fonts) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Liên kết đến tệp CSS chung của bạn (giả định nằm trong assets/css/) -->
+    <!-- Đường dẫn này giả định tệp HTML này nằm trong thư mục con cấp 2 (e.g., folder_cap_1/folder_cap_2/bai_tap_D_E.html) -->
+    <link rel="stylesheet" href="../../assets/css/style.css"> 
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập D & E</h1>
+        </div>
+        
+        <!-- Phần Bài Tập D -->
+        <h2>Bài D: Trả lời các câu hỏi bằng ý tưởng của riêng bạn.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Answer the questions using your own ideas.
+            <br>
+            <strong>Hướng dẫn:</strong> Trả lời các câu hỏi bằng ý tưởng của riêng bạn.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án mẫu và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="fillInTheBlanksFormD">
+            <!-- Câu hỏi D1 -->
+            <div class="question-item">
+                <p class="question-text">1. Where are cars usually fixed?</p>
+                <p class="question-text">They <input type="text" id="qD1" name="qD1" class="form-control d-inline-block w-auto"></p>
+                <i class="feedback-icon fa-solid" id="iconD1"></i>
+            </div>
+
+            <!-- Câu hỏi D2 -->
+            <div class="question-item">
+                <p class="question-text">2. Where will the next Olympic Games be held?</p>
+                <p class="question-text">I <input type="text" id="qD2" name="qD2" class="form-control d-inline-block w-auto"></p>
+                <i class="feedback-icon fa-solid" id="iconD2"></i>
+            </div>
+
+            <!-- Câu hỏi D3 -->
+            <div class="question-item">
+                <p class="question-text">3. Who are Oscars usually awarded to?</p>
+                <p class="question-text">They <input type="text" id="qD3" name="qD3" class="form-control d-inline-block w-auto"></p>
+                <i class="feedback-icon fa-solid" id="iconD3"></i>
+            </div>
+
+            <!-- Câu hỏi D4 -->
+            <div class="question-item">
+                <p class="question-text">4. What are you not allowed to do at school?</p>
+                <p class="question-text">I <input type="text" id="qD4" name="qD4" class="form-control d-inline-block w-auto"></p>
+                <i class="feedback-icon fa-solid" id="iconD4"></i>
+            </div>
+
+            <!-- Câu hỏi D5 -->
+            <div class="question-item">
+                <p class="question-text">5. What were you given for your birthday last year?</p>
+                <p class="question-text">I <input type="text" id="qD5" name="qD5" class="form-control d-inline-block w-auto"></p>
+                <i class="feedback-icon fa-solid" id="iconD5"></i>
+            </div>
+
+            <!-- Câu hỏi D6 -->
+            <div class="question-item">
+                <p class="question-text">6. What will you be given for your next birthday?</p>
+                <p class="question-text">I'll probably <input type="text" id="qD6" name="qD6" class="form-control d-inline-block w-auto"></p>
+                <i class="feedback-icon fa-solid" id="iconD6"></i>
+            </div>
+            
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers('D')">Kiểm tra Bài D</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise('D')">Làm lại Bài D</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplayD" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolutionD">
+            <h2>Lời giải chi tiết và Giải thích Bài D</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+
+        <hr class="my-5"> <!-- Đường phân cách giữa hai bài tập -->
+
+        <!-- Phần Bài Tập E -->
+        <h2>Bài E: Hoàn thành mỗi câu thứ hai sử dụng từ đã cho, sao cho nó có nghĩa tương tự như câu đầu tiên. Viết từ hai đến năm từ.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Complete each second sentence using the word given, so that it has a similar meaning to the first sentence. Write between two and five words.
+            <br>
+            <strong>Hướng dẫn:</strong> Hoàn thành mỗi câu thứ hai sử dụng từ đã cho, sao cho nó có nghĩa tương tự như câu đầu tiên. Viết từ hai đến năm từ.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="fillInTheBlanksFormE">
+            <!-- Câu hỏi E1 -->
+            <div class="question-item">
+                <p class="question-text">1. Will they send the letters first class? <strong>sent</strong></p>
+                <p class="question-text">Will the letters <input type="text" id="qE1" name="qE1" class="form-control d-inline-block w-auto"> first class?</p>
+                <i class="feedback-icon fa-solid" id="iconE1"></i>
+            </div>
+
+            <!-- Câu hỏi E2 -->
+            <div class="question-item">
+                <p class="question-text">2. I'm not sure if they eat pizza in China. <strong>is</strong></p>
+                <p class="question-text">I'm not sure if pizza <input type="text" id="qE2" name="qE2" class="form-control d-inline-block w-auto"> in China.</p>
+                <i class="feedback-icon fa-solid" id="iconE2"></i>
+            </div>
+
+            <!-- Câu hỏi E3 -->
+            <div class="question-item">
+                <p class="question-text">3. Someone told me that they don't make cars in the UK anymore. <strong>made</strong></p>
+                <p class="question-text">Someone told me that cars <input type="text" id="qE3" name="qE3" class="form-control d-inline-block w-auto"> in the UK anymore.</p>
+                <i class="feedback-icon fa-solid" id="iconE3"></i>
+            </div>
+
+            <!-- Câu hỏi E4 -->
+            <div class="question-item">
+                <p class="question-text">4. Do they usually feed the animals three times a day? <strong>fed</strong></p>
+                <p class="question-text">Are the animals usually <input type="text" id="qE4" name="qE4" class="form-control d-inline-block w-auto"> three times a day?</p>
+                <i class="feedback-icon fa-solid" id="iconE4"></i>
+            </div>
+
+            <!-- Câu hỏi E5 -->
+            <div class="question-item">
+                <p class="question-text">5. Mr Jones is ill, so he won't give us a geography test today! <strong>be</strong></p>
+                <p class="question-text">Mr Jones is ill, so we won't <input type="text" id="qE5" name="qE5" class="form-control d-inline-block w-auto"> a geography test today!</p>
+                <i class="feedback-icon fa-solid" id="iconE5"></i>
+            </div>
+
+            <!-- Câu hỏi E6 -->
+            <div class="question-item">
+                <p class="question-text">6. Did they take her to hospital in an ambulance? <strong>she</strong></p>
+                <p class="question-text">Was <input type="text" id="qE6" name="qE6" class="form-control d-inline-block w-auto"> to hospital in an ambulance?</p>
+                <i class="feedback-icon fa-solid" id="iconE6"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers('E')">Kiểm tra Bài E</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise('E')">Làm lại Bài E</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplayE" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolutionE">
+            <h2>Lời giải chi tiết và Giải thích Bài E</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Liên kết đến các tệp JavaScript logic chung -->
+    <script src="../../assets/js/data-handler.js"></script>
+    <script src="../../assets/js/fill-in-the-blank-handler.js"></script>
+    <script src="../../assets/js/exercise-logic.js"></script>
+
+    <!-- Script định nghĩa dữ liệu cụ thể cho bài tập này -->
+    <script>
+        // Dữ liệu cho Bài D
+        const exerciseDData = {
+            'qD1': {
+                type: 'fill_in_the_blank',
+                text_parts: ['They ', '.'],
+                correct_answer: 'are usually fixed at a garage.', // Sample answer
+                fullSentence: 'They are usually fixed at a garage.',
+                translation: 'Chúng thường được sửa ở một gara.',
+                explanation: 'Đây là câu hỏi mở. Đáp án mẫu là "are usually fixed at a garage." Bạn có thể trả lời bằng ý tưởng của riêng mình, miễn là câu trả lời đúng ngữ pháp và phù hợp với ngữ cảnh.',
+                grammar_note: 'Sử dụng thì hiện tại đơn bị động để diễn tả một hành động thường xuyên.'
+            },
+            'qD2': {
+                type: 'fill_in_the_blank',
+                text_parts: ['I ', '.'],
+                correct_answer: 'think the next Olympic Games will be held in Los Angeles.', // Sample answer
+                fullSentence: 'I think the next Olympic Games will be held in Los Angeles.',
+                translation: 'Tôi nghĩ Thế vận hội tiếp theo sẽ được tổ chức ở Los Angeles.',
+                explanation: 'Đây là câu hỏi mở. Đáp án mẫu là "think the next Olympic Games will be held in Los Angeles." Bạn có thể trả lời bằng ý tưởng của riêng mình, miễn là câu trả lời đúng ngữ pháp và phù hợp với ngữ cảnh.',
+                grammar_note: 'Sử dụng thì tương lai đơn bị động để diễn tả một sự kiện sẽ diễn ra trong tương lai.'
+            },
+            'qD3': {
+                type: 'fill_in_the_blank',
+                text_parts: ['They ', '.'],
+                correct_answer: 'are usually awarded to actors, directors, and other film professionals.', // Sample answer
+                fullSentence: 'They are usually awarded to actors, directors, and other film professionals.',
+                translation: 'Chúng thường được trao cho các diễn viên, đạo diễn và các chuyên gia điện ảnh khác.',
+                explanation: 'Đây là câu hỏi mở. Đáp án mẫu là "are usually awarded to actors, directors, and other film professionals." Bạn có thể trả lời bằng ý tưởng của riêng mình, miễn là câu trả lời đúng ngữ pháp và phù hợp với ngữ cảnh.',
+                grammar_note: 'Sử dụng thì hiện tại đơn bị động để diễn tả một hành động thường xuyên.'
+            },
+            'qD4': {
+                type: 'fill_in_the_blank',
+                text_parts: ['I ', '.'],
+                correct_answer: 'am not allowed to use my phone in class.', // Sample answer
+                fullSentence: 'I am not allowed to use my phone in class.',
+                translation: 'Tôi không được phép sử dụng điện thoại trong lớp.',
+                explanation: 'Đây là câu hỏi mở. Đáp án mẫu là "am not allowed to use my phone in class." Bạn có thể trả lời bằng ý tưởng của riêng mình, miễn là câu trả lời đúng ngữ pháp và phù hợp với ngữ cảnh.',
+                grammar_note: 'Sử dụng cấu trúc bị động "be allowed to do something" để diễn tả sự cho phép.'
+            },
+            'qD5': {
+                type: 'fill_in_the_blank',
+                text_parts: ['I ', '.'],
+                correct_answer: 'was given a new book for my birthday last year.', // Sample answer
+                fullSentence: 'I was given a new book for my birthday last year.',
+                translation: 'Tôi đã được tặng một cuốn sách mới vào sinh nhật năm ngoái.',
+                explanation: 'Đây là câu hỏi mở. Đáp án mẫu là "was given a new book for my birthday last year." Bạn có thể trả lời bằng ý tưởng của riêng mình, miễn là câu trả lời đúng ngữ pháp và phù hợp với ngữ cảnh.',
+                grammar_note: 'Sử dụng thì quá khứ đơn bị động để diễn tả một hành động đã xảy ra trong quá khứ.'
+            },
+            'qD6': {
+                type: 'fill_in_the_blank',
+                text_parts: ['I\'ll probably ', '.'],
+                correct_answer: 'be given some money for my next birthday.', // Sample answer
+                fullSentence: 'I\'ll probably be given some money for my next birthday.',
+                translation: 'Tôi có lẽ sẽ được tặng một ít tiền vào sinh nhật tiếp theo.',
+                explanation: 'Đây là câu hỏi mở. Đáp án mẫu là "be given some money for my next birthday." Bạn có thể trả lời bằng ý tưởng của riêng mình, miễn là câu trả lời đúng ngữ pháp và phù hợp với ngữ cảnh.',
+                grammar_note: 'Sử dụng thì tương lai đơn bị động để diễn tả một hành động sẽ xảy ra trong tương lai.'
+            }
+        };
+
+        // Dữ liệu cho Bài E
+        const exerciseEData = {
+            'qE1': {
+                type: 'fill_in_the_blank',
+                text_parts: ['Will the letters ', ' first class?'],
+                correct_answer: 'be sent',
+                fullSentence: 'Will the letters be sent first class?',
+                translation: 'Những lá thư sẽ được gửi hạng nhất chứ?',
+                explanation: 'Biến đổi câu chủ động sang bị động ở thì tương lai đơn. "Send" (gửi) thành "be sent". Đáp án phải từ 2 đến 5 từ.',
+                grammar_note: 'Cấu trúc bị động tương lai đơn: will be + V3/ed.'
+            },
+            'qE2': {
+                type: 'fill_in_the_blank',
+                text_parts: ['I\'m not sure if pizza ', ' in China.'],
+                correct_answer: 'is eaten',
+                fullSentence: 'I\'m not sure if pizza is eaten in China.',
+                translation: 'Tôi không chắc liệu pizza có được ăn ở Trung Quốc không.',
+                explanation: 'Biến đổi câu chủ động sang bị động ở thì hiện tại đơn. "Eat" (ăn) thành "is eaten". Đáp án phải từ 2 đến 5 từ.',
+                grammar_note: 'Cấu trúc bị động hiện tại đơn: is/are + V3/ed.'
+            },
+            'qE3': {
+                type: 'fill_in_the_blank',
+                text_parts: ['Someone told me that cars ', ' in the UK anymore.'],
+                correct_answer: 'aren\'t made',
+                fullSentence: 'Someone told me that cars aren\'t made in the UK anymore.',
+                translation: 'Ai đó nói với tôi rằng ô tô không còn được sản xuất ở Anh nữa.',
+                explanation: 'Biến đổi câu chủ động sang bị động ở thì hiện tại đơn, dạng phủ định. "Don\'t make" (không sản xuất) thành "aren\'t made". "Cars" là số nhiều nên dùng "aren\'t". Đáp án phải từ 2 đến 5 từ.',
+                grammar_note: 'Cấu trúc bị động hiện tại đơn phủ định: isn\'t/aren\'t + V3/ed.'
+            },
+            'qE4': {
+                type: 'fill_in_the_blank',
+                text_parts: ['Are the animals usually ', ' three times a day?'],
+                correct_answer: 'fed',
+                fullSentence: 'Are the animals usually fed three times a day?',
+                translation: 'Những con vật thường được cho ăn ba lần một ngày phải không?',
+                explanation: 'Biến đổi câu chủ động sang bị động ở thì hiện tại đơn, dạng câu hỏi. "Feed" (cho ăn) thành "fed". Đáp án phải từ 2 đến 5 từ.',
+                grammar_note: 'Cấu trúc bị động hiện tại đơn câu hỏi: Am/Is/Are + S + V3/ed?'
+            },
+            'qE5': {
+                type: 'fill_in_the_blank',
+                text_parts: ['Mr Jones is ill, so we won\'t ', ' a geography test today!'],
+                correct_answer: 'be given',
+                fullSentence: 'Mr Jones is ill, so we won\'t be given a geography test today!',
+                translation: 'Ông Jones bị ốm, vì vậy chúng tôi sẽ không được cho làm bài kiểm tra địa lý hôm nay!',
+                explanation: 'Biến đổi câu chủ động sang bị động ở thì tương lai đơn. "Won\'t give" (sẽ không cho) thành "won\'t be given". Đáp án phải từ 2 đến 5 từ.',
+                grammar_note: 'Cấu trúc bị động tương lai đơn phủ định: won\'t be + V3/ed.'
+            },
+            'qE6': {
+                type: 'fill_in_the_blank',
+                text_parts: ['Was ', ' to hospital in an ambulance?'],
+                correct_answer: 'she taken',
+                fullSentence: 'Was she taken to hospital in an ambulance?',
+                translation: 'Cô ấy đã được đưa đến bệnh viện bằng xe cứu thương phải không?',
+                explanation: 'Biến đổi câu chủ động sang bị động ở thì quá khứ đơn, dạng câu hỏi. "Take" (đưa) thành "taken". Đáp án phải từ 2 đến 5 từ.',
+                grammar_note: 'Cấu trúc bị động quá khứ đơn câu hỏi: Was/Were + S + V3/ed?'
+            }
+        };
+
+        // Hàm submitAnswers và resetExercise trong common.js cần được cập nhật
+        // để chấp nhận tham số 'exerciseType' ('D' hoặc 'E')
+        // để biết bộ dữ liệu nào cần sử dụng và phần tử nào cần cập nhật.
+        // Tôi sẽ cập nhật common.js để hỗ trợ điều này.
+        
+        // Khởi tạo dữ liệu cho bài tập D khi trang tải
+        // Lưu ý: common.js cần được sửa đổi để quản lý nhiều bộ questionsData.
+        // Hoặc, mỗi nút "Kiểm tra" sẽ gọi một hàm khác nhau với dữ liệu riêng.
+
+        // Để đơn giản hóa, tôi sẽ sửa đổi common.js để chấp nhận một tham số `formId`
+        // và `questionsDataMap` để nó có thể xử lý nhiều bộ câu hỏi.
+        // Hoặc, cách dễ nhất là có 2 hàm submitAnswersD() và submitAnswersE()
+        // và 2 hàm resetExerciseD() và resetExerciseE()
+        // Mỗi hàm sẽ gọi setQuestionsData() trước khi gọi logic chính.
+
+        // Để giữ common.js chung nhất, chúng ta sẽ tạo các hàm wrapper ở đây
+        // và truyền dữ liệu cụ thể vào common.js.
+
+        function submitAnswers(exerciseType) {
+            let currentQuestionsData;
+            let formId;
+            let scoreDisplayId;
+            let solutionSectionId;
+
+            if (exerciseType === 'D') {
+                currentQuestionsData = exerciseDData;
+                formId = 'fillInTheBlanksFormD';
+                scoreDisplayId = 'scoreDisplayD';
+                solutionSectionId = 'detailedSolutionD';
+            } else if (exerciseType === 'E') {
+                currentQuestionsData = exerciseEData;
+                formId = 'fillInTheBlanksFormE';
+                scoreDisplayId = 'scoreDisplayE';
+                solutionSectionId = 'detailedSolutionE';
+            } else {
+                console.error('Invalid exercise type:', exerciseType);
+                return;
+            }
+            
+            // Gọi hàm logic chính từ common.js, truyền dữ liệu và ID cần thiết
+            // common.js cần được điều chỉnh để chấp nhận các tham số này.
+            // Tạm thời, tôi sẽ gọi setQuestionsData và sau đó gọi submitAnswers() không tham số
+            // và sửa common.js để nó lấy dữ liệu từ questionsData toàn cục.
+            setQuestionsData(currentQuestionsData);
+            // Cần một cách để truyền formId, scoreDisplayId, solutionSectionId vào common.js
+            // Cách tốt nhất là sửa đổi common.js để nó nhận các ID này làm tham số
+            // hoặc để nó tự tìm kiếm dựa trên một cấu trúc DOM cụ thể.
+            // Để đơn giản nhất, tôi sẽ sửa đổi submitAnswers và resetExercise trong common.js
+            // để chúng nhận formId, scoreDisplayId, solutionSectionId làm tham số.
+            
+            // Tạm thời, tôi sẽ gọi trực tiếp logic từ common.js và truyền các ID.
+            // common.js cần được sửa đổi để có các hàm submitAnswersLogic và resetExerciseLogic.
+            submitAnswersLogic(formId, scoreDisplayId, solutionSectionId);
+        }
+
+        function resetExercise(exerciseType) {
+            let formId;
+            let scoreDisplayId;
+            let solutionSectionId;
+
+            if (exerciseType === 'D') {
+                formId = 'fillInTheBlanksFormD';
+                scoreDisplayId = 'scoreDisplayD';
+                solutionSectionId = 'detailedSolutionD';
+            } else if (exerciseType === 'E') {
+                formId = 'fillInTheBlanksFormE';
+                scoreDisplayId = 'scoreDisplayE';
+                solutionSectionId = 'detailedSolutionE';
+            } else {
+                console.error('Invalid exercise type:', exerciseType);
+                return;
+            }
+            resetExerciseLogic(formId, scoreDisplayId, solutionSectionId);
+        }
+
+        // Cần cập nhật common.js để có các hàm submitAnswersLogic và resetExerciseLogic
+        // và biến questionsData toàn cục được sử dụng bởi chúng.
+        // Tôi sẽ cung cấp bản cập nhật common.js sau.
+    </script>
+</body>
+</html>
