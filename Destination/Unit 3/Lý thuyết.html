@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Từ vựng Tiếng Anh: Fun and games (Unit 3)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-bottom: 50px;
+        }
+        .container-main {
+            max-width: 960px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-left: 5px solid #007bff;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #28a745;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-bottom: 1px solid #28a745;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        .section-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .vocab-table, .exercise-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+        .vocab-table th, .vocab-table td,
+        .exercise-table th, .exercise-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .vocab-table th, .exercise-table th {
+            background-color: #e9ecef;
+            font-weight: 600;
+            color: #34495e;
+        }
+        .vocab-table td strong {
+            color: #0056b3;
+        }
+        .example {
+            font-style: italic;
+            color: #5a5a5a;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #dc3545;
+        }
+
+        /* Flashcard Styles */
+        .flashcard-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .flashcard {
+            width: 250px;
+            height: 150px;
+            perspective: 1000px; /* For 3D flip effect */
+        }
+        .flashcard-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+        .flashcard-front {
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #0056b3;
+        }
+        .flashcard-back {
+            background-color: #28a745;
+            color: white;
+            transform: rotateY(180deg);
+            border: 2px solid #1e7e34;
+        }
+
+        /* Exercise Styles */
+        .exercise-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .exercise-item p {
+            margin-bottom: 10px;
+        }
+        .exercise-item input[type="text"] {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 8px;
+            width: 200px;
+            max-width: 100%;
+            margin-left: 10px;
+            font-size: 1em;
+        }
+        .exercise-feedback {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .correct { color: #28a745; }
+        .incorrect { color: #dc3545; }
+        .is-valid { border-color: #28a745 !important; }
+        .is-invalid { border-color: #dc3545 !important; }
+
+
+        .matching-exercise-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .matching-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #cceeff;
+        }
+        .matching-item {
+            padding: 10px 15px;
+            background-color: #e9f5ff;
+            border: 1px solid #a3daff;
+            border-radius: 5px;
+            cursor: grab;
+            transition: background-color 0.2s;
+            font-weight: 500;
+        }
+        .matching-item.dragging {
+            opacity: 0.7;
+            border: 2px dashed #007bff;
+        }
+        .matching-item.correct-match {
+            background-color: #d4edda; /* Light green */
+            border-color: #28a745; /* Green */
+            color: #155724; /* Darker green text */
+        }
+        .matching-item.incorrect-match {
+            background-color: #f8d7da; /* Light red */
+            border-color: #dc3545; /* Red */
+            color: #721c24; /* Darker red text */
+        }
+        .matching-item.drop-target {
+            border: 2px dashed #007bff;
+            background-color: #e6f7ff;
+        }
+        .matching-target {
+            padding: 10px 15px;
+            background-color: #e9ecef;
+            border: 1px dashed #ced4da;
+            border-radius: 5px;
+            min-height: 45px; /* To prevent collapse when empty */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-style: italic;
+            color: #6c757d;
+        }
+        .matching-target.has-item {
+            border: 1px solid #a3daff; /* Solid border when it has an item */
+            background-color: #e9f5ff; /* Slightly different background */
+            color: #333; /* Darker text */
+            font-style: normal; /* Remove italic */
+        }
+        .matching-target.hover {
+            background-color: #dbeeff;
+            border-color: #007bff;
+        }
+        .check-match-btn, .reset-match-btn {
+            margin-top: 20px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px 25px;
+            font-size: 1em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container-main {
+                margin: 20px 10px;
+                padding: 20px;
+            }
+            .vocab-table, .exercise-table {
+                font-size: 0.9em;
+            }
+            .vocab-table th, .vocab-table td,
+            .exercise-table th, .exercise-table td {
+                padding: 8px;
+            }
+            .flashcard {
+                width: 180px;
+                height: 120px;
+            }
+            .flashcard-front, .flashcard-back {
+                font-size: 1em;
+            }
+            .exercise-item input[type="text"] {
+                width: 150px;
+                margin-top: 5px;
+                display: block;
+            }
+            .matching-exercise-grid {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <span class="badge bg-primary fs-6 me-2">Unit 3</span>
+            <h1>Từ vựng: Fun and games</h1>
+        </div>
+        <p class="lead text-center text-muted">Chào mừng bạn đến với bài học từ vựng về chủ đề "Vui chơi và trò chơi".</p>
+
+        <div class="section-box">
+            <h2>1. Từ vựng chủ đề (Topic Vocabulary)</h2>
+            <p>Dưới đây là các từ vựng chính liên quan đến chủ đề "Fun and games".</p>
+            <table class="vocab-table">
+                <thead>
+                    <tr>
+                        <th>Từ (Word)</th>
+                        <th>Loại từ & Định nghĩa (Type & Definition)</th>
+                        <th>Ví dụ (Example)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>beat</strong> (v)</td><td>đánh bại, thắng</td><td>Our team <span class="example">beat</span> them by two goals.</td></tr>
+                    <tr><td><strong>board game</strong> (n phr)</td><td>trò chơi cờ bàn (ví dụ: cờ vua, cờ tỉ phú)</td><td>Let's play a <span class="example">board game</span> tonight.</td></tr>
+                    <tr><td><strong>captain</strong> (n)</td><td>đội trưởng</td><td>She's the <span class="example">captain</span> of the football team.</td></tr>
+                    <tr><td><strong>challenge</strong> (v, n)</td><td>thử thách (động từ, danh từ)</td><td>It will be a big <span class="example">challenge</span> to climb that mountain.</td></tr>
+                    <tr><td><strong>champion</strong> (n)</td><td>nhà vô địch</td><td>He is the reigning world <span class="example">champion</span>.</td></tr>
+                    <tr><td><strong>cheat</strong> (v)</td><td>gian lận</td><td>He always tries to <span class="example">cheat</span> when playing cards.</td></tr>
+                    <tr><td><strong>classical music</strong> (n phr)</td><td>nhạc cổ điển</td><td>Do you enjoy <span class="example">classical music</span>?</td></tr>
+                    <tr><td><strong>club</strong> (n)</td><td>câu lạc bộ</td><td>I joined a photography <span class="example">club</span> last year.</td></tr>
+                    <tr><td><strong>coach</strong> (n)</td><td>huấn luyện viên</td><td>Our basketball <span class="example">coach</span> is very strict.</td></tr>
+                    <tr><td><strong>competition</strong> (n)</td><td>cuộc thi đấu</td><td>She won first prize in the singing <span class="example">competition</span>.</td></tr>
+                    <tr><td><strong>concert</strong> (n)</td><td>buổi hòa nhạc</td><td>We're going to a rock <span class="example">concert</span> tonight.</td></tr>
+                    <tr><td><strong>defeat</strong> (v, n)</td><td>đánh bại, sự thất bại (động từ, danh từ)</td><td>They suffered a heavy <span class="example">defeat</span> in the final match.</td></tr>
+                    <tr><td><strong>entertaining</strong> (adj)</td><td>thú vị, mang tính giải trí</td><td>The movie was very <span class="example">entertaining</span>.</td></tr>
+                    <tr><td><strong>folk music</strong> (n phr)</td><td>nhạc dân gian</td><td>I love listening to traditional <span class="example">folk music</span>.</td></tr>
+                    <tr><td><strong>group</strong> (n)</td><td>nhóm, ban nhạc</td><td>The music <span class="example">group</span> will perform next week.</td></tr>
+                    <tr><td><strong>gym</strong> (n)</td><td>phòng tập thể hình</td><td>I go to the <span class="example">gym</span> three times a week.</td></tr>
+                    <tr><td><strong>have fun</strong> (v phr)</td><td>vui vẻ</td><td>We always <span class="example">have fun</span> when we're together.</td></tr>
+                    <tr><td><strong>interest</strong> (v, n)</td><td>làm cho hứng thú, sự quan tâm (động từ, danh từ)</td><td>History <span class="example">interests</span> me a lot.</td></tr>
+                    <tr><td><strong>member</strong> (n)</td><td>thành viên</td><td>Are you a <span class="example">member</span> of this club?</td></tr>
+                    <tr><td><strong>opponent</strong> (n)</td><td>đối thủ</td><td>He beat his <span class="example">opponent</span> in the final.</td></tr>
+                    <tr><td><strong>organise</strong> (v)</td><td>tổ chức</td><td>She helped <span class="example">organise</span> the party.</td></tr>
+                    <tr><td><strong>pleasure</strong> (n)</td><td>niềm vui, sự thích thú</td><td>It was a great <span class="example">pleasure</span> to meet you.</td></tr>
+                    <tr><td><strong>referee</strong> (n)</td><td>trọng tài</td><td>The <span class="example">referee</span> blew his whistle.</td></tr>
+                    <tr><td><strong>rhythm</strong> (n)</td><td>nhịp điệu</td><td>I love the <span class="example">rhythm</span> of Latin music.</td></tr>
+                    <tr><td><strong>risk</strong> (v, n)</td><td>mạo hiểm, rủi ro (động từ, danh từ)</td><td>He took a big <span class="example">risk</span> by investing all his money.</td></tr>
+                    <tr><td><strong>score</strong> (v, n)</td><td>ghi điểm, tỉ số</td><td>What's the <span class="example">score</span>?</td></tr>
+                    <tr><td><strong>support</strong> (v, n)</td><td>ủng hộ, sự ủng hộ (động từ, danh từ)</td><td>Which team do you <span class="example">support</span>?</td></tr>
+                    <tr><td><strong>team</strong> (n)</td><td>đội</td><td>Our <span class="example">team</span> played very well.</td></tr>
+                    <tr><td><strong>train</strong> (v)</td><td>huấn luyện, tập luyện</td><td>She trains every day for the marathon.</td></tr>
+                    <tr><td><strong>video game</strong> (n phr)</td><td>trò chơi điện tử</td><td>My brother loves playing <span class="example">video games</span>.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-box">
+            <h2>2. Cụm động từ (Phrasal Verbs)</h2>
+            <table class="vocab-table">
+                <thead>
+                    <tr>
+                        <th>Phrasal Verb</th>
+                        <th>Định nghĩa (Definition)</th>
+                        <th>Ví dụ (Example)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>carry on</strong></td><td>continue (tiếp tục)</td><td><span class="example">Carry on</span> with your work while I'm away.</td></tr>
+                    <tr><td><strong>eat out</strong></td><td>eat at a restaurant (ăn ở nhà hàng)</td><td>We decided to <span class="example">eat out</span> tonight.</td></tr>
+                    <tr><td><strong>give up</strong></td><td>stop doing something you do regularly (từ bỏ thói quen)</td><td>I'm trying to <span class="example">give up</span> smoking.</td></tr>
+                    <tr><td><strong>join in</strong></td><td>participate, take part (tham gia vào)</td><td>Everyone should <span class="example">join in</span> the activities.</td></tr>
+                    <tr><td><strong>send off</strong></td><td>make a player leave a game (e.g. football) (đuổi cầu thủ ra khỏi sân - trong bóng đá)</td><td>The referee <span class="example">sent off</span> the player for a foul.</td></tr>
+                    <tr><td><strong>take up</strong></td><td>start (a hobby, sport, etc.) (bắt đầu một sở thích, môn thể thao)</td><td>I want to <span class="example">take up</span> tennis.</td></tr>
+                    <tr><td><strong>turn down</strong></td><td>lower the volume of (giảm âm lượng)</td><td>Please <span class="example">turn down</span> the music.</td></tr>
+                    <tr><td><strong>turn up</strong></td><td>increase the volume of (tăng âm lượng)</td><td>Can you <span class="example">turn up</span> the radio?</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-box">
+            <h2>3. Cụm giới từ (Prepositional Phrases)</h2>
+            <table class="vocab-table">
+                <thead>
+                    <tr>
+                        <th>Cụm giới từ (Phrase)</th>
+                        <th>Định nghĩa (Definition)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>for a long time</strong></td><td>trong một thời gian dài</td></tr>
+                    <tr><td><strong>for fun</strong></td><td>để cho vui</td></tr>
+                    <tr><td><strong>in the middle (of)</strong></td><td>ở giữa (của)</td></tr>
+                    <tr><td><strong>in time (for)</strong></td><td>kịp lúc (cho)</td></tr>
+                    <tr><td><strong>on CD/DVD/video</strong></td><td>trên CD/DVD/video</td></tr>
+                    <tr><td><strong>on stage</strong></td><td>trên sân khấu</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-box">
+            <h2>4. Cấu tạo từ (Word Formation)</h2>
+            <p>Học cách tạo các dạng từ khác nhau từ một gốc từ.</p>
+            <table class="vocab-table">
+                <thead>
+                    <tr>
+                        <th>Gốc từ (Root)</th>
+                        <th>Danh từ (Noun)</th>
+                        <th>Động từ (Verb)</th>
+                        <th>Tính từ (Adjective)</th>
+                        <th>Người/Vật (Person/Thing)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>act</strong></td>
+                        <td>action, athletics</td>
+                        <td>act</td>
+                        <td>active</td>
+                        <td>actor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>athlete</strong></td>
+                        <td>athletics</td>
+                        <td></td>
+                        <td>athletic</td>
+                        <td>athlete</td>
+                    </tr>
+                    <tr>
+                        <td><strong>child</strong></td>
+                        <td>childhood</td>
+                        <td></td>
+                        <td>childish, childlike</td>
+                        <td>child</td>
+                    </tr>
+                    <tr>
+                        <td><strong>collect</strong></td>
+                        <td>collection</td>
+                        <td>collect</td>
+                        <td></td>
+                        <td>collector</td>
+                    </tr>
+                    <tr>
+                        <td><strong>entertain</strong></td>
+                        <td>entertainment</td>
+                        <td>entertain</td>
+                        <td>entertaining</td>
+                        <td>entertainer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>hero</strong></td>
+                        <td>hero</td>
+                        <td></td>
+                        <td>heroic</td>
+                        <td>heroine (nữ anh hùng)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>music</strong></td>
+                        <td>music</td>
+                        <td></td>
+                        <td>musical</td>
+                        <td>musician</td>
+                    </tr>
+                    <tr>
+                        <td><strong>play</strong></td>
+                        <td>play, player</td>
+                        <td>play</td>
+                        <td>playful</td>
+                        <td>player</td>
+                    </tr>
+                    <tr>
+                        <td><strong>sail</strong></td>
+                        <td>sail</td>
+                        <td>sail</td>
+                        <td>sailing</td>
+                        <td>sailor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>sing</strong></td>
+                        <td>song, singer, singing</td>
+                        <td>sing</td>
+                        <td></td>
+                        <td>singer</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-box">
+            <h2>5. Cấu trúc từ (Word Patterns)</h2>
+            <p>Các cấu trúc ngữ pháp thường đi kèm với từ vựng.</p>
+            <table class="vocab-table">
+                <thead>
+                    <tr>
+                        <th>Loại từ (Type)</th>
+                        <th>Từ (Word)</th>
+                        <th>Cấu trúc (Pattern)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="3">Adjectives (Tính từ)</td>
+                        <td>bored</td>
+                        <td>bored with (chán nản với)</td>
+                    </tr>
+                    <tr>
+                        <td>crazy</td>
+                        <td>crazy about (phát cuồng vì)</td>
+                    </tr>
+                    <tr>
+                        <td>good</td>
+                        <td>good at (giỏi về)</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="1">Verbs (Động từ)</td>
+                        <td>feel</td>
+                        <td>feel like (cảm thấy muốn)</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">Nouns (Danh từ)</td>
+                        <td>interested</td>
+                        <td>interested in (quan tâm đến)</td>
+                    </tr>
+                    <tr>
+                        <td>keen</td>
+                        <td>keen on (thích thú)</td>
+                    </tr>
+                    <tr>
+                        <td>popular</td>
+                        <td>popular with (phổ biến với)</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"></td>
+                        <td>listen</td>
+                        <td>listen to (lắng nghe)</td>
+                    </tr>
+                    <tr>
+                        <td>take part</td>
+                        <td>take part in (tham gia vào)</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3"></td>
+                        <td>book</td>
+                        <td>a book by (sb) about (một cuốn sách của (ai đó) về)</td>
+                    </tr>
+                    <tr>
+                        <td>fan</td>
+                        <td>a fan of (một người hâm mộ của)</td>
+                    </tr>
+                    <tr>
+                        <td>game</td>
+                        <td>a game against (một trận đấu với)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-box">
+            <h2>6. Luyện tập từ vựng</h2>
+
+            <h3>6.1. Bài tập Điền từ (Fill in the Blanks)</h3>
+            <p>Điền từ thích hợp vào chỗ trống. Sử dụng các từ từ phần "Topic Vocabulary" bên trên.</p>
+            <div class="exercise-item">
+                <p>1. Our football ______ needs to be stronger to win the championship. (đội)</p>
+                <input type="text" id="fill_1">
+                <span class="exercise-feedback" id="feedback_1"></span>
+            </div>
+            <div class="exercise-item">
+                <p>2. I love listening to live music, especially at a outdoor ______. (buổi hòa nhạc)</p>
+                <input type="text" id="fill_2">
+                <span class="exercise-feedback" id="feedback_2"></span>
+            </div>
+            <div class="exercise-item">
+                <p>3. It's important to ______ regularly to stay healthy. (tập luyện)</p>
+                <input type="text" id="fill_3">
+                <span class="exercise-feedback" id="feedback_3"></span>
+            </div>
+            <div class="exercise-item">
+                <p>4. Don't try to ______ during the exam, it's unfair. (gian lận)</p>
+                <input type="text" id="fill_4">
+                <span class="exercise-feedback" id="feedback_4"></span>
+            </div>
+            <div class="exercise-item">
+                <p>5. She is the best player, so she is the team ______. (đội trưởng)</p>
+                <input type="text" id="fill_5">
+                <span class="exercise-feedback" id="feedback_5"></span>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <button type="button" class="btn btn-primary me-3" onclick="checkFillInBlanks()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetFillInBlanks()">Làm lại</button>
+            </div>
+
+            <h3>6.2. Thẻ Flashcard (Flashcards)</h3>
+            <p class="text-center">Nhấn vào thẻ để lật và xem nghĩa!</p>
+            <div class="flashcard-container" id="flashcardContainer">
+                </div>
+
+            <h3>6.3. Bài tập Nối từ (Matching Exercise)</h3>
+            <p class="text-center">Kéo và thả từ tiếng Anh vào định nghĩa tiếng Việt phù hợp.</p>
+            <div class="matching-exercise-grid">
+                <div class="matching-column" id="englishWords">
+                    <h4>Từ tiếng Anh</h4>
+                    </div>
+                <div class="matching-column" id="vietnameseDefinitions">
+                    <h4>Định nghĩa tiếng Việt</h4>
+                    </div>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <button type="button" class="btn btn-primary me-3 check-match-btn" onclick="checkMatching()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary reset-match-btn" onclick="resetMatching()">Làm lại</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTFyMfwGpGFFRKKoXpQf/ZtVKKjoF+L7ffy4qC7zQtxHiJitjEATj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkmXLRV5vfJzJrEPiniwz4rsVZpGgG8Y1r+KNuGMuwtj44gJjEnFqVfXpX5f" crossorigin="anonymous"></script>
+
+    <script>
+        // Data for exercises
+        const vocabularyData = [
+            { word: 'beat', definition: 'đánh bại, thắng' },
+            { word: 'board game', definition: 'trò chơi cờ bàn (ví dụ: cờ vua, cờ tỉ phú)' },
+            { word: 'captain', definition: 'đội trưởng' },
+            { word: 'challenge', definition: 'thử thách' },
+            { word: 'champion', definition: 'nhà vô địch' },
+            { word: 'cheat', definition: 'gian lận' },
+            { word: 'classical music', definition: 'nhạc cổ điển' },
+            { word: 'club', definition: 'câu lạc bộ' },
+            { word: 'coach', definition: 'huấn luyện viên' },
+            { word: 'competition', definition: 'cuộc thi đấu' },
+            { word: 'concert', definition: 'buổi hòa nhạc' },
+            { word: 'defeat', definition: 'đánh bại, sự thất bại' },
+            { word: 'entertaining', definition: 'thú vị, mang tính giải trí' },
+            { word: 'folk music', definition: 'nhạc dân gian' },
+            { word: 'group', definition: 'nhóm, ban nhạc' },
+            { word: 'gym', definition: 'phòng tập thể hình' },
+            { word: 'have fun', definition: 'vui vẻ' },
+            { word: 'interest', definition: 'làm cho hứng thú, sự quan tâm' },
+            { word: 'member', definition: 'thành viên' },
+            { word: 'opponent', definition: 'đối thủ' },
+            { word: 'organise', definition: 'tổ chức' },
+            { word: 'pleasure', definition: 'niềm vui, sự thích thú' },
+            { word: 'referee', definition: 'trọng tài' },
+            { word: 'rhythm', definition: 'nhịp điệu' },
+            { word: 'risk', definition: 'mạo hiểm, rủi ro' },
+            { word: 'score', definition: 'ghi điểm, tỉ số' },
+            { word: 'support', definition: 'ủng hộ, sự ủng hộ' },
+            { word: 'team', definition: 'đội' },
+            { word: 'train', definition: 'huấn luyện, tập luyện' },
+            { word: 'video game', definition: 'trò chơi điện tử' }
+        ];
+
+        const phrasalVerbsData = [
+            { word: 'carry on', definition: 'tiếp tục' },
+            { word: 'eat out', definition: 'ăn ở nhà hàng' },
+            { word: 'give up', definition: 'từ bỏ thói quen' },
+            { word: 'join in', definition: 'tham gia vào' },
+            { word: 'send off', definition: 'đuổi cầu thủ ra khỏi sân (trong bóng đá)' },
+            { word: 'take up', definition: 'bắt đầu một sở thích, môn thể thao' },
+            { word: 'turn down', definition: 'giảm âm lượng' },
+            { word: 'turn up', definition: 'tăng âm lượng' }
+        ];
+
+        // --- Fill in the Blanks Exercise ---
+        const fillInBlanksQuestions = [
+            { id: "fill_1", correct: "TEAM", hint: "(đội)" },
+            { id: "fill_2", correct: "CONCERT", hint: "(buổi hòa nhạc)" },
+            { id: "fill_3", correct: "TRAIN", hint: "(tập luyện)" },
+            { id: "fill_4", correct: "CHEAT", hint: "(gian lận)" },
+            { id: "fill_5", correct: "CAPTAIN", hint: "(đội trưởng)" }
+        ];
+
+        function checkFillInBlanks() {
+            let allCorrect = true;
+            fillInBlanksQuestions.forEach(q => {
+                const input = document.getElementById(q.id);
+                const feedback = document.getElementById(`feedback_${q.id.split('_')[1]}`);
+                const userAnswer = input.value.toUpperCase().trim();
+                const correctAnswer = q.correct.toUpperCase();
+
+                if (userAnswer === correctAnswer) {
+                    feedback.textContent = 'Đúng!';
+                    feedback.className = 'exercise-feedback correct';
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                } else {
+                    feedback.textContent = `Sai. Đáp án đúng: ${correctAnswer}`;
+                    feedback.className = 'exercise-feedback incorrect';
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                    allCorrect = false;
+                }
+            });
+            if (allCorrect) {
+                alert('Chúc mừng! Bạn đã hoàn thành đúng tất cả các câu.');
+            } else {
+                alert('Vẫn còn một số câu sai. Hãy kiểm tra lại đáp án nhé!');
+            }
+        }
+
+        function resetFillInBlanks() {
+            fillInBlanksQuestions.forEach(q => {
+                const input = document.getElementById(q.id);
+                const feedback = document.getElementById(`feedback_${q.id.split('_')[1]}`);
+                input.value = '';
+                input.classList.remove('is-valid', 'is-invalid');
+                feedback.textContent = '';
+                feedback.className = 'exercise-feedback';
+            });
+        }
+
+        // --- Flashcard Exercise ---
+        function createFlashcards() {
+            const container = document.getElementById('flashcardContainer');
+            container.innerHTML = ''; // Clear previous cards
+
+            // Combine vocabulary and phrasal verbs for flashcards
+            const allWords = [...vocabularyData, ...phrasalVerbsData];
+
+            // Shuffle the words
+            for (let i = allWords.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [allWords[i], allWords[j]] = [allWords[j], allWords[i]];
+            }
+
+            allWords.forEach(item => {
+                const flashcard = document.createElement('div');
+                flashcard.classList.add('flashcard');
+
+                const flashcardInner = document.createElement('div');
+                flashcardInner.classList.add('flashcard-inner');
+
+                const flashcardFront = document.createElement('div');
+                flashcardFront.classList.add('flashcard-front');
+                flashcardFront.textContent = item.word.toUpperCase();
+
+                const flashcardBack = document.createElement('div');
+                flashcardBack.classList.add('flashcard-back');
+                flashcardBack.textContent = item.definition;
+
+                flashcardInner.appendChild(flashcardFront);
+                flashcardInner.appendChild(flashcardBack);
+                flashcard.appendChild(flashcardInner);
+
+                flashcard.addEventListener('click', () => {
+                    flashcard.classList.toggle('flipped');
+                });
+
+                container.appendChild(flashcard);
+            });
+        }
+
+        // --- Matching Exercise ---
+        let draggedItem = null;
+        // This will store actual DOM elements for currently placed items
+        let currentMatches = {}; // {targetElementId: droppedItemElement}
+
+        const matchingWords = [
+            { id: 'm-beat', english: 'beat', vietnamese: 'đánh bại, thắng' },
+            { id: 'm-referee', english: 'referee', vietnamese: 'trọng tài' },
+            { id: 'm-gym', english: 'gym', vietnamese: 'phòng tập thể hình' },
+            { id: 'm-opponent', english: 'opponent', vietnamese: 'đối thủ' },
+            { id: 'm-champion', english: 'champion', vietnamese: 'nhà vô địch' },
+            { id: 'm-score', english: 'score', vietnamese: 'ghi điểm, tỉ số' },
+            { id: 'm-takeup', english: 'take up', vietnamese: 'bắt đầu một sở thích, môn thể thao' },
+            { id: 'm-turnup', english: 'turn up', vietnamese: 'tăng âm lượng' }
+        ];
+
+        function createMatchingExercise() {
+            const englishCol = document.getElementById('englishWords');
+            const vietnameseCol = document.getElementById('vietnameseDefinitions');
+            englishCol.innerHTML = '<h4>Từ tiếng Anh</h4>';
+            vietnameseCol.innerHTML = '<h4>Định nghĩa tiếng Việt</h4>';
+
+            const shuffledEnglish = [...matchingWords].sort(() => Math.random() - 0.5);
+            const shuffledVietnamese = [...matchingWords].sort(() => Math.random() - 0.5);
+
+            shuffledEnglish.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('matching-item');
+                div.textContent = item.english;
+                div.setAttribute('draggable', 'true');
+                div.dataset.wordId = item.id;
+                div.addEventListener('dragstart', handleDragStart);
+                englishCol.appendChild(div);
+            });
+
+            shuffledVietnamese.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('matching-target');
+                div.id = `target-${item.id}`; // Give each target a unique ID
+                div.textContent = item.vietnamese;
+                div.dataset.correctWordId = item.id; // Store correct English word ID
+                div.addEventListener('dragover', handleDragOver);
+                div.addEventListener('dragleave', handleDragLeave);
+                div.addEventListener('drop', handleDrop);
+                vietnameseCol.appendChild(div);
+            });
+
+            // Re-enable buttons
+            document.querySelector('.check-match-btn').removeAttribute('disabled');
+            document.querySelector('.reset-match-btn').removeAttribute('disabled');
+        }
+
+        function handleDragStart(e) {
+            draggedItem = e.target;
+            e.dataTransfer.setData('text/plain', draggedItem.dataset.wordId);
+            setTimeout(() => {
+                draggedItem.classList.add('dragging');
+            }, 0);
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault(); // Allow drop
+            if (e.target.classList.contains('matching-target')) {
+                e.target.classList.add('hover');
+            }
+        }
+
+        function handleDragLeave(e) {
+            if (e.target.classList.contains('matching-target')) {
+                e.target.classList.remove('hover');
+            }
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const target = e.target; // This is the matching-target div
+
+            if (target.classList.contains('matching-target')) {
+                target.classList.remove('hover');
+                const wordId = e.dataTransfer.getData('text/plain');
+                const droppedWordElement = document.querySelector(`.matching-item[data-word-id="${wordId}"]`);
+
+                // If this target already has an item, move it back to the English column
+                if (currentMatches[target.id]) {
+                    const currentItemInTarget = currentMatches[target.id];
+                    document.getElementById('englishWords').appendChild(currentItemInTarget);
+                    // Reset its styles
+                    currentItemInTarget.classList.remove('correct-match', 'incorrect-match', 'matched-item');
+                    currentItemInTarget.classList.add('matching-item');
+                    currentItemInTarget.setAttribute('draggable', 'true');
+                    delete currentMatches[target.id];
+                }
+
+                // Append the dragged item to the target
+                target.innerHTML = ''; // Clear original text content
+                target.appendChild(droppedWordElement);
+                droppedWordElement.classList.remove('dragging');
+                droppedWordElement.style.margin = '0'; // Remove auto margin if applied
+
+                // Store the match (target ID -> dropped item element)
+                currentMatches[target.id] = droppedWordElement;
+
+                // Mark the target as having an item
+                target.classList.add('has-item');
+                target.style.cursor = 'default'; // No more drag over for occupied target
+
+                // Make the dropped item not draggable anymore once placed
+                droppedWordElement.setAttribute('draggable', 'false');
+                droppedWordElement.classList.remove('matching-item'); // Remove this class
+                droppedWordElement.classList.add('matched-item'); // Add a new class for placed items
+            }
+        }
+
+        function checkMatching() {
+            let score = 0;
+            matchingWords.forEach(word => {
+                // Find the target that *should* contain this English word
+                const correctTarget = document.getElementById(`target-${word.id}`);
+                if (correctTarget && correctTarget.children.length > 0) {
+                    const droppedItem = correctTarget.children[0]; // Get the item currently in this target
+                    // Check if the ID of the dropped item matches the correct word ID for this target
+                    if (droppedItem.dataset.wordId === correctTarget.dataset.correctWordId) {
+                        droppedItem.classList.add('correct-match');
+                        droppedItem.classList.remove('incorrect-match');
+                        score++;
+                    } else {
+                        droppedItem.classList.add('incorrect-match');
+                        droppedItem.classList.remove('correct-match');
+                    }
+                }
+            });
+            alert(`Bạn đã nối đúng ${score} / ${matchingWords.length} cặp!`);
+
+            // Disable buttons after checking
+            document.querySelector('.check-match-btn').setAttribute('disabled', 'true');
+            // document.querySelector('.reset-match-btn').setAttribute('disabled', 'true'); // Keep reset active
+        }
+
+        function resetMatching() {
+            // Move all placed items back to the English column
+            const englishCol = document.getElementById('englishWords');
+            document.querySelectorAll('.matched-item').forEach(item => {
+                item.classList.remove('correct-match', 'incorrect-match', 'matched-item');
+                item.classList.add('matching-item'); // Re-add for dragging
+                item.setAttribute('draggable', 'true');
+                englishCol.appendChild(item);
+            });
+
+            // Clear all targets and reset their styles
+            document.querySelectorAll('.matching-target').forEach(target => {
+                target.innerHTML = ''; // Clear any content
+                target.classList.remove('has-item', 'hover');
+                target.style.cursor = 'pointer'; // Make it droppable again
+            });
+
+            // Clear the currentMatches tracking
+            currentMatches = {};
+
+            // Re-create the matching exercise to re-shuffle
+            createMatchingExercise();
+        }
+
+
+        // Initialize exercises on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            createFlashcards();
+            createMatchingExercise();
+        });
+    </script>
+</body>
+</html>

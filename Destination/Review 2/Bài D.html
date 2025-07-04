@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Chọn Đáp Án Đúng</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        /* Styling for options group */
+        .option-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Space between options */
+            margin-top: 15px;
+        }
+
+        /* Styling for individual clickable options */
+        .option-label {
+            cursor: pointer;
+            padding: 8px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 20px; /* Pill shape */
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            user-select: none; /* Prevent text selection on double click */
+            background-color: #f0f2f5;
+            color: #34495e;
+            font-weight: normal;
+        }
+        .option-label:hover {
+            background-color: #e9ecef;
+            transform: translateY(-1px);
+        }
+        .option-label.selected {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+            font-weight: 600;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+        }
+        /* Feedback styles after submission */
+        .option-label.is-correct {
+            background-color: #d1e7dd; /* Green background */
+            border-color: #198754; /* Green border */
+            color: #198754;
+            font-weight: 700;
+        }
+        .option-label.is-incorrect {
+            background-color: #f8d7da; /* Red background */
+            border-color: #dc3545; /* Red border */
+            color: #dc3545;
+            font-weight: 700;
+        }
+        /* Style for correct answer when user chose incorrectly */
+        .option-label.correct-but-not-selected {
+            background-color: #e6f7ff; /* Light blue */
+            border-color: #007bff; /* Blue border */
+            color: #007bff;
+            font-weight: 700;
+        }
+
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .option-label {
+                padding: 6px 10px;
+                font-size: 0.9em;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Chọn Đáp Án Đúng</h1>
+        </div>
+        <h2>Chọn đáp án đúng.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Choose the correct answer.
+            <br>
+            <strong>Hướng dẫn:</strong> Chọn đáp án đúng nhất.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="multipleChoiceForm">
+            <div class="question-item" data-question-id="q26">
+                <p class="question-text">26. It's the first time <span class="blank-placeholder"></span> all the answers right in a test!</p>
+                <div class="option-group">
+                    <span class="option-label" data-option-value="A">A. I've got</span>
+                    <span class="option-label" data-option-value="B">B. I'd got</span>
+                    <span class="option-label" data-option-value="C">C. I've been getting</span>
+                    <span class="option-label" data-option-value="D">D. I'd been getting</span>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon26"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q27">
+                <p class="question-text">27. The exam <span class="blank-placeholder"></span> when Jimmy finally found the right room.</p>
+                <div class="option-group">
+                    <span class="option-label" data-option-value="A">A. has already started</span>
+                    <span class="option-label" data-option-value="B">B. already started</span>
+                    <span class="option-label" data-option-value="C">C. had already started</span>
+                    <span class="option-label" data-option-value="D">D. already starts</span>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon27"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q28">
+                <p class="question-text">28. <span class="blank-placeholder"></span> that crossword for over an hour and you still haven't finished it!</p>
+                <div class="option-group">
+                    <span class="option-label" data-option-value="A">A. You've done</span>
+                    <span class="option-label" data-option-value="B">B. You'd done</span>
+                    <span class="option-label" data-option-value="C">C. You've been doing</span>
+                    <span class="option-label" data-option-value="D">D. You'd been doing</span>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon28"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q29">
+                <p class="question-text">29. When they let us go in, we <span class="blank-placeholder"></span> outside the exam room for over half an hour.</p>
+                <div class="option-group">
+                    <span class="option-label" data-option-value="A">A. have stood</span>
+                    <span class="option-label" data-option-value="B">B. had stood</span>
+                    <span class="option-label" data-option-value="C">C. have been standing</span>
+                    <span class="option-label" data-option-value="D">D. are standing</span>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon29"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q30">
+                <p class="question-text">30. Clare hasn't finished her homework <span class="blank-placeholder"></span>.</p>
+                <div class="option-group">
+                    <span class="option-label" data-option-value="A">A. already</span>
+                    <span class="option-label" data-option-value="B">B. yet</span>
+                    <span class="option-label" data-option-value="C">C. just</span>
+                    <span class="option-label" data-option-value="D">D. ever</span>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon30"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q31">
+                <p class="question-text">31. Have you <span class="blank-placeholder"></span> been on a school trip?</p>
+                <div class="option-group">
+                    <span class="option-label" data-option-value="A">A. yet</span>
+                    <span class="option-label" data-option-value="B">B. for</span>
+                    <span class="option-label" data-option-value="C">C. before</span>
+                    <span class="option-label" data-option-value="D">D. ever</span>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon31"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q32">
+                <p class="question-text">32. Lizzie has been having dance classes <span class="blank-placeholder"></span> she was four years old.</p>
+                <div class="option-group">
+                    <span class="option-label" data-option-value="A">A. for</span>
+                    <span class="option-label" data-option-value="B">B. from</span>
+                    <span class="option-label" data-option-value="C">C. since</span>
+                    <span class="option-label" data-option-value="D">D. when</span>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon32"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q33">
+                <p class="question-text">33. Had you been learning French <span class="blank-placeholder"></span> several years before you took your first exam?</p>
+                <div class="option-group">
+                    <span class="option-label" data-option-value="A">A. for</span>
+                    <span class="option-label" data-option-value="B">B. from</span>
+                    <span class="option-label" data-option-value="C">C. since</span>
+                    <span class="option-label" data-option-value="D">D. when</span>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon33"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q26': {
+                question_text: 'It\'s the first time {blank} all the answers right in a test!',
+                options: {
+                    'A': 'I\'ve got',
+                    'B': 'I\'d got',
+                    'C': 'I\'ve been getting',
+                    'D': 'I\'d been getting'
+                },
+                correct_answer_value: 'C',
+                fullSentence: 'It\'s the first time I\'ve been getting all the answers right in a test!',
+                translation: 'Đây là lần đầu tiên tôi trả lời đúng tất cả các câu hỏi trong bài kiểm tra!',
+                explanation: 'Cấu trúc "It\'s the first time..." thường đi với thì Hiện tại hoàn thành (Present Perfect Simple hoặc Continuous). "Getting all the answers right" nhấn mạnh quá trình hoặc trải nghiệm, nên Hiện tại hoàn thành tiếp diễn (Present Perfect Continuous) là phù hợp nhất.',
+                grammar_note: 'Cấu trúc: "It\'s the first time + S + have/has + been + V-ing".'
+            },
+            'q27': {
+                question_text: 'The exam {blank} when Jimmy finally found the right room.',
+                options: {
+                    'A': 'has already started',
+                    'B': 'already started',
+                    'C': 'had already started',
+                    'D': 'already starts'
+                },
+                correct_answer_value: 'C',
+                fullSentence: 'The exam had already started when Jimmy finally found the right room.',
+                translation: 'Kỳ thi đã bắt đầu rồi khi Jimmy cuối cùng tìm thấy đúng phòng.',
+                explanation: 'Hành động "the exam started" (kỳ thi bắt đầu) xảy ra trước hành động "Jimmy found the right room" (Jimmy tìm thấy phòng). Cả hai đều ở quá khứ, nên hành động xảy ra trước dùng thì Quá khứ hoàn thành (Past Perfect).',
+                grammar_note: 'Thì Quá khứ hoàn thành (Past Perfect) dùng cho hành động xảy ra trước một hành động khác trong quá khứ.'
+            },
+            'q28': {
+                question_text: '{blank} that crossword for over an hour and you still haven\'t finished it!',
+                options: {
+                    'A': 'You\'ve done',
+                    'B': 'You\'d done',
+                    'C': 'You\'ve been doing',
+                    'D': 'You\'d been doing'
+                },
+                correct_answer_value: 'C',
+                fullSentence: 'You\'ve been doing that crossword for over an hour and you still haven\'t finished it!',
+                translation: 'Bạn đã làm bài ô chữ đó hơn một giờ rồi mà vẫn chưa xong!',
+                explanation: 'Cụm từ "for over an hour" và "still haven\'t finished it" chỉ một hành động bắt đầu trong quá khứ và vẫn đang tiếp diễn hoặc vừa kết thúc với kết quả ở hiện tại, nhấn mạnh thời gian kéo dài. Do đó, thì Hiện tại hoàn thành tiếp diễn (Present Perfect Continuous) là phù hợp.',
+                grammar_note: 'Thì Hiện tại hoàn thành tiếp diễn (Present Perfect Continuous) dùng để nhấn mạnh thời gian của hành động kéo dài đến hiện tại.'
+            },
+            'q29': {
+                question_text: 'When they let us go in, we {blank} outside the exam room for over half an hour.',
+                options: {
+                    'A': 'have stood',
+                    'B': 'had stood',
+                    'C': 'have been standing',
+                    'D': 'had been standing'
+                },
+                correct_answer_value: 'D',
+                fullSentence: 'When they let us go in, we had been standing outside the exam room for over half an hour.',
+                translation: 'Khi họ cho chúng tôi vào, chúng tôi đã đứng bên ngoài phòng thi hơn nửa tiếng rồi.',
+                explanation: 'Hành động "standing" (đứng) diễn ra liên tục trong một khoảng thời gian ("for over half an hour") trước một hành động khác trong quá khứ ("they let us go in"). Do đó, thì Quá khứ hoàn thành tiếp diễn (Past Perfect Continuous) là phù hợp nhất.',
+                grammar_note: 'Thì Quá khứ hoàn thành tiếp diễn (Past Perfect Continuous) dùng để diễn tả hành động kéo dài liên tục trước một thời điểm hoặc hành động khác trong quá khứ.'
+            },
+            'q30': {
+                question_text: 'Clare hasn\'t finished her homework {blank}.',
+                options: {
+                    'A': 'already',
+                    'B': 'yet',
+                    'C': 'just',
+                    'D': 'ever'
+                },
+                correct_answer_value: 'B',
+                fullSentence: 'Clare hasn\'t finished her homework yet.',
+                translation: 'Clare vẫn chưa làm xong bài tập về nhà của mình.',
+                explanation: '"Yet" được dùng trong câu phủ định và câu hỏi với thì Hiện tại hoàn thành để chỉ một điều gì đó chưa xảy ra cho đến thời điểm hiện tại.',
+                grammar_note: '"Yet" thường đứng cuối câu phủ định hoặc câu hỏi trong thì Hiện tại hoàn thành.'
+            },
+            'q31': {
+                question_text: 'Have you {blank} been on a school trip?',
+                options: {
+                    'A': 'yet',
+                    'B': 'for',
+                    'C': 'before',
+                    'D': 'ever'
+                },
+                correct_answer_value: 'D',
+                fullSentence: 'Have you ever been on a school trip?',
+                translation: 'Bạn đã bao giờ đi dã ngoại ở trường chưa?',
+                explanation: '"Ever" thường được dùng trong câu hỏi với thì Hiện tại hoàn thành để hỏi liệu một điều gì đó đã từng xảy ra vào bất kỳ thời điểm nào trong quá khứ hay chưa.',
+                grammar_note: '"Ever" thường dùng trong câu hỏi thì Hiện tại hoàn thành để hỏi về kinh nghiệm.'
+            },
+            'q32': {
+                question_text: 'Lizzie has been having dance classes {blank} she was four years old.',
+                options: {
+                    'A': 'for',
+                    'B': 'from',
+                    'C': 'since',
+                    'D': 'when'
+                },
+                correct_answer_value: 'C',
+                fullSentence: 'Lizzie has been having dance classes since she was four years old.',
+                translation: 'Lizzie đã học các lớp nhảy từ khi cô bé bốn tuổi.',
+                explanation: '"Since" được dùng với thì Hiện tại hoàn thành hoặc Hiện tại hoàn thành tiếp diễn để chỉ một thời điểm bắt đầu trong quá khứ mà hành động/trạng thái đó vẫn tiếp diễn đến hiện tại.',
+                grammar_note: '"Since" + mốc thời gian (point in time) trong quá khứ.'
+            },
+            'q33': {
+                question_text: 'Had you been learning French {blank} several years before you took your first exam?',
+                options: {
+                    'A': 'for',
+                    'B': 'from',
+                    'C': 'since',
+                    'D': 'when'
+                },
+                correct_answer_value: 'A',
+                fullSentence: 'Had you been learning French for several years before you took your first exam?',
+                translation: 'Bạn đã học tiếng Pháp được vài năm trước khi bạn tham gia kỳ thi đầu tiên của mình phải không?',
+                explanation: '"For" được dùng với các thì hoàn thành (như Quá khứ hoàn thành tiếp diễn ở đây) để chỉ một khoảng thời gian kéo dài.',
+                grammar_note: '"For" + khoảng thời gian (duration of time).'
+            }
+        };
+
+        // Event listener for option selection
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.option-group').forEach(group => {
+                group.addEventListener('click', function(event) {
+                    if (event.target.classList.contains('option-label')) {
+                        const questionItem = this.closest('.question-item');
+                        // Remove 'selected' class from all options within the same question
+                        questionItem.querySelectorAll('.option-label').forEach(label => {
+                            label.classList.remove('selected');
+                        });
+                        // Add 'selected' class to the clicked option
+                        event.target.classList.add('selected');
+                    }
+                });
+            });
+        });
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const questionItem = document.querySelector(`[data-question-id="${qId}"]`);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+                const allOptions = questionItem.querySelectorAll('.option-label');
+
+                let isCorrect = false;
+                let selectedOptionValue = null;
+
+                // Reset all option styles first
+                allOptions.forEach(option => {
+                    option.classList.remove('selected', 'is-correct', 'is-incorrect', 'correct-but-not-selected');
+                });
+
+                const selectedOption = questionItem.querySelector('.option-label.selected');
+
+                if (selectedOption) {
+                    selectedOptionValue = selectedOption.dataset.optionValue;
+                    if (selectedOptionValue === questionInfo.correct_answer_value) {
+                        isCorrect = true;
+                        score++;
+                        selectedOption.classList.add('is-correct');
+                    } else {
+                        selectedOption.classList.add('is-incorrect');
+                        // Highlight the correct answer if the user chose incorrectly
+                        questionItem.querySelector(`[data-option-value="${questionInfo.correct_answer_value}"]`).classList.add('correct-but-not-selected');
+                    }
+                } else {
+                    // If no option was selected, it's incorrect. Highlight the correct one.
+                    questionItem.querySelector(`[data-option-value="${questionInfo.correct_answer_value}"]`).classList.add('correct-but-not-selected');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                // Replace {blank} with the correct answer, highlighted
+                const fullTextWithCorrectAnswer = questionInfo.question_text.replace('{blank}', `<span class="correct-answer-text">${questionInfo.options[questionInfo.correct_answer_value]}</span>`);
+                questionTextSolutionDiv.innerHTML = `${qId.substring(1)}. ${fullTextWithCorrectAnswer}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing selections, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const allOptions = document.querySelectorAll('.option-label');
+            allOptions.forEach(option => {
+                option.classList.remove('selected', 'is-correct', 'is-incorrect', 'correct-but-not-selected'); // Remove all feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar - Past Simple with Pictures</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container-main {
+            max-width: 950px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .image-card {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-bottom: 15px;
+        }
+        .image-card .header {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 0;
+            width: 100%;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .image-card img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .image-card .number {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 5px;
+        }
+
+        .exercise-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start; /* Align number and text at start */
+            font-size: 1.05em;
+            color: #34495e;
+        }
+        .exercise-item .form-label {
+            margin-right: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+            width: 30px; /* Numbering width */
+            text-align: right;
+            flex-shrink: 0;
+            padding-top: 8px; /* Align with input text */
+        }
+        .exercise-item .text-before-input {
+            margin-right: 5px;
+            padding-top: 8px; /* Align with input text */
+        }
+        .exercise-item .answer-input {
+            flex-grow: 1;
+            max-width: 350px; /* Limit input width */
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .exercise-item .answer-input:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .exercise-item .answer-input.is-valid {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .exercise-item .answer-input.is-invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+            background-color: #f8d7da;
+            color: #842029;
+        }
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default */
+            padding-top: 8px; /* Align with input text */
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <span class="badge bg-primary fs-6 me-2">B</span>
+            <h1>Look at the pictures and complete the sentences.</h1>
+        </div>
+        <p class="instruction">
+            Hãy nhìn vào các bức tranh và hoàn thành các câu. Sử dụng dạng đúng của thì Quá khứ đơn (Past Simple).
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <div class="image-grid">
+            <div class="image-card">
+                <div class="header">last week</div>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAACrCAMAAABYxN25AAAAA1BMVEUAAACpQvLNAAAAC0lEQVR42mNkGAFgAgAAADMAA0B9YtQAAAAASUVORK5CYII=" alt="Image 1: Scary movie" class="img-fluid">
+                <div class="number">1</div>
+            </div>
+            <div class="image-card">
+                <div class="header">yesterday</div>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAACrCAMAAABYxN25AAAAA1BMVEUAAACpQvLNAAAAC0lEQVR42mNkGAFgAgAAADMAA0B9YtQAAAAASUVORK5CYII=" alt="Image 2: Football deflated" class="img-fluid">
+                <div class="number">2</div>
+            </div>
+            <div class="image-card">
+                <div class="header">two years ago</div>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAACrCAMAAABYxN25AAAAA1BMVEUAAACpQvLNAAAAC0lEQVR42mNkGAFgAgAAADMAA0B9YtQAAAAASUVORK5CYII=" alt="Image 3: Eiffel Tower" class="img-fluid">
+                <div class="number">3</div>
+            </div>
+            <div class="image-card">
+                <div class="header">last night</div>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAACrCAMAAABYxN25AAAAA1BMVEUAAACpQvLNAAAAC0lEQVR42mNkGAFgAgAAADMAA0B9YtQAAAAASUVORK5CYII=" alt="Image 4: Doing homework" class="img-fluid">
+                <div class="number">4</div>
+            </div>
+            <div class="image-card">
+                <div class="header">in June</div>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAACrCAMAAABYxN25AAAAA1BMVEUAAACpQvLNAAAAC0lEQVR42mNkGAFgAgAAADMAA0B9YtQAAAAASUVORK5CYII=" alt="Image 5: Giving a present" class="img-fluid">
+                <div class="number">5</div>
+            </div>
+            <div class="image-card">
+                <div class="header">a week ago</div>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAACrCAMAAABYxN25AAAAA1BMVEUAAACpQvLNAAAAC0lEQVR42mNkGAFgAgAAADMAA0B9YtQAAAAASUVORK5CYII=" alt="Image 6: Breaking a vase" class="img-fluid">
+                <div class="number">6</div>
+            </div>
+        </div>
+
+        <form id="pastSimpleForm">
+            <div class="exercise-item">
+                <label for="q1" class="form-label">1</label>
+                <span class="text-before-input">I don't want to go and see the film because I <strong>saw</strong> it last week.</span>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q2" class="form-label">2</label>
+                <span class="text-before-input">I don't need a football because</span>
+                <input type="text" class="form-control answer-input" id="q2" name="q2">
+                <span class="text-before-input">.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q3" class="form-label">3</label>
+                <span class="text-before-input">I know a lot about Paris because</span>
+                <input type="text" class="form-control answer-input" id="q3" name="q3">
+                <span class="text-before-input">.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q4" class="form-label">4</label>
+                <span class="text-before-input">I don't need to worry about my homework because</span>
+                <input type="text" class="form-control answer-input" id="q4" name="q4">
+                <span class="text-before-input">.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q5" class="form-label">5</label>
+                <span class="text-before-input">I haven't got a PlayStation any more because</span>
+                <input type="text" class="form-control answer-input" id="q5" name="q5">
+                <span class="text-before-input">.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q6" class="form-label">6</label>
+                <span class="text-before-input">Mum is angry with me because</span>
+                <input type="text" class="form-control answer-input" id="q6" name="q6">
+                <span class="text-before-input">.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTFyMfwGpGFFRKKoXpQf/ZtVKKjoF+L7ffy4qC7zQtxHiJitjEATj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkmXLRV5vfJzJrEPiniwz4rsVZpGgG8Y1r+KNuGMuwtj44gJjEnFqVfXpX5f" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers and explanations for each question
+        const correctAnswers = {
+            'q2': {
+                // Image 2 shows a deflated football and "yesterday"
+                answer: ['I deflated it yesterday', 'he deflated it yesterday', 'it deflated yesterday'],
+                explanation: 'Để hoàn thành câu "Tôi không cần một quả bóng đá bởi vì...", cần một lý do trong quá khứ. Hình ảnh cho thấy quả bóng bị xịt hơi vào "yesterday". Dạng quá khứ đơn của "deflate" (làm xịt hơi) là "deflated".',
+                grammar_note: 'Thì Quá khứ đơn (Simple Past) dùng để diễn tả hành động xảy ra và kết thúc tại một thời điểm xác định trong quá khứ (ở đây là "yesterday"). Động từ "deflate" là động từ quy tắc, thêm -ed.',
+                translation: "Tôi không cần một quả bóng đá vì tôi đã làm xịt hơi nó/nó bị xịt hơi ngày hôm qua."
+            },
+            'q3': {
+                // Image 3 shows a person near the Eiffel Tower and "two years ago"
+                answer: ['I went there two years ago', 'I visited there two years ago'],
+                explanation: 'Câu "Tôi biết nhiều về Paris bởi vì..." đòi hỏi một hành động trong quá khứ liên quan đến Paris. Hình ảnh cho thấy người đó ở Tháp Eiffel "two years ago". Dạng quá khứ đơn của "go" (đi) là "went" hoặc "visit" (thăm) là "visited".',
+                grammar_note: 'Thì Quá khứ đơn với "two years ago" (hai năm trước) chỉ một thời điểm xác định trong quá khứ. "Go" là động từ bất quy tắc (go-went-gone), "visit" là quy tắc.',
+                translation: "Tôi biết nhiều về Paris vì tôi đã đến đó hai năm trước."
+            },
+            'q4': {
+                // Image 4 shows a boy doing homework and "last night"
+                answer: ['I did it last night', 'I finished it last night'],
+                explanation: 'Để "không cần lo lắng về bài tập về nhà", có nghĩa là bài tập đã được làm xong. Hình ảnh cho thấy cậu bé đang làm bài tập "last night". Dạng quá khứ đơn của "do" (làm) là "did" hoặc "finish" (hoàn thành) là "finished".',
+                grammar_note: 'Thì Quá khứ đơn với "last night" (tối qua) chỉ hành động đã hoàn thành trong quá khứ. "Do" là động từ bất quy tắc (do-did-done), "finish" là quy tắc.',
+                translation: "Tôi không cần lo lắng về bài tập về nhà vì tôi đã làm xong nó tối qua."
+            },
+            'q5': {
+                // Image 5 shows someone receiving a present (a PlayStation) and "in June"
+                // This one has a few interpretations. Given the context "haven't got ... anymore", the most common is that it was given away or sold.
+                answer: ['I sold it in June', 'I gave it away in June', 'my parents gave it to me in June', 'I received it in June'], // "Received" would mean they HAD it, then don't anymore. Let's stick to sold/given away/broken for "not anymore".
+                // Re-evaluating based on the image: A gift. So, the reason you don't have it anymore could be it broke, or you sold it, or gave it away. The most direct based on a gift is "I received it" but the sentence is "haven't got it anymore".
+                // Let's go with logical reasons for "not having anymore" if you received it: sold, gave away, broke.
+                // The image shows receiving a gift. A common scenario for "not having anymore" is if it broke or was replaced.
+                // Or perhaps, the image implies *why* you have one, but the sentence says "haven't got anymore".
+                // Let's assume the question implies why it's *gone*.
+                answer: ['I sold it in June', 'it broke in June', 'I gave it away in June'], // Common reasons for "not having anymore"
+                explanation: 'Câu "Tôi không còn PlayStation nữa bởi vì..." cần một lý do trong quá khứ về việc không còn sở hữu nó. Hình ảnh cho thấy ai đó nhận một món quà (PlayStation) vào "in June". Có thể là bạn đã bán nó ("sold"), làm hỏng nó ("broke"), hoặc tặng nó ("gave it away").',
+                grammar_note: 'Thì Quá khứ đơn dùng cho hành động đã xảy ra và kết thúc ("sold" - quá khứ của "sell", "broke" - quá khứ của "break", "gave" - quá khứ của "give").',
+                translation: "Tôi không còn PlayStation nữa vì tôi đã bán nó vào tháng Sáu / nó bị hỏng vào tháng Sáu / tôi đã tặng nó vào tháng Sáu."
+            },
+            'q6': {
+                // Image 6 shows a broken vase and "a week ago"
+                answer: ['I broke a vase a week ago', 'I broke the vase a week ago'],
+                explanation: 'Câu "Mẹ tức giận với tôi bởi vì..." cần một hành động sai trái trong quá khứ. Hình ảnh cho thấy một chiếc bình bị vỡ "a week ago". Dạng quá khứ đơn của "break" (làm vỡ) là "broke".',
+                grammar_note: 'Thì Quá khứ đơn với "a week ago" (một tuần trước) chỉ một thời điểm cụ thể trong quá khứ. "Break" là động từ bất quy tắc (break-broke-broken).',
+                translation: "Mẹ tức giận với tôi vì tôi đã làm vỡ chiếc bình một tuần trước."
+            }
+        };
+
+        function normalizeAnswer(answer) {
+            return answer.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            Object.keys(correctAnswers).forEach(qId => {
+                const inputElement = document.getElementById(qId);
+                if (!inputElement) return;
+
+                const userAnswer = normalizeAnswer(inputElement.value);
+                const correctInfo = correctAnswers[qId];
+                const feedbackIcon = inputElement.nextElementSibling;
+
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+
+                const isCorrect = correctInfo.answer.some(ans => normalizeAnswer(ans) === userAnswer);
+
+                if (isCorrect) {
+                    score++;
+                    inputElement.classList.add('is-valid');
+                    feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                    feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                }
+                feedbackIcon.style.display = 'inline-block';
+
+                // Add detailed solution for each question
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                // Reconstruct original sentence and highlight correct answer
+                const questionTextDiv = document.createElement('div');
+                questionTextDiv.classList.add('question-text');
+                const originalFullText = document.querySelector(`#${qId}`).parentNode.textContent.trim(); // Get full sentence text
+                // Replace user input part with correct answer for display in solution
+                const textWithAnswer = originalFullText.replace(inputElement.value.trim(), `<span class="correct-answer-text">${correctInfo.answer[0]}</span>`);
+                questionTextDiv.innerHTML = `<label for="${qId}" class="form-label">${qId.substring(1)}</label>. ` + textWithAnswer.replace(`${qId.substring(1)}. `, ''); // Remove initial number from the original text if it was fetched with it
+                
+                solutionItem.appendChild(questionTextDiv);
+
+                // Grammar explanation
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${correctInfo.explanation}<br>${correctInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                // Translation
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${correctInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+        }
+
+        function resetExercise() {
+            const inputs = document.querySelectorAll('.answer-input');
+            inputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('is-valid', 'is-invalid');
+                const feedbackIcon = input.nextElementSibling;
+                feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                feedbackIcon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions
+        }
+    </script>
+</body>
+</html>
+            

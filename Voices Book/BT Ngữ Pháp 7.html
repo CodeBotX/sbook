@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp A1: Mệnh đề quan hệ xác định & Used To V (Trắc nghiệm)</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Sử dụng font Inter */
+            background-color: #f0f2f5;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 850px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            color: #1a73e8; /* Màu xanh Google */
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .lead {
+            color: #5f6368;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .question-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8faff; /* Nền xanh nhạt hơn */
+            border: 1px solid #dcdfe4;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-section h3 {
+            color: #3c4043;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid #e8eaed;
+            padding-bottom: 10px;
+        }
+        .question-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eceff1;
+        }
+        .question-item label {
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+            color: #202124;
+            font-size: 1.05rem;
+        }
+        .form-check {
+            margin-bottom: 8px;
+        }
+        .form-check-input {
+            margin-right: 8px;
+        }
+        .form-check-label {
+            font-size: 0.95rem;
+            color: #3c4043;
+        }
+        .instructions {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #70757a;
+            padding: 10px 15px;
+            background-color: #e6f4f1;
+            border-left: 5px solid #34a853;
+            border-radius: 5px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none; /* Hidden by default */
+        }
+        .feedback.correct {
+            background-color: #e6ffed;
+            color: #1e8449;
+            border: 1px solid #34a853;
+        }
+        .feedback.incorrect {
+            background-color: #ffebe6;
+            color: #c53929;
+            border: 1px solid #ea4335;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            border-left: 4px solid #aab7b8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            display: none; /* Hidden by default */
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1764cc;
+            border-color: #1764cc;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .d-grid {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Bài Tập Ngữ Pháp A1</h1>
+        <p class="lead text-center">Trắc nghiệm về Mệnh đề quan hệ xác định (Defining Relative Clauses) & Used to V</p>
+        <hr>
+
+        <form id="grammarQuizForm">
+            <!-- Phần bài tập Defining Relative Clauses -->
+            <div class="question-section">
+                <h3>Phần 1: Mệnh đề quan hệ xác định (Defining Relative Clauses)</h3>
+                <p class="instructions">Chọn đáp án đúng nhất (A, B, C hoặc D) để hoàn thành các câu.</p>
+                <div id="part1-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Phần bài tập Used to V -->
+            <div class="question-section">
+                <h3>Phần 2: Used to V</h3>
+                <p class="instructions">Chọn câu viết lại đúng nhất, sử dụng cấu trúc **used to + động từ nguyên mẫu**, nói về những thói quen/trạng thái trong quá khứ đã không còn tiếp diễn ở hiện tại.</p>
+                <div id="part2-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-primary" type="button" onclick="submitQuiz()">Nộp bài</button>
+                <button class="btn btn-secondary" type="button" onclick="resetQuiz()">Làm lại</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Dữ liệu câu hỏi cho Phần 1: Mệnh đề quan hệ xác định
+        const questionsPart1 = [
+            {
+                id: "q1",
+                text: "1. This is the cat ______ likes to sleep all day.",
+                options: {
+                    a: "who",
+                    b: "which",
+                    c: "where",
+                    d: "when"
+                },
+                correct: "b", // Correct: which (or that)
+                explanation: "Để chỉ vật (the cat), chúng ta dùng 'which' hoặc 'that'. Ở đây 'which' là lựa chọn đúng để thay thế cho vật làm chủ ngữ trong mệnh đề quan hệ."
+            },
+            {
+                id: "q2",
+                text: "2. She is the teacher ______ teaches us English.",
+                options: {
+                    a: "which",
+                    b: "whose",
+                    c: "who",
+                    d: "where"
+                },
+                correct: "c", // Correct: who (or that)
+                explanation: "Để chỉ người (the teacher), chúng ta dùng 'who' hoặc 'that'. Ở đây 'who' là lựa chọn đúng để thay thế cho người làm chủ ngữ trong mệnh đề quan hệ."
+            },
+            {
+                id: "q3",
+                text: "3. I visited the park ______ we had a picnic last summer.",
+                options: {
+                    a: "which",
+                    b: "who",
+                    c: "where",
+                    d: "what"
+                },
+                correct: "c", // Correct: where
+                explanation: "Để chỉ nơi chốn (the park) mà hành động (we had a picnic) diễn ra, chúng ta dùng 'where'."
+            },
+            {
+                id: "q4",
+                text: "4. The book ______ I read was very interesting.",
+                options: {
+                    a: "who",
+                    b: "where",
+                    c: "when",
+                    d: "which"
+                },
+                correct: "d", // Correct: which (or that)
+                explanation: "Để chỉ vật (the book) làm tân ngữ trong mệnh đề quan hệ, chúng ta dùng 'which' hoặc 'that'. Ở đây 'which' là lựa chọn đúng."
+            },
+            {
+                id: "q5",
+                text: "5. He is the man ______ lives next door to me.",
+                options: {
+                    a: "which",
+                    b: "who",
+                    c: "where",
+                    d: "what"
+                },
+                correct: "b", // Correct: who (or that)
+                explanation: "Để chỉ người (the man) làm chủ ngữ trong mệnh đề quan hệ, chúng ta dùng 'who' hoặc 'that'. Ở đây 'who' là lựa chọn đúng."
+            },
+            {
+                id: "q6",
+                text: "6. This is the restaurant ______ serves the best pizza.",
+                options: {
+                    a: "who",
+                    b: "where",
+                    c: "what",
+                    d: "which"
+                },
+                correct: "d", // Correct: which (or that)
+                explanation: "Trong câu này, 'the restaurant' được bổ nghĩa như một vật thể ('cái nhà hàng') làm chủ ngữ cho hành động 'serves'. Vì vậy, 'which' (hoặc 'that') là phù hợp nhất. 'Where' sẽ được dùng nếu mệnh đề quan hệ mô tả hành động diễn ra *tại* địa điểm đó (ví dụ: 'This is the restaurant where we often eat pizza')."
+            },
+            {
+                id: "q7",
+                text: "7. I like movies ______ have happy endings.",
+                options: {
+                    a: "who",
+                    b: "where",
+                    c: "which",
+                    d: "when"
+                },
+                correct: "c", // Correct: which (or that)
+                explanation: "Để chỉ vật (movies) làm chủ ngữ trong mệnh đề quan hệ, chúng ta dùng 'which' hoặc 'that'. Ở đây 'which' là lựa chọn đúng."
+            },
+            {
+                id: "q8",
+                text: "8. The girl ______ is wearing a red hat is my sister.",
+                options: {
+                    a: "which",
+                    b: "who",
+                    c: "where",
+                    d: "what"
+                },
+                correct: "b", // Correct: who (or that)
+                explanation: "Để chỉ người (the girl) làm chủ ngữ trong mệnh đề quan hệ, chúng ta dùng 'who' hoặc 'that'. Ở đây 'who' là lựa chọn đúng."
+            },
+            {
+                id: "q9",
+                text: "9. London is the city ______ I want to visit next year.",
+                options: {
+                    a: "which",
+                    b: "who",
+                    c: "where",
+                    d: "when"
+                },
+                correct: "c", // Correct: where
+                explanation: "Để chỉ nơi chốn (London, the city) mà bạn muốn đến thăm (một hành động diễn ra tại đó), chúng ta dùng 'where'."
+            },
+            {
+                id: "q10",
+                text: "10. I bought a phone ______ is very easy to use.",
+                options: {
+                    a: "who",
+                    b: "where",
+                    c: "which",
+                    d: "when"
+                },
+                correct: "c", // Correct: which (or that)
+                explanation: "Để chỉ vật (a phone) làm chủ ngữ trong mệnh đề quan hệ, chúng ta dùng 'which' hoặc 'that'. Ở đây 'which' là lựa chọn đúng."
+            }
+        ];
+
+        // Dữ liệu câu hỏi cho Phần 2: Used to V
+        const questionsPart2 = [
+            {
+                id: "q11",
+                text: "1. When I was a child, I often played with dolls. (Chọn câu viết lại đúng nhất)",
+                options: {
+                    a: "I used to playing with dolls.",
+                    b: "I use to play with dolls.",
+                    c: "I used to play with dolls.",
+                    d: "I was used to play with dolls."
+                },
+                correct: "c",
+                explanation: "Cấu trúc 'used to + động từ nguyên mẫu (bare infinitive)' dùng để diễn tả thói quen hoặc trạng thái trong quá khứ không còn ở hiện tại. Đáp án 'c' là đúng. 'a' sai vì 'playing' (sau 'to' phải là động từ nguyên mẫu), 'b' sai vì 'use to' (phải là 'used to'), 'd' sai vì 'was used to' có nghĩa là 'đã quen với' và theo sau là V-ing hoặc danh từ."
+            },
+            {
+                id: "q12",
+                text: "2. My brother often watched cartoons on TV every morning. (Chọn câu viết lại đúng nhất)",
+                options: {
+                    a: "My brother used to watching cartoons.",
+                    b: "My brother use to watch cartoons.",
+                    c: "My brother used to watch cartoons.",
+                    d: "My brother would watch cartoons."
+                },
+                correct: "c",
+                explanation: "Để diễn tả thói quen trong quá khứ (thường xem hoạt hình), cấu trúc đúng là 'used to + động từ nguyên mẫu (watch)'. Đáp án 'c' là chính xác. 'Would' cũng có thể dùng cho thói quen trong quá khứ nhưng 'used to' nhấn mạnh hơn việc thói quen đó đã kết thúc."
+            },
+            {
+                id: "q13",
+                text: "3. They lived in a small apartment many years ago. (Chọn câu viết lại đúng nhất)",
+                options: {
+                    a: "They used to living in a small apartment.",
+                    b: "They used to live in a small apartment.",
+                    c: "They use to live in a small apartment.",
+                    d: "They were used to live in a small apartment."
+                },
+                correct: "b",
+                explanation: "Để diễn tả một trạng thái tồn tại trong quá khứ (họ từng sống ở đó) mà giờ không còn, 'used to + động từ nguyên mẫu (live)' là cấu trúc đúng."
+            },
+            {
+                id: "q14",
+                text: "4. We often went to the beach every summer. (Chọn câu viết lại đúng nhất)",
+                options: {
+                    a: "We used to go to the beach every summer.",
+                    b: "We used to going to the beach every summer.",
+                    c: "We use to go to the beach every summer.",
+                    d: "We are used to go to the beach every summer."
+                },
+                correct: "a",
+                explanation: "Để diễn tả thói quen thường đi biển vào mùa hè trong quá khứ, 'used to go' là chính xác. Các đáp án khác sai cấu trúc hoặc nghĩa."
+            },
+            {
+                id: "q15",
+                text: "5. She didn't like vegetables when she was young. (Chọn câu viết lại đúng nhất)",
+                options: {
+                    a: "She used to not like vegetables.",
+                    b: "She didn't used to like vegetables.",
+                    c: "She didn't use to like vegetables.",
+                    d: "She wasn't used to like vegetables."
+                },
+                correct: "c",
+                explanation: "Ở dạng phủ định của 'used to', chúng ta dùng 'didn't use to + động từ nguyên mẫu'. Lưu ý rằng trong câu phủ định, 'used' trở thành 'use' (không có 'd')."
+            }
+        ];
+
+        // Hàm để tải và hiển thị câu hỏi
+        function loadQuestions() {
+            const part1Container = document.getElementById('part1-questions');
+            const part2Container = document.getElementById('part2-questions');
+
+            // Xóa nội dung cũ
+            part1Container.innerHTML = '';
+            part2Container.innerHTML = '';
+
+            // Tải câu hỏi Phần 1
+            questionsPart1.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part1Container.innerHTML += questionHtml;
+            });
+
+            // Tải câu hỏi Phần 2
+            questionsPart2.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part2Container.innerHTML += questionHtml;
+            });
+        }
+
+        // Hàm kiểm tra đáp án và hiển thị giải thích
+        function submitQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+            let allCorrect = true;
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                // Ẩn feedback và explanation cũ
+                feedbackDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+
+                if (selectedOption) {
+                    if (selectedOption.value === q.correct) {
+                        feedbackDiv.textContent = "Đúng rồi! 🎉";
+                        feedbackDiv.classList.add('correct');
+                    } else {
+                        feedbackDiv.textContent = `Sai rồi. Đáp án đúng là ${q.correct.toUpperCase()}. ❌`;
+                        feedbackDiv.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                } else {
+                    feedbackDiv.textContent = "Bạn chưa chọn đáp án.";
+                    feedbackDiv.classList.add('incorrect');
+                    allCorrect = false;
+                }
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${q.explanation}`;
+            });
+
+            if (allCorrect) {
+                // Optional: You can add a general "Congratulations" message here
+                // For A1, per-question feedback might be more useful.
+            }
+        }
+
+        // Hàm làm lại bài
+        function resetQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (selectedOption) {
+                    selectedOption.checked = false; // Bỏ chọn đáp án đã chọn
+                }
+
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                // Ẩn feedback và explanation
+                feedbackDiv.style.display = 'none';
+                explanationDiv.style.display = 'none';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                explanationDiv.innerHTML = '';
+            });
+        }
+
+        // Tải câu hỏi khi trang được tải xong
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+    </script>
+</body>
+</html>

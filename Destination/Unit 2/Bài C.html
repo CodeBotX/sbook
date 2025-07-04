@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar - Past Continuous</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .exercise-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.05em;
+            color: #34495e;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .exercise-item .form-label {
+            margin-right: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+            width: 30px; /* Numbering width */
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .exercise-item .text-segment {
+            margin-right: 5px;
+        }
+        .exercise-item .answer-input {
+            flex-grow: 1;
+            max-width: 250px; /* Limit input width */
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .exercise-item .answer-input:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .exercise-item .answer-input.is-valid {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .exercise-item .answer-input.is-invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+            background-color: #f8d7da;
+            color: #842029;
+        }
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default */
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <span class="badge bg-primary fs-6 me-2">C</span>
+            <h1>Complete using the correct past continuous form of the verbs in brackets.</h1>
+        </div>
+        <p class="instruction">
+            Hoàn thành các câu sau bằng cách sử dụng dạng đúng của thì Quá khứ tiếp diễn (Past Continuous) của động từ trong ngoặc.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="pastContinuousForm">
+            <div class="exercise-item">
+                <label for="q1" class="form-label">1</label>
+                <span class="text-segment">Ted</span>
+                <input type="text" class="form-control answer-input" id="q1" name="q1" placeholder="(play)">
+                <span class="text-segment">his guitar at half past seven.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q2" class="form-label">2</label>
+                <span class="text-segment">At midnight, I</span>
+                <input type="text" class="form-control answer-input" id="q2" name="q2" placeholder="(sleep)">
+                <span class="text-segment">, but Jane</span>
+                <input type="text" class="form-control answer-input" id="q2b" name="q2b" placeholder="(listen)">
+                <span class="text-segment">to music.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q3" class="form-label">3</label>
+                <span class="text-segment">Luke</span>
+                <input type="text" class="form-control answer-input" id="q3" name="q3" placeholder="(stand)">
+                <span class="text-segment">outside the bank when suddenly two robbers ran past him.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q4" class="form-label">4</label>
+                <span class="text-segment">I know Doug</span>
+                <input type="text" class="form-control answer-input" id="q4" name="q4" placeholder="(work)">
+                <span class="text-segment">late at the office because I saw him when I</span>
+                <input type="text" class="form-control answer-input" id="q4b" name="q4b" placeholder="(leave)">
+                <span class="text-segment">.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q5" class="form-label">5</label>
+                <input type="text" class="form-control answer-input" id="q5a" name="q5a" placeholder="(Were)">
+                <span class="text-segment">you</span>
+                <input type="text" class="form-control answer-input" id="q5b" name="q5b" placeholder="(have)">
+                <span class="text-segment">a shower when the earthquake happened?</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q6" class="form-label">6</label>
+                <span class="text-segment">Penny</span>
+                <input type="text" class="form-control answer-input" id="q6" name="q6" placeholder="(run)">
+                <span class="text-segment">to catch the bus when she slipped and fell.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q7" class="form-label">7</label>
+                <span class="text-segment">When you saw Eugene,</span>
+                <input type="text" class="form-control answer-input" id="q7a" name="q7a" placeholder="(was)">
+                <span class="text-segment">he</span>
+                <input type="text" class="form-control answer-input" id="q7b" name="q7b" placeholder="(go)">
+                <span class="text-segment">home?</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q8" class="form-label">8</label>
+                <span class="text-segment">At midnight? Erm ... we</span>
+                <input type="text" class="form-control answer-input" id="q8" name="q8" placeholder="(watch)">
+                <span class="text-segment">a DVD, I think.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTFyMfwGpGFFRKKoXpQf/ZtVKKjoF+L7ffy4qC7zQtxHiJitjEATj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkmXLRV5vfJzJrEPiniwz4rsVZpGgG8Y1r+KNuGMuwtj44gJjEnFqVfXpX5f" crossorigin="anonymous"></script>
+
+    <script>
+        const correctAnswers = {
+            'q1': {
+                answer: ['was playing'],
+                originalText: 'Ted {verb} his guitar at half past seven.',
+                translation: 'Ted đang chơi guitar lúc bảy rưỡi.',
+                explanation: 'Thì Quá khứ tiếp diễn (Past Continuous) được dùng để diễn tả một hành động đang xảy ra tại một thời điểm cụ thể trong quá khứ ("at half past seven"). Chủ ngữ "Ted" là số ít, nên dùng "was".',
+                grammar_note: 'Cấu trúc: S + was/were + V-ing.'
+            },
+            'q2': {
+                answer: ['was sleeping'],
+                originalText: 'At midnight, I {verb1}, but Jane {verb2} to music.',
+                translation: 'Lúc nửa đêm, tôi đang ngủ, nhưng Jane thì đang nghe nhạc.',
+                explanation: 'Hai hành động "tôi đang ngủ" và "Jane đang nghe nhạc" xảy ra song song tại cùng một thời điểm trong quá khứ ("at midnight").',
+                grammar_note: 'Khi hai hành động tiếp diễn xảy ra cùng lúc trong quá khứ, cả hai đều dùng Past Continuous. "I" đi với "was", "Jane" đi với "was".'
+            },
+            'q2b': {
+                answer: ['was listening']
+            },
+            'q3': {
+                answer: ['was standing'],
+                originalText: 'Luke {verb} outside the bank when suddenly two robbers ran past him.',
+                translation: 'Luke đang đứng bên ngoài ngân hàng thì đột nhiên hai tên cướp chạy ngang qua anh ấy.',
+                explanation: 'Hành động "Luke đang đứng" là một hành động đang diễn ra trong quá khứ thì bị một hành động khác (hai tên cướp chạy qua) xen vào. Hành động bị xen vào dùng Past Simple ("ran"), hành động đang diễn ra dùng Past Continuous.',
+                grammar_note: 'Cấu trúc: Past Continuous (hành động đang diễn ra) + when + Past Simple (hành động xen vào).'
+            },
+            'q4': {
+                answer: ['was working'],
+                originalText: 'I know Doug {verb1} late at the office because I saw him when I {verb2}.',
+                translation: 'Tôi biết Doug đang làm việc muộn ở văn phòng bởi vì tôi đã thấy anh ấy khi tôi rời đi.',
+                explanation: 'Doug đang "làm việc muộn" (hành động tiếp diễn) thì tôi "rời đi" (hành động xảy ra tức thời).',
+                grammar_note: 'Past Continuous (hành động đang diễn ra) + when + Past Simple (hành động xảy ra tại một thời điểm).'
+            },
+            'q4b': {
+                answer: ['was leaving']
+            },
+            'q5a': {
+                answer: ['were'],
+                originalText: '{verb1} you {verb2} a shower when the earthquake happened?',
+                translation: 'Có phải bạn đang tắm khi trận động đất xảy ra không?',
+                explanation: 'Hành động "đang tắm" là một hành động đang diễn ra thì bị một hành động khác (trận động đất xảy ra) xen vào. Đây là câu hỏi. Với chủ ngữ "you", trợ động từ là "were".',
+                grammar_note: 'Cấu trúc câu hỏi: Was/Were + S + V-ing...? Khi có "when" nối hai mệnh đề, một Past Continuous và một Past Simple.'
+            },
+            'q5b': {
+                answer: ['having']
+            },
+            'q6': {
+                answer: ['was running'],
+                originalText: 'Penny {verb} to catch the bus when she slipped and fell.',
+                translation: 'Penny đang chạy để bắt xe buýt thì cô ấy bị trượt ngã.',
+                explanation: 'Penny đang "chạy" (hành động tiếp diễn) thì bị "trượt và ngã" (hành động xen vào).',
+                grammar_note: 'Tương tự Q3, Past Continuous (hành động đang diễn ra) + when + Past Simple (hành động xen vào). "Penny" là số ít, dùng "was".'
+            },
+            'q7a': {
+                answer: ['was'],
+                originalText: 'When you saw Eugene, {verb1} he {verb2} home?',
+                translation: 'Khi bạn gặp Eugene, anh ấy đang đi về nhà phải không?',
+                explanation: 'Hành động "đang đi về nhà" (tiếp diễn) xảy ra đồng thời với hành động "nhìn thấy Eugene" (xảy ra tức thời). Đây là câu hỏi về hành động đang diễn ra tại thời điểm Past Simple. Chủ ngữ "he" đi với "was".',
+                grammar_note: 'Cấu trúc câu hỏi với Past Continuous: (Wh-word) + was/were + S + V-ing? Đây là câu hỏi về hành động đang diễn ra tại thời điểm Past Simple xảy ra.'
+            },
+            'q7b': {
+                answer: ['going']
+            },
+            'q8': {
+                answer: ['were watching'],
+                originalText: 'At midnight? Erm ... we {verb} a DVD, I think.',
+                translation: 'Lúc nửa đêm ư? Ừm... tôi nghĩ là chúng tôi đang xem một DVD.',
+                explanation: 'Hành động "đang xem DVD" xảy ra tại một thời điểm cụ thể trong quá khứ ("at midnight").',
+                grammar_note: '"We" là chủ ngữ số nhiều, nên dùng "were".'
+            }
+        };
+
+        function normalizeAnswer(answer) {
+            return answer.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        function submitAnswers() {
+            let score = 0;
+            let totalCorrectableQuestions = 0; // To count only the primary questions (q1, q2, q3, etc.)
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Process each primary question (q1, q2, q3, ...)
+            const primaryQuestions = ['q1', 'q2', 'q3', 'q4', 'q5a', 'q6', 'q7a', 'q8'];
+
+            primaryQuestions.forEach(qId => {
+                const correctInfo = correctAnswers[qId];
+                if (!correctInfo) return; // Skip if no info for this ID (e.g., q2b, q4b, q5b, q7b are handled below)
+
+                totalCorrectableQuestions++; // Count this as a main question for scoring
+
+                let isQuestionCorrect = true; // Assume true until a blank is wrong
+
+                // Handle single blank questions (q1, q3, q6, q8)
+                if (!qId.endsWith('a') && !qId.endsWith('b') && !correctAnswers[`${qId}b`]) {
+                    const inputElement = document.getElementById(qId);
+                    const userAnswer = normalizeAnswer(inputElement.value);
+                    const feedbackIcon = inputElement.nextElementSibling;
+
+                    inputElement.classList.remove('is-valid', 'is-invalid');
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+
+                    const isCorrect = correctInfo.answer.some(ans => normalizeAnswer(ans) === userAnswer);
+
+                    if (isCorrect) {
+                        inputElement.classList.add('is-valid');
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        isQuestionCorrect = false;
+                        inputElement.classList.add('is-invalid');
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+                // Handle multi-blank questions (q2, q4, q5, q7)
+                else if (qId.endsWith('a')) { // Only process the 'a' part to generate a single solution entry
+                    const qIdB = qId.slice(0, -1) + 'b'; // Get the 'b' part ID
+                    const inputElementA = document.getElementById(qId);
+                    const inputElementB = document.getElementById(qIdB);
+
+                    const userAnswerA = normalizeAnswer(inputElementA.value);
+                    const userAnswerB = normalizeAnswer(inputElementB.value);
+
+                    const correctInfoB = correctAnswers[qIdB];
+
+                    const isCorrectA = correctInfo.answer.some(ans => normalizeAnswer(ans) === userAnswerA);
+                    const isCorrectB = correctInfoB.answer.some(ans => normalizeAnswer(ans) === userAnswerB);
+
+                    const feedbackIconA = inputElementA.nextElementSibling; // This needs to be adjusted based on HTML structure
+                    const feedbackIconB = inputElementB.nextElementSibling; // This needs to be adjusted based on HTML structure
+
+                    // Find the common feedback icon for the whole exercise item
+                    let commonFeedbackIcon = null;
+                    let currentElement = inputElementB.nextElementSibling;
+                    while (currentElement) {
+                        if (currentElement.classList.contains('feedback-icon')) {
+                            commonFeedbackIcon = currentElement;
+                            break;
+                        }
+                        currentElement = currentElement.nextElementSibling;
+                    }
+
+
+                    inputElementA.classList.remove('is-valid', 'is-invalid');
+                    inputElementB.classList.remove('is-valid', 'is-invalid');
+                    if (commonFeedbackIcon) {
+                        commonFeedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    }
+
+
+                    if (isCorrectA) {
+                        inputElementA.classList.add('is-valid');
+                    } else {
+                        isQuestionCorrect = false;
+                        inputElementA.classList.add('is-invalid');
+                    }
+
+                    if (isCorrectB) {
+                        inputElementB.classList.add('is-valid');
+                    } else {
+                        isQuestionCorrect = false;
+                        inputElementB.classList.add('is-invalid');
+                    }
+
+                    if (commonFeedbackIcon) {
+                        if (isCorrectA && isCorrectB) {
+                            commonFeedbackIcon.classList.add('fa-check-circle', 'text-success');
+                        } else {
+                            commonFeedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                        }
+                        commonFeedbackIcon.style.display = 'inline-block';
+                    }
+
+                } else if (qId === 'q2' || qId === 'q4') { // Special handling for q2 and q4 which are main questions with 'b' parts
+                    const qIdB = `${qId}b`;
+                    const inputElementA = document.getElementById(qId);
+                    const inputElementB = document.getElementById(qIdB);
+
+                    const userAnswerA = normalizeAnswer(inputElementA.value);
+                    const userAnswerB = normalizeAnswer(inputElementB.value);
+
+                    const correctInfoB = correctAnswers[qIdB];
+
+                    const isCorrectA = correctInfo.answer.some(ans => normalizeAnswer(ans) === userAnswerA);
+                    const isCorrectB = correctInfoB.answer.some(ans => normalizeAnswer(ans) === userAnswerB);
+
+                    // For feedback icons, find the one associated with the last input in the sequence for the item
+                    let commonFeedbackIcon = null;
+                    let currentElement = inputElementB.nextElementSibling; // Get the element right after the last input
+                    while (currentElement) {
+                        if (currentElement.classList.contains('feedback-icon')) {
+                            commonFeedbackIcon = currentElement;
+                            break;
+                        }
+                        currentElement = currentElement.nextElementSibling;
+                    }
+
+
+                    inputElementA.classList.remove('is-valid', 'is-invalid');
+                    inputElementB.classList.remove('is-valid', 'is-invalid');
+                     if (commonFeedbackIcon) {
+                        commonFeedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    }
+
+                    if (isCorrectA) {
+                        inputElementA.classList.add('is-valid');
+                    } else {
+                        isQuestionCorrect = false;
+                        inputElementA.classList.add('is-invalid');
+                    }
+
+                    if (isCorrectB) {
+                        inputElementB.classList.add('is-valid');
+                    } else {
+                        isQuestionCorrect = false;
+                        inputElementB.classList.add('is-invalid');
+                    }
+
+                    if (commonFeedbackIcon) {
+                        if (isCorrectA && isCorrectB) {
+                            commonFeedbackIcon.classList.add('fa-check-circle', 'text-success');
+                        } else {
+                            commonFeedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                        }
+                        commonFeedbackIcon.style.display = 'inline-block';
+                    }
+                }
+
+
+                if (isQuestionCorrect) {
+                    score++;
+                }
+
+
+                // Add detailed solution for each question
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.replace(/a$|b$/, ''); // Get base number for display (e.g., q5a -> q5)
+                const displayQuestionNumber = parseInt(questionNumber.substring(1)); // Convert 'q1' to 1
+
+                const questionTextDiv = document.createElement('div');
+                questionTextDiv.classList.add('question-text');
+
+                let fullSentenceText = correctInfo.originalText;
+                if (qId.endsWith('a') || qId === 'q2' || qId === 'q4') { // Handle multi-blank questions
+                    const qIdB = qId.endsWith('a') ? qId.slice(0, -1) + 'b' : qId + 'b';
+                    const correctInfoB = correctAnswers[qIdB];
+                    if (correctInfoB) {
+                        fullSentenceText = fullSentenceText
+                            .replace('{verb1}', `<span class="correct-answer-text">${correctInfo.answer[0]}</span>`)
+                            .replace('{verb2}', `<span class="correct-answer-text">${correctInfoB.answer[0]}</span>`);
+                    }
+                } else { // Handle single blank questions
+                    fullSentenceText = fullSentenceText.replace('{verb}', `<span class="correct-answer-text">${correctInfo.answer[0]}</span>`);
+                }
+
+                questionTextDiv.innerHTML = `<label class="form-label">${displayQuestionNumber}</label>. ` + fullSentenceText;
+                solutionItem.appendChild(questionTextDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${correctInfo.explanation}<br>${correctInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${correctInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalCorrectableQuestions} điểm.`;
+
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalCorrectableQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalCorrectableQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+        }
+
+
+        function resetExercise() {
+            const inputs = document.querySelectorAll('.answer-input');
+            inputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('is-valid', 'is-invalid');
+                // The feedback icon is not necessarily the immediate next sibling for multi-input items
+                // We need to find the correct feedback icon associated with the overall exercise item
+                let currentElement = input;
+                let foundFeedbackIcon = null;
+                while (currentElement && !currentElement.classList.contains('exercise-item')) {
+                    currentElement = currentElement.parentElement;
+                }
+                if (currentElement) {
+                    foundFeedbackIcon = currentElement.querySelector('.feedback-icon');
+                }
+
+                if (foundFeedbackIcon) {
+                    foundFeedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    foundFeedbackIcon.style.display = 'none';
+                }
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions
+        }
+    </script>
+</body>
+</html>

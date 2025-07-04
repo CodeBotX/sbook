@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Formation - English Exercise</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+        }
+        .container-main {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .exercise-text {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            line-height: 2.2;
+        }
+        .exercise-text .question-line {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        .exercise-text .question-number {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-right: 10px;
+            width: 25px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .exercise-text .answer-input {
+            width: 180px; /* Wider for word formation */
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            display: inline-block;
+            margin: 0 5px;
+            vertical-align: middle;
+        }
+        .exercise-text .answer-input:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .exercise-text .answer-input.is-valid {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .exercise-text .answer-input.is-invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+            background-color: #f8d7da;
+            color: #842029;
+        }
+        .exercise-text .hint-word {
+            font-weight: bold;
+            color: #0d6efd;
+            margin-left: 10px;
+            font-size: 0.9em;
+            vertical-align: middle;
+        }
+
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text-solution {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+        }
+        .solution-list .solution-item .explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <span class="badge bg-primary fs-6 me-2">F</span>
+            <h1>Word formation: Complete by changing the form of the word in capitals when this is necessary.</h1>
+        </div>
+        <p class="instruction">
+            Hoàn thành các câu bằng cách thay đổi dạng của từ viết hoa nếu cần thiết.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="wordFormationForm">
+            <div class="exercise-text">
+                <div class="question-line">
+                    <span class="question-number">1</span> What's the name of that ............... you were singing earlier?
+                    <input type="text" class="form-control answer-input" id="q1" name="q1">
+                    <span class="hint-word">SING</span>
+                </div>
+                <div class="question-line">
+                    <span class="question-number">2</span> I started to learn the piano, but I don't think I've got much ............... talent, to be honest.
+                    <input type="text" class="form-control answer-input" id="q2" name="q2">
+                    <span class="hint-word">MUSIC</span>
+                </div>
+                <div class="question-line">
+                    <span class="question-number">3</span> My dad used to be really fit and was on his college ............... team.
+                    <input type="text" class="form-control answer-input" id="q3" name="q3">
+                    <span class="hint-word">ATHLETE</span>
+                </div>
+                <div class="question-line">
+                    <span class="question-number">4</span> When you were young, did you ever play in the street with other local ...............?
+                    <input type="text" class="form-control answer-input" id="q4" name="q4">
+                    <span class="hint-word">CHILD</span>
+                </div>
+                <div class="question-line">
+                    <span class="question-number">5</span> Alan is studying to be an ............... , but I don't think he's enjoying it.
+                    <input type="text" class="form-control answer-input" id="q5" name="q5">
+                    <span class="hint-word">ACT</span>
+                </div>
+                <div class="question-line">
+                    <span class="question-number">6</span> They have a wonderful ............... of old toys at the museum in town.
+                    <input type="text" class="form-control answer-input" id="q6" name="q6">
+                    <span class="hint-word">COLLECT</span>
+                </div>
+                <div class="question-line">
+                    <span class="question-number">7</span> My grandad loves to ............... and we often go out on his boat.
+                    <input type="text" class="form-control answer-input" id="q7" name="q7">
+                    <span class="hint-word">SAIL</span>
+                </div>
+                <div class="question-line">
+                    <span class="question-number">8</span> You have to practise a lot if you want to work as a ............... .
+                    <input type="text" class="form-control answer-input" id="q8" name="q8">
+                    <span class="hint-word">MUSIC</span>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTFyMfwGpGFFRKKoXpQf/ZtVKKjoF+L7ffy4qC7zQtxHiJitjEATj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkmXLRV5vfJzJrEPiniwz4rsVZpGgG8Y1r+KNuGMuwtj44gJjEnFqVfXpX5f" crossorigin="anonymous"></script>
+
+    <script>
+        const correctAnswers = {
+            'q1': {
+                original_word: 'SING',
+                correct: 'song',
+                sentence_parts: ['What\'s the name of that ', ' you were singing earlier?'],
+                explanation: 'Sau "that" và trước động từ "were singing", cần một danh từ để chỉ một bản nhạc. "Song" (bài hát) là dạng danh từ của "sing" (hát).',
+                translation: 'Tên của bài hát mà bạn đã hát lúc nãy là gì?',
+            },
+            'q2': {
+                original_word: 'MUSIC',
+                correct: 'musical',
+                sentence_parts: ['I started to learn the piano, but I don\'t think I\'ve got much ', ' talent, to be honest.'],
+                explanation: 'Trước danh từ "talent" (tài năng), cần một tính từ để bổ nghĩa. "Musical" (có năng khiếu âm nhạc, thuộc về âm nhạc) là tính từ của "music". Cụm "musical talent" có nghĩa là tài năng âm nhạc.',
+                translation: 'Tôi bắt đầu học piano, nhưng thành thật mà nói, tôi không nghĩ mình có nhiều tài năng âm nhạc.',
+            },
+            'q3': {
+                original_word: 'ATHLETE',
+                correct: 'athletic',
+                sentence_parts: ['My dad used to be really fit and was on his college ', ' team.'],
+                explanation: 'Trước danh từ "team" (đội), cần một tính từ để mô tả loại đội. "Athletic" (thuộc về điền kinh, thể thao) là tính từ của "athlete" (vận động viên). "Athletic team" là đội thể thao/điền kinh.',
+                translation: 'Bố tôi từng rất khỏe mạnh và là thành viên của đội điền kinh trường đại học.',
+            },
+            'q4': {
+                original_word: 'CHILD',
+                correct: 'children',
+                sentence_parts: ['When you were young, did you ever play in the street with other local ', '?'],
+                explanation: 'Sau "other local" (những người địa phương khác), cần một danh từ số nhiều để chỉ người. "Children" (trẻ em) là dạng số nhiều của "child".',
+                translation: 'Khi bạn còn nhỏ, bạn có bao giờ chơi ở đường phố với những đứa trẻ địa phương khác không?',
+            },
+            'q5': {
+                original_word: 'ACT',
+                correct: 'actor',
+                sentence_parts: ['Alan is studying to be an ', ' , but I don\'t think he\'s enjoying it.'],
+                explanation: 'Sau mạo từ "an" và trước dấu phẩy, cần một danh từ chỉ nghề nghiệp bắt đầu bằng nguyên âm. "Actor" (diễn viên nam) là danh từ chỉ người làm nghề diễn xuất, bắt nguồn từ động từ "act".',
+                translation: 'Alan đang học để trở thành một diễn viên, nhưng tôi không nghĩ anh ấy thích công việc đó.',
+            },
+            'q6': {
+                original_word: 'COLLECT',
+                correct: 'collection',
+                sentence_parts: ['They have a wonderful ', ' of old toys at the museum in town.'],
+                explanation: 'Sau tính từ "wonderful" (tuyệt vời) và trước giới từ "of", cần một danh từ. "Collection" (bộ sưu tập) là danh từ của "collect" (thu thập).',
+                translation: 'Họ có một bộ sưu tập đồ chơi cũ tuyệt vời tại bảo tàng trong thị trấn.',
+            },
+            'q7': {
+                original_word: 'SAIL',
+                correct: 'sail', // Can also be 'sailing' if interpreted as a hobby/activity
+                sentence_parts: ['My grandad loves to ', ' and we often go out on his boat.'],
+                explanation: 'Sau động từ "loves to", cần một động từ nguyên mẫu không "to" để diễn tả hành động yêu thích. "Sail" (chèo thuyền, đi thuyền) là dạng động từ. (Hoặc "sailing" nếu coi là danh động từ chỉ hoạt động).',
+                translation: 'Ông tôi thích đi thuyền và chúng tôi thường ra khơi trên chiếc thuyền của ông ấy.',
+            },
+            'q8': {
+                original_word: 'MUSIC',
+                correct: 'musician',
+                sentence_parts: ['You have to practise a lot if you want to work as a ', ' .'],
+                explanation: 'Sau "work as a" (làm việc với tư cách là một), cần một danh từ chỉ nghề nghiệp. "Musician" (nhạc sĩ) là danh từ chỉ người làm việc với âm nhạc, có nguồn gốc từ "music".',
+                translation: 'Bạn phải luyện tập rất nhiều nếu bạn muốn làm nghề nhạc sĩ.',
+            },
+        };
+
+        function normalizeAnswer(answer) {
+            return answer.toLowerCase().trim();
+        }
+
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            Object.keys(correctAnswers).forEach(qId => {
+                const inputElement = document.getElementById(qId);
+                if (!inputElement) return;
+
+                const userAnswer = normalizeAnswer(inputElement.value);
+                const correctInfo = correctAnswers[qId];
+                const isCorrect = correctInfo.correct === userAnswer;
+
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (isCorrect) {
+                    score++;
+                    inputElement.classList.add('is-valid');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                }
+
+                // Add detailed solution for each question
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextDiv = document.createElement('div');
+                questionTextDiv.classList.add('question-text-solution');
+
+                // Reconstruct sentence with correct answer
+                const fullSentenceHtml = correctInfo.sentence_parts[0] +
+                                         `<span class="correct-answer-text-solution">${correctInfo.correct}</span>` +
+                                         correctInfo.sentence_parts[1];
+                
+                questionTextDiv.innerHTML = `<strong>Câu ${questionNumber}:</strong> ${fullSentenceHtml} <span class="hint-word">(${correctInfo.original_word})</span>`;
+                solutionItem.appendChild(questionTextDiv);
+
+                // Add explanation
+                const explanationDiv = document.createElement('div');
+                explanationDiv.classList.add('explanation');
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${correctInfo.explanation}`;
+                solutionItem.appendChild(explanationDiv);
+
+                // Add translation
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${correctInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+                
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+        }
+
+        function resetExercise() {
+            const inputs = document.querySelectorAll('.answer-input');
+            inputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('is-valid', 'is-invalid');
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions
+        }
+    </script>
+</body>
+</html>

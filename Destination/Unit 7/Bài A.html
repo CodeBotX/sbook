@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Hiện Tại Tiếp Diễn</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 1000px; /* Increased max-width for better layout of two columns */
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Layout for diary and questions */
+        .exercise-content {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 30px; /* Space between diary and questions */
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .diary-section {
+            flex: 1;
+            min-width: 300px; /* Minimum width for diary */
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .diary-section h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .diary-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .diary-section li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e9ecef;
+            display: flex;
+            align-items: center;
+            font-size: 1em;
+            color: #555;
+        }
+        .diary-section li:last-child {
+            border-bottom: none;
+        }
+        .diary-section li .day {
+            font-weight: 600;
+            color: #34495e;
+            margin-right: 10px;
+            min-width: 80px; /* Ensure day name has enough space */
+        }
+        .diary-section li .activity {
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        .questions-section {
+            flex: 2; /* Questions take more space */
+            min-width: 450px; /* Minimum width for questions */
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .questions-section h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .questions-section .question-item {
+            margin-bottom: 20px;
+            border: none; /* Remove border from individual question items here */
+            padding: 0;
+            background-color: transparent;
+            box-shadow: none;
+        }
+        .questions-section .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .questions-section input[type="text"] {
+            display: inline-block;
+            width: 300px; /* Adjust width for sentence input */
+            margin: 0 5px;
+            padding: 0 5px;
+            border: none;
+            border-bottom: 1px solid #ced4da;
+            border-radius: 0;
+            font-size: 1em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: transparent;
+            text-align: left; /* Align text left in input */
+        }
+        .questions-section input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: none;
+            border-bottom-width: 2px;
+        }
+        /* Styles for correct and incorrect input feedback */
+        .questions-section input[type="text"].is-correct {
+            border-color: #198754;
+            box-shadow: none;
+            border-bottom-width: 2px;
+        }
+        .questions-section input[type="text"].is-incorrect {
+            border-color: #dc3545;
+            box-shadow: none;
+            border-bottom-width: 2px;
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .exercise-content {
+                flex-direction: column; /* Stack diary and questions vertically */
+                gap: 20px;
+            }
+            .diary-section, .questions-section {
+                min-width: unset; /* Remove min-width for full responsiveness */
+                flex: none; /* Remove flex sizing */
+                width: 100%; /* Take full width */
+            }
+            .diary-section li {
+                font-size: 0.95em;
+            }
+            .questions-section .question-text {
+                font-size: 1em;
+            }
+            .questions-section input[type="text"] {
+                width: 100%; /* Full width input on small screens */
+                margin: 5px 0; /* Add vertical margin */
+            }
+            .buttons .btn {
+                font-size: 1em;
+                padding: 10px 20px;
+                margin: 0 5px;
+            }
+            .score-display {
+                font-size: 1.2em;
+                padding: 10px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Hiện Tại Tiếp Diễn</h1>
+        </div>
+        <h2>Nhìn vào nhật ký của Shelley và sử dụng các gợi ý để viết câu. Sử dụng thì hiện tại tiếp diễn.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Look at Shelley's diary and use the prompts to write sentences. Use the correct form of the present continuous.
+            <br>
+            <strong>Hướng dẫn:</strong> Nhìn vào nhật ký của Shelley và sử dụng các gợi ý để viết câu. Sử dụng thì hiện tại tiếp diễn.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <div class="exercise-content">
+            <div class="diary-section">
+                <h3>Shelley's Diary</h3>
+                <ul>
+                    <li><span class="day">Monday:</span> <span class="activity">meet Alison - Friends Café</span></li>
+                    <li><span class="day">Tuesday:</span> <span class="activity">go shopping - Mum</span></li>
+                    <li><span class="day">Wednesday:</span> <span class="activity">catch train - Brighton</span></li>
+                    <li><span class="day">Thursday:</span> <span class="activity">spend day - Charlie in Brighton</span></li>
+                    <li><span class="day">Friday:</span> <span class="activity">catch train - home - 10 am</span></li>
+                    <li><span class="day">Saturday:</span> <span class="activity">work - Dad's shop - all morning</span></li>
+                </ul>
+            </div>
+
+            <form id="presentContinuousForm" class="questions-section">
+                <h3>Viết câu</h3>
+                <div class="question-item">
+                    <p class="question-text">1. On Monday, she <input type="text" id="q1" name="q1" class="form-control d-inline-block w-auto"></p>
+                    <i class="feedback-icon fa-solid" id="icon1"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">2. On Tuesday, she <input type="text" id="q2" name="q2" class="form-control d-inline-block w-auto"></p>
+                    <i class="feedback-icon fa-solid" id="icon2"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">3. On Wednesday, she <input type="text" id="q3" name="q3" class="form-control d-inline-block w-auto"></p>
+                    <i class="feedback-icon fa-solid" id="icon3"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">4. On Thursday, she <input type="text" id="q4" name="q4" class="form-control d-inline-block w-auto"></p>
+                    <i class="feedback-icon fa-solid" id="icon4"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">5. On Friday, she <input type="text" id="q5" name="q5" class="form-control d-inline-block w-auto"></p>
+                    <i class="feedback-icon fa-solid" id="icon5"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">6. On Saturday, she <input type="text" id="q6" name="q6" class="form-control d-inline-block w-auto"></p>
+                    <i class="feedback-icon fa-solid" id="icon6"></i>
+                </div>
+
+                <div class="buttons text-center mt-5">
+                    <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                    <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                prompt: 'meet Alison - Friends Café',
+                correct_answer: 'is meeting Alison at Friends Café.',
+                fullSentence: 'On Monday, she is meeting Alison at Friends Café.',
+                translation: 'Vào thứ Hai, cô ấy sẽ gặp Alison tại Friends Café.',
+                explanation: 'Sử dụng thì hiện tại tiếp diễn để diễn tả một kế hoạch đã được sắp xếp trong tương lai gần.',
+                grammar_note: 'Thì hiện tại tiếp diễn (Present Continuous): S + is/am/are + V-ing. Dùng cho các sự kiện đã được sắp xếp trong tương lai.'
+            },
+            'q2': {
+                prompt: 'go shopping - Mum',
+                correct_answer: 'is going shopping with Mum.',
+                fullSentence: 'On Tuesday, she is going shopping with Mum.',
+                translation: 'Vào thứ Ba, cô ấy sẽ đi mua sắm với Mẹ.',
+                explanation: 'Tương tự, đây là một kế hoạch đã định. "Go shopping" là một cụm động từ phổ biến.',
+                grammar_note: 'Cụm từ: "go shopping".'
+            },
+            'q3': {
+                prompt: 'catch train - Brighton',
+                correct_answer: 'is catching a train to Brighton.',
+                fullSentence: 'On Wednesday, she is catching a train to Brighton.',
+                translation: 'Vào thứ Tư, cô ấy sẽ bắt tàu đi Brighton.',
+                explanation: 'Sử dụng "catch a train to" để chỉ việc bắt tàu đến một địa điểm. Thì hiện tại tiếp diễn cho kế hoạch.',
+                grammar_note: 'Cụm từ: "catch a train to [destination]".'
+            },
+            'q4': {
+                prompt: 'spend day - Charlie in Brighton',
+                correct_answer: 'is spending the day with Charlie in Brighton.',
+                fullSentence: 'On Thursday, she is spending the day with Charlie in Brighton.',
+                translation: 'Vào thứ Năm, cô ấy sẽ dành cả ngày với Charlie ở Brighton.',
+                explanation: 'Sử dụng "spend the day with someone in a place" để diễn tả việc dành thời gian với ai đó ở đâu.',
+                grammar_note: 'Cụm từ: "spend time with someone in a place".'
+            },
+            'q5': {
+                prompt: 'catch train - home - 10 am',
+                correct_answer: 'is catching a train home at 10 am.',
+                fullSentence: 'On Friday, she is catching a train home at 10 am.',
+                translation: 'Vào thứ Sáu, cô ấy sẽ bắt tàu về nhà lúc 10 giờ sáng.',
+                explanation: 'Tương tự như câu 3, thêm thời gian cụ thể vào cuối câu.',
+                grammar_note: 'Cụm từ: "catch a train home at [time]".'
+            },
+            'q6': {
+                prompt: 'work - Dad\'s shop - all morning',
+                correct_answer: 'is working at Dad\'s shop all morning.',
+                fullSentence: 'On Saturday, she is working at Dad\'s shop all morning.',
+                translation: 'Vào thứ Bảy, cô ấy sẽ làm việc tại cửa hàng của Bố cả buổi sáng.',
+                explanation: 'Sử dụng "work at" để chỉ nơi làm việc. "All morning" nhấn mạnh khoảng thời gian kéo dài của hoạt động đã định.',
+                grammar_note: 'Cụm từ: "work at a place".'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                let isCorrect = false;
+                const userAnswer = (inputElement ? inputElement.value.trim() : '').toLowerCase();
+                const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                // Reset feedback classes on input
+                if (inputElement) {
+                    inputElement.classList.remove('is-correct', 'is-incorrect');
+                }
+
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    if (inputElement) {
+                        inputElement.classList.add('is-correct');
+                    }
+                } else {
+                    if (inputElement) {
+                        inputElement.classList.add('is-incorrect');
+                    }
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                // Construct the full sentence for solution display
+                const fullSentenceForSolution = `${qId.substring(1)}. ${questionInfo.fullSentence.replace(questionInfo.correct_answer, `<span class="correct-answer-text">${questionInfo.correct_answer}</span>`)}`;
+                questionTextSolutionDiv.innerHTML = fullSentenceForSolution;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+    translationDiv.classList.add('translation');
+    translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = ''; // Clear text input
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

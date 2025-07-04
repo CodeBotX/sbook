@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp A1: Câu điều kiện loại 2 & Must, Have to, Should</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .lead {
+            color: #5f6368;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .question-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8faff;
+            border: 1px solid #dcdfe4;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-section h3 {
+            color: #3c4043;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid #e8eaed;
+            padding-bottom: 10px;
+        }
+        .question-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eceff1;
+        }
+        .question-item label {
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+            color: #202124;
+            font-size: 1.05rem;
+        }
+        .form-check {
+            margin-bottom: 8px;
+        }
+        .form-check-input {
+            margin-right: 8px;
+        }
+        .form-check-label {
+            font-size: 0.95rem;
+            color: #3c4043;
+        }
+        .instructions {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #70757a;
+            padding: 10px 15px;
+            background-color: #e6f4f1;
+            border-left: 5px solid #34a853;
+            border-radius: 5px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #e6ffed;
+            color: #1e8449;
+            border: 1px solid #34a853;
+        }
+        .feedback.incorrect {
+            background-color: #ffebe6;
+            color: #c53929;
+            border: 1px solid #ea4335;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            border-left: 4px solid #aab7b8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            display: none;
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1764cc;
+            border-color: #1764cc;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .d-grid {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Bài Tập Ngữ Pháp A1</h1>
+        <p class="lead text-center">Câu điều kiện loại 2 (Second Conditionals) & Must, Have to, Should</p>
+        <hr>
+
+        <form id="grammarQuizForm">
+            <!-- Phần bài tập Second Conditionals -->
+            <div class="question-section">
+                <h3>Phần 1: Câu điều kiện loại 2 (Second Conditionals)</h3>
+                <p class="instructions">Chọn đáp án đúng nhất (A, B, C hoặc D) để hoàn thành các câu điều kiện loại 2.</p>
+                <div id="part1-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Phần bài tập Must, Have to, Should -->
+            <div class="question-section">
+                <h3>Phần 2: Must, Have to, Should</h3>
+                <p class="instructions">Chọn từ/cụm từ đúng nhất (A, B, C hoặc D) để hoàn thành các câu.</p>
+                <div id="part2-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-primary" type="button" onclick="submitQuiz()">Nộp bài</button>
+                <button class="btn btn-secondary" type="button" onclick="resetQuiz()">Làm lại</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Dữ liệu câu hỏi cho Phần 1: Second Conditionals (20 câu)
+        const questionsPart1 = [
+            {
+                id: "q1_sc",
+                text: "1. If I ______ (have) a lot of money, I ______ (buy) a new car.",
+                options: {
+                    a: "had / would buy",
+                    b: "have / will buy",
+                    c: "had / bought",
+                    d: "would have / bought"
+                },
+                correct: "a",
+                explanation: "Câu điều kiện loại 2 diễn tả tình huống không có thật ở hiện tại. Cấu trúc: If + S + V2/ed, S + would + V nguyên mẫu. 'Had' là quá khứ đơn của 'have', 'would buy' là dạng của mệnh đề chính."
+            },
+            {
+                id: "q2_sc",
+                text: "2. If she ______ (be) taller, she ______ (reach) the top shelf.",
+                options: {
+                    a: "was / will reach",
+                    b: "were / would reach",
+                    c: "is / reaches",
+                    d: "would be / reached"
+                },
+                correct: "b",
+                explanation: "Trong câu điều kiện loại 2, 'to be' luôn dùng 'were' cho tất cả các ngôi. 'Would reach' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q3_sc",
+                text: "3. He ______ (travel) the world if he ______ (not have) to work.",
+                options: {
+                    a: "would travel / didn't have",
+                    b: "travels / doesn't have",
+                    c: "will travel / won't have",
+                    d: "traveled / didn't have"
+                },
+                correct: "a",
+                explanation: "Mệnh đề chính dùng 'would + V nguyên mẫu', mệnh đề 'if' dùng quá khứ đơn (phủ định 'didn't have')."
+            },
+            {
+                id: "q4_sc",
+                text: "4. If it ______ (rain) tomorrow, we ______ (stay) at home.",
+                options: {
+                    a: "rains / will stay",
+                    b: "rained / would stay",
+                    c: "would rain / stayed",
+                    d: "is raining / are staying"
+                },
+                correct: "b",
+                explanation: "Diễn tả tình huống giả định trong tương lai. 'Rained' là quá khứ đơn của 'rain', 'would stay' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q5_sc",
+                text: "5. If I ______ (be) you, I ______ (apologize).",
+                options: {
+                    a: "was / will apologize",
+                    b: "were / would apologize",
+                    c: "am / apologize",
+                    d: "would be / apologized"
+                },
+                correct: "b",
+                explanation: "Cấu trúc 'If I were you' là lời khuyên. 'Would apologize' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q6_sc",
+                text: "6. What ______ you ______ (do) if you ______ (win) the lottery?",
+                options: {
+                    a: "will / do / win",
+                    b: "would / do / won",
+                    c: "did / do / win",
+                    d: "would / did / won"
+                },
+                correct: "b",
+                explanation: "Câu hỏi điều kiện loại 2. 'Would do' là dạng đúng của mệnh đề chính, 'won' là quá khứ đơn của 'win'."
+            },
+            {
+                id: "q7_sc",
+                text: "7. If they ______ (know) about the problem, they ______ (help) us.",
+                options: {
+                    a: "knew / would help",
+                    b: "know / will help",
+                    c: "knew / helped",
+                    d: "had known / would help"
+                },
+                correct: "a",
+                explanation: "Cấu trúc câu điều kiện loại 2. 'Knew' là quá khứ đơn của 'know', 'would help' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q8_sc",
+                text: "8. I ______ (not go) to the party if I ______ (feel) sick.",
+                options: {
+                    a: "won't go / feel",
+                    b: "wouldn't go / felt",
+                    c: "didn't go / felt",
+                    d: "wouldn't go / feel"
+                },
+                correct: "b",
+                explanation: "Diễn tả kết quả giả định và điều kiện không có thật. 'Wouldn't go' là phủ định của mệnh đề chính, 'felt' là quá khứ đơn của 'feel'."
+            },
+            {
+                id: "q9_sc",
+                text: "9. If we ______ (have) more time, we ______ (visit) the museum.",
+                options: {
+                    a: "had / would visit",
+                    b: "have / will visit",
+                    c: "had / visited",
+                    d: "would have / visit"
+                },
+                correct: "a",
+                explanation: "Cấu trúc câu điều kiện loại 2. 'Had' là quá khứ đơn của 'have', 'would visit' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q10_sc",
+                text: "10. She ______ (be) happier if she ______ (live) in the countryside.",
+                options: {
+                    a: "is / lives",
+                    b: "would be / lived",
+                    c: "will be / lives",
+                    d: "was / lived"
+                },
+                correct: "b",
+                explanation: "Diễn tả tình huống giả định. 'Would be' là dạng đúng của mệnh đề chính, 'lived' là quá khứ đơn của 'live'."
+            },
+            {
+                id: "q11_sc",
+                text: "11. If I ______ (find) a wallet, I ______ (return) it to the owner.",
+                options: {
+                    a: "found / would return",
+                    b: "find / will return",
+                    c: "found / returned",
+                    d: "would find / returned"
+                },
+                correct: "a",
+                explanation: "Cấu trúc câu điều kiện loại 2. 'Found' là quá khứ đơn của 'find', 'would return' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q12_sc",
+                text: "12. They ______ (buy) a house if they ______ (can) afford it.",
+                options: {
+                    a: "will buy / can",
+                    b: "would buy / could",
+                    c: "buy / could",
+                    d: "bought / can"
+                },
+                correct: "b",
+                explanation: "Mệnh đề chính dùng 'would + V nguyên mẫu', mệnh đề 'if' dùng quá khứ đơn ('could' là quá khứ của 'can')."
+            },
+            {
+                id: "q13_sc",
+                text: "13. If she ______ (speak) English well, she ______ (get) a better job.",
+                options: {
+                    a: "speaks / will get",
+                    b: "spoke / would get",
+                    c: "spoke / gets",
+                    d: "had spoken / would get"
+                },
+                correct: "b",
+                explanation: "Cấu trúc câu điều kiện loại 2. 'Spoke' là quá khứ đơn của 'speak', 'would get' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q14_sc",
+                text: "14. What ______ you ______ (do) if you ______ (see) a ghost?",
+                options: {
+                    a: "will / do / see",
+                    b: "would / do / saw",
+                    c: "did / do / see",
+                    d: "would / did / saw"
+                },
+                correct: "b",
+                explanation: "Câu hỏi điều kiện loại 2. 'Would do' là dạng đúng của mệnh đề chính, 'saw' là quá khứ đơn của 'see'."
+            },
+            {
+                id: "q15_sc",
+                text: "15. If I ______ (not be) busy, I ______ (come) with you.",
+                options: {
+                    a: "wasn't / will come",
+                    b: "weren't / would come",
+                    c: "am not / come",
+                    d: "didn't be / would come"
+                },
+                correct: "b",
+                explanation: "Trong câu điều kiện loại 2, 'to be' luôn dùng 'were' cho tất cả các ngôi. 'Wouldn't come' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q16_sc",
+                text: "16. If he ______ (study) harder, he ______ (pass) the exam.",
+                options: {
+                    a: "studies / will pass",
+                    b: "studied / would pass",
+                    c: "studied / passed",
+                    d: "had studied / would pass"
+                },
+                correct: "b",
+                explanation: "Cấu trúc câu điều kiện loại 2. 'Studied' là quá khứ đơn của 'study', 'would pass' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q17_sc",
+                text: "17. We ______ (go) for a walk if the weather ______ (be) nicer.",
+                options: {
+                    a: "will go / is",
+                    b: "would go / were",
+                    c: "go / was",
+                    d: "went / would be"
+                },
+                correct: "b",
+                explanation: "Diễn tả tình huống giả định. 'Would go' là dạng đúng của mệnh đề chính, 'were' là dạng đúng của 'to be' trong mệnh đề 'if'."
+            },
+            {
+                id: "q18_sc",
+                text: "18. If she ______ (have) enough time, she ______ (learn) to play the piano.",
+                options: {
+                    a: "has / will learn",
+                    b: "had / would learn",
+                    c: "had / learned",
+                    d: "would have / learn"
+                },
+                correct: "b",
+                explanation: "Cấu trúc câu điều kiện loại 2. 'Had' là quá khứ đơn của 'have', 'would learn' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q19_sc",
+                text: "19. If I ______ (not know) the answer, I ______ (ask) for help.",
+                options: {
+                    a: "don't know / will ask",
+                    b: "didn't know / would ask",
+                    c: "didn't know / asked",
+                    d: "won't know / ask"
+                },
+                correct: "b",
+                explanation: "Cấu trúc câu điều kiện loại 2 (phủ định). 'Didn't know' là quá khứ đơn phủ định của 'know', 'would ask' là dạng đúng của mệnh đề chính."
+            },
+            {
+                id: "q20_sc",
+                text: "20. They ______ (be) very happy if you ______ (visit) them.",
+                options: {
+                    a: "are / visit",
+                    b: "will be / visit",
+                    c: "would be / visited",
+                    d: "were / would visit"
+                },
+                correct: "c",
+                explanation: "Cấu trúc câu điều kiện loại 2. 'Would be' là dạng đúng của mệnh đề chính, 'visited' là quá khứ đơn của 'visit'."
+            }
+        ];
+
+        // Dữ liệu câu hỏi cho Phần 2: Must, Have to, Should (20 câu)
+        const questionsPart2 = [
+            {
+                id: "q1_mhs",
+                text: "1. You ______ clean your room. It's very messy. (Lời khuyên mạnh mẽ từ người nói)",
+                options: {
+                    a: "should",
+                    b: "must",
+                    c: "have to",
+                    d: "don't have to"
+                },
+                correct: "b",
+                explanation: "'Must' diễn tả sự bắt buộc mạnh mẽ hoặc lời khuyên nhấn mạnh từ người nói. 'Should' nhẹ hơn, 'have to' thường do ngoại cảnh."
+            },
+            {
+                id: "q2_mhs",
+                text: "2. Students ______ wear school uniforms. It's a school rule.",
+                options: {
+                    a: "should",
+                    b: "mustn't",
+                    c: "have to",
+                    d: "don't have to"
+                },
+                correct: "c",
+                explanation: "'Have to' diễn tả sự bắt buộc do quy định, luật lệ (quy tắc của trường học)."
+            },
+            {
+                id: "q3_mhs",
+                text: "3. You ______ smoke in the hospital. It's forbidden.",
+                options: {
+                    a: "don't have to",
+                    b: "shouldn't",
+                    c: "mustn't",
+                    d: "should"
+                },
+                correct: "c",
+                explanation: "'Mustn't' diễn tả sự cấm đoán, điều không được phép làm."
+            },
+            {
+                id: "q4_mhs",
+                text: "4. You look tired. You ______ get some rest.",
+                options: {
+                    a: "must",
+                    b: "have to",
+                    c: "should",
+                    d: "don't have to"
+                },
+                correct: "c",
+                explanation: "'Should' dùng để đưa ra lời khuyên hoặc gợi ý."
+            },
+            {
+                id: "q5_mhs",
+                text: "5. I'm sorry, I ______ leave now. My bus is coming.",
+                options: {
+                    a: "should",
+                    b: "must",
+                    c: "don't have to",
+                    d: "mustn't"
+                },
+                correct: "b", // Could also be 'have to' depending on nuance, but 'must' for immediate internal necessity. 'Have to' is also very common. For A1, 'must' for strong feeling/necessity.
+                explanation: "'Must' diễn tả sự cần thiết cấp bách mà người nói cảm thấy. 'My bus is coming' tạo ra sự cấp bách này."
+            },
+            {
+                id: "q6_mhs",
+                text: "6. We ______ pay for this meal. It's free.",
+                options: {
+                    a: "mustn't",
+                    b: "shouldn't",
+                    c: "don't have to",
+                    d: "must"
+                },
+                correct: "c",
+                explanation: "'Don't have to' diễn tả điều gì đó không cần thiết phải làm."
+            },
+            {
+                id: "q7_mhs",
+                text: "7. It's raining heavily. You ______ take an umbrella.",
+                options: {
+                    a: "must",
+                    b: "have to",
+                    c: "should",
+                    d: "don't have to"
+                },
+                correct: "c",
+                explanation: "'Should' dùng để đưa ra lời khuyên hợp lý dựa trên tình hình."
+            },
+            {
+                id: "q8_mhs",
+                text: "8. All passengers ______ show their passports at the border.",
+                options: {
+                    a: "should",
+                    b: "must",
+                    c: "have to",
+                    d: "don't have to"
+                },
+                correct: "c",
+                explanation: "'Have to' diễn tả sự bắt buộc do quy định của chính quyền, khách quan."
+            },
+            {
+                id: "q9_mhs",
+                text: "9. You ______ talk loudly in the library. It's disturbing.",
+                options: {
+                    a: "shouldn't",
+                    b: "don't have to",
+                    c: "must",
+                    d: "have to"
+                },
+                correct: "a",
+                explanation: "'Shouldn't' dùng để đưa ra lời khuyên không nên làm điều gì đó."
+            },
+            {
+                id: "q10_mhs",
+                text: "10. He's very ill. He ______ see a doctor immediately.",
+                options: {
+                    a: "should",
+                    b: "has to",
+                    c: "must",
+                    d: "doesn't have to"
+                },
+                correct: "c",
+                explanation: "'Must' diễn tả sự cần thiết cấp bách và mạnh mẽ (người nói cảm thấy rất quan trọng)."
+            },
+            {
+                id: "q11_mhs",
+                text: "11. I ______ work on Saturdays. It's part of my contract.",
+                options: {
+                    a: "should",
+                    b: "must",
+                    c: "have to",
+                    d: "don't have to"
+                },
+                correct: "c",
+                explanation: "'Have to' diễn tả sự bắt buộc do hợp đồng lao động (quy định bên ngoài)."
+            },
+            {
+                id: "q12_mhs",
+                text: "12. You ______ worry about it. Everything will be fine.",
+                options: {
+                    a: "mustn't",
+                    b: "shouldn't",
+                    c: "don't have to",
+                    d: "must"
+                },
+                correct: "c",
+                explanation: "'Don't have to' diễn tả điều gì đó không cần thiết phải làm (ở đây là không cần lo lắng)."
+            },
+            {
+                id: "q13_mhs",
+                text: "13. We ______ arrive on time for the meeting, it's very important.",
+                options: {
+                    a: "should",
+                    b: "must",
+                    c: "have to",
+                    d: "don't have to"
+                },
+                correct: "b",
+                explanation: "'Must' diễn tả sự bắt buộc mạnh mẽ, sự quan trọng từ người nói. 'Have to' cũng đúng nhưng 'must' nhấn mạnh tính cấp thiết/quan trọng hơn."
+            },
+            {
+                id: "q14_mhs",
+                text: "14. She ______ study hard to pass the exam.",
+                options: {
+                    a: "should",
+                    b: "must",
+                    c: "don't have to",
+                    d: "mustn't"
+                },
+                correct: "a",
+                explanation: "'Should' dùng để đưa ra lời khuyên về điều cần làm để đạt được mục tiêu."
+            },
+            {
+                id: "q15_mhs",
+                text: "15. You ______ touch the paintings. They are very old and fragile.",
+                options: {
+                    a: "don't have to",
+                    b: "shouldn't",
+                    c: "mustn't",
+                    d: "should"
+                },
+                correct: "c",
+                explanation: "'Mustn't' diễn tả sự cấm đoán, điều không được phép làm vì có thể gây hại."
+            },
+            {
+                id: "q16_mhs",
+                text: "16. I ______ finish this report by Friday. My boss said so.",
+                options: {
+                    a: "should",
+                    b: "must",
+                    c: "have to",
+                    d: "don't have to"
+                },
+                correct: "c",
+                explanation: "'Have to' diễn tả sự bắt buộc do yêu cầu từ người khác (ông chủ)."
+            },
+            {
+                id: "q17_mhs",
+                text: "17. You ______ wear a helmet when cycling. It's for your safety.",
+                options: {
+                    a: "mustn't",
+                    b: "don't have to",
+                    c: "should",
+                    d: "must"
+                },
+                correct: "c", // Could be 'must' if it's a legal requirement, but 'should' for strong advice for safety. For A1, 'should' covers strong advice.
+                explanation: "'Should' dùng để đưa ra lời khuyên về điều gì là tốt/quan trọng cho sự an toàn."
+            },
+            {
+                id: "q18_mhs",
+                text: "18. He ______ register for the course before the deadline. Otherwise, he can't join.",
+                options: {
+                    a: "should",
+                    b: "must",
+                    c: "has to",
+                    d: "doesn't have to"
+                },
+                correct: "c",
+                explanation: "'Has to' diễn tả sự bắt buộc do điều kiện bên ngoài (hạn chót, nếu không sẽ không tham gia được)."
+            },
+            {
+                id: "q19_mhs",
+                text: "19. You ______ eat too much sugar. It's bad for your health.",
+                options: {
+                    a: "mustn't",
+                    b: "shouldn't",
+                    c: "don't have to",
+                    d: "must"
+                },
+                correct: "b",
+                explanation: "'Shouldn't' dùng để đưa ra lời khuyên không nên làm điều gì đó vì nó có hại."
+            },
+            {
+                id: "q20_mhs",
+                text: "20. We ______ get a visa to enter this country. It's mandatory.",
+                options: {
+                    a: "should",
+                    b: "must",
+                    c: "have to",
+                    d: "don't have to"
+                },
+                correct: "c",
+                explanation: "'Have to' diễn tả sự bắt buộc do quy định, luật pháp (mandatory)."
+            }
+        ];
+
+        // Hàm để tải và hiển thị câu hỏi
+        function loadQuestions() {
+            const part1Container = document.getElementById('part1-questions');
+            const part2Container = document.getElementById('part2-questions');
+
+            part1Container.innerHTML = '';
+            part2Container.innerHTML = '';
+
+            // Tải câu hỏi Phần 1
+            questionsPart1.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part1Container.innerHTML += questionHtml;
+            });
+
+            // Tải câu hỏi Phần 2
+            questionsPart2.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part2Container.innerHTML += questionHtml;
+            });
+        }
+
+        // Hàm kiểm tra đáp án và hiển thị giải thích
+        function submitQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+            let allCorrect = true;
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+
+                if (selectedOption) {
+                    if (selectedOption.value === q.correct) {
+                        feedbackDiv.textContent = "Đúng rồi! 🎉";
+                        feedbackDiv.classList.add('correct');
+                    } else {
+                        feedbackDiv.textContent = `Sai rồi. Đáp án đúng là ${q.correct.toUpperCase()}. ❌`;
+                        feedbackDiv.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                } else {
+                    feedbackDiv.textContent = "Bạn chưa chọn đáp án.";
+                    feedbackDiv.classList.add('incorrect');
+                    allCorrect = false;
+                }
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${q.explanation}`;
+            });
+
+            if (allCorrect) {
+                // Có thể thêm thông báo chung nếu muốn, nhưng feedback từng câu đã rõ ràng.
+            }
+        }
+
+        // Hàm làm lại bài
+        function resetQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (selectedOption) {
+                    selectedOption.checked = false;
+                }
+
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'none';
+                explanationDiv.style.display = 'none';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                explanationDiv.innerHTML = '';
+            });
+        }
+
+        // Tải câu hỏi khi trang được tải xong
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+    </script>
+</body>
+</html>

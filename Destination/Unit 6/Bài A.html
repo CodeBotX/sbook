@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Điền Từ Ngữ Pháp</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center; /* Align input with text */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .question-item .question-text input[type="text"] {
+            display: inline-block;
+            width: 150px; /* Adjust width as needed */
+            margin: 0 5px;
+            padding: 0 5px; /* Reduced padding for underline effect */
+            border: none; /* Remove all borders */
+            border-bottom: 1px solid #ced4da; /* Only bottom border */
+            border-radius: 0; /* Remove border-radius for a clean underline */
+            font-size: 1em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: transparent; /* Ensure background is transparent */
+        }
+        .question-item .question-text input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: none; /* Remove box-shadow on focus for underline effect */
+            border-bottom-width: 2px; /* Thicker underline on focus */
+        }
+        /* Styles for correct and incorrect input feedback */
+        .question-item .question-text input[type="text"].is-correct {
+            border-color: #198754;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for correct */
+        }
+        .question-item .question-text input[type="text"].is-incorrect {
+            border-color: #dc3545;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for incorrect */
+        }
+
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .question-item .question-text input[type="text"] {
+                width: 100px; /* Smaller width for inputs on small screens */
+                margin: 0 3px;
+                padding: 0 4px; /* Adjusted padding */
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Điền Từ Ngữ Pháp</h1>
+        </div>
+        <h2>Hoàn thành bằng cách sử dụng đúng dạng của từ và cụm từ trong hộp.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Complete using the correct form of the words and phrases in the boxes.
+            <br>
+            <strong>Hướng dẫn:</strong> Điền từ hoặc cụm từ thích hợp vào chỗ trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="fillInTheBlanksForm">
+            <!-- Set 1: achieve • fail • pass -->
+            <div class="mb-4">
+                <p class="mb-2"><strong>achieve &bull; fail &bull; pass</strong></p>
+                <div class="question-item">
+                    <p class="question-text">1. We had our English exam this morning. I hope I've <input type="text" id="q1" name="q1" class="form-control d-inline-block w-auto"></p>
+                    <i class="feedback-icon fa-solid" id="icon1"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">2. Pete couldn't answer any questions, so he thinks he has <input type="text" id="q2" name="q2" class="form-control d-inline-block w-auto"></p>
+                    <i class="feedback-icon fa-solid" id="icon2"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">3. Our teacher said that we've all <input type="text" id="q3" name="q3" class="form-control d-inline-block w-auto"> a lot this year.</p>
+                    <i class="feedback-icon fa-solid" id="icon3"></i>
+                </div>
+            </div>
+
+            <!-- Set 2: degree • experience • instruction -->
+            <div class="mb-4">
+                <p class="mb-2"><strong>degree &bull; experience &bull; instruction</strong></p>
+                <div class="question-item">
+                    <p class="question-text">4. I've left you a list of <input type="text" id="q4" name="q4" class="form-control d-inline-block w-auto"> on the kitchen table. Make sure you follow them!</p>
+                    <i class="feedback-icon fa-solid" id="icon4"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">5. Meeting Brad Pitt was an amazing <input type="text" id="q5" name="q5" class="form-control d-inline-block w-auto">!</p>
+                    <i class="feedback-icon fa-solid" id="icon5"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">6. My sister left Warwick University after she got her <input type="text" id="q6" name="q6" class="form-control d-inline-block w-auto">.</p>
+                    <i class="feedback-icon fa-solid" id="icon6"></i>
+                </div>
+            </div>
+
+            <!-- Set 3: course • qualification • skill -->
+            <div class="mb-4">
+                <p class="mb-2"><strong>course &bull; qualification &bull; skill</strong></p>
+                <div class="question-item">
+                    <p class="question-text">7. Being able to use a computer is a very useful <input type="text" id="q7" name="q7" class="form-control d-inline-block w-auto">.</p>
+                    <i class="feedback-icon fa-solid" id="icon7"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">8. I'm thinking of going on a computer <input type="text" id="q8" name="q8" class="form-control d-inline-block w-auto">.</p>
+                    <i class="feedback-icon fa-solid" id="icon8"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">9. You can only apply for this job if you've got a <input type="text" id="q9" name="q9" class="form-control d-inline-block w-auto"> in website design.</p>
+                    <i class="feedback-icon fa-solid" id="icon9"></i>
+                </div>
+            </div>
+
+            <!-- Set 4: make progress • make sure • take an exam -->
+            <div class="mb-4">
+                <p class="mb-2"><strong>make progress &bull; make sure &bull; take an exam</strong></p>
+                <div class="question-item">
+                    <p class="question-text">10. You've all <input type="text" id="q10" name="q10" class="form-control d-inline-block w-auto"> a lot of <input type="text" id="q10_b" name="q10_b" class="form-control d-inline-block w-auto"> this year. Well done!</p>
+                    <i class="feedback-icon fa-solid" id="icon10"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">11. I always get nervous before I <input type="text" id="q11" name="q11" class="form-control d-inline-block w-auto">.</p>
+                    <i class="feedback-icon fa-solid" id="icon11"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">12. I <input type="text" id="q12" name="q12" class="form-control d-inline-block w-auto"> that I'd answered all the questions and then I handed in my test paper.</p>
+                    <i class="feedback-icon fa-solid" id="icon12"></i>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        // The 'text_parts' array helps reconstruct the sentence around the input field.
+        const questionsData = {
+            'q1': {
+                text_parts: ['We had our English exam this morning. I hope I\'ve ', '!'],
+                correct_answer: 'passed',
+                fullSentence: 'We had our English exam this morning. I hope I\'ve passed!',
+                translation: 'Chúng tôi đã có bài kiểm tra tiếng Anh sáng nay. Tôi hy vọng tôi đã vượt qua!',
+                explanation: 'Động từ "pass" (đậu, vượt qua) được sử dụng ở thì hiện tại hoàn thành (I\'ve passed) để nói về kết quả của một kỳ thi vừa diễn ra. Động từ "pass" dùng khi thi đậu một kỳ thi hoặc môn học.',
+                grammar_note: 'Cấu trúc: hope + S + have/has + P.P.'
+            },
+            'q2': {
+                text_parts: ['Pete couldn\'t answer any questions, so he thinks he has ', '.'],
+                correct_answer: 'failed',
+                fullSentence: 'Pete couldn\'t answer any questions, so he thinks he has failed.',
+                translation: 'Pete không thể trả lời bất kỳ câu hỏi nào, vì vậy anh ấy nghĩ rằng mình đã trượt.',
+                explanation: 'Động từ "fail" (trượt, thất bại) được dùng ở thì hiện tại hoàn thành (has failed) để nói về kết quả không mong muốn của một kỳ thi. Nó đối lập với "pass".',
+                grammar_note: 'Sử dụng "fail" khi không đạt được kết quả mong muốn trong một kỳ thi/nhiệm vụ.'
+            },
+            'q3': {
+                text_parts: ['Our teacher said that we\'ve all ', ' a lot this year.'],
+                correct_answer: 'achieved',
+                fullSentence: 'Our teacher said that we\'ve all achieved a lot this year.',
+                translation: 'Giáo viên của chúng tôi nói rằng tất cả chúng tôi đã đạt được rất nhiều trong năm nay.',
+                explanation: 'Động từ "achieve" (đạt được, hoàn thành) được dùng để nói về việc đạt được mục tiêu, thành công đáng kể. "A lot" cho thấy có nhiều thành tựu được tạo ra trong năm nay.',
+                grammar_note: 'Sử dụng "achieve" cho việc đạt được mục tiêu, thành công.'
+            },
+            'q4': {
+                text_parts: ['I\'ve left you a list of ', ' on the kitchen table. Make sure you follow them!'],
+                correct_answer: 'instructions',
+                fullSentence: 'I\'ve left you a list of instructions on the kitchen table. Make sure you follow them!',
+                translation: 'Tôi đã để lại cho bạn một danh sách hướng dẫn trên bàn bếp. Hãy chắc chắn rằng bạn làm theo chúng!',
+                explanation: 'Danh từ "instruction" (hướng dẫn) thường được dùng ở dạng số nhiều "instructions" khi nói về một bộ các chỉ dẫn. Cụm từ "a list of" cũng gợi ý một danh từ số nhiều.',
+                grammar_note: 'Dùng "instructions" (số nhiều) để chỉ các chỉ dẫn, hướng dẫn.'
+            },
+            'q5': {
+                text_parts: ['Meeting Brad Pitt was an amazing ', '!'],
+                correct_answer: 'experience',
+                fullSentence: 'Meeting Brad Pitt was an amazing experience!',
+                translation: 'Gặp Brad Pitt là một trải nghiệm tuyệt vời!',
+                explanation: 'Danh từ "experience" (trải nghiệm) là phù hợp nhất trong ngữ cảnh này để mô tả một sự kiện hoặc tình huống đáng nhớ, thường là cá nhân và gây ấn tượng mạnh.',
+                grammar_note: '"Experience" (danh từ không đếm được) chỉ sự trải qua, kinh nghiệm nói chung; (danh từ đếm được) chỉ một sự kiện cụ thể đã trải qua.'
+            },
+            'q6': {
+                text_parts: ['My sister left Warwick University after she got her ', '.'],
+                correct_answer: 'degree',
+                fullSentence: 'My sister left Warwick University after she got her degree.',
+                translation: 'Chị tôi đã rời Đại học Warwick sau khi cô ấy nhận bằng cấp của mình.',
+                explanation: 'Danh từ "degree" (bằng cấp) là thứ mà sinh viên nhận được sau khi hoàn thành chương trình học tại một trường đại học. Cụm từ "left Warwick University" gợi ý rằng cô ấy đã hoàn thành việc học.',
+                grammar_note: '"Degree" là bằng cấp đại học hoặc sau đại học.'
+            },
+            'q7': {
+                text_parts: ['Being able to use a computer is a very useful ', '.'],
+                correct_answer: 'skill',
+                fullSentence: 'Being able to use a computer is a very useful skill.',
+                translation: 'Có khả năng sử dụng máy tính là một kỹ năng rất hữu ích.',
+                explanation: 'Danh từ "skill" (kỹ năng) là khả năng làm điều gì đó tốt, đặc biệt là do học hỏi và luyện tập. Khả năng sử dụng máy tính rõ ràng là một kỹ năng.',
+                grammar_note: '"Skill" là khả năng thực hiện một việc gì đó thành thạo.'
+            },
+            'q8': {
+                text_parts: ['I\'m thinking of going on a computer ', '.'],
+                correct_answer: 'course',
+                fullSentence: 'I\'m thinking of going on a computer course.',
+                translation: 'Tôi đang nghĩ đến việc tham gia một khóa học máy tính.',
+                explanation: 'Danh từ "course" (khóa học) là một chuỗi các bài học hoặc một chương trình giáo dục. "Going on a computer course" có nghĩa là tham gia một khóa học về máy tính.',
+                grammar_note: '"Course" là một chuỗi các bài học hoặc một chương trình đào tạo.'
+            },
+            'q9': {
+                text_parts: ['You can only apply for this job if you\'ve got a ', ' in website design.'],
+                correct_answer: 'qualification',
+                fullSentence: 'You can only apply for this job if you\'ve got a qualification in website design.',
+                translation: 'Bạn chỉ có thể nộp đơn xin việc này nếu bạn có bằng cấp/chuyên môn về thiết kế trang web.',
+                explanation: 'Danh từ "qualification" (bằng cấp, chuyên môn) là một văn bằng, chứng chỉ hoặc một kỹ năng mà bạn có được sau khi hoàn thành một khóa học hoặc kỳ thi, chứng minh khả năng của bạn để làm một công việc cụ thể.',
+                grammar_note: '"Qualification" là bằng cấp, chứng chỉ chính thức chứng minh trình độ.'
+            },
+            'q10': {
+                text_parts: ['You\'ve all ', ' a lot of ', ' this year. Well done!'],
+                correct_answer_parts: ['made', 'progress'], // For questions with multiple blanks
+                fullSentence: 'You\'ve all made a lot of progress this year. Well done!',
+                translation: 'Tất cả các bạn đã đạt được nhiều tiến bộ trong năm nay. Làm tốt lắm!',
+                explanation: 'Cụm động từ "make progress" (tiến bộ) là cách dùng đúng khi nói về việc cải thiện hoặc phát triển. Thì hiện tại hoàn thành ("You\'ve all made") được sử dụng để nói về sự tiến bộ tích lũy đến thời điểm hiện tại.',
+                grammar_note: 'Cụm từ cố định: "make progress".'
+            },
+            'q11': {
+                text_parts: ['I always get nervous before I ', '.'],
+                correct_answer: 'take an exam',
+                fullSentence: 'I always get nervous before I take an exam.',
+                translation: 'Tôi luôn lo lắng trước khi tôi tham gia một kỳ thi.',
+                explanation: 'Cụm động từ "take an exam" (tham gia một kỳ thi) là cách dùng phổ biến nhất để nói về việc làm bài kiểm tra. "Get nervous before" cũng gợi ý một sự kiện mà bạn tham gia.',
+                grammar_note: 'Cụm từ cố định: "take an exam".'
+            },
+            'q12': {
+                text_parts: ['I ', ' that I\'d answered all the questions and then I handed in my test paper.'],
+                correct_answer: 'made sure',
+                fullSentence: 'I made sure that I\'d answered all the questions and then I handed in my test paper.',
+                translation: 'Tôi đã chắc chắn rằng mình đã trả lời tất cả các câu hỏi và sau đó tôi đã nộp bài kiểm tra của mình.',
+                explanation: 'Cụm động từ "make sure" (đảm bảo, chắc chắn) được dùng để diễn tả hành động kiểm tra lại để chắc chắn điều gì đó. Câu này kể về một hành động trong quá khứ nên dùng quá khứ đơn "made sure".',
+                grammar_note: 'Cụm từ cố định: "make sure". Dùng thì Quá khứ Đơn cho hành động đã hoàn thành trong quá khứ.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            // Filter out the '_b' questions to get the actual number of main questions
+            const totalQuestions = Object.keys(questionsData).filter(qId => !qId.endsWith('_b')).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                // Skip the '_b' questions as they are handled with their main question (e.g., q10_b handled with q10)
+                if (qId.endsWith('_b')) {
+                    return;
+                }
+
+                const questionInfo = questionsData[qId];
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                let isCorrect = false;
+                let userAnswerForSolution = ''; // To store user's answer for solution display
+
+                // Handle questions with multiple blanks (like q10)
+                if (qId === 'q10') {
+                    const input1 = document.getElementById('q10');
+                    const input2 = document.getElementById('q10_b');
+                    
+                    // Reset feedback classes
+                    input1.classList.remove('is-correct', 'is-incorrect');
+                    input2.classList.remove('is-correct', 'is-incorrect');
+
+                    const userVal1 = input1.value.trim().toLowerCase();
+                    const userVal2 = input2.value.trim().toLowerCase();
+                    const correctVal1 = questionInfo.correct_answer_parts[0].toLowerCase();
+                    const correctVal2 = questionInfo.correct_answer_parts[1].toLowerCase();
+
+                    if (userVal1 === correctVal1 && userVal2 === correctVal2) {
+                        isCorrect = true;
+                        score++;
+                        input1.classList.add('is-correct');
+                        input2.classList.add('is-correct');
+                    } else {
+                        input1.classList.add('is-incorrect');
+                        input2.classList.add('is-incorrect');
+                    }
+                    userAnswerForSolution = `${input1.value.trim()} ${input2.value.trim()}`;
+                } else { // Handle single blank questions
+                    const inputElement = document.getElementById(qId);
+                    
+                    // Reset feedback classes
+                    inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                    userAnswerForSolution = inputElement.value.trim();
+                    if (userAnswerForSolution.toLowerCase() === questionInfo.correct_answer.toLowerCase()) {
+                        isCorrect = true;
+                        score++;
+                        inputElement.classList.add('is-correct');
+                    } else {
+                        inputElement.classList.add('is-incorrect');
+                    }
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+
+                let fullTextHtml;
+                if (qId === 'q10') {
+                    fullTextHtml = `${questionNumber}. ${questionInfo.text_parts[0]} <span class="correct-answer-text">${questionInfo.correct_answer_parts[0]}</span> ${questionInfo.text_parts[1]} <span class="correct-answer-text">${questionInfo.correct_answer_parts[1]}</span> ${questionInfo.text_parts[2] || ''}`;
+                } else {
+                    fullTextHtml = `${questionNumber}. ${questionInfo.text_parts[0]} <span class="correct-answer-text">${questionInfo.correct_answer}</span> ${questionInfo.text_parts[1] || ''}`;
+                }
+                questionTextSolutionDiv.innerHTML = fullTextHtml;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = ''; // Clear text input
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>English Verb Quiz</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f4f6f9;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .correct {
+      border: 2px solid #28a745 !important;
+      background-color: #e9fbe9;
+    }
+
+    .incorrect {
+      border: 2px solid #dc3545 !important;
+      background-color: #fdeaea;
+    }
+
+    .answer {
+      display: block;
+      margin-top: 5px;
+      font-style: italic;
+      color: #dc3545;
+    }
+
+    .explanation {
+      margin-top: 5px;
+      font-size: 0.95rem;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h3 class="mb-4">Complete the sentences using the correct form of the verbs:</h3>
+    <form id="quizForm">
+      <ol>
+        <li>In Monopoly, you <input type="text" class="form-control d-inline w-auto" name="q1"> around the board, buying houses and hotels.</li>
+        <li>Are you <input type="text" class="form-control d-inline w-auto" name="q2"> this programme or can I turn the TV off?</li>
+        <li>Regular exercise <input type="text" class="form-control d-inline w-auto" name="q3"> you to stay healthy.</li>
+        <li>I <input type="text" class="form-control d-inline w-auto" name="q4"> my brother’s guitar until I get a new one.</li>
+        <li>Simon always <input type="text" class="form-control d-inline w-auto" name="q5"> the washing-up after lunch.</li>
+        <li>Do you <input type="text" class="form-control d-inline w-auto" name="q6"> any sweaters in a larger size?</li>
+        <li>You <input type="text" class="form-control d-inline w-auto" name="q7"> the kite right. Let me show you.</li>
+        <li>Dad, you <input type="text" class="form-control d-inline w-auto" name="q8"> to the local astronomy club.</li>
+      </ol>
+      <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const answers = {
+      q1: { correct: "move", explanation: "Trong trò chơi Monopoly, hành động là di chuyển quanh bàn cờ nên dùng 'move' (thì hiện tại đơn)." },
+      q2: { correct: "watching", explanation: "'Are you watching' là thì hiện tại tiếp diễn, dùng khi muốn hỏi ai đó đang xem cái gì ở thời điểm hiện tại." },
+      q3: { correct: "helps", explanation: "'Regular exercise' là chủ ngữ số ít nên dùng 'helps' (thêm 's' theo ngữ pháp hiện tại đơn)." },
+      q4: { correct: "using", explanation: "'I'm just using' là hiện tại tiếp diễn – mô tả hành động tạm thời đang xảy ra." },
+      q5: { correct: "does", explanation: "'Simon always does' – dùng thì hiện tại đơn với trạng từ tần suất 'always'." },
+      q6: { correct: "have", explanation: "Câu hỏi với 'Do you have' – dùng 'have' với danh từ số nhiều/số ít khi hỏi về sở hữu." },
+      q7: { correct: "aren't holding", explanation: "'You aren't holding' – phủ định hiện tại tiếp diễn, mô tả hành động đang làm sai." },
+      q8: { correct: "don't belong", explanation: "'You don't belong' – hiện tại đơn phủ định, chỉ sự thật là không thuộc về nhóm." }
+    };
+
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const form = event.target;
+
+      for (const [name, data] of Object.entries(answers)) {
+        const input = form[name];
+        const value = input.value.trim().toLowerCase();
+        input.classList.remove("correct", "incorrect");
+
+        // Remove previous explanations
+        let next = input.nextElementSibling;
+        while (next && (next.classList.contains("answer") || next.classList.contains("explanation"))) {
+          const temp = next.nextElementSibling;
+          next.remove();
+          next = temp;
+        }
+
+        const answerSpan = document.createElement("span");
+        answerSpan.className = "answer";
+
+        const explanation = document.createElement("div");
+        explanation.className = "explanation";
+
+        if (value === data.correct.toLowerCase()) {
+          input.classList.add("correct");
+        } else {
+          input.classList.add("incorrect");
+          answerSpan.textContent = `Đáp án đúng: ${data.correct}`;
+          explanation.textContent = data.explanation;
+          input.insertAdjacentElement("afterend", answerSpan);
+          answerSpan.insertAdjacentElement("afterend", explanation);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+            

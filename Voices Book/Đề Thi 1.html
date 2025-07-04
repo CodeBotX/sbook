@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Thi Mẫu Tiếng Anh - Trắc Nghiệm</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 950px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .lead {
+            color: #5f6368;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section-title {
+            color: #007bff;
+            margin-top: 35px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8eaed;
+        }
+        .question-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8faff;
+            border: 1px solid #dcdfe4;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-section h4 {
+            color: #3c4043;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .question-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eceff1;
+        }
+        .question-item p {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #202124;
+            font-size: 1.05rem;
+        }
+        .form-check {
+            margin-bottom: 8px;
+        }
+        .form-check-input {
+            margin-right: 8px;
+        }
+        .form-check-label {
+            font-size: 0.95rem;
+            color: #3c4043;
+        }
+        .instructions {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #70757a;
+            padding: 10px 15px;
+            background-color: #e6f4f1;
+            border-left: 5px solid #34a853;
+            border-radius: 5px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #e6ffed;
+            color: #1e8449;
+            border: 1px solid #34a853;
+        }
+        .feedback.incorrect {
+            background-color: #ffebe6;
+            color: #c53929;
+            border: 1px solid #ea4335;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            border-left: 4px solid #aab7b8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            display: none;
+        }
+        .score-display {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a73e8;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e6f7ff;
+            border-radius: 8px;
+            border: 1px solid #a8d6ff;
+            display: none; /* Hidden initially */
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1764cc;
+            border-color: #1764cc;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .d-grid {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Đề Thi Mẫu Tiếng Anh</h1>
+        <p class="lead text-center">HANOI UNIVERSITY OF SCIENCE & TECHNOLOGY</p>
+        <hr>
+
+        <p class="instructions">
+            Chào mừng bạn đến với bài kiểm tra mẫu! Vui lòng chọn đáp án đúng nhất cho mỗi câu hỏi.
+            Sau khi hoàn thành, nhấn nút "Nộp bài" để xem kết quả và giải thích chi tiết.
+            <br><strong>Lưu ý:</strong>
+            <ul>
+                <li>Phần Nghe và Viết không được chuyển đổi sang định dạng này.</li>
+                <li>Phần Đọc hiểu (Câu 21-25) có tham chiếu hình ảnh/biển báo. Vui lòng tham khảo đề thi gốc để xem hình ảnh đầy đủ.</li>
+            </ul>
+        </p>
+
+        <form id="quizForm">
+            <!-- READING SECTION -->
+            <h2 class="section-title">READING SECTION</h2>
+
+            <!-- Part 1. Questions 16-20 (Reading Comprehension) -->
+            <div class="question-section">
+                <h4>Part 1. Questions 16-20: Read the article and choose the correct answer A, B or C.</h4>
+                <div class="reading-passage mb-4 p-3 border rounded bg-light">
+                    <h5>English Language History and Spread</h5>
+                    <p>Over the past 600 years, English has grown from a language of few speakers to become the dominant language of international communication. English as we know it today emerged around 1350, after having incorporated many elements of French that were introduced following the Norman invasion of 1030. Until the 1600s, English was, for the most part, spoken only in England and had not extended even as far as Wales, Scotland, or Ireland. However, during the course of the next two centuries, English began to spread out the globe as a result of exploration, trade (including slave trade), colonization, and missionary work. Thus, small enclaves of English speakers became established and grew in various parts of the world. As these communities proliferated, English gradually became the primary language of international business, banking, and diplomacy.</p>
+                    <p>Currently, about 80 percent of the information stored on computer systems worldwide is in English. Two-thirds of the world’s science writing is in English, and English is the main language of technology, advertising, media, international airports, and traffic controllers. Today there are more than 700 million English users in the world, and over half of these are nonnative speakers, constituting the largest number of nonnative users than any other language in the world.</p>
+                </div>
+                <div id="reading-part1-questions"></div>
+            </div>
+
+            <!-- Part 2. Questions 21-25 (Sign/Message Interpretation) -->
+            <div class="question-section">
+                <h4>Part 2. Questions 21-25: Look at the sign/message in each question. What does it say? Choose the correct explanation (A, B or C).</h4>
+                <div class="text-center mb-3">
+                    <img src="static/DT1-P2.png" alt="Part 2 Illustration" style="max-width:100%;height:auto;border:1px solid #ccc;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.07);">
+                  </div>
+                <div id="reading-part2-questions"></div>
+            </div>
+
+            <!-- Part 3. Questions 26-35 (Cloze Test) -->
+            <div class="question-section">
+                <h4>Part 3. Questions 26-35: Read the text below and choose the correct word for each space.</h4>
+                <div class="cloze-passage mb-4 p-3 border rounded bg-light">
+                    <h5>Chocolate</h5>
+                    <p>When the Spanish explorer Cortez reached in the sixteenth century, he found the people there using a drink they (26) _______ chocolate. It tasted quite strong (27) _______ it had pepper in it. To (28) ________ it taste better, the Spanish added sugar to it. When chocolate first came to Europe in the seventeen the century, people started to drink it with milk, (29) _______ of water. Nowadays, tones of chocolate and cocoa are (30) ________ to factories, where they are turned (31) _______ many popular sweet and cakes.</p>
+                    <p>(32) _________ chocolate and cocoa came from the fruit of the cacao tree. Cacao trees (33) ______ only be grown in hot countries, as they need warm climate. Cacao is an American plant (34) _______ still grows wild in the northern part of South America. Countries in Central and South America were the first to grow it, but today Africa (35) _______ the world with the most chocolate.</p>
+                </div>
+                <div id="reading-part3-questions"></div>
+            </div>
+
+            <!-- GRAMMAR – VOCABULARY SECTION -->
+            <h2 class="section-title">GRAMMAR – VOCABULARY</h2>
+            <div class="question-section">
+                <h4>Questions 36-55: Choose a correct word or phrase to complete each of the following sentences.</h4>
+                <div id="grammar-vocab-questions"></div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-primary" type="button" onclick="submitQuiz()">Nộp bài</button>
+                <button class="btn btn-secondary" type="button" onclick="resetQuiz()">Làm lại</button>
+            </div>
+            
+            <div class="score-display mt-4" id="scoreDisplay"></div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        const questionsData = [
+            // READING SECTION - Part 1 (Reading Comprehension)
+            {
+                id: "q16",
+                section: "reading-part1-questions",
+                text: "16. What is the main topic of this passage?",
+                options: {
+                    a: "the number of nonnative users of English",
+                    b: "the French influence on the English language",
+                    c: "the expansion of English as an international language",
+                    d: "the use of English for science and technology"
+                },
+                correct: "c",
+                explanation: "Đoạn văn chủ yếu nói về sự phát triển và mở rộng của tiếng Anh từ một ngôn ngữ ít người nói trở thành ngôn ngữ thống trị trong giao tiếp quốc tế, thông qua các giai đoạn lịch sử và các yếu tố đóng góp vào sự lan rộng đó. (The passage mainly talks about the development and expansion of English from a language of few speakers to the dominant language of international communication, through historical periods and factors contributing to its spread.)"
+            },
+            {
+                id: "q17",
+                section: "reading-part1-questions",
+                text: "17. The word “extended” as used in line 4 is more similar to which of the following?",
+                options: {
+                    a: "experienced",
+                    b: "conferred",
+                    c: "spread",
+                    d: "stretched"
+                },
+                correct: "c",
+                explanation: "Trong ngữ cảnh 'had not extended even as far as Wales, Scotland, or Ireland' (chưa lan rộng/mở rộng đến cả Wales, Scotland hay Ireland), từ 'extended' có nghĩa gần nhất với 'spread' (lan rộng). (In the context 'had not extended even as far as Wales, Scotland, or Ireland', the word 'extended' is closest in meaning to 'spread'.)"
+            },
+            {
+                id: "q18",
+                section: "reading-part1-questions",
+                text: "18. Approximately when did English begin to be used beyond England?",
+                options: {
+                    a: "in 1066",
+                    b: "around 1350",
+                    c: "before 1600",
+                    d: "after 1600"
+                },
+                correct: "d",
+                explanation: "Đoạn văn nói rằng 'Until the 1600s, English was, for the most part, spoken only in England... However, during the course of the next two centuries, English began to spread out the globe'. Điều này có nghĩa là tiếng Anh bắt đầu được sử dụng bên ngoài nước Anh sau năm 1600. (The passage states 'Until the 1600s, English was, for the most part, spoken only in England... However, during the course of the next two centuries, English began to spread out the globe'. This means English began to be used beyond England after 1600.)"
+            },
+            {
+                id: "q19",
+                section: "reading-part1-questions",
+                text: "19. According to the passage, all of the following contributed to the spread of English around the world EXCEPT ….",
+                options: {
+                    a: "the slave trade",
+                    b: "the Norman invasion",
+                    c: "missionaries",
+                    d: "colonization"
+                },
+                correct: "b",
+                explanation: "Đoạn văn liệt kê 'exploration, trade (including slave trade), colonization, and missionary work' là các yếu tố góp phần vào sự lan rộng của tiếng Anh sau năm 1600. Cuộc xâm lược của người Norman (Norman invasion) diễn ra vào năm 1030 và chỉ được nhắc đến như một sự kiện giới thiệu các yếu tố tiếng Pháp vào tiếng Anh, không phải là yếu tố trực tiếp góp phần vào sự lan rộng toàn cầu của tiếng Anh sau đó. (The passage lists 'exploration, trade (including slave trade), colonization, and missionary work' as factors contributing to the spread of English after 1600. The Norman invasion in 1030 is mentioned only as an event that introduced French elements into English, not as a direct factor in its global spread later on.)"
+            },
+            {
+                id: "q20",
+                section: "reading-part1-questions",
+                text: "20. According to the passage, approximately how many nonnative users of English are there in the world today?",
+                options: {
+                    a: "a quarter million",
+                    b: "350 million",
+                    c: "half a million",
+                    d: "700 million"
+                },
+                correct: "b",
+                explanation: "Đoạn văn nói 'Today there are more than 700 million English users in the world, and over half of these are nonnative speakers'. 'Over half' của 700 triệu là hơn 350 triệu. Trong các lựa chọn, 350 triệu là con số gần nhất. (The passage states 'Today there are more than 700 million English users in the world, and over half of these are nonnative speakers'. 'Over half' of 700 million is more than 350 million. Among the choices, 350 million is the closest figure.)"
+            },
+            // READING SECTION - Part 2 (Sign/Message Interpretation)
+            {
+                id: "q21",
+                section: "reading-part2-questions",
+                text: "21. Sign: COLLEGE STAFF/STUDENT BUS, Students cannot get on the bus without ID cards.",
+                options: {
+                    a: "The bus service cannot be used by college staff unless they show ID cards.",
+                    b: "Students can get their ID cards on the bus.",
+                    c: "Students are not allowed on the bus unless they have ID cards."
+                },
+                correct: "c",
+                explanation: "Biển báo ghi rõ 'Students cannot get on the bus without ID cards', có nghĩa là học sinh không được phép lên xe buýt nếu không có thẻ ID. (The sign clearly states 'Students cannot get on the bus without ID cards', which means students are not permitted on the bus unless they possess ID cards.)"
+            },
+            {
+                id: "q22",
+                section: "reading-part2-questions",
+                text: "22. Message from Laura to Jane: 'The jumper’s lovely- thanks. Could you tell me where you got it? I’d like to buy another one to match the coat I also got for my birthday.'",
+                options: {
+                    a: "Laura liked the jumper Jane bought but needs it in a different size.",
+                    b: "Laura wants to try to get the same jumper in a different colour.",
+                    c: "Laura received two jumpers which were the same, so wants to exchange one."
+                },
+                correct: "b",
+                explanation: "Laura nói 'I’d like to buy another one to match the coat I also got for my birthday'. Điều này ngụ ý rằng cô ấy muốn mua một chiếc áo len khác có màu sắc/kiểu dáng phù hợp với chiếc áo khoác mới, chứ không phải cần size khác hay đổi một trong hai chiếc giống nhau. (Laura states 'I’d like to buy another one to match the coat I also got for my birthday'. This implies she wants to purchase another jumper in a color/style that complements her new coat, not necessarily a different size or to exchange identical items.)"
+            },
+            {
+                id: "q23",
+                section: "reading-part2-questions",
+                text: "23. Sign: UNIVERSITY HOLIDAYS, 'From next Friday, the library will be closed during weekends and evenings.'",
+                options: {
+                    a: "The library will have shorter opening hours until next Friday.",
+                    b: "The library will change its opening hours next Friday.",
+                    c: "The library will open again to students next Friday."
+                },
+                correct: "b",
+                explanation: "Biển báo nói 'From next Friday, the library will be closed during weekends and evenings', có nghĩa là giờ mở cửa của thư viện sẽ thay đổi bắt đầu từ thứ Sáu tới. (The sign indicates 'From next Friday, the library will be closed during weekends and evenings', meaning the library's operating hours will be adjusted starting next Friday.)"
+            },
+            {
+                id: "q24",
+                section: "reading-part2-questions",
+                text: "24. Message from Jo to Mark: 'We went on a bus sightseeing tour of the city yesterday. We didn’t stop anywhere but saw more than you would on foot.'",
+                options: {
+                    a: "Jo is pleased with the number of things she saw from the bus.",
+                    b: "Jo regrets not having walked around the city to look at the sights.",
+                    c: "Jo thinks there are better sightseeing tours than the one she took."
+                },
+                correct: "a",
+                explanation: "Jo nói 'saw more than you would on foot' (thấy nhiều hơn khi đi bộ), điều này thể hiện sự hài lòng với những gì cô ấy đã thấy từ xe buýt. (Jo states 'saw more than you would on foot', indicating her satisfaction with the extent of what she observed from the bus.)"
+            },
+            {
+                id: "q25",
+                section: "reading-part2-questions",
+                text: "25. Sign: Market vehicles unload here, 07.00 – 10.00 daily, Customer parking allowed at other times.",
+                options: {
+                    a: "Customers may park outside the market for up to three hours.",
+                    b: "You may unload your vehicle here at any time.",
+                    c: "Customers may park here at times when vehicles are not unloading."
+                },
+                correct: "c",
+                explanation: "Biển báo cho biết 'Customer parking allowed at other times', nghĩa là khách hàng có thể đậu xe vào những thời điểm mà xe chở hàng không dỡ hàng (tức là ngoài 7h-10h sáng). (The sign states 'Customer parking allowed at other times', implying that customers are permitted to park during periods when market vehicles are not unloading, i.e., outside of 7:00-10:00 daily.)"
+            },
+            // READING SECTION - Part 3 (Cloze Test)
+            {
+                id: "q26",
+                section: "reading-part3-questions",
+                text: "26. When the Spanish explorer Cortez reached in the sixteenth century, he found the people there using a drink they ______ chocolate.",
+                options: {
+                    a: "announced",
+                    b: "told",
+                    c: "called",
+                    d: "declared"
+                },
+                correct: "c",
+                explanation: "Động từ 'called' (gọi là, đặt tên là) phù hợp nhất với ngữ cảnh nói về việc đặt tên cho một loại đồ uống. (The verb 'called' is the most suitable in the context of naming a drink.)"
+            },
+            {
+                id: "q27",
+                section: "reading-part3-questions",
+                text: "27. It tasted quite strong ______ it had pepper in it.",
+                options: {
+                    a: "while",
+                    b: "because",
+                    c: "so",
+                    d: "weather"
+                },
+                correct: "b",
+                explanation: "Từ 'because' (bởi vì) dùng để giải thích lý do (vị cay của tiêu là nguyên nhân cho vị mạnh). (The word 'because' is used to explain the reason (the taste of pepper is the cause of the strong flavor).)"
+            },
+            {
+                id: "q28",
+                section: "reading-part3-questions",
+                text: "28. To ______ it taste better, the Spanish added sugar to it.",
+                options: {
+                    a: "let",
+                    b: "cause",
+                    c: "allow",
+                    d: "make"
+                },
+                correct: "d",
+                explanation: "Cấu trúc 'make + O + V (bare infinitive)' có nghĩa là 'khiến/làm cho ai/cái gì đó làm gì/trở nên thế nào'. Ở đây là 'khiến nó ngon hơn'. (The structure 'make + object + base form verb' means 'to cause someone/something to do something/become something'. Here, it means 'to make it taste better'.)"
+            },
+            {
+                id: "q29",
+                section: "reading-part3-questions",
+                text: "29. When chocolate first came to Europe in the seventeenth century, people started to drink it with milk, ______ of water.",
+                options: {
+                    a: "apart",
+                    b: "except",
+                    c: "rather",
+                    d: "instead"
+                },
+                correct: "d",
+                explanation: "Cụm từ 'instead of' (thay vì) được dùng để chỉ sự thay thế, tức là uống với sữa thay vì nước. (The phrase 'instead of' is used to indicate a replacement, meaning drinking it with milk rather than water.)"
+            },
+            {
+                id: "q30",
+                section: "reading-part3-questions",
+                text: "30. Nowadays, tonnes of chocolate and cocoa are ______ to factories, where they are turned (31) _______ many popular sweet and cakes.",
+                options: {
+                    a: "delivered",
+                    b: "directed",
+                    c: "prepared",
+                    d: "produced"
+                },
+                correct: "a",
+                explanation: "Sô cô la và ca cao được 'delivered' (chuyển giao/vận chuyển) đến các nhà máy. (Chocolate and cocoa are 'delivered' to factories, meaning they are transported there.)"
+            },
+            {
+                id: "q31",
+                section: "reading-part3-questions",
+                text: "31. ...where they are turned ______ many popular sweet and cakes.",
+                options: {
+                    a: "down",
+                    b: "into",
+                    c: "off",
+                    d: "over"
+                },
+                correct: "b",
+                explanation: "Cụm động từ 'turn into' có nghĩa là 'biến thành/chuyển đổi thành'. (The phrasal verb 'turn into' means 'to transform into'.)"
+            },
+            {
+                id: "q32",
+                section: "reading-part3-questions",
+                text: "32. ______ chocolate and cocoa came from the fruit of the cacao tree.",
+                options: {
+                    a: "Both",
+                    b: "Every",
+                    c: "Either",
+                    d: "Each"
+                },
+                correct: "a",
+                explanation: "'Both' (cả hai) được dùng để chỉ cả sô cô la và ca cao, vì chúng đều đến từ cây ca cao. (Both' is used to refer to both chocolate and cocoa, as they both originate from the cacao tree.)"
+            },
+            {
+                id: "q33",
+                section: "reading-part3-questions",
+                text: "33. Cacao trees ______ only be grown in hot countries, as they need warm climate.",
+                options: {
+                    a: "ought t",
+                    b: "can",
+                    c: "have",
+                    d: "might"
+                },
+                correct: "b",
+                explanation: "'Can' (có thể) diễn tả khả năng hoặc điều kiện để cây ca cao có thể được trồng (chỉ ở những nước nóng). (Can' expresses the ability or condition for cacao trees to be grown (only in hot countries).)"
+            },
+            {
+                id: "q34",
+                section: "reading-part3-questions",
+                text: "34. Cacao is an American plant ______ still grows wild in the northern part of South America.",
+                options: {
+                    a: "what",
+                    b: "which",
+                    c: "who",
+                    d: "whose"
+                },
+                correct: "b",
+                explanation: "'Which' là đại từ quan hệ dùng để thay thế cho vật (an American plant) làm chủ ngữ của mệnh đề quan hệ. ('Which' is the relative pronoun used to refer to a thing (an American plant) as the subject of the relative clause.)"
+            },
+            {
+                id: "q35",
+                section: "reading-part3-questions",
+                text: "35. ...but today Africa ______ the world with the most chocolate.",
+                options: {
+                    a: "brings",
+                    b: "fetches",
+                    c: "supplies",
+                    d: "gives"
+                },
+                correct: "c",
+                explanation: "'Supplies' (cung cấp) là động từ phù hợp nhất với cụm 'supplies the world with' để nói về việc châu Phi cung cấp sô cô la cho thế giới. (Supplies' is the most suitable verb for the phrase 'supplies the world with', indicating Africa provides chocolate to the world.)"
+            },
+            // GRAMMAR – VOCABULARY SECTION
+            {
+                id: "q36",
+                section: "grammar-vocab-questions",
+                text: "36. After my sister fainted, it was about two minutes before she ______ round.",
+                options: {
+                    a: "got",
+                    b: "came",
+                    c: "took",
+                    d: "went"
+                },
+                correct: "b",
+                explanation: "Cụm động từ 'come round' có nghĩa là 'tỉnh lại/lấy lại ý thức'. (The phrasal verb 'come round' means to regain consciousness.)"
+            },
+            {
+                id: "q37",
+                section: "grammar-vocab-questions",
+                text: "37. While people were talking to each other, he ________ his book.",
+                options: {
+                    a: "is reading",
+                    b: "read",
+                    c: "was reading",
+                    d: "has been reading"
+                },
+                correct: "c",
+                explanation: "Thì Quá khứ tiếp diễn được dùng để diễn tả hai hành động đang xảy ra song song trong quá khứ. 'Were talking' và 'was reading' diễn ra cùng lúc. (The Past Continuous tense is used to describe two actions happening simultaneously in the past. 'Were talking' and 'was reading' occur at the same time.)"
+            },
+            {
+                id: "q38",
+                section: "grammar-vocab-questions",
+                text: "38. He bought _______furniture for her new apartment which she has bought recently.",
+                options: {
+                    a: "many",
+                    b: "few",
+                    c: "much",
+                    d: "a few"
+                },
+                correct: "c",
+                explanation: "'Furniture' (nội thất) là danh từ không đếm được, vì vậy chúng ta dùng 'much' để diễn tả số lượng lớn. ('Furniture' is an uncountable noun, so 'much' is used to express a large quantity.)"
+            },
+            {
+                id: "q39",
+                section: "grammar-vocab-questions",
+                text: "39. We are ____ money so that we can buy a bigger house by the end of this year.",
+                options: {
+                    a: "spending",
+                    b: "winning",
+                    c: "lending",
+                    d: "saving up"
+                },
+                correct: "d",
+                explanation: "Cụm động từ 'saving up' có nghĩa là 'tiết kiệm tiền' cho một mục đích cụ thể (mua nhà lớn hơn). (The phrasal verb 'saving up' means to accumulate money for a specific purpose (to buy a bigger house).)"
+            },
+            {
+                id: "q40",
+                section: "grammar-vocab-questions",
+                text: "40. We were both very excited about the visit, as we _____ each other for ages.",
+                options: {
+                    a: "never saw",
+                    b: "hadn’t seen",
+                    c: "didn’t see",
+                    d: "haven’t seen"
+                },
+                correct: "b",
+                explanation: "Hành động 'hadn't seen' (chưa gặp) xảy ra và hoàn thành trước hành động 'were excited' (rất hào hứng) trong quá khứ. 'For ages' (trong nhiều năm) nhấn mạnh khoảng thời gian kéo dài cho đến thời điểm đó trong quá khứ. (The action of 'hadn't seen' (not having met) occurred and was completed before the action of 'were excited' (being very excited) in the past. 'For ages' emphasizes a prolonged period leading up to that point in the past.)"
+            },
+            {
+                id: "q41",
+                section: "grammar-vocab-questions",
+                text: "41. He is a very _____ person – he is good at waiting calmly without getting angry.",
+                options: {
+                    a: "patient",
+                    b: "sensitive",
+                    c: "sociable",
+                    d: "honest"
+                },
+                correct: "a",
+                explanation: "Tính từ 'patient' (kiên nhẫn) phù hợp với mô tả 'good at waiting calmly without getting angry'. (The adjective 'patient' is suitable for the description 'good at waiting calmly without getting angry'.)"
+            },
+            {
+                id: "q42",
+                section: "grammar-vocab-questions",
+                text: "42. Anne was riding her bike to school ______ Peter saw her yesterday.",
+                options: {
+                    a: "while",
+                    b: "since",
+                    c: "when",
+                    d: "as"
+                },
+                correct: "c",
+                explanation: "'When' được dùng để nối một hành động đang diễn ra trong quá khứ ('was riding') với một hành động ngắn, đột ngột xen vào ('saw her'). (When' is used to connect an ongoing action in the past ('was riding') with a sudden, shorter action that interrupted it ('saw her').)"
+            },
+            {
+                id: "q43",
+                section: "grammar-vocab-questions",
+                text: "43. Jane is a wonderful singer. Her mother tells me that she ____ professionally since she was four.",
+                options: {
+                    a: "was singing",
+                    b: "is singing",
+                    c: "had been sung",
+                    d: "has been singing"
+                },
+                correct: "d",
+                explanation: "'Since she was four' chỉ mốc thời gian bắt đầu hành động và hành động đó vẫn tiếp diễn cho đến hiện tại. Do đó, dùng thì Hiện tại hoàn thành tiếp diễn ('has been singing'). (The phrase 'since she was four' indicates the starting point of an action that continues up to the present. Therefore, the Present Perfect Continuous tense ('has been singing') is used.)"
+            },
+            {
+                id: "q44",
+                section: "grammar-vocab-questions",
+                text: "44. Have you asked Sam if he has ______money to lend you?",
+                options: {
+                    a: "any",
+                    b: "a little",
+                    c: "many",
+                    d: "a few"
+                },
+                correct: "a",
+                explanation: "Trong câu hỏi ('Have you asked...'), chúng ta thường dùng 'any' với danh từ không đếm được ('money'). 'A little' dùng trong câu khẳng định. ('Any' is typically used with uncountable nouns like 'money' in questions. 'A little' is used in affirmative sentences.)"
+            },
+            {
+                id: "q45",
+                section: "grammar-vocab-questions",
+                text: "45. Emily _____ free tickets for the Olympics, but she didn’t want to go.",
+                options: {
+                    a: "gave",
+                    b: "is given",
+                    c: "was gave",
+                    d: "was given"
+                },
+                correct: "d",
+                explanation: "Chủ ngữ 'Emily' là người nhận (chịu tác động) của hành động 'give tickets', nên câu phải ở dạng bị động thì Quá khứ đơn: 'was/were + V3/ed'. 'Given' là phân từ hai của 'give'. (The subject 'Emily' is the recipient (undergoer) of the action 'give tickets', so the sentence must be in the Past Simple passive voice: 'was/were + Past Participle'. 'Given' is the past participle of 'give'.)"
+            },
+            {
+                id: "q46",
+                section: "grammar-vocab-questions",
+                text: "46. We _______ football if the weather was good. Type 2",
+                options: {
+                    a: "were be able to play",
+                    b: "would be able to play",
+                    c: "were able to play",
+                    d: "will be able to play"
+                },
+                correct: "b",
+                explanation: "Đây là câu điều kiện loại 2 (Type 2 Conditional), diễn tả điều kiện không có thật ở hiện tại. Cấu trúc là 'If + Quá khứ đơn, S + would + V nguyên mẫu'. 'Would be able to play' phù hợp với cấu trúc và ý nghĩa của khả năng giả định. (This is a Type 2 Conditional sentence, expressing an unreal condition in the present. The structure is 'If + Past Simple, Subject + would + base form verb'. 'Would be able to play' fits the structure and the meaning of hypothetical ability.)"
+            },
+            {
+                id: "q47",
+                section: "grammar-vocab-questions",
+                text: "47. He _______ basketball for the local team, but he’s too old now.",
+                options: {
+                    a: "did used to play",
+                    b: "uses to play",
+                    c: "used to play",
+                    d: "used play"
+                },
+                correct: "c",
+                explanation: "Cấu trúc 'used to + động từ nguyên mẫu' được dùng để diễn tả thói quen hoặc trạng thái trong quá khứ mà bây giờ không còn nữa. (The structure 'used to + base form verb' is used to express habits or states in the past that no longer exist.)"
+            },
+            {
+                id: "q48",
+                section: "grammar-vocab-questions",
+                text: "48. What form of exercise do you think is suitable_______ older people?",
+                options: {
+                    a: "for",
+                    b: "about",
+                    c: "with",
+                    d: "on"
+                },
+                correct: "a",
+                explanation: "Tính từ 'suitable' (phù hợp) luôn đi kèm với giới từ 'for' (dành cho/phù hợp với). (The adjective 'suitable' is always followed by the preposition 'for'.)"
+            },
+            {
+                id: "q49",
+                section: "grammar-vocab-questions",
+                text: "49. Mercedes cars come from Germany. They _______ by many rich and famous people.",
+                options: {
+                    a: "are drive",
+                    b: "is driven",
+                    c: "are drove",
+                    d: "are driven"
+                },
+                correct: "d",
+                explanation: "Câu này ở thể bị động thì Hiện tại đơn. 'Cars' là chủ ngữ số nhiều, nên dùng 'are'. 'Driven' là quá khứ phân từ của 'drive'. (This sentence is in the Present Simple passive voice. 'Cars' is a plural subject, so 'are' is used. 'Driven' is the past participle of 'drive'.)"
+            },
+            {
+                id: "q50",
+                section: "grammar-vocab-questions",
+                text: "50. “Could you open the window, please?” - “_______ “",
+                options: {
+                    a: "Yes, of course",
+                    b: "I’m, of course",
+                    c: "I feel sorry",
+                    d: "Never mind"
+                },
+                correct: "a",
+                explanation: "'Yes, of course' (Vâng, tất nhiên rồi) là cách đáp lại lịch sự và tự nguyện khi ai đó đưa ra yêu cầu. (Yes, of course' is a polite and willing response when someone makes a request.)"
+            },
+            {
+                id: "q51",
+                section: "grammar-vocab-questions",
+                text: "51. She _______ to several specialists about her problem, but nobody knows why she is sick.",
+                options: {
+                    a: "has been talking",
+                    b: "has talked",
+                    c: "is talking",
+                    d: "talked"
+                },
+                correct: "b",
+                explanation: "Thì Hiện tại hoàn thành ('has talked') được dùng để diễn tả hành động đã xảy ra trong quá khứ nhưng có kết quả/liên quan đến hiện tại ('nobody knows why she is sick'). Nó nhấn mạnh kết quả của việc cô ấy đã nói chuyện với các chuyên gia. (The Present Perfect tense ('has talked') is used to describe an action that happened in the past but has a result or relevance to the present ('nobody knows why she is sick'). It emphasizes the outcome of her speaking with specialists.)"
+            },
+            {
+                id: "q52",
+                section: "grammar-vocab-questions",
+                text: "52. Lily is fond of listening to ______ music while Kevin is interested in playing _____ piano.",
+                options: {
+                    a: "the/ ----",
+                    b: "----/ ----",
+                    c: "---- / the",
+                    d: "the / the"
+                },
+                correct: "c",
+                explanation: "Khi nói chung về âm nhạc ('music' là danh từ không đếm được), chúng ta không dùng mạo từ. Với nhạc cụ cụ thể ('piano'), chúng ta dùng mạo từ 'the'. (When speaking generally about music ('music' is an uncountable noun), no article is used. With specific musical instruments ('piano'), the article 'the' is used.)"
+            },
+            {
+                id: "q53",
+                section: "grammar-vocab-questions",
+                text: "53. If we _______ a cheap car for sale, we _________ it immediately.",
+                options: {
+                    a: "found/ will buy",
+                    b: "will find/ will buy",
+                    c: "could find/ could buy",
+                    d: "find/ will buy"
+                },
+                correct: "d",
+                explanation: "Đây là câu điều kiện loại 1 (Type 1 Conditional), diễn tả điều kiện có thật hoặc có thể xảy ra ở hiện tại hoặc tương lai. Cấu trúc là 'If + Hiện tại đơn, S + will + V nguyên mẫu'. (This is a Type 1 Conditional sentence, expressing a real or possible condition in the present or future. The structure is 'If + Present Simple, Subject + will + base form verb'.)"
+            },
+            {
+                id: "q54",
+                section: "grammar-vocab-questions",
+                text: "54. I’m doing a computer course because I want to improve my computer ______. ",
+                options: {
+                    a: "qualifications",
+                    b: "skills",
+                    c: "requirements",
+                    d: "knowledge"
+                },
+                correct: "b",
+                explanation: "Để cải thiện khả năng sử dụng máy tính, người ta cần cải thiện 'computer skills' (kỹ năng máy tính). (To improve one's ability to use computers, one needs to improve their 'computer skills'.)"
+            },
+            {
+                id: "q55",
+                section: "grammar-vocab-questions",
+                text: "55. Some of the best-selling _______in our shop are flat-screen TV, laptops and mobile handsets.",
+                options: {
+                    a: "essentials",
+                    b: "accessories",
+                    c: "electronic goods",
+                    d: "electronic product"
+                },
+                correct: "c",
+                explanation: "'Electronic goods' (hàng điện tử) là danh mục chung bao gồm TV, laptop và điện thoại di động. 'Electronic product' là danh từ số ít không phù hợp với các ví dụ được liệt kê. (Electronic goods' is a general category that includes TVs, laptops, and mobile handsets. 'Electronic product' is a singular noun that does not fit the listed examples.)"
+            }
+        ];
+
+        // Hàm để tải và hiển thị câu hỏi
+        function loadQuestions() {
+            questionsData.forEach(q => {
+                const sectionContainer = document.getElementById(q.section);
+                if (!sectionContainer) return; // Skip if section not found
+
+                const questionHtml = `
+                    <div class="question-item">
+                        <p>${q.text}</p>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                sectionContainer.innerHTML += questionHtml;
+            });
+        }
+
+        // Hàm kiểm tra đáp án và hiển thị giải thích
+        function submitQuiz() {
+            let score = 0;
+            const totalQuestions = questionsData.length;
+
+            questionsData.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+
+                if (selectedOption) {
+                    if (selectedOption.value === q.correct) {
+                        feedbackDiv.textContent = "Đúng rồi! 🎉";
+                        feedbackDiv.classList.add('correct');
+                        score++;
+                    } else {
+                        feedbackDiv.textContent = `Sai rồi. Đáp án đúng là ${q.correct.toUpperCase()}. ❌`;
+                        feedbackDiv.classList.add('incorrect');
+                    }
+                } else {
+                    feedbackDiv.textContent = "Bạn chưa chọn đáp án.";
+                    feedbackDiv.classList.add('incorrect');
+                }
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${q.explanation}`;
+            });
+
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt được: ${score} / ${totalQuestions} điểm.`;
+            scoreDisplay.style.display = 'block';
+        }
+
+        // Hàm làm lại bài
+        function resetQuiz() {
+            questionsData.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (selectedOption) {
+                    selectedOption.checked = false;
+                }
+
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'none';
+                explanationDiv.style.display = 'none';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                explanationDiv.innerHTML = '';
+            });
+
+            document.getElementById('scoreDisplay').style.display = 'none';
+        }
+
+        // Tải câu hỏi khi trang được tải xong
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+    </script>
+</body>
+</html>

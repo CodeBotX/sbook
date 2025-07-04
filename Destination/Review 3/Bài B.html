@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài B: Hoàn thành câu thứ hai bằng cách sử dụng từ đã cho</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .original-sentence {
+            font-size: 1.05em;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .question-item .rewritten-sentence {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            display: flex;
+            align-items: baseline; /* Align text baselines */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 5px; /* Space between words */
+        }
+        .question-item .word-given {
+            font-size: 0.9em;
+            font-weight: normal;
+            color: #6c757d;
+            margin-left: 10px;
+            white-space: nowrap; /* Prevent wrapping */
+        }
+
+        /* Styling for input fields with underline */
+        .question-item .underline-input {
+            border: none;
+            border-bottom: 2px solid #ced4da; /* Underline style */
+            padding: 2px 5px;
+            margin: 0 5px;
+            font-size: 1em;
+            text-align: center;
+            width: 250px; /* Adjust width as needed for phrases */
+            background-color: transparent; /* Transparent background */
+            transition: border-color 0.2s ease;
+        }
+        .question-item .underline-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        /* Feedback styles after submission */
+        .question-item .underline-input.is-correct {
+            border-color: #198754;
+            color: #198754;
+            font-weight: 600;
+        }
+        .question-item .underline-input.is-incorrect {
+            border-color: #dc3545;
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .original-sentence {
+                font-size: 0.95em;
+            }
+            .question-item .rewritten-sentence {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .question-item .underline-input {
+                width: 150px; /* Smaller width for mobile */
+                padding: 1px 3px;
+                font-size: 0.9em;
+            }
+            .question-item .word-given {
+                font-size: 0.8em;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Viết Lại Câu</h1>
+        </div>
+        <h2>Hoàn thành mỗi câu thứ hai bằng cách sử dụng từ đã cho, sao cho nó có nghĩa tương tự với câu đầu tiên. Viết từ hai đến năm từ.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Complete each second sentence using the word given, so that it has a similar meaning to the first sentence. Write between two and five words.
+            <br>
+            <strong>Hướng dẫn:</strong> Hoàn thành mỗi câu thứ hai bằng cách sử dụng từ đã cho, sao cho nó có nghĩa tương tự với câu đầu tiên. Viết từ hai đến năm từ.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="rewriteSentencesForm">
+            <div class="question-item" data-question-id="q11">
+                <p class="original-sentence">11. Did they give you a map of the area?</p>
+                <p class="rewritten-sentence">
+                    Did they <input type="text" class="underline-input" id="q11_input"> a map of the area?
+                    <span class="word-given">provide</span>
+                </p>
+                <i class="feedback-icon fa-solid" id="icon11"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q12">
+                <p class="original-sentence">12. My intention is to travel to Malta by ferry.</p>
+                <p class="rewritten-sentence">
+                    I <input type="text" class="underline-input" id="q12_input"> travel to Malta by ferry.
+                    <span class="word-given">going</span>
+                </p>
+                <i class="feedback-icon fa-solid" id="icon12"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q13">
+                <p class="original-sentence">13. I like staying by the sea when I'm on holiday.</p>
+                <p class="rewritten-sentence">
+                    I like staying <input type="text" class="underline-input" id="q13_input"> when I'm on holiday.
+                    <span class="word-given">coast</span>
+                </p>
+                <i class="feedback-icon fa-solid" id="icon13"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q14">
+                <p class="original-sentence">14. Be careful when you leave the bus.</p>
+                <p class="rewritten-sentence">
+                    Be careful when you <input type="text" class="underline-input" id="q14_input"> the bus.
+                    <span class="word-given">off</span>
+                </p>
+                <i class="feedback-icon fa-solid" id="icon14"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q15">
+                <p class="original-sentence">15. The beach is close to the hotel, so we can walk there.</p>
+                <p class="rewritten-sentence">
+                    We can <input type="text" class="underline-input" id="q15_input"> from the hotel to the beach because it's close.
+                    <span class="word-given">foot</span>
+                </p>
+                <i class="feedback-icon fa-solid" id="icon15"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q16">
+                <p class="original-sentence">16. Why don't you drive to Brighton this weekend?</p>
+                <p class="rewritten-sentence">
+                    Why don't you go to Brighton <input type="text" class="underline-input" id="q16_input"> this weekend?
+                    <span class="word-given">car</span>
+                </p>
+                <i class="feedback-icon fa-solid" id="icon16"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q17">
+                <p class="original-sentence">17. We're going to return to Bali again this summer.</p>
+                <p class="rewritten-sentence">
+                    We're going to <input type="text" class="underline-input" id="q17_input"> Bali again this summer.
+                    <span class="word-given">back</span>
+                </p>
+                <i class="feedback-icon fa-solid" id="icon17"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q18">
+                <p class="original-sentence">18. I like to watch the planes leaving the ground when I'm at the airport.</p>
+                <p class="rewritten-sentence">
+                    I like to watch the planes <input type="text" class="underline-input" id="q18_input"> when I'm at the airport.
+                    <span class="word-given">off</span>
+                </p>
+                <i class="feedback-icon fa-solid" id="icon18"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q11': {
+                original_sentence: 'Did they give you a map of the area?',
+                word_given: 'provide',
+                blanked_sentence: 'Did they {blank} a map of the area?',
+                correct_answer: 'provide you with',
+                full_correct_sentence: 'Did they provide you with a map of the area?',
+                translation: 'Họ có cung cấp cho bạn một bản đồ khu vực không?',
+                explanation: '"Provide someone with something" là cấu trúc thông dụng có nghĩa là cung cấp cho ai đó cái gì.',
+                grammar_note: 'Cấu trúc: provide (sb) with (sth).'
+            },
+            'q12': {
+                original_sentence: 'My intention is to travel to Malta by ferry.',
+                word_given: 'going',
+                blanked_sentence: 'I {blank} travel to Malta by ferry.',
+                correct_answer: 'am going to',
+                full_correct_sentence: 'I am going to travel to Malta by ferry.',
+                translation: 'Tôi sẽ đi du lịch Malta bằng phà.',
+                explanation: '"Be going to" được dùng để diễn tả ý định hoặc kế hoạch đã định trong tương lai.',
+                grammar_note: 'Cấu trúc: be going to + V (nguyên thể).'
+            },
+            'q13': {
+                original_sentence: 'I like staying by the sea when I\'m on holiday.',
+                word_given: 'coast',
+                blanked_sentence: 'I like staying {blank} when I\'m on holiday.',
+                correct_answer: 'on the coast',
+                full_correct_sentence: 'I like staying on the coast when I\'m on holiday.',
+                translation: 'Tôi thích ở ven biển khi đi nghỉ mát.',
+                explanation: '"On the coast" là cụm từ chỉ vị trí ven biển.',
+                grammar_note: 'Cụm từ cố định: on the coast.'
+            },
+            'q14': {
+                original_sentence: 'Be careful when you leave the bus.',
+                word_given: 'off',
+                blanked_sentence: 'Be careful when you {blank} the bus.',
+                correct_answer: 'get off',
+                full_correct_sentence: 'Be careful when you get off the bus.',
+                translation: 'Hãy cẩn thận khi bạn xuống xe buýt.',
+                explanation: '"Get off" là cụm động từ có nghĩa là xuống khỏi phương tiện công cộng lớn như xe buýt, tàu hỏa.',
+                grammar_note: 'Cụm động từ: get off (xuống khỏi phương tiện công cộng lớn).'
+            },
+            'q15': {
+                original_sentence: 'The beach is close to the hotel, so we can walk there.',
+                word_given: 'foot',
+                blanked_sentence: 'We can {blank} from the hotel to the beach because it\'s close.',
+                correct_answer: 'go on foot',
+                full_correct_sentence: 'We can go on foot from the hotel to the beach because it\'s close.',
+                translation: 'Chúng ta có thể đi bộ từ khách sạn ra bãi biển vì nó gần.',
+                explanation: '"Go on foot" có nghĩa là đi bộ.',
+                grammar_note: 'Cụm từ cố định: go on foot.'
+            },
+            'q16': {
+                original_sentence: 'Why don\'t you drive to Brighton this weekend?',
+                word_given: 'car',
+                blanked_sentence: 'Why don\'t you go to Brighton {blank} this weekend?',
+                correct_answer: 'by car',
+                full_correct_sentence: 'Why don\'t you go to Brighton by car this weekend?',
+                translation: 'Tại sao bạn không đi Brighton bằng ô tô cuối tuần này?',
+                explanation: '"By car" là cách diễn đạt phương tiện di chuyển.',
+                grammar_note: 'Sử dụng "by" + phương tiện (by car, by train, by bus).'
+            },
+            'q17': {
+                original_sentence: 'We\'re going to return to Bali again this summer.',
+                word_given: 'back',
+                blanked_sentence: 'We\'re going to {blank} Bali again this summer.',
+                correct_answer: 'go back to',
+                full_correct_sentence: 'We\'re going to go back to Bali again this summer.',
+                translation: 'Chúng tôi sẽ quay lại Bali vào mùa hè này.',
+                explanation: '"Go back to" có nghĩa là quay trở lại một địa điểm.',
+                grammar_note: 'Cụm động từ: go back to.'
+            },
+            'q18': {
+                original_sentence: 'I like to watch the planes leaving the ground when I\'m at the airport.',
+                word_given: 'off',
+                blanked_sentence: 'I like to watch the planes {blank} when I\'m at the airport.',
+                correct_answer: 'taking off',
+                full_correct_sentence: 'I like to watch the planes taking off when I\'m at the airport.',
+                translation: 'Tôi thích xem máy bay cất cánh khi tôi ở sân bay.',
+                explanation: '"Take off" là cụm động từ có nghĩa là cất cánh. Cấu trúc "watch + object + V-ing" được dùng để diễn tả hành động đang diễn ra.',
+                grammar_note: 'Cấu trúc: watch + O + V-ing (xem ai đó/cái gì đang làm gì).'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(`${qId}_input`);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                // Ensure inputElement is not null before proceeding
+                if (!inputElement) {
+                    console.error(`Input element with ID ${qId}_input not found.`);
+                    return; // Skip this question if element is missing
+                }
+
+                const userAnswer = inputElement.value.trim().toLowerCase();
+                const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                // Remove previous feedback classes
+                inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                let isCorrect = false;
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-correct');
+                } else {
+                    inputElement.classList.add('is-incorrect');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                // Display the original sentence and the full correct rewritten sentence
+                questionTextSolutionDiv.innerHTML = `<strong>${questionNumber}. ${questionInfo.original_sentence}</strong><br>
+                                                    ${questionInfo.blanked_sentence.replace('{blank}', `<span class="correct-answer-text">${questionInfo.correct_answer}</span>`)}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            document.querySelectorAll('.underline-input').forEach(input => {
+                input.value = ''; // Clear input field
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            document.querySelectorAll('.feedback-icon').forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

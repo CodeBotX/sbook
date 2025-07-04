@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Thi Mẫu Tiếng Anh A1.2</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 950px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .lead {
+            color: #5f6368;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section-title {
+            color: #007bff;
+            margin-top: 35px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8eaed;
+        }
+        .question-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8faff;
+            border: 1px solid #dcdfe4;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-section h4 {
+            color: #3c4043;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .question-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eceff1;
+        }
+        .question-item p {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #202124;
+            font-size: 1.05rem;
+        }
+        .form-check {
+            margin-bottom: 8px;
+        }
+        .form-check-input {
+            margin-right: 8px;
+        }
+        .form-check-label {
+            font-size: 0.95rem;
+            color: #3c4043;
+        }
+        .instructions {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #70757a;
+            padding: 10px 15px;
+            background-color: #e6f4f1;
+            border-left: 5px solid #34a853;
+            border-radius: 5px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #e6ffed;
+            color: #1e8449;
+            border: 1px solid #34a853;
+        }
+        .feedback.incorrect {
+            background-color: #ffebe6;
+            color: #c53929;
+            border: 1px solid #ea4335;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            border-left: 4px solid #aab7b8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            display: none;
+        }
+        .score-display {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a73e8;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e6f7ff;
+            border-radius: 8px;
+            border: 1px solid #a8d6ff;
+            display: none; /* Hidden initially */
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1764cc;
+            border-color: #1764cc;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .d-grid {
+            margin-top: 30px;
+        }
+        .writing-sample-container {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #e6f4f1;
+            border: 1px solid #34a853;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: none; /* Hidden initially */
+        }
+        .writing-sample-container h4 {
+            color: #1e8449;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .writing-input-area {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .writing-input-area textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            line-height: 1.5;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Đề Thi Mẫu Tiếng Anh A1.2</h1>
+        <p class="lead text-center">SAMPLE FINAL TEST - A1.2</p>
+        <hr>
+
+        <p class="instructions">
+            Chào mừng bạn đến với bài kiểm tra mẫu! Vui lòng chọn đáp án đúng nhất cho mỗi câu hỏi.
+            Sau khi hoàn thành, nhấn nút "Nộp bài" để xem kết quả và giải thích chi tiết.
+            <br><strong>Lưu ý:</strong>
+            <ul>
+                <li>Phần Nghe (Listening) không được chuyển đổi sang định dạng này.</li>
+                <li>Phần Viết (Writing) sẽ hiển thị một bài viết mẫu sau khi bạn nộp bài.</li>
+            </ul>
+        </p>
+
+        <form id="quizForm">
+            <!-- SECTION 2: GRAMMAR - VOCABULARY - FUNCTIONAL ENGLISH -->
+            <h2 class="section-title">SECTION 2: GRAMMAR - VOCABULARY - FUNCTIONAL ENGLISH</h2>
+            <div class="question-section">
+                <h4>I. Choose a correct word or phrase to complete each of the following sentences.</h4>
+                <div id="grammar-vocab-questions"></div>
+            </div>
+
+            <!-- SECTION 3: READING -->
+            <h2 class="section-title">SECTION 3: READING</h2>
+
+            <!-- Part III. Fill in each blank with ONE suitable word (Cloze Test) -->
+            <div class="question-section">
+                <h4>III. Fill in each blank with ONE suitable word.</h4>
+                <div class="cloze-passage mb-4 p-3 border rounded bg-light">
+                    <h5>Robots in Medicine</h5>
+                    <p>Robots already have a (26) ______ role in medicine. Robots are helping doctors achieve more (27) ______ in the operating room, performing safer, less invasive techniques. For example, the Da Vinci Surgical System by Intuitive Surgical helps simplify complex procedures, and lets surgeons work through much smaller incisions, thus making patient (28) ______ easier and quicker.</p>
+                    <p>Advances in bio-robotics are leading to even more and more applications in surgery (29) ______ have the potential to perform better than human surgeons in certain respects.</p>
+                    <p>The pace of technological change is rapid, and it is easily possible to foresee a time (30) ______ robots will become our teachers, policemen and even soldiers.</p>
+                    <p>Robots will be better soldiers than humans. They can strictly (31) ______ the rules of engagement, codes of conduct, and war protocols (32) ______ better than more passionate humans, resulting (33) ______ a reduction of war crimes.</p>
+                    <p>Most robots in the future will do jobs which are the sorts of things that people used to do. They will take away a lot of the mundane physical jobs certainly.</p>
+                    <p>Some (34) ______ predict that it is not just manual jobs that will be replaced. The more advanced the technology becomes, the more it forces us to (35) ______ on those things that are fundamentally human.</p>
+                </div>
+                <div id="reading-part3-questions"></div>
+            </div>
+
+            <!-- Part IV. Read the passage and choose the correct answer for each of the questions below. -->
+            <div class="question-section">
+                <h4>IV. Read the passage and choose the correct answer for each of the questions below.</h4>
+                <div class="reading-passage mb-4 p-3 border rounded bg-light">
+                    <h5>New TV Star: Jeanne Dixon</h5>
+                    <p>Jeanne Dixon began making predictions when she was a little girl. She had a crystal ball that she used to look into the future. She correctly predicted several events, including the death of her grandfather. She also learned to use astrology. When she was just eight years old, a palm reader told her fortune. The palm reader said that Jeanne would become famous for her unique ability to predict the future.</p>
+                    <p>Dixon made many predictions about the future throughout her life, but the one that brought her the most fame was her prediction of the assassination of President Kennedy. In 1952, she had a vision. She saw a man with blue eyes living in the White House. He was going to die a violent death. Eight years later, John Kennedy, a man with blue eyes, became president of the United States. On November 22<sup>nd</sup>, 1963, Jeanne told her friends, "Something terrible is going to happen today." Then, they heard an announcement. President Kennedy had been shot.</p>
+                    <p>Another of Dixon's major predictions was the death of President Kennedy's brother Robert. One day, she was walking through a hotel in Los Angeles. Suddenly, she stopped and said, "Robert Kennedy is going to be killed here." Soon after that, in June 1968, Robert Kennedy was shot in that exact place.</p>
+                    <p>Dixon accurately predicted the deaths of several other celebrities. She also predicted other kinds of events, for example, a big earthquake in Alaska in 1964. She made a number of wrong predictions as well, but people don't seem to remember as many of these. </p>
+                    <p>Dixon didn't keep any fees she earned from making predictions. She donated all the money to a charity that supported educational and health projects for children. She was a vegetarian and often prepared healthy food for elderly people. She also liked to help animals and took care of many lost cats and dogs.</p>
+                    <p>Jeanne Dixon died in 1997, but she left behind several predictions which could still come true. One of them is that intelligent life will be discovered on another planet.</p>
+                </div>
+                <div id="reading-part4-questions"></div>
+            </div>
+
+            <!-- SECTION 4: WRITING -->
+            <h2 class="section-title">SECTION 4: WRITING</h2>
+            <div class="question-section">
+                <h4>Write a paragraph (120 words) about your favorite movie, using the following prompts:</h4>
+                <ul>
+                    <li>What is it?</li>
+                    <li>What is the story of it?</li>
+                    <li>When you watched it?</li>
+                    <li>Why is it your favorite movie?</li>
+                </ul>
+                <div class="writing-input-area">
+                    <textarea id="writingInput" placeholder="Viết bài của bạn vào đây..."></textarea>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-primary" type="button" onclick="submitQuiz()">Nộp bài</button>
+                <button class="btn btn-secondary" type="button" onclick="resetQuiz()">Làm lại</button>
+            </div>
+            
+            <div class="score-display mt-4" id="scoreDisplay"></div>
+
+            <!-- Writing Section Sample Answer -->
+            <div class="writing-sample-container" id="writingSample">
+                <h4>Bài viết mẫu: Your Favorite Movie</h4>
+                <p>My favorite movie is **Spirited Away**, a beautiful animated film by Studio Ghibli. The story follows a young girl named Chihiro who wanders into a magical world and must work in a bathhouse for spirits to save her parents, who have been turned into pigs. It’s a captivating journey about courage, self-discovery, and friendship.</p>
+                <p>I first watched this movie when I was about ten years old, and it immediately enchanted me with its unique characters and stunning visuals. It left a profound impression on me, making me believe in the power of imagination.</p>
+                <p>It's my favorite because it blends fantasy with deep themes about identity and growing up. The animation is breathtaking, and the music is truly magical. Every time I watch it, I discover something new, and it always makes me feel a sense of wonder and warmth. It's not just a movie; it's an experience that stays with you.</p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        const questionsData = [
+            // SECTION 2: GRAMMAR - VOCABULARY - FUNCTIONAL ENGLISH
+            {
+                id: "q1",
+                section: "grammar-vocab-questions",
+                text: "1. If they ______ (live) in the countryside, they ______ (feel) happier.",
+                options: {
+                    a: "had lived/had been felt",
+                    b: "lived/ would feel",
+                    c: "live/ feel",
+                    d: "are living/are feeling"
+                },
+                correct: "b",
+                explanation: "Đây là câu điều kiện loại 2, diễn tả điều kiện không có thật ở hiện tại. Cấu trúc: If + S + V2/ed, S + would + V nguyên mẫu. 'Lived' là quá khứ đơn của 'live', 'would feel' là dạng mệnh đề chính. (This is a Type 2 conditional sentence, expressing an unreal condition in the present. Structure: If + Subject + V2/ed, Subject + would + base form verb. 'Lived' is the past simple of 'live', 'would feel' is the main clause form.)"
+            },
+            {
+                id: "q2",
+                section: "grammar-vocab-questions",
+                text: "2. In the future, many things in our homes ______ by apps.",
+                options: {
+                    a: "were controlled",
+                    b: "are controlled",
+                    c: "will be controlled",
+                    d: "is going to be controlled"
+                },
+                correct: "c",
+                explanation: "Câu này diễn tả hành động sẽ xảy ra trong tương lai ('In the future') và chủ ngữ ('many things') là đối tượng chịu tác động. Do đó, dùng thì Tương lai đơn bị động: 'will be + V3/ed'. (This sentence describes an action that will happen in the future ('In the future') and the subject ('many things') is the recipient of the action. Therefore, the Future Simple passive voice is used: 'will be + Past Participle'.)"
+            },
+            {
+                id: "q3",
+                section: "grammar-vocab-questions",
+                text: "3. My dental appointment is at 2 p.m. It says I ______ arrive 15 minutes early or they will cancel the appointment!",
+                options: {
+                    a: "must",
+                    b: "should",
+                    c: "have to",
+                    d: "had better"
+                },
+                correct: "d",
+                explanation: "'Had better' diễn tả một lời khuyên mạnh mẽ hoặc cảnh báo về hậu quả nếu không làm theo ('or they will cancel the appointment!'). 'Must' hoặc 'have to' cũng diễn tả sự bắt buộc nhưng 'had better' nhấn mạnh cảnh báo hơn trong trường hợp này. (Had better' expresses a strong recommendation or warning about consequences if not followed ('or they will cancel the appointment!'). 'Must' or 'have to' also indicate obligation but 'had better' emphasizes the warning more in this context.)"
+            },
+            {
+                id: "q4",
+                section: "grammar-vocab-questions",
+                text: "4. Direct Speech: 'I stayed in a hotel yesterday.' - Reported Speech:",
+                options: {
+                    a: "She told me that she had stayed in a hotel the day before.",
+                    b: "She told to me that she'd stay in a hotel the day before.",
+                    c: "She told me that she stayed in a hotel yesterday.",
+                    d: "She told to me that I stayed in a hotel yesterday."
+                },
+                correct: "a",
+                explanation: "Thì quá khứ đơn ('stayed') lùi thành quá khứ hoàn thành ('had stayed'). 'Yesterday' chuyển thành 'the day before'. 'Told' không đi với 'to' khi có tân ngữ trực tiếp. (The Past Simple tense ('stayed') becomes the Past Perfect ('had stayed'). 'Yesterday' changes to 'the day before'. 'Told' does not take 'to' when followed by a direct object.)"
+            },
+            {
+                id: "q5",
+                section: "grammar-vocab-questions",
+                text: "5. Black Pink is ______ South Korean girl group. They are considered as ______ most successful Korean girl group internationally.",
+                options: {
+                    a: "a/the",
+                    b: "the/the",
+                    c: "$a/a$",
+                    d: "no article/the"
+                },
+                correct: "a",
+                explanation: "Lần đầu tiên nhắc đến 'South Korean girl group', dùng 'a' (một nhóm nhạc). Phần sau, 'most successful' là so sánh nhất, nên dùng 'the'. (The first mention of 'South Korean girl group' takes 'a' (one group). For the second blank, 'most successful' is a superlative, so 'the' is used.)"
+            },
+            {
+                id: "q6",
+                section: "grammar-vocab-questions",
+                text: "6. What ______ devices have you bought recently?",
+                options: {
+                    a: "electronic",
+                    b: "app",
+                    c: "software",
+                    d: "hardware"
+                },
+                correct: "a",
+                explanation: "'Electronic devices' (thiết bị điện tử) là cụm danh từ phổ biến và phù hợp với ngữ cảnh. (Electronic devices' is a common noun phrase and fits the context.)"
+            },
+            {
+                id: "q7",
+                section: "grammar-vocab-questions",
+                text: "7. When I went to ______ concert, my friend ______ there.",
+                options: {
+                    a: "a/ had arrived",
+                    b: "the/ is arriving",
+                    c: "the/had arrived",
+                    d: "the/arrived"
+                },
+                correct: "c",
+                explanation: "Dùng 'the' vì 'concert' được xác định bởi ngữ cảnh. Hành động 'my friend arrived' xảy ra trước 'I went to the concert', nên dùng Quá khứ hoàn thành ('had arrived'). (The concert' is specific. My friend's arrival happened before I went to the concert, so the Past Perfect ('had arrived') is used.)"
+            },
+            {
+                id: "q8",
+                section: "grammar-vocab-questions",
+                text: "8. I wasn't able to finish the race because I was ______.",
+                options: {
+                    a: "scared",
+                    b: "amazed",
+                    c: "exhausted",
+                    d: "disappointed"
+                },
+                correct: "c",
+                explanation: "'Exhausted' (kiệt sức) là lý do hợp lý nhất khiến ai đó không thể hoàn thành cuộc đua. (Exhausted' (very tired) is the most logical reason for someone not being able to finish a race.)"
+            },
+            {
+                id: "q9",
+                section: "grammar-vocab-questions",
+                text: "9. ______ with the washing? Yes, absolutely.",
+                options: {
+                    a: "Could you give me a hand",
+                    b: "Would you mind",
+                    c: "I was wondering do you need my help",
+                    d: "Please do"
+                },
+                correct: "a",
+                explanation: "'Could you give me a hand?' (Bạn có thể giúp tôi một tay được không?) là cách hỏi xin sự giúp đỡ. 'Yes, absolutely' là câu trả lời đồng ý. (Could you give me a hand?' is a way to ask for help. 'Yes, absolutely' is an affirmative response.)"
+            },
+            {
+                id: "q10",
+                section: "grammar-vocab-questions",
+                text: "10. Let's ______ a break for lunch!",
+                options: {
+                    a: "take",
+                    b: "have",
+                    c: "get",
+                    d: "stay"
+                },
+                correct: "b",
+                explanation: "Cụm 'have a break' (nghỉ giải lao) là thành ngữ đúng. (The phrase 'have a break' is the correct collocation.)"
+            },
+            {
+                id: "q11",
+                section: "grammar-vocab-questions",
+                text: "11. He probably ______ buy a new mobile phone until next year.",
+                options: {
+                    a: "won't be able to",
+                    b: "will be able to",
+                    c: "might",
+                    d: "could"
+                },
+                correct: "a",
+                explanation: "Diễn tả khả năng không thể xảy ra trong tương lai ('until next year'). 'Probably' đi với 'won't be able to' để chỉ sự không chắc chắn cao. (Expresses a probable inability to do something in the future ('until next year'). 'Probably' combines with 'won't be able to' for high probability of inability.)"
+            },
+            {
+                id: "q12",
+                section: "grammar-vocab-questions",
+                text: "12. In the future, most people will work from home. There ______ be any offices.",
+                options: {
+                    a: "probably won't",
+                    b: "will probably",
+                    c: "probably will",
+                    d: "won't probably"
+                },
+                correct: "a",
+                explanation: "'Probably won't' diễn tả khả năng rất cao là không xảy ra. 'Won't probably' là không đúng ngữ pháp. (Probably won't' expresses a high probability of something not happening. 'Won't probably' is grammatically incorrect.)"
+            },
+            {
+                id: "q13",
+                section: "grammar-vocab-questions",
+                text: "13. What did Dana say to Zaid about the swimming competition? - She said to Zaid that she'd think about it.",
+                options: {
+                    a: "She said to Zaid that she thinks about it.",
+                    b: "She said to Zaid that she'd think about it.",
+                    c: "She said Zaid that she had think about it.",
+                    d: "She siad Zaid to think about it."
+                },
+                correct: "b", // Corrected as there was an issue in the provided answer 'b' in the doc
+                explanation: "Câu gốc có lẽ là 'I'll think about it'. 'Will' lùi thành 'would' ('she'd'). Không dùng 'to' sau 'said' khi có tân ngữ trực tiếp (Zaid). (The original sentence was likely 'I'll think about it'. 'Will' changes to 'would' ('she'd'). 'Said' is not followed by 'to' when there is a direct object (Zaid).)"
+            },
+            {
+                id: "q14",
+                section: "grammar-vocab-questions",
+                text: "14. I love the ______ when the main characters found his missing girl.",
+                options: {
+                    a: "plot",
+                    b: "animation",
+                    c: "scene",
+                    d: "series"
+                },
+                correct: "c",
+                explanation: "'Scene' (cảnh phim) là từ phù hợp nhất để chỉ một phần cụ thể trong phim. (Scene' (a part of a film) is the most appropriate word to refer to a specific segment in a movie.)"
+            },
+            {
+                id: "q15",
+                section: "grammar-vocab-questions",
+                text: "15. I think I have too ______ on my phone. I can never find the ones I need.",
+                options: {
+                    a: "many capacity",
+                    b: "many apps",
+                    c: "much software",
+                    d: "much memory"
+                },
+                correct: "b",
+                explanation: "'Apps' (ứng dụng) là danh từ đếm được, và việc không tìm thấy cái mình cần cho thấy có 'too many apps'. (Apps' (applications) is a countable noun, and the inability to find what's needed suggests having 'too many apps'.)"
+            },
+            {
+                id: "q16_gv", // Renamed to avoid conflict with reading q16
+                section: "grammar-vocab-questions",
+                text: "16. He is in bed with a ______. His temperature is 39°C.",
+                options: {
+                    a: "cold",
+                    b: "fever",
+                    c: "stroke",
+                    d: "accident"
+                },
+                correct: "b",
+                explanation: "Nhiệt độ 39°C là dấu hiệu của 'fever' (sốt). (A temperature of 39°C is indicative of a 'fever'.)"
+            },
+            {
+                id: "q17_gv", // Renamed to avoid conflict with reading q17
+                section: "grammar-vocab-questions",
+                text: "17. She was ______ that he could be so unkind.",
+                options: {
+                    a: "shocked",
+                    b: "excited",
+                    c: "amazed",
+                    d: "delighted"
+                },
+                correct: "a",
+                explanation: "'Unkind' (không tốt bụng) thường gây ra cảm giác 'shocked' (sốc) hoặc thất vọng, không phải những cảm xúc tích cực như 'excited', 'amazed', 'delighted'. (Unkind' behavior typically evokes feelings of 'shocked' or disappointment, not positive emotions like 'excited', 'amazed', or 'delighted'.)"
+            },
+            {
+                id: "q18_gv", // Renamed to avoid conflict with reading q18
+                section: "grammar-vocab-questions",
+                text: "18. Mark: 'I've got an A in Chemistry!' - Nicole: '______'",
+                options: {
+                    a: "Congratulations!",
+                    b: "Can you become my tutor?",
+                    c: "The teacher is easy on you.",
+                    d: "I hate chemistry."
+                },
+                correct: "a",
+                explanation: "Khi ai đó đạt được thành tích tốt ('got an A'), 'Congratulations!' (Chúc mừng!) là cách đáp lại phù hợp nhất. (When someone achieves good results ('got an A'), 'Congratulations!' is the most appropriate response.)"
+            },
+            {
+                id: "q19_gv", // Renamed to avoid conflict with reading q19
+                section: "grammar-vocab-questions",
+                text: "19. John: 'Hey Harry, long time no see!' - Harry: '______'",
+                options: {
+                    a: "Give me a call more often.",
+                    b: "Pleasure to meet you now.",
+                    c: "Hey! What a surprise! How have you been?",
+                    d: "Yes, you are right but why are you here?"
+                },
+                correct: "c",
+                explanation: "Khi gặp lại một người bạn sau thời gian dài ('long time no see'), câu đáp lại thể hiện sự ngạc nhiên và hỏi thăm ('What a surprise! How have you been?') là phù hợp nhất. (When meeting a friend after a long time ('long time no see'), an appropriate response expressing surprise and inquiry ('What a surprise! How have you been?') is most suitable.)"
+            },
+            {
+                id: "q20_gv", // Renamed to avoid conflict with reading q20
+                section: "grammar-vocab-questions",
+                text: "20. Our big challenge is the new plan to build a road through the forest. Oh no! That will really damage ______.",
+                options: {
+                    a: "We are able to let that happen.",
+                    b: "We will let that happen.",
+                    c: "We can let that happen.",
+                    d: "We can't let that happen."
+                },
+                correct: "d",
+                explanation: "Cụm 'Oh no! That will really damage' cho thấy đây là điều không mong muốn và cần phải ngăn chặn. 'We can't let that happen' (Chúng ta không thể để điều đó xảy ra) phù hợp với ngữ cảnh này. (The phrase 'Oh no! That will really damage' indicates an undesirable outcome that needs to be prevented. 'We can't let that happen' fits this context.)"
+            },
+            {
+                id: "q21_gv",
+                section: "grammar-vocab-questions",
+                text: "21. I sometimes read ______ fictions in my spare time.",
+                options: {
+                    a: "science",
+                    b: "scientific",
+                    c: "scientist",
+                    d: "scientifically"
+                },
+                correct: "a",
+                explanation: "'Science fiction' (khoa học viễn tưởng) là cụm danh từ cố định chỉ một thể loại văn học/phim. (Science fiction' is a fixed noun phrase referring to a genre of literature/film.)"
+            },
+            {
+                id: "q22_gv",
+                section: "grammar-vocab-questions",
+                text: "22. It is of great ______ to show your interest and politeness when you are having a job interview.",
+                options: {
+                    a: "importance",
+                    b: "important",
+                    c: "importantly",
+                    d: "unimportant"
+                },
+                correct: "a",
+                explanation: "Cấu trúc 'It is of great + noun' (Nó có tầm quan trọng lớn) là cách diễn đạt đúng ngữ pháp. Danh từ của 'important' là 'importance'. (The structure 'It is of great + noun' is grammatically correct. The noun form of 'important' is 'importance'.)"
+            },
+            {
+                id: "q23_gv",
+                section: "grammar-vocab-questions",
+                text: "23. They are university professors who ______ in the history of the Russian empire.",
+                options: {
+                    a: "special",
+                    b: "specially",
+                    c: "specialize",
+                    d: "specialization"
+                },
+                correct: "c",
+                explanation: "Sau 'who' (đại từ quan hệ thay thế cho 'professors'), cần một động từ chia theo chủ ngữ số nhiều. 'Specialize' (chuyên về) là động từ phù hợp. (After 'who' (a relative pronoun referring to 'professors'), a plural verb is needed. 'Specialize' is the appropriate verb.)"
+            },
+            {
+                id: "q24_gv",
+                section: "grammar-vocab-questions",
+                text: "24. To be safe under water, ______ need to be able to control their rate of descent and ascent in the water.",
+                options: {
+                    a: "divers",
+                    b: "dive",
+                    c: "diving",
+                    d: "dives"
+                },
+                correct: "a",
+                explanation: "Chủ ngữ của câu là người thực hiện hành động, 'divers' (thợ lặn) là danh từ chỉ người phù hợp. (The subject of the sentence is the person performing the action, and 'divers' is the appropriate noun referring to people.)"
+            },
+            {
+                id: "q25_gv",
+                section: "grammar-vocab-questions",
+                text: "25. He has been very interested in doing research on ______ since he was at high school.",
+                options: {
+                    a: "biology",
+                    b: "biological",
+                    c: "biologist",
+                    d: "biologically"
+                },
+                correct: "a",
+                explanation: "Cụm 'research on' thường đi với danh từ. 'Biology' (sinh học) là tên môn học, phù hợp với ngữ cảnh nghiên cứu. (The phrase 'research on' is typically followed by a noun. 'Biology' is the name of a subject and fits the context of research.)"
+            },
+            // SECTION 3: READING - Part III (Cloze Test)
+            {
+                id: "q26_cloze",
+                section: "reading-part3-questions",
+                text: "26. Robots already have a ______ role in medicine.",
+                options: {
+                    a: "pessimistic",
+                    b: "disappointed",
+                    c: "significant",
+                    d: "minor"
+                },
+                correct: "c",
+                explanation: "Ngữ cảnh đoạn văn nói về sự giúp đỡ và khả năng tốt hơn của robot trong y học, nên 'significant' (quan trọng, đáng kể) là từ phù hợp nhất. (The context of the passage discusses robots' assistance and improved capabilities in medicine, so 'significant' is the most suitable word.)"
+            },
+            {
+                id: "q27_cloze",
+                section: "reading-part3-questions",
+                text: "27. Robots are helping doctors achieve more ______ in the operating room, performing safer, less invasive techniques.",
+                options: {
+                    a: "difficulty",
+                    b: "mistake",
+                    c: "precision",
+                    d: "decision"
+                },
+                correct: "c",
+                explanation: "Robots giúp phẫu thuật an toàn hơn, ít xâm lấn hơn, điều này ngụ ý họ giúp đạt được sự 'precision' (chính xác) cao hơn. (Robots help make surgery safer and less invasive, implying they help achieve greater 'precision'.)"
+            },
+            {
+                id: "q28_cloze",
+                section: "reading-part3-questions",
+                text: "28. ...thus making patient ______ easier and quicker.",
+                options: {
+                    a: "recovery",
+                    b: "discovery",
+                    c: "illness",
+                    d: "diseases"
+                },
+                correct: "a",
+                explanation: "Kỹ thuật ít xâm lấn giúp bệnh nhân 'recovery' (phục hồi) dễ dàng và nhanh chóng hơn. (Less invasive techniques lead to easier and quicker patient 'recovery'.)"
+            },
+            {
+                id: "q29_cloze",
+                section: "reading-part3-questions",
+                text: "29. Advances in bio-robotics are leading to even more and more applications in surgery ______ have the potential to perform better than human surgeons in certain respects.",
+                options: {
+                    a: "although",
+                    b: "because",
+                    c: "if",
+                    d: "however"
+                },
+                correct: "d",
+                explanation: "Cấu trúc câu yêu cầu một đại từ quan hệ (như 'which' hoặc 'that') để nối 'applications' với 'have the potential'. Tuy nhiên, trong các lựa chọn được cung cấp, không có đại từ quan hệ. Nếu phải chọn từ các lựa chọn này, 'however' (tuy nhiên) có thể được dùng như một trạng từ liên kết để chỉ sự tương phản hoặc chuyển tiếp ý, nhưng nó yêu cầu cấu trúc câu khác (ví dụ: có dấu chấm phẩy hoặc dấu chấm trước đó). Câu hỏi này có vẻ bị lỗi về mặt ngữ pháp trong các lựa chọn. (The sentence structure requires a relative pronoun (like 'which' or 'that') to connect 'applications' with 'have the potential'. However, none of the provided options are relative pronouns. If forced to choose from these options, 'however' (tuy nhiên) could be used as a conjunctive adverb to indicate contrast or transition, but it requires a different sentence structure (e.g., a semicolon or full stop before it). This question appears to have a grammatical flaw in its options.)"
+            },
+            {
+                id: "q30_cloze",
+                section: "reading-part3-questions",
+                text: "30. ...it is easily possible to foresee a time ______ robots will become our teachers, policemen and even soldiers.",
+                options: {
+                    a: "when",
+                    b: "which",
+                    c: "that",
+                    d: "where"
+                },
+                correct: "a",
+                explanation: "'Time' là danh từ chỉ thời gian, do đó đại từ quan hệ 'when' (khi mà) là phù hợp nhất để giới thiệu mệnh đề quan hệ chỉ thời gian. ('Time' is a noun referring to a period, so the relative pronoun 'when' (at which time) is the most suitable to introduce a relative clause of time.)"
+            },
+            {
+                id: "q31_cloze",
+                section: "reading-part3-questions",
+                text: "31. They can strictly ______ the rules of engagement, codes of conduct, and war protocols...",
+                options: {
+                    a: "chase",
+                    b: "pursue",
+                    c: "admit",
+                    d: "follow"
+                },
+                correct: "d",
+                explanation: "'Follow the rules' (tuân theo quy tắc) là cụm động từ chính xác, có nghĩa là làm theo các quy tắc hoặc quy trình. ('Follow the rules' is the correct collocation, meaning to adhere to rules or procedures.)"
+            },
+            {
+                id: "q32_cloze",
+                section: "reading-part3-questions",
+                text: "32. ...and war protocols ______ better than more passionate humans, resulting (33) ______ a reduction of war crimes.",
+                options: {
+                    a: "more",
+                    b: "many",
+                    c: "as",
+                    d: "much"
+                },
+                correct: "a",
+                explanation: "Cấu trúc so sánh hơn với tính từ/trạng từ: 'more + better' không chính xác. 'Better' đã là so sánh hơn của 'good'/'well'. Tuy nhiên, nếu 'more' được dùng để nhấn mạnh mức độ, nó có thể được dùng trước một tính từ/trạng từ. Trong trường hợp này, 'more' có thể là một lỗi in ấn hoặc câu muốn nhấn mạnh 'better' theo cách nào đó. Tuy nhiên, nếu chọn từ các đáp án, 'more' là gần nhất với ý so sánh. (The structure 'more + better' is grammatically incorrect as 'better' is already a comparative form of 'good'/'well'. However, if 'more' is intended to emphasize degree, it could be used before an adjective/adverb. In this context, 'more' might be a typo or an attempt to emphasize 'better' in some way. If choosing from the given options, 'more' is the closest in implying a comparative emphasis.)"
+            },
+            {
+                id: "q33_cloze",
+                section: "reading-part3-questions",
+                text: "33. ...resulting ______ a reduction of war crimes.",
+                options: {
+                    a: "for",
+                    b: "in",
+                    c: "with",
+                    d: "about"
+                },
+                correct: "b",
+                explanation: "Cụm động từ 'result in' có nghĩa là 'dẫn đến kết quả là'. (The phrasal verb 'result in' means to lead to a particular outcome.)"
+            },
+            {
+                id: "q34_cloze",
+                section: "reading-part3-questions",
+                text: "34. Some ______ predict that it is not just manual jobs that will be replaced.",
+                options: {
+                    a: "managers",
+                    b: "agriculturalists",
+                    c: "experts",
+                    d: "runners"
+                },
+                correct: "c",
+                explanation: "'Experts' (các chuyên gia) là những người có kiến thức để đưa ra dự đoán về sự thay thế công việc bởi công nghệ. (Experts' are individuals with knowledge to make predictions about job displacement by technology.)"
+            },
+            {
+                id: "q35_cloze",
+                section: "reading-part3-questions",
+                text: "35. ...the more it forces us to ______ on those things that are fundamentally human.",
+                options: {
+                    a: "look",
+                    b: "spend",
+                    c: "focus",
+                    d: "achieve"
+                },
+                correct: "c",
+                explanation: "Cụm 'focus on' có nghĩa là 'tập trung vào'. (The phrase 'focus on' means to concentrate attention or effort on something.)"
+            },
+            // SECTION 3: READING - Part IV (Reading Comprehension)
+            {
+                id: "q36_reading_iv",
+                section: "reading-part4-questions",
+                text: "36. What is this passage mainly about?",
+                options: {
+                    a: "Using astrology",
+                    b: "A famous palm reader",
+                    c: "Assassinations of famous people",
+                    d: "A woman who predicted the future"
+                },
+                correct: "d",
+                explanation: "Đoạn văn chủ yếu nói về cuộc đời và khả năng dự đoán tương lai của Jeanne Dixon, một người phụ nữ nổi tiếng với những lời tiên tri của mình. Các lựa chọn khác chỉ là các khía cạnh nhỏ hoặc ví dụ trong câu chuyện của cô ấy. (The passage is primarily about the life and predictive abilities of Jeanne Dixon, a woman famous for her prophecies. Other options are merely minor aspects or examples within her story.)"
+            },
+            {
+                id: "q37_reading_iv",
+                section: "reading-part4-questions",
+                text: "37. Who predicted Jeanne Dixon's future?",
+                options: {
+                    a: "An astrologer",
+                    b: "A palm reader",
+                    c: "A crystal ball reader",
+                    d: "Jeanne's grandfather"
+                },
+                correct: "b",
+                explanation: "Đoạn văn nói 'When she was just eight years old, a palm reader told her fortune'. (The passage states 'When she was just eight years old, a palm reader told her fortune'.)"
+            },
+            {
+                id: "q38_reading_iv",
+                section: "reading-part4-questions",
+                text: "38. What happened in 1968?",
+                options: {
+                    a: "John Kennedy lived in the White House.",
+                    b: "There was an earthquake in Alaska.",
+                    c: "President Kennedy's brother was killed.",
+                    d: "Jeanne Dixon started"
+                },
+                correct: "c",
+                explanation: "Đoạn văn nói 'Soon after that, in June 1968, Robert Kennedy was shot in that exact place'. Robert Kennedy là anh trai của Tổng thống Kennedy. (The passage states 'Soon after that, in June 1968, Robert Kennedy was shot in that exact place'. Robert Kennedy was President Kennedy's brother.)"
+            },
+            {
+                id: "q39_reading_iv",
+                section: "reading-part4-questions",
+                text: "39. What is true about Jeanne Dixon?",
+                options: {
+                    a: "She didn't eat meat.",
+                    b: "She didn't like children.",
+                    c: "All her predictions were correct.",
+                    d: "She became rich from making predictions."
+                },
+                correct: "a",
+                explanation: "Đoạn văn nêu 'She was a vegetarian'. Người ăn chay là người không ăn thịt. (The passage states 'She was a vegetarian'. A vegetarian is someone who does not eat meat.)"
+            },
+            {
+                id: "q40_reading_iv",
+                section: "reading-part4-questions",
+                text: "40. What does 'exact' mean in paragraph 3?",
+                options: {
+                    a: "specific; precise",
+                    b: "force to give",
+                    c: "careful",
+                    d: "demand"
+                },
+                correct: "a",
+                explanation: "Trong ngữ cảnh 'in that exact place' (ở chính xác nơi đó), 'exact' có nghĩa là 'specific' (cụ thể) hoặc 'precise' (chính xác). (In the context of 'in that exact place', 'exact' means 'specific' or 'precise'.)"
+            }
+        ];
+
+        // Hàm để tải và hiển thị câu hỏi
+        function loadQuestions() {
+            questionsData.forEach(q => {
+                const sectionContainer = document.getElementById(q.section);
+                if (!sectionContainer) return; // Skip if section not found
+
+                const questionHtml = `
+                    <div class="question-item">
+                        <p>${q.text}</p>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                sectionContainer.innerHTML += questionHtml;
+            });
+        }
+
+        // Hàm kiểm tra đáp án và hiển thị giải thích
+        function submitQuiz() {
+            let score = 0;
+            const totalQuestions = questionsData.length;
+
+            questionsData.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+
+                if (selectedOption) {
+                    if (selectedOption.value === q.correct) {
+                        feedbackDiv.textContent = "Đúng rồi! 🎉";
+                        feedbackDiv.classList.add('correct');
+                        score++;
+                    } else {
+                        feedbackDiv.textContent = `Sai rồi. Đáp án đúng là ${q.correct.toUpperCase()}. ❌`;
+                        feedbackDiv.classList.add('incorrect');
+                    }
+                } else {
+                    feedbackDiv.textContent = "Bạn chưa chọn đáp án.";
+                    feedbackDiv.classList.add('incorrect');
+                }
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${q.explanation}`;
+            });
+
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt được: ${score} / ${totalQuestions} điểm.`;
+            scoreDisplay.style.display = 'block';
+
+            // Show writing sample after submission
+            document.getElementById('writingSample').style.display = 'block';
+        }
+
+        // Hàm làm lại bài
+        function resetQuiz() {
+            questionsData.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (selectedOption) {
+                    selectedOption.checked = false;
+                }
+
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'none';
+                explanationDiv.style.display = 'none';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                explanationDiv.innerHTML = '';
+            });
+
+            document.getElementById('scoreDisplay').style.display = 'none';
+            document.getElementById('writingSample').style.display = 'none'; // Hide writing sample on reset
+            document.getElementById('writingInput').value = ''; // Clear writing input
+        }
+
+        // Tải câu hỏi khi trang được tải xong
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+    </script>
+</body>
+</html>

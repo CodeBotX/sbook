@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Perfect Continuous Exercise</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Dialogue styling */
+        .dialogue-container {
+            background-color: #f0f8ff; /* Light blue background for dialogue */
+            border: 1px solid #cce5ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .dialogue-line {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 15px;
+        }
+        .speaker {
+            font-weight: bold;
+            color: #007bff;
+            margin-right: 10px;
+            flex-shrink: 0;
+            min-width: 60px; /* Adjust speaker width */
+        }
+        .dialogue-text {
+            flex-grow: 1;
+            font-size: 1em;
+            color: #333;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+        .dialogue-text .text-segment {
+            margin-right: 5px;
+            white-space: pre-wrap;
+        }
+        .dialogue-text .answer-input {
+            flex-grow: 1;
+            min-width: 100px;
+            max-width: 200px; /* Limit input width in dialogue */
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            font-size: 0.95em;
+        }
+        .dialogue-text .answer-input:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        /* Feedback borders for inputs */
+        .dialogue-text .answer-input.is-valid {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .dialogue-text .answer-input.is-invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+            background-color: #f8d7da;
+            color: #842029;
+        }
+
+        /* Hint word styling */
+        .hint-word {
+            font-weight: bold;
+            color: #777;
+            margin-left: 10px;
+            flex-shrink: 0;
+            font-size: 0.9em;
+            min-width: 80px;
+            text-align: right;
+        }
+
+        /* Feedback icons (check/cross) */
+        .feedback-icon {
+            margin-left: 8px;
+            font-size: 1.1em;
+            display: none; /* Hidden by default, shown by JS */
+            flex-shrink: 0;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none;
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .dialogue-line {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .speaker {
+                margin-bottom: 5px;
+            }
+            .dialogue-text {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+            .dialogue-text .text-segment {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            .dialogue-text .answer-input {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+            .hint-word {
+                margin-left: 0;
+                text-align: left;
+                width: 100%;
+                margin-top: 5px;
+            }
+            .feedback-icon {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp</h1>
+        </div>
+        <h2>Hoàn thành hội thoại sử dụng thì Hiện tại Hoàn thành Tiếp diễn</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Complete using the correct present perfect continuous form of the verbs in brackets. Use short forms where possible.
+            <br>
+            <strong>Hướng dẫn:</strong> Hoàn thành bằng cách sử dụng dạng Hiện tại Hoàn thành Tiếp diễn đúng của động từ trong ngoặc. Sử dụng dạng rút gọn nếu có thể.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="grammarForm">
+            <div class="dialogue-container">
+                <div class="dialogue-line">
+                    <span class="speaker">Mandy:</span>
+                    <div class="dialogue-text">
+                        <span class="text-segment">Hi Matt. How are you? What (1)</span>
+                        <input type="text" class="form-control answer-input" id="q1_part1" name="q1_part1">
+                        <span class="text-segment">you</span>
+                        <input type="text" class="form-control answer-input" id="q1_part2" name="q1_part2">
+                        <span class="text-segment">recently?</span>
+                        <span class="hint-word">(you / do)</span>
+                        <i class="feedback-icon fa-solid" id="icon1"></i>
+                    </div>
+                </div>
+
+                <div class="dialogue-line">
+                    <span class="speaker">Matt:</span>
+                    <div class="dialogue-text">
+                        <span class="text-segment">Oh, hi Mandy! Well, (2)</span>
+                        <input type="text" class="form-control answer-input" id="q2" name="q2">
+                        <span class="text-segment">for my exams.</span>
+                        <span class="hint-word">(I / study)</span>
+                        <i class="feedback-icon fa-solid" id="icon2"></i>
+                    </div>
+                </div>
+
+                <div class="dialogue-line">
+                    <span class="speaker">Mandy:</span>
+                    <div class="dialogue-text">
+                        <span class="text-segment">That sounds boring! (3)</span>
+                        <input type="text" class="form-control answer-input" id="q3_part1" name="q3_part1">
+                        <span class="text-segment">you</span>
+                        <input type="text" class="form-control answer-input" id="q3_part2" name="q3_part2">
+                        <span class="text-segment">hard?</span>
+                        <span class="hint-word">(you / work)</span>
+                        <i class="feedback-icon fa-solid" id="icon3"></i>
+                    </div>
+                </div>
+
+                <div class="dialogue-line">
+                    <span class="speaker">Matt:</span>
+                    <div class="dialogue-text">
+                        <span class="text-segment">Very! Basically, (4)</span>
+                        <input type="text" class="form-control answer-input" id="q4" name="q4">
+                        <span class="text-segment">at my desk in my bedroom for the past three weeks and (5)</span>
+                        <input type="text" class="form-control answer-input" id="q5" name="q5">
+                        <span class="text-segment">out at all.</span>
+                        <span class="hint-word">(I / just / sit) (I / not / go)</span>
+                        <i class="feedback-icon fa-solid" id="icon4"></i>
+                        <i class="feedback-icon fa-solid" id="icon5"></i>
+                    </div>
+                </div>
+
+                <div class="dialogue-line">
+                    <span class="speaker">Matt:</span>
+                    <div class="dialogue-text">
+                        <span class="text-segment">(6)</span>
+                        <input type="text" class="form-control answer-input" id="q6" name="q6">
+                        <span class="text-segment">with Michael, my best friend, some of the time, though, so at least I've had some company. How about you?</span>
+                        <span class="hint-word">(I / work)</span>
+                        <i class="feedback-icon fa-solid" id="icon6"></i>
+                    </div>
+                </div>
+
+                <div class="dialogue-line">
+                    <span class="speaker">Mandy:</span>
+                    <div class="dialogue-text">
+                        <span class="text-segment">Well, my mum and (7)</span>
+                        <input type="text" class="form-control answer-input" id="q7" name="q7">
+                        <span class="text-segment">my bedroom for the last few days. That has been fun! And (8)</span>
+                        <input type="text" class="form-control answer-input" id="q8" name="q8">
+                        <span class="text-segment">our summer holiday.</span>
+                        <span class="hint-word">(I / paint) (we / also / plan)</span>
+                        <i class="feedback-icon fa-solid" id="icon7"></i>
+                        <i class="feedback-icon fa-solid" id="icon8"></i>
+                    </div>
+                </div>
+
+                <div class="dialogue-line">
+                    <span class="speaker">Matt:</span>
+                    <div class="dialogue-text">
+                        <span class="text-segment">Great! Where are you going?</span>
+                    </div>
+                </div>
+
+                <div class="dialogue-line">
+                    <span class="speaker">Mandy:</span>
+                    <div class="dialogue-text">
+                        <span class="text-segment">Well, we haven't decided yet. (9)</span>
+                        <input type="text" class="form-control answer-input" id="q9" name="q9">
+                        <span class="text-segment">at different places to see which we like best.</span>
+                        <span class="hint-word">(We / look)</span>
+                        <i class="feedback-icon fa-solid" id="icon9"></i>
+                    </div>
+                </div>
+
+                <div class="dialogue-line">
+                    <span class="speaker">Matt:</span>
+                    <div class="dialogue-text">
+                        <span class="text-segment">I'm sure you'll have a great time, wherever you go. Oh, by the way, (10)</span>
+                        <input type="text" class="form-control answer-input" id="q10" name="q10">
+                        <span class="text-segment">of having a party when I finish my exams. Would you like to come?</span>
+                        <span class="hint-word">(I / think)</span>
+                        <i class="feedback-icon fa-solid" id="icon10"></i>
+                    </div>
+                </div>
+
+                <div class="dialogue-line">
+                    <span class="speaker">Mandy:</span>
+                    <div class="dialogue-text">
+                        <span class="text-segment">Sure! That would be great!</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, translations, and explanations for each question
+        const questionsData = {
+            'q1_part1': {
+                answers: ['have'],
+                originalText: 'What {answer1} you {answer2} recently?',
+                translation: 'Gần đây bạn đang làm gì vậy?',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Tiếp diễn để hỏi về một hành động đang diễn ra trong khoảng thời gian gần đây ("recently").',
+                grammar_note: 'Cấu trúc câu hỏi: What + have/has + S + been + V-ing?'
+            },
+            'q1_part2': {
+                answers: ['been doing']
+            },
+            'q2': {
+                answers: ['I\'ve been studying'],
+                originalText: 'Well, {answer} for my exams.',
+                translation: 'À, tôi đã và đang học cho các kỳ thi của mình.',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Tiếp diễn để diễn tả một hành động (học) đang diễn ra liên tục cho đến hiện tại, nhấn mạnh quá trình.',
+                grammar_note: 'Cấu trúc: S + have/has + been + V-ing. Dạng rút gọn của "I have" là "I\'ve".'
+            },
+            'q3_part1': {
+                answers: ['Have'],
+                originalText: '{answer1} you {answer2} hard?',
+                translation: 'Bạn có làm việc chăm chỉ không?',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Tiếp diễn để hỏi về quá trình làm việc chăm chỉ, liên quan đến hiện tại.',
+                grammar_note: 'Cấu trúc câu hỏi: Have/Has + S + been + V-ing?'
+            },
+            'q3_part2': {
+                answers: ['been working']
+            },
+            'q4': {
+                answers: ['I\'ve just been sitting'],
+                originalText: 'Basically, {answer} at my desk in my bedroom for the past three weeks.',
+                translation: 'Về cơ bản, tôi đã chỉ ngồi ở bàn làm việc trong phòng ngủ suốt ba tuần qua.',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Tiếp diễn với "just" và "for the past three weeks" để nhấn mạnh một hành động vừa mới và liên tục diễn ra trong một khoảng thời gian đến hiện tại.',
+                grammar_note: 'Cấu trúc: S + have/has + just + been + V-ing. Dạng rút gọn của "I have" là "I\'ve".'
+            },
+            'q5': {
+                answers: ['I haven\'t been going'],
+                originalText: 'and {answer} out at all.',
+                translation: 'và tôi hoàn toàn không ra ngoài.',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Tiếp diễn ở dạng phủ định để diễn tả một hành động không diễn ra liên tục trong một khoảng thời gian cho đến hiện tại.',
+                grammar_note: 'Cấu trúc phủ định: S + have/has + not + been + V-ing. Dạng rút gọn của "I have not" là "I haven\'t".'
+            },
+            'q6': {
+                answers: ['I\'ve been working'],
+                originalText: '{answer} with Michael, my best friend, some of the time.',
+                translation: 'Tôi đã làm việc với Michael, người bạn thân nhất của tôi, một thời gian.',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Tiếp diễn để diễn tả một hành động (làm việc) đang diễn ra liên tục trong một khoảng thời gian, có thể vẫn còn tiếp diễn.',
+                grammar_note: 'Cấu trúc: S + have/has + been + V-ing. Dạng rút gọn của "I have" là "I\'ve".'
+            },
+            'q7': {
+                answers: ['I\'ve been painting'],
+                originalText: 'Well, my mum and {answer} my bedroom for the last few days.',
+                translation: 'À, mẹ tôi và tôi đã sơn phòng ngủ của tôi vài ngày qua.',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Tiếp diễn với "for the last few days" để nhấn mạnh quá trình hành động kéo dài liên tục đến hiện tại.',
+                grammar_note: 'Cấu trúc: S + have/has + been + V-ing. Dạng rút gọn của "I have" là "I\'ve".'
+            },
+            'q8': {
+                answers: ['we\'ve also been planning'],
+                originalText: 'And {answer} our summer holiday.',
+                translation: 'Và chúng tôi cũng đã lên kế hoạch cho kỳ nghỉ hè của mình.',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Tiếp diễn với "also" để diễn tả một hành động khác đang diễn ra song song và liên tục đến hiện tại.',
+                grammar_note: 'Cấu trúc: S + have/has + also + been + V-ing. Dạng rút gọn của "we have" là "we\'ve".'
+            },
+            'q9': {
+                answers: ['We\'ve been looking'],
+                originalText: '{answer} at different places to see which we like best.',
+                translation: 'Chúng tôi đã và đang tìm kiếm các địa điểm khác nhau để xem chúng tôi thích nơi nào nhất.',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Tiếp diễn để diễn tả một hành động (tìm kiếm) đang diễn ra liên tục cho đến hiện tại, nhấn mạnh quá trình.',
+                grammar_note: 'Cấu trúc: S + have/has + been + V-ing. Dạng rút gọn của "We have" là "We\'ve".'
+            },
+            'q10': {
+                answers: ['I\'ve been thinking'],
+                originalText: 'Oh, by the way, {answer} of having a party when I finish my exams.',
+                translation: 'À nhân tiện, tôi đã và đang nghĩ đến việc tổ chức một bữa tiệc khi tôi thi xong.',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Tiếp diễn để diễn tả một hành động (suy nghĩ) đang diễn ra liên tục cho đến hiện tại, có thể vẫn chưa hoàn thành.',
+                grammar_note: 'Cấu trúc: S + have/has + been + V-ing. Dạng rút gọn của "I have" là "I\'ve".'
+            }
+        };
+
+        /**
+         * Normalizes a string by converting to lowercase, trimming whitespace,
+         * and replacing multiple spaces with a single space.
+         * @param {string} answer - The string to normalize.
+         * @returns {string} The normalized string.
+         */
+        function normalizeAnswer(answer) {
+            return answer.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = 10; // Manually set total questions as some are multi-part
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Keep track of processed questions to avoid duplicate scoring/explanations for multi-part questions
+            const processedQuestionNumbers = new Set();
+
+            // Iterate through each question ID in the questionsData
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qId = `q${i}`;
+                let isQuestionCorrect = true;
+                let currentQuestionAnswers = []; // To store answers for this logical question
+                let originalTextTemplate;
+                let explanationInfo;
+
+                // Handle multi-part questions (e.g., q1, q3)
+                if (questionsData[`${qId}_part1`]) {
+                    const input1 = document.getElementById(`${qId}_part1`);
+                    const input2 = document.getElementById(`${qId}_part2`);
+                    const correctInfo1 = questionsData[`${qId}_part1`];
+                    const correctInfo2 = questionsData[`${qId}_part2`];
+
+                    const userAnswer1 = normalizeAnswer(input1.value);
+                    const userAnswer2 = normalizeAnswer(input2.value);
+
+                    const isPart1Correct = correctInfo1.answers.some(ans => normalizeAnswer(ans) === userAnswer1);
+                    const isPart2Correct = correctInfo2.answers.some(ans => normalizeAnswer(ans) === userAnswer2);
+
+                    // Apply feedback to individual inputs
+                    input1.classList.remove('is-valid', 'is-invalid');
+                    input2.classList.remove('is-valid', 'is-invalid');
+
+                    if (isPart1Correct) input1.classList.add('is-valid'); else input1.classList.add('is-invalid');
+                    if (isPart2Correct) input2.classList.add('is-valid'); else input2.classList.add('is-invalid');
+
+                    isQuestionCorrect = isPart1Correct && isPart2Correct;
+                    currentQuestionAnswers = [correctInfo1.answers[0], correctInfo2.answers[0]];
+
+                    // Get the feedback icon for the logical question (e.g., icon1 for q1)
+                    const feedbackIcon = document.getElementById(`icon${i}`);
+                    if (feedbackIcon) {
+                        feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                        if (isQuestionCorrect) {
+                            feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                        } else {
+                            feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                        }
+                        feedbackIcon.style.display = 'inline-block';
+                    }
+                    originalTextTemplate = correctInfo1.originalText;
+                    explanationInfo = correctInfo1;
+
+                } else { // Handle single-part questions
+                    const inputElement = document.getElementById(qId);
+                    const userAnswer = normalizeAnswer(inputElement.value);
+                    const correctInfo = questionsData[qId];
+
+                    isQuestionCorrect = correctInfo.answers.some(ans => normalizeAnswer(ans) === userAnswer);
+                    currentQuestionAnswers = [correctInfo.answers[0]];
+
+                    // Apply feedback to input
+                    inputElement.classList.remove('is-valid', 'is-invalid');
+                    if (isQuestionCorrect) inputElement.classList.add('is-valid'); else inputElement.classList.add('is-invalid');
+
+                    // Get the feedback icon for the logical question
+                    const feedbackIcon = document.getElementById(`icon${i}`);
+                    if (feedbackIcon) {
+                        feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                        if (isQuestionCorrect) {
+                            feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                        } else {
+                            feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                        }
+                        feedbackIcon.style.display = 'inline-block';
+                    }
+                    originalTextTemplate = correctInfo.originalText;
+                    explanationInfo = correctInfo;
+                }
+
+                if (isQuestionCorrect) {
+                    score++;
+                }
+                processedQuestionNumbers.add(i); // Mark this logical question as processed
+
+                // Add detailed solution for this logical question
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+
+                let fullSentenceHtml = `${i}. `;
+                if (questionsData[`${qId}_part1`]) {
+                    fullSentenceHtml += originalTextTemplate
+                        .replace('{answer1}', `<span class="correct-answer-text">${questionsData[`${qId}_part1`].answers[0]}</span>`)
+                        .replace('{answer2}', `<span class="correct-answer-text">${questionsData[`${qId}_part2`].answers[0]}</span>`);
+                } else {
+                    fullSentenceHtml += originalTextTemplate.replace('{answer}', `<span class="correct-answer-text">${questionsData[qId].answers[0]}</span>`);
+                }
+
+                questionTextSolutionDiv.innerHTML = fullSentenceHtml;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${explanationInfo.explanation}<br>${explanationInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${explanationInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            }
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing inputs, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const inputElements = document.querySelectorAll('.answer-input');
+            inputElements.forEach(input => {
+                input.value = ''; // Clear input value
+                input.classList.remove('is-valid', 'is-invalid'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

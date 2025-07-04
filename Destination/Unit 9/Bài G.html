@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài G: Sử dụng từ đã cho để tạo thành từ phù hợp</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Exercise text container */
+        .exercise-text-container {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            font-size: 1.1em;
+            line-height: 1.8; /* Increased line height for readability */
+        }
+        .exercise-text-container p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        /* Styling for input fields with underline */
+        .exercise-text-container .underline-input {
+            border: none;
+            border-bottom: 2px solid #ced4da; /* Underline style */
+            padding: 2px 5px;
+            margin: 0 5px;
+            font-size: 1em;
+            text-align: center;
+            width: 150px; /* Adjust width as needed */
+            background-color: transparent; /* Transparent background */
+            transition: border-color 0.2s ease;
+        }
+        .exercise-text-container .underline-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        /* Feedback styles after submission */
+        .exercise-text-container .underline-input.is-correct {
+            border-color: #198754;
+            color: #198754;
+            font-weight: 600;
+        }
+        .exercise-text-container .underline-input.is-incorrect {
+            border-color: #dc3545;
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        /* Scrambled word display */
+        .exercise-text-container .scrambled-word {
+            font-size: 0.9em;
+            font-weight: normal;
+            color: #6c757d;
+            margin-left: auto; /* Pushes the scrambled word to the right */
+            white-space: nowrap; /* Prevents wrapping */
+        }
+
+        /* Feedback icons (placed next to inputs for this exercise) */
+        .feedback-icon {
+            margin-left: 5px;
+            font-size: 1em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .exercise-text-container {
+                padding: 15px;
+                font-size: 1em;
+            }
+            .exercise-text-container .underline-input {
+                width: 100px; /* Smaller width for mobile */
+                padding: 1px 3px;
+                font-size: 0.9em;
+            }
+            .exercise-text-container .scrambled-word {
+                font-size: 0.8em;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Tạo Từ</h1>
+        </div>
+        <h2>Sử dụng từ đã cho ở dạng viết hoa cuối mỗi dòng để tạo thành một từ phù hợp với chỗ trống trên cùng dòng.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Use the word given in capitals at the end of each line to form a word that fits in the gap in the same line.
+            <br>
+            <strong>Hướng dẫn:</strong> Sử dụng từ đã cho ở dạng viết hoa cuối mỗi dòng để tạo thành một từ phù hợp với chỗ trống trên cùng dòng.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="wordFormationForm">
+            <div class="exercise-text-container">
+                <p style="font-weight: bold; font-size: 1.5em; text-align: center; margin-bottom: 20px;">Going abroad</p>
+                <p>
+                    Up until the 1960s, not many British people had (1) <input type="text" class="underline-input" id="q1_input"> abroad for
+                    their holidays. <span class="scrambled-word">FLY</span>
+                </p>
+                <p>
+                    Although the idea was (2) <input type="text" class="underline-input" id="q2_input">, flying was still too
+                    expensive for most people. <span class="scrambled-word">ATTRACT</span>
+                </p>
+                <p>
+                    The only (3) <input type="text" class="underline-input" id="q3_input"> people had was to go
+                    to British resorts. <span class="scrambled-word">CHOOSE</span>
+                </p>
+                <p>
+                    Instead of flying, families (4) <input type="text" class="underline-input" id="q4_input"> to the British
+                    coast. <span class="scrambled-word">DRIVE</span>
+                </p>
+                <p>
+                    Places like Blackpool and Brighton had millions of (5) <input type="text" class="underline-input" id="q5_input">
+                    every year. <span class="scrambled-word">VISIT</span>
+                </p>
+                <p>
+                    During the 60s and 70s, prices dropped and (6) <input type="text" class="underline-input" id="q6_input">
+                    began to visit places like Spain. <span class="scrambled-word">TRAVEL</span>
+                </p>
+                <p>
+                    At first, hotels were (7) <input type="text" class="underline-input" id="q7_input">, but
+                    they slowly got better. <span class="scrambled-word">COMFORT</span>
+                </p>
+                <p>
+                    These days, the (8) <input type="text" class="underline-input" id="q8_input"> lounges at airports
+                    are full and people travel (9) <input type="text" class="underline-input" id="q9_input"> and forwards across the world for
+                    work and on holiday. <span class="scrambled-word">DEPART / BACK</span>
+                </p>
+                <p>
+                    Every summer, tourists go in all (10) <input type="text" class="underline-input" id="q10_input"> in
+                    search of the perfect beach and the perfect resort. <span class="scrambled-word">DIRECT</span>
+                </p>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                question_text: 'Up until the 1960s, not many British people had (1) {blank} abroad for their holidays.',
+                scrambled_word: 'FLY',
+                correct_answer: 'FLOWN',
+                fullSentence: 'Up until the 1960s, not many British people had FLOWN abroad for their holidays.',
+                translation: 'Cho đến những năm 1960, không nhiều người Anh đã bay ra nước ngoài để nghỉ lễ.',
+                explanation: '"Flown" là dạng quá khứ phân từ của "fly", phù hợp với thì hiện tại hoàn thành (had flown) để chỉ trải nghiệm du lịch.',
+                grammar_note: 'Thì hiện tại hoàn thành (Present Perfect) dùng để diễn tả kinh nghiệm hoặc hành động đã xảy ra trong quá khứ mà không rõ thời gian cụ thể.'
+            },
+            'q2': {
+                question_text: 'Although the idea was (2) {blank}, flying was still too expensive for most people.',
+                scrambled_word: 'ATTRACT',
+                correct_answer: 'ATTRACTIVE',
+                fullSentence: 'Although the idea was ATTRACTIVE, flying was still too expensive for most people.',
+                translation: 'Mặc dù ý tưởng đó hấp dẫn, nhưng việc đi máy bay vẫn quá đắt đối với hầu hết mọi người.',
+                explanation: '"Attractive" (hấp dẫn) là tính từ, bổ nghĩa cho danh từ "idea" và đứng sau động từ "to be".',
+                grammar_note: 'Tính từ thường đứng sau động từ "to be" để bổ nghĩa cho chủ ngữ.'
+            },
+            'q3': {
+                question_text: 'The only (3) {blank} people had was to go to British resorts.',
+                scrambled_word: 'CHOOSE',
+                correct_answer: 'CHOICE',
+                fullSentence: 'The only CHOICE people had was to go to British resorts.',
+                translation: 'Lựa chọn duy nhất mà mọi người có là đi đến các khu nghỉ dưỡng của Anh.',
+                explanation: '"Choice" (lựa chọn) là danh từ, phù hợp với ngữ cảnh "lựa chọn duy nhất".',
+                grammar_note: '"The only" thường đi kèm với danh từ.'
+            },
+            'q4': {
+                question_text: 'Instead of flying, families (4) {blank} to the British coast.',
+                scrambled_word: 'DRIVE',
+                correct_answer: 'DROVE',
+                fullSentence: 'Instead of flying, families DROVE to the British coast.',
+                translation: 'Thay vì bay, các gia đình đã lái xe đến bờ biển Anh.',
+                explanation: '"Drove" là dạng quá khứ đơn của "drive", phù hợp với ngữ cảnh hành động đã xảy ra trong quá khứ.',
+                grammar_note: 'Thì quá khứ đơn (Simple Past) dùng để diễn tả hành động đã hoàn thành trong quá khứ.'
+            },
+            'q5': {
+                question_text: 'Places like Blackpool and Brighton had millions of (5) {blank} every year.',
+                scrambled_word: 'VISIT',
+                correct_answer: 'VISITORS',
+                fullSentence: 'Places like Blackpool and Brighton had millions of VISITORS every year.',
+                translation: 'Những nơi như Blackpool và Brighton có hàng triệu du khách mỗi năm.',
+                explanation: '"Visitors" (du khách) là danh từ số nhiều, phù hợp với "millions of" để chỉ số lượng người đến thăm.',
+                grammar_note: '"Millions of" + danh từ đếm được số nhiều.'
+            },
+            'q6': {
+                question_text: 'During the 60s and 70s, prices dropped and (6) {blank} began to visit places like Spain.',
+                scrambled_word: 'TRAVEL',
+                correct_answer: 'TRAVELLERS', // or TRAVELERS
+                fullSentence: 'During the 60s and 70s, prices dropped and TRAVELLERS began to visit places like Spain.',
+                translation: 'Trong những năm 60 và 70, giá cả giảm và du khách bắt đầu đến thăm những nơi như Tây Ban Nha.',
+                explanation: '"Travellers" (du khách) là danh từ chỉ người, phù hợp với việc "bắt đầu đến thăm các địa điểm".',
+                grammar_note: 'Danh từ chỉ người, số nhiều.'
+            },
+            'q7': {
+                question_text: 'At first, hotels were (7) {blank}, but they slowly got better.',
+                scrambled_word: 'COMFORT',
+                correct_answer: 'UNCOMFORTABLE',
+                fullSentence: 'At first, hotels were UNCOMFORTABLE, but they slowly got better.',
+                translation: 'Ban đầu, các khách sạn không thoải mái, nhưng dần dần chúng trở nên tốt hơn.',
+                explanation: '"Uncomfortable" (không thoải mái) là tính từ, đối lập với "got better", mô tả chất lượng ban đầu của khách sạn. Tiền tố "un-" tạo nghĩa phủ định.',
+                grammar_note: 'Tính từ thường đứng sau động từ "to be" để bổ nghĩa cho chủ ngữ. Tiền tố "un-" tạo nghĩa phủ định.'
+            },
+            'q8': {
+                question_text: 'These days, the (8) {blank} lounges at airports are full and people travel (9) {blank} and forwards across the world for work and on holiday.',
+                scrambled_word: 'DEPART',
+                correct_answer: 'DEPARTURE',
+                fullSentence: 'These days, the DEPARTURE lounges at airports are full and people travel BACKWARDS and forwards across the world for work and on holiday.',
+                translation: 'Ngày nay, các phòng chờ khởi hành tại sân bay đều chật kín và mọi người đi lại ngược xuôi khắp thế giới để làm việc và nghỉ lễ.',
+                explanation: '"Departure" (khởi hành) là danh từ, dùng làm tính từ bổ nghĩa cho "lounges" (phòng chờ khởi hành).',
+                grammar_note: 'Danh từ có thể đóng vai trò như tính từ khi đứng trước một danh từ khác để tạo thành cụm danh từ.'
+            },
+            'q9': {
+                question_text: 'These days, the (8) {blank} lounges at airports are full and people travel (9) {blank} and forwards across the world for work and on holiday.',
+                scrambled_word: 'BACK',
+                correct_answer: 'BACKWARDS',
+                fullSentence: 'These days, the DEPARTURE lounges at airports are full and people travel BACKWARDS and forwards across the world for work and on holiday.',
+                translation: 'Ngày nay, các phòng chờ khởi hành tại sân bay đều chật kín và mọi người đi lại ngược xuôi khắp thế giới để làm việc và nghỉ lễ.',
+                explanation: '"Backwards" (ngược lại, lùi lại) kết hợp với "forwards" tạo thành cụm "backwards and forwards" (đi đi lại lại, ngược xuôi).',
+                grammar_note: '"Backwards" là trạng từ chỉ cách thức.'
+            },
+            'q10': {
+                question_text: 'Every summer, tourists go in all (10) {blank} in search of the perfect beach and the perfect resort.',
+                scrambled_word: 'DIRECT',
+                correct_answer: 'DIRECTIONS',
+                fullSentence: 'Every summer, tourists go in all DIRECTIONS in search of the perfect beach and the perfect resort.',
+                translation: 'Mỗi mùa hè, du khách đi khắp mọi hướng để tìm kiếm bãi biển hoàn hảo và khu nghỉ dưỡng lý tưởng.',
+                explanation: '"Directions" (hướng) là danh từ số nhiều, phù hợp với cụm "in all directions" (khắp mọi hướng).',
+                grammar_note: '"In all directions" là một cụm từ cố định.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(`${qId}_input`);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                // Ensure inputElement is not null before proceeding
+                if (!inputElement) {
+                    console.error(`Input element with ID ${qId}_input not found.`);
+                    return; // Skip this question if element is missing
+                }
+
+                const userAnswer = inputElement.value.trim().toUpperCase(); // Convert to uppercase for comparison
+                const correctAnswer = questionInfo.correct_answer.toUpperCase(); // Convert to uppercase for comparison
+
+                // Remove previous feedback classes
+                inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                let isCorrect = false;
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-correct');
+                } else {
+                    inputElement.classList.add('is-incorrect');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                // Replace {blank} with the correct answer, highlighted
+                const fullTextWithCorrectAnswer = questionInfo.question_text.replace('{blank}', `<span class="correct-answer-text">${questionInfo.correct_answer}</span>`);
+                questionTextSolutionDiv.innerHTML = `${questionNumber}. ${fullTextWithCorrectAnswer} <span class="scrambled-word">(${questionInfo.scrambled_word})</span>`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            document.querySelectorAll('.underline-input').forEach(input => {
+                input.value = ''; // Clear input field
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            document.querySelectorAll('.feedback-icon').forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

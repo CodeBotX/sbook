@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp A1.2: Thể Bị Động & Modals of prediction and possibility</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .lead {
+            color: #5f6368;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .question-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8faff;
+            border: 1px solid #dcdfe4;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-section h3 {
+            color: #3c4043;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid #e8eaed;
+            padding-bottom: 10px;
+        }
+        .question-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eceff1;
+        }
+        .question-item label {
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+            color: #202124;
+            font-size: 1.05rem;
+        }
+        .form-check {
+            margin-bottom: 8px;
+        }
+        .form-check-input {
+            margin-right: 8px;
+        }
+        .form-check-label {
+            font-size: 0.95rem;
+            color: #3c4043;
+        }
+        .instructions {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #70757a;
+            padding: 10px 15px;
+            background-color: #e6f4f1;
+            border-left: 5px solid #34a853;
+            border-radius: 5px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #e6ffed;
+            color: #1e8449;
+            border: 1px solid #34a853;
+        }
+        .feedback.incorrect {
+            background-color: #ffebe6;
+            color: #c53929;
+            border: 1px solid #ea4335;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            border-left: 4px solid #aab7b8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            display: none;
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1764cc;
+            border-color: #1764cc;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .d-grid {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Bài Tập Ngữ Pháp A1.2</h1>
+        <p class="lead text-center">Thể Bị Động (Passives) & Các động từ khuyết thiếu chỉ sự dự đoán và khả năng (Modals of prediction and possibility)</p>
+        <hr>
+
+        <form id="grammarQuizForm">
+            <!-- Phần bài tập Passives -->
+            <div class="question-section">
+                <h3>Phần 1: Thể Bị Động (Passives)</h3>
+                <p class="instructions">Chọn dạng bị động đúng cho mỗi câu.</p>
+                <div id="part1-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Phần bài tập Modals of prediction and possibility -->
+            <div class="question-section">
+                <h3>Phần 2: Các động từ khuyết thiếu chỉ sự dự đoán và khả năng</h3>
+                <p class="instructions">Chọn từ/cụm từ đúng nhất để hoàn thành các câu.</p>
+                <div id="part2-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-primary" type="button" onclick="submitQuiz()">Nộp bài</button>
+                <button class="btn btn-secondary" type="button" onclick="resetQuiz()">Làm lại</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Dữ liệu câu hỏi cho Phần 1: Passives (20 câu)
+        const questionsPart1 = [
+            {
+                id: "q1_passives",
+                text: "1. The report ______ (write) by me yesterday.",
+                options: {
+                    a: "wrote",
+                    b: "was written",
+                    c: "is written",
+                    d: "has written"
+                },
+                correct: "b",
+                explanation: "Câu ở thì Quá khứ đơn, đối tượng ('The report') chịu tác động, có 'by me' và 'yesterday' chỉ thời gian cụ thể. Cấu trúc bị động quá khứ đơn: 'was/were + V3/ed'. (Báo cáo được viết bởi tôi ngày hôm qua.)"
+            },
+            {
+                id: "q2_passives",
+                text: "2. English ______ (speak) in many countries.",
+                options: {
+                    a: "speaks",
+                    b: "is spoken",
+                    c: "is speaking",
+                    d: "has spoken"
+                },
+                correct: "b",
+                explanation: "Câu ở thì Hiện tại đơn, diễn tả sự thật hoặc thói quen. 'English' là đối tượng chịu tác động. Cấu trúc bị động hiện tại đơn: 'am/is/are + V3/ed'. (Tiếng Anh được nói ở nhiều quốc gia.)"
+            },
+            {
+                id: "q3_passives",
+                text: "3. A new bridge ______ (build) across the river next year.",
+                options: {
+                    a: "will build",
+                    b: "is built",
+                    c: "will be built",
+                    d: "has been built"
+                },
+                correct: "c",
+                explanation: "Câu ở thì Tương lai đơn, có 'next year'. 'A new bridge' là đối tượng chịu tác động. Cấu trúc bị động tương lai đơn: 'will be + V3/ed'. (Một cây cầu mới sẽ được xây dựng qua sông vào năm tới.)"
+            },
+            {
+                id: "q4_passives",
+                text: "4. The letter ______ (send) yesterday morning.",
+                options: {
+                    a: "sent",
+                    b: "was sent",
+                    c: "is sent",
+                    d: "has sent"
+                },
+                correct: "b",
+                explanation: "Câu ở thì Quá khứ đơn, có 'yesterday morning'. 'The letter' là đối tượng. Dùng bị động quá khứ đơn. (Lá thư đã được gửi vào sáng hôm qua.)"
+            },
+            {
+                id: "q5_passives",
+                text: "5. My car ______ (repair) right now.",
+                options: {
+                    a: "repairs",
+                    b: "is repairing",
+                    c: "is being repaired",
+                    d: "has repaired"
+                },
+                correct: "c",
+                explanation: "Câu ở thì Hiện tại tiếp diễn, có 'right now'. 'My car' đang được sửa. Cấu trúc bị động hiện tại tiếp diễn: 'am/is/are + being + V3/ed'. (Xe của tôi đang được sửa ngay bây giờ.)"
+            },
+            {
+                id: "q6_passives",
+                text: "6. The food ______ (prepare) by the chef every day.",
+                options: {
+                    a: "prepares",
+                    b: "is prepared",
+                    c: "is preparing",
+                    d: "has prepared"
+                },
+                correct: "b",
+                explanation: "Câu ở thì Hiện tại đơn, có 'every day'. 'The food' là đối tượng. Dùng bị động hiện tại đơn. (Thức ăn được chuẩn bị bởi đầu bếp mỗi ngày.)"
+            },
+            {
+                id: "q7_passives",
+                text: "7. The new hospital ______ (open) last month.",
+                options: {
+                    a: "opened",
+                    b: "was opened",
+                    c: "is opened",
+                    d: "has opened"
+                },
+                correct: "b",
+                explanation: "Câu ở thì Quá khứ đơn, có 'last month'. 'The new hospital' là đối tượng. Dùng bị động quá khứ đơn. (Bệnh viện mới đã được khai trương vào tháng trước.)"
+            },
+            {
+                id: "q8_passives",
+                text: "8. This book ______ (write) by a famous author.",
+                options: {
+                    a: "wrote",
+                    b: "is written",
+                    c: "writes",
+                    d: "has written"
+                },
+                correct: "b",
+                explanation: "Diễn tả sự thật hoặc thông tin chung. 'This book' là đối tượng chịu tác động. Dùng bị động hiện tại đơn. (Cuốn sách này được viết bởi một tác giả nổi tiếng.)"
+            },
+            {
+                id: "q9_passives",
+                text: "9. All the tickets ______ (sell) out by noon.",
+                options: {
+                    a: "sold",
+                    b: "have sold",
+                    c: "have been sold",
+                    d: "were selling"
+                },
+                correct: "c",
+                explanation: "Hành động đã hoàn thành cho đến hiện tại ('by noon'). 'All the tickets' là đối tượng. Dùng bị động hiện tại hoàn thành. (Tất cả vé đã được bán hết vào buổi trưa.)"
+            },
+            {
+                id: "q10_passives",
+                text: "10. The cake ______ (eat) by the children before I arrived.",
+                options: {
+                    a: "ate",
+                    b: "was eaten",
+                    c: "had been eaten",
+                    d: "has been eaten"
+                },
+                correct: "c",
+                explanation: "Hành động 'eat cake' xảy ra và hoàn thành trước 'I arrived' (quá khứ). Dùng bị động quá khứ hoàn thành: 'had been + V3/ed'. (Chiếc bánh đã bị bọn trẻ ăn hết trước khi tôi đến.)"
+            },
+            {
+                id: "q11_passives",
+                text: "11. The bridge ______ (damage) by the storm last night.",
+                options: {
+                    a: "damaged",
+                    b: "was damaged",
+                    c: "is damaged",
+                    d: "has damaged"
+                },
+                correct: "b",
+                explanation: "Câu ở thì Quá khứ đơn, có 'last night'. 'The bridge' là đối tượng. Dùng bị động quá khứ đơn. (Cây cầu đã bị hư hại bởi cơn bão tối qua.)"
+            },
+            {
+                id: "q12_passives",
+                text: "12. The package ______ (deliver) to your house tomorrow.",
+                options: {
+                    a: "will deliver",
+                    b: "is delivered",
+                    c: "will be delivered",
+                    d: "has been delivered"
+                },
+                correct: "c",
+                explanation: "Câu ở thì Tương lai đơn, có 'tomorrow'. 'The package' là đối tượng. Dùng bị động tương lai đơn. (Gói hàng sẽ được giao đến nhà bạn vào ngày mai.)"
+            },
+            {
+                id: "q13_passives",
+                text: "13. These shoes ______ (make) in Italy.",
+                options: {
+                    a: "make",
+                    b: "are made",
+                    c: "are making",
+                    d: "have made"
+                },
+                correct: "b",
+                explanation: "Diễn tả sự thật hoặc nguồn gốc. 'These shoes' là đối tượng chịu tác động. Dùng bị động hiện tại đơn. (Những đôi giày này được sản xuất tại Ý.)"
+            },
+            {
+                id: "q14_passives",
+                text: "14. A new system ______ (install) at the office next week.",
+                options: {
+                    a: "will install",
+                    b: "is installing",
+                    c: "will be installed",
+                    d: "has installed"
+                },
+                correct: "c",
+                explanation: "Câu ở thì Tương lai đơn, có 'next week'. 'A new system' là đối tượng. Dùng bị động tương lai đơn. (Một hệ thống mới sẽ được cài đặt tại văn phòng vào tuần tới.)"
+            },
+            {
+                id: "q15_passives",
+                text: "15. The children ______ (teach) by Mrs. Smith every morning.",
+                options: {
+                    a: "teach",
+                    b: "are taught",
+                    c: "are teaching",
+                    d: "have taught"
+                },
+                correct: "b",
+                explanation: "Câu ở thì Hiện tại đơn, có 'every morning'. 'The children' là đối tượng. Dùng bị động hiện tại đơn. (Những đứa trẻ được dạy bởi cô Smith mỗi sáng.)"
+            },
+            {
+                id: "q16_passives",
+                text: "16. The email ______ (already / send) when I checked.",
+                options: {
+                    a: "already sent",
+                    b: "had already been sent",
+                    c: "has already sent",
+                    d: "was already sending"
+                },
+                correct: "b",
+                explanation: "Hành động 'send email' đã hoàn thành trước 'I checked' (quá khứ). Dùng bị động quá khứ hoàn thành. (Email đã được gửi rồi khi tôi kiểm tra.)"
+            },
+            {
+                id: "q17_passives",
+                text: "17. That song ______ (play) on the radio many times.",
+                options: {
+                    a: "played",
+                    b: "was played",
+                    c: "has been played",
+                    d: "is played"
+                },
+                correct: "c",
+                explanation: "Diễn tả kinh nghiệm hoặc hành động đã xảy ra trong quá khứ và có liên quan đến hiện tại ('many times' tính đến bây giờ). Dùng bị động hiện tại hoàn thành. (Bài hát đó đã được phát trên đài nhiều lần.)"
+            },
+            {
+                id: "q18_passives",
+                text: "18. The problem ______ (discuss) by the committee at the last meeting.",
+                options: {
+                    a: "discussed",
+                    b: "was discussed",
+                    c: "is discussed",
+                    d: "has discussed"
+                },
+                correct: "b",
+                explanation: "Câu ở thì Quá khứ đơn, có 'at the last meeting'. 'The problem' là đối tượng. Dùng bị động quá khứ đơn. (Vấn đề đã được thảo luận bởi ủy ban tại cuộc họp gần đây nhất.)"
+            },
+            {
+                id: "q19_passives",
+                text: "19. The new policy ______ (announce) by the manager tomorrow.",
+                options: {
+                    a: "will announce",
+                    b: "is announced",
+                    c: "will be announced",
+                    d: "has been announced"
+                },
+                correct: "c",
+                explanation: "Câu ở thì Tương lai đơn, có 'tomorrow'. 'The new policy' là đối tượng. Dùng bị động tương lai đơn. (Chính sách mới sẽ được công bố bởi quản lý vào ngày mai.)"
+            },
+            {
+                id: "q20_passives",
+                text: "20. The movie ______ (film) in Hollywood.",
+                options: {
+                    a: "filmed",
+                    b: "is filmed",
+                    c: "was filmed",
+                    d: "has filmed"
+                },
+                correct: "b", // General fact, so Present Simple Passive. If it was a specific past event, 'was filmed' would also be correct.
+                explanation: "Diễn tả một sự thật chung về nơi bộ phim được quay. Dùng bị động hiện tại đơn. (Bộ phim được quay ở Hollywood.)"
+            }
+        ];
+
+        // Dữ liệu câu hỏi cho Phần 2: Modals of prediction and possibility (20 câu)
+        const questionsPart2 = [
+            {
+                id: "q1_mpp",
+                text: "1. I'm not sure, but it ______ rain later.",
+                options: {
+                    a: "will",
+                    b: "must",
+                    c: "may",
+                    d: "should"
+                },
+                correct: "c",
+                explanation: "'May' diễn tả khả năng có thể xảy ra nhưng không chắc chắn (possibility). (Tôi không chắc, nhưng trời có thể mưa lát nữa.)"
+            },
+            {
+                id: "q2_mpp",
+                text: "2. The train ______ probably arrive on time.",
+                options: {
+                    a: "might",
+                    b: "will",
+                    c: "may",
+                    d: "could"
+                },
+                correct: "b",
+                explanation: "'Will probably' diễn tả một dự đoán rất có khả năng xảy ra. (Tàu có lẽ sẽ đến đúng giờ.)"
+            },
+            {
+                id: "q3_mpp",
+                text: "3. Do you think he ______ be at home now? His car is not here.",
+                options: {
+                    a: "will",
+                    b: "can",
+                    c: "might not",
+                    d: "must"
+                },
+                correct: "c",
+                explanation: "'Might not' diễn tả khả năng không xảy ra. Nếu xe không có ở đây, có lẽ anh ấy không ở nhà. (Bạn có nghĩ anh ấy có thể không ở nhà bây giờ không? Xe của anh ấy không có ở đây.)"
+            },
+            {
+                id: "q4_mpp",
+                text: "4. Don't worry, everything ______ be fine.",
+                options: {
+                    a: "may",
+                    b: "might",
+                    c: "will",
+                    d: "could"
+                },
+                correct: "c",
+                explanation: "'Will' diễn tả sự chắc chắn hoặc dự đoán mạnh mẽ. (Đừng lo lắng, mọi thứ sẽ ổn thôi.)"
+            },
+            {
+                id: "q5_mpp",
+                text: "5. She ______ come to the party, but she's not sure yet.",
+                options: {
+                    a: "will",
+                    b: "must",
+                    c: "may",
+                    d: "should"
+                },
+                correct: "c",
+                explanation: "'May' diễn tả khả năng có thể xảy ra nhưng có sự không chắc chắn. (Cô ấy có thể đến dự tiệc, nhưng cô ấy chưa chắc chắn.)"
+            },
+            {
+                id: "q6_mpp",
+                text: "6. It's cloudy, so it ______ rain later.",
+                options: {
+                    a: "will",
+                    b: "may",
+                    c: "must",
+                    d: "should"
+                },
+                correct: "b",
+                explanation: "'May' diễn tả khả năng có thể xảy ra. (Trời nhiều mây, vì vậy trời có thể mưa lát nữa.)"
+            },
+            {
+                id: "q7_mpp",
+                text: "7. I think they ______ probably win the game.",
+                options: {
+                    a: "may",
+                    b: "might",
+                    c: "will",
+                    d: "could"
+                },
+                correct: "c",
+                explanation: "'Will probably' diễn tả một dự đoán rất có khả năng xảy ra. (Tôi nghĩ họ có lẽ sẽ thắng trận đấu.)"
+            },
+            {
+                id: "q8_mpp",
+                text: "8. He ______ not be happy with the news, but I don't know for sure.",
+                options: {
+                    a: "will",
+                    b: "may",
+                    c: "must",
+                    d: "can"
+                },
+                correct: "b",
+                explanation: "'May not' diễn tả khả năng không xảy ra, có sự không chắc chắn. (Anh ấy có thể sẽ không vui với tin tức, nhưng tôi không biết chắc.)"
+            },
+            {
+                id: "q9_mpp",
+                text: "9. This problem ______ be difficult to solve.",
+                options: {
+                    a: "will",
+                    b: "must",
+                    c: "could",
+                    d: "should"
+                },
+                correct: "c",
+                explanation: "'Could' diễn tả khả năng có thể xảy ra. (Vấn đề này có thể khó giải quyết.)"
+            },
+            {
+                id: "q10_mpp",
+                text: "10. He ______ pass the exam if he studies harder, but it's not guaranteed.",
+                options: {
+                    a: "will",
+                    b: "must",
+                    c: "might",
+                    d: "can"
+                },
+                correct: "c",
+                explanation: "'Might' diễn tả khả năng yếu hơn, không chắc chắn (not guaranteed). (Anh ấy có thể sẽ đậu kỳ thi nếu anh ấy học chăm chỉ hơn, nhưng không được đảm bảo.)"
+            },
+            {
+                id: "q11_mpp",
+                text: "11. The store ______ be closed by now, it's late.",
+                options: {
+                    a: "may",
+                    b: "might",
+                    c: "will",
+                    d: "must"
+                },
+                correct: "d",
+                explanation: "'Must' ở đây diễn tả suy luận logic, sự chắc chắn dựa trên thông tin hiện có. (Cửa hàng chắc hẳn đã đóng cửa rồi, đã muộn rồi.)"
+            },
+            {
+                id: "q12_mpp",
+                text: "12. They ______ probably won't agree with our plan.",
+                options: {
+                    a: "will",
+                    b: "may",
+                    c: "X",
+                    d: "might"
+                },
+                correct: "c",
+                explanation: "'Probably won't' là cách dùng đúng cho 'very unlikely'. Không dùng 'won't probably'. (Họ có lẽ sẽ không đồng ý với kế hoạch của chúng ta.)"
+            },
+            {
+                id: "q13_mpp",
+                text: "13. I ______ finish this work tonight, but I'm not entirely sure.",
+                options: {
+                    a: "will",
+                    b: "must",
+                    c: "may",
+                    d: "can"
+                },
+                correct: "c",
+                explanation: "'May' diễn tả khả năng có thể xảy ra nhưng có sự không chắc chắn. (Tôi có thể hoàn thành công việc này tối nay, nhưng tôi không hoàn toàn chắc chắn.)"
+            },
+            {
+                id: "q14_mpp",
+                text: "14. She ______ be the new manager. She looks very confident.",
+                options: {
+                    a: "may",
+                    b: "might",
+                    c: "must",
+                    d: "should"
+                },
+                correct: "c",
+                explanation: "'Must' diễn tả suy luận logic, sự chắc chắn cao. (Cô ấy chắc hẳn là quản lý mới. Cô ấy trông rất tự tin.)"
+            },
+            {
+                id: "q15_mpp",
+                text: "15. It's a long way. We ______ miss the bus.",
+                options: {
+                    a: "will",
+                    b: "must",
+                    c: "might",
+                    d: "should"
+                },
+                correct: "c",
+                explanation: "'Might' diễn tả khả năng có thể xảy ra. (Đường dài. Chúng ta có thể sẽ lỡ xe buýt.)"
+            },
+            {
+                id: "q16_mpp",
+                text: "16. Scientists believe that life ______ exist on other planets.",
+                options: {
+                    a: "will",
+                    b: "must",
+                    c: "could",
+                    d: "should"
+                },
+                correct: "c",
+                explanation: "'Could' diễn tả khả năng có thể xảy ra. (Các nhà khoa học tin rằng sự sống có thể tồn tại trên các hành tinh khác.)"
+            },
+            {
+                id: "q17_mpp",
+                text: "17. He ______ be tired; he's been working all day.",
+                options: {
+                    a: "may",
+                    b: "might",
+                    c: "must",
+                    d: "will"
+                },
+                correct: "c",
+                explanation: "'Must' diễn tả suy luận logic, sự chắc chắn dựa trên bằng chứng ('been working all day'). (Anh ấy chắc hẳn rất mệt; anh ấy đã làm việc cả ngày.)"
+            },
+            {
+                id: "q18_mpp",
+                text: "18. Prices ______ go up next year, but nothing is certain.",
+                options: {
+                    a: "will",
+                    b: "must",
+                    c: "may",
+                    d: "should"
+                },
+                correct: "c",
+                explanation: "'May' diễn tả khả năng có thể xảy ra nhưng không chắc chắn ('nothing is certain'). (Giá cả có thể tăng vào năm tới, nhưng không có gì là chắc chắn.)"
+            },
+            {
+                id: "q19_mpp",
+                text: "19. The project ______ probably be completed on time.",
+                options: {
+                    a: "may",
+                    b: "might",
+                    c: "will",
+                    d: "could"
+                },
+                correct: "c",
+                explanation: "'Will probably' diễn tả một dự đoán rất có khả năng xảy ra. (Dự án có lẽ sẽ được hoàn thành đúng thời hạn.)"
+            },
+            {
+                id: "q20_mpp",
+                text: "20. I ______ not be able to come to the meeting, I have another appointment.",
+                options: {
+                    a: "will",
+                    b: "must",
+                    c: "may",
+                    d: "should"
+                },
+                correct: "c",
+                explanation: "'May not' diễn tả khả năng không xảy ra. (Tôi có thể sẽ không thể đến cuộc họp, tôi có một cuộc hẹn khác.)"
+            }
+        ];
+
+        // Hàm để tải và hiển thị câu hỏi
+        function loadQuestions() {
+            const part1Container = document.getElementById('part1-questions');
+            const part2Container = document.getElementById('part2-questions');
+
+            part1Container.innerHTML = '';
+            part2Container.innerHTML = '';
+
+            // Tải câu hỏi Phần 1
+            questionsPart1.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part1Container.innerHTML += questionHtml;
+            });
+
+            // Tải câu hỏi Phần 2
+            questionsPart2.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part2Container.innerHTML += questionHtml;
+            });
+        }
+
+        // Hàm kiểm tra đáp án và hiển thị giải thích
+        function submitQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+            let allCorrect = true;
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+
+                if (selectedOption) {
+                    if (selectedOption.value === q.correct) {
+                        feedbackDiv.textContent = "Đúng rồi! 🎉";
+                        feedbackDiv.classList.add('correct');
+                    } else {
+                        feedbackDiv.textContent = `Sai rồi. Đáp án đúng là ${q.correct.toUpperCase()}. ❌`;
+                        feedbackDiv.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                } else {
+                    feedbackDiv.textContent = "Bạn chưa chọn đáp án.";
+                    feedbackDiv.classList.add('incorrect');
+                    allCorrect = false;
+                }
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${q.explanation}`;
+            });
+
+            if (allCorrect) {
+                // Có thể thêm thông báo chung nếu muốn, nhưng feedback từng câu đã rõ ràng.
+            }
+        }
+
+        // Hàm làm lại bài
+        function resetQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (selectedOption) {
+                    selectedOption.checked = false;
+                }
+
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'none';
+                explanationDiv.style.display = 'none';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                explanationDiv.innerHTML = '';
+            });
+        }
+
+        // Tải câu hỏi khi trang được tải xong
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+    </script>
+</body>
+</html>

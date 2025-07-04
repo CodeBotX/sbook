@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Sửa Lỗi Ngữ Pháp - Các Thì Quá Khứ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Diary entry styling */
+        .diary-entry {
+            background-color: #fcfcfc;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            font-size: 1.05em;
+            line-height: 1.8;
+            position: relative; /* For line numbers */
+        }
+        .diary-entry p {
+            margin-bottom: 0;
+            padding-left: 40px; /* Space for line numbers */
+            text-indent: -40px; /* Indent text to align with line number */
+        }
+        .diary-entry p:first-child {
+            margin-top: 0;
+        }
+        .diary-entry .line-number {
+            font-weight: bold;
+            color: #007bff;
+            margin-right: 15px;
+            display: inline-block;
+            width: 25px; /* Fixed width for alignment */
+            text-align: right;
+        }
+        .diary-entry .error-input {
+            width: 100px; /* Fixed width for input */
+            padding: 5px 8px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            font-size: 0.95em;
+            margin-left: 10px;
+            vertical-align: middle;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .diary-entry .error-input:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .diary-entry .error-input.is-valid {
+            border-color: #198754 !important;
+            background-color: #d1e7dd;
+        }
+        .diary-entry .error-input.is-invalid {
+            border-color: #dc3545 !important;
+            background-color: #f8d7da;
+        }
+        .diary-entry .feedback-icon {
+            margin-left: 8px;
+            font-size: 1.1em;
+            display: none;
+            vertical-align: middle;
+        }
+        .diary-entry .feedback-icon.text-success { color: #198754; }
+        .diary-entry .feedback-icon.text-danger { color: #dc3545; }
+
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none;
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .original-line {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-action {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .diary-entry {
+                padding: 15px;
+            }
+            .diary-entry p {
+                padding-left: 20px;
+                text-indent: -20px;
+            }
+            .diary-entry .line-number {
+                width: 20px;
+                margin-right: 10px;
+            }
+            .diary-entry .error-input {
+                width: 80px;
+                margin-left: 5px;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Sửa Lỗi Ngữ Pháp</h1>
+        </div>
+        <h2>Tìm từ thừa hoặc đánh dấu câu đúng</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> If a line is correct, put a tick (✔). If there is an extra word in a line, write the word.
+            <br>
+            <strong>Hướng dẫn:</strong> Nếu một dòng đúng, hãy điền dấu tích (✔). Nếu có một từ thừa trong dòng, hãy viết từ đó.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="grammarForm">
+            <div class="diary-entry">
+                <p>Dear Diary,</p>
+                <p><span class="line-number">1</span> <input type="text" class="error-input" id="q1" name="q1" placeholder="Từ thừa / ✔"> <i class="feedback-icon fa-solid" id="icon1"></i> This morning my exam results finally had came. I'd been expecting</p>
+                <p><span class="line-number">2</span> <input type="text" class="error-input" id="q2" name="q2" placeholder="Từ thừa / ✔"> <i class="feedback-icon fa-solid" id="icon2"></i> them for the last week. I knew I'd been done quite well, but I was</p>
+                <p><span class="line-number">3</span> <input type="text" class="error-input" id="q3" name="q3" placeholder="Từ thừa / ✔"> <i class="feedback-icon fa-solid" id="icon3"></i> still nervous as I had opened the envelope. Before I'd had a chance to</p>
+                <p><span class="line-number">4</span> <input type="text" class="error-input" id="q4" name="q4" placeholder="Từ thừa / ✔"> <i class="feedback-icon fa-solid" id="icon4"></i> look at them, my sister ran up and pulled them out of my hand! She</p>
+                <p><span class="line-number">5</span> <input type="text" class="error-input" id="q5" name="q5" placeholder="Từ thừa / ✔"> <i class="feedback-icon fa-solid" id="icon5"></i> had read them out one by one. 'English A, maths A, biology A,</p>
+                <p><span class="line-number">6</span> <input type="text" class="error-input" id="q6" name="q6" placeholder="Từ thừa / ✔"> <i class="feedback-icon fa-solid" id="icon6"></i> French A ...' This was the news I'd been waiting for. I'd got As in</p>
+                <p><span class="line-number">7</span> <input type="text" class="error-input" id="q7" name="q7" placeholder="Từ thừa / ✔"> <i class="feedback-icon fa-solid" id="icon7"></i> every subject - even geography, which I hadn't been making sure</p>
+                <p><span class="line-number">8</span> <input type="text" class="error-input" id="q8" name="q8" placeholder="Từ thừa / ✔"> <i class="feedback-icon fa-solid" id="icon8"></i> about! When Mum and Dad heard the news, they immediately started</p>
+                <p><span class="line-number">9</span> <input type="text" class="error-input" id="q9" name="q9" placeholder="Từ thừa / ✔"> <i class="feedback-icon fa-solid" id="icon9"></i> been shouting with joy. By the time I'd had breakfast, Mum had</p>
+                <p><span class="line-number">10</span> <input type="text" class="error-input" id="q10" name="q10" placeholder="Từ thừa / ✔"> <i class="feedback-icon fa-solid" id="icon10"></i> already called Grandma and Grandpa and had yet told the neighbours!</p>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, original lines, explanations, and translations
+        const questionsData = {
+            'q1': {
+                answers: ['had'],
+                originalLine: 'This morning my exam results finally had came.',
+                correctLine: 'This morning my exam results finally came.',
+                translation: 'Sáng nay kết quả thi của tôi cuối cùng đã đến.',
+                explanation: 'Trong câu này, hành động "came" (đến) là một sự kiện đã hoàn thành tại một thời điểm cụ thể trong quá khứ ("This morning"). Việc sử dụng thì Quá khứ Đơn là thích hợp. Từ "had" là thừa vì "came" không cần trợ động từ "had" để tạo thành thì Quá khứ Hoàn thành khi nó đứng một mình và không diễn tả một hành động xảy ra trước một hành động khác trong quá khứ.',
+                grammar_note: 'Sử dụng Quá khứ Đơn cho hành động đã hoàn thành tại thời điểm cụ thể trong quá khứ. Tránh dùng Quá khứ Hoàn thành nếu không có hành động nào khác xảy ra sau đó.'
+            },
+            'q2': {
+                answers: ['been'],
+                originalLine: 'I knew I\'d been done quite well, but I was',
+                correctLine: 'I knew I\'d done quite well, but I was',
+                translation: 'Tôi biết tôi đã làm khá tốt, nhưng tôi vẫn',
+                explanation: 'Cụm từ "I\'d done" là viết tắt của "I had done", sử dụng thì Quá khứ Hoàn thành để diễn tả hành động "làm bài thi" đã hoàn thành trước thời điểm "tôi biết" ở quá khứ. Việc thêm "been" vào đây là thừa, vì "done" đã là quá khứ phân từ của "do" và không cần "been" để tạo thành thể bị động (vì chủ ngữ "I" là người thực hiện hành động).',
+                grammar_note: 'Quá khứ Hoàn thành: S + had + P.P. (V3). "Been" chỉ dùng trong thì tiếp diễn hoặc thể bị động.'
+            },
+            'q3': {
+                answers: ['✔'],
+                originalLine: 'still nervous as I had opened the envelope. Before I\'d had a chance to',
+                correctLine: 'still nervous as I had opened the envelope. Before I\'d had a chance to',
+                translation: 'vẫn lo lắng khi tôi đã mở phong bì. Trước khi tôi kịp có cơ hội để',
+                explanation: 'Câu này đúng. "I had opened" (Quá khứ Hoàn thành) diễn tả hành động mở phong bì xảy ra trước việc "still nervous" (vẫn lo lắng) và trước khi có cơ hội nhìn vào kết quả. "I\'d had a chance" cũng đúng, diễn tả việc có cơ hội đã xảy ra trước đó.',
+                grammar_note: 'Sử dụng Quá khứ Hoàn thành để diễn tả hành động xảy ra trước một thời điểm hoặc hành động khác trong quá khứ.'
+            },
+            'q4': {
+                answers: ['✔'],
+                originalLine: 'look at them, my sister ran up and pulled them out of my hand! She',
+                correctLine: 'look at them, my sister ran up and pulled them out of my hand! She',
+                translation: 'nhìn vào chúng, em gái tôi chạy đến và giật chúng ra khỏi tay tôi! Cô ấy',
+                explanation: 'Câu này đúng. Các hành động "ran up" và "pulled" đều ở thì Quá khứ Đơn, diễn tả chuỗi hành động kế tiếp nhau trong quá khứ.',
+                grammar_note: 'Sử dụng Quá khứ Đơn cho các hành động liên tiếp trong một chuỗi sự kiện ở quá khứ.'
+            },
+            'q5': {
+                answers: ['✔'],
+                originalLine: 'had read them out one by one. \'English A, maths A, biology A,',
+                correctLine: 'had read them out one by one. \'English A, maths A, biology A,',
+                translation: 'đã đọc chúng ra từng cái một. \'Tiếng Anh A, toán A, sinh học A,',
+                explanation: 'Câu này đúng. "Had read" (Quá khứ Hoàn thành) diễn tả hành động đọc kết quả xảy ra trước khi người kể chuyện có cơ hội nhìn vào chúng (như đã nói ở dòng 3-4).',
+                grammar_note: 'Quá khứ Hoàn thành được dùng để chỉ hành động xảy ra trước một hành động khác đã hoàn thành trong quá khứ.'
+            },
+            'q6': {
+                answers: ['✔'],
+                originalLine: 'French A ...\' This was the news I\'d been waiting for. I\'d got As in',
+                correctLine: 'French A ...\' This was the news I\'d been waiting for. I\'d got As in',
+                translation: 'Tiếng Pháp A...\' Đây là tin tức mà tôi đã chờ đợi. Tôi đã đạt điểm A ở',
+                explanation: 'Câu này đúng. "I\'d been waiting for" (Quá khứ Hoàn thành Tiếp diễn) diễn tả hành động chờ đợi đã diễn ra liên tục trong một khoảng thời gian trước khi tin tức đến. "I\'d got As" (Quá khứ Hoàn thành Đơn) diễn tả kết quả đạt được trước thời điểm hiện tại của câu chuyện.',
+                grammar_note: 'Quá khứ Hoàn thành Tiếp diễn nhấn mạnh quá trình; Quá khứ Hoàn thành Đơn nhấn mạnh kết quả hoặc hành động hoàn thành trước một điểm trong quá khứ.'
+            },
+            'q7': {
+                answers: ['been'],
+                originalLine: 'every subject - even geography, which I hadn\'t been making sure',
+                correctLine: 'every subject - even geography, which I hadn\'t made sure',
+                translation: 'mọi môn học - ngay cả địa lý, môn mà tôi không chắc chắn.',
+                explanation: 'Cụm từ "hadn\'t made sure" là thì Quá khứ Hoàn thành Đơn ở dạng phủ định, diễn tả hành động "không chắc chắn" đã xảy ra trước đó. Việc thêm "been" vào đây là thừa vì "make sure" không phải là một hành động tiếp diễn trong ngữ cảnh này, và cũng không phải là thể bị động.',
+                grammar_note: 'Quá khứ Hoàn thành phủ định: S + had + not + P.P. "Make" là động từ bất quy tắc, P.P. là "made".'
+            },
+            'q8': {
+                answers: ['been'],
+                originalLine: 'about! When Mum and Dad heard the news, they immediately started',
+                correctLine: 'about! When Mum and Dad heard the news, they immediately started shouting with joy.',
+                translation: 'về! Khi bố mẹ nghe tin, họ ngay lập tức bắt đầu reo hò vui sướng.',
+                explanation: 'Sau động từ "start" (bắt đầu), chúng ta có thể dùng "to + V" hoặc "V-ing". Trong trường hợp này, "shouting" là V-ing. Việc thêm "been" vào đây là thừa, vì "started" đã là động từ chính và không cần "been" để tạo thành thì tiếp diễn cho "shouting".',
+                grammar_note: 'Cấu trúc: start + V-ing / to V. "Been" không cần thiết ở đây.'
+            },
+            'q9': {
+                answers: ['✔'],
+                originalLine: 'shouting with joy. By the time I\'d had breakfast, Mum had',
+                correctLine: 'shouting with joy. By the time I\'d had breakfast, Mum had',
+                translation: 'reo hò vui sướng. Vào lúc tôi ăn sáng xong, mẹ đã',
+                explanation: 'Câu này đúng. "By the time I\'d had breakfast" (vào lúc tôi ăn sáng xong) sử dụng thì Quá khứ Hoàn thành ("had had") để chỉ một hành động hoàn thành trước một thời điểm khác trong quá khứ.',
+                grammar_note: 'Sử dụng Quá khứ Hoàn thành để diễn tả hành động xảy ra trước một thời điểm cụ thể trong quá khứ.'
+            },
+            'q10': {
+                answers: ['yet'],
+                originalLine: 'already called Grandma and Grandpa and had yet told the neighbours!',
+                correctLine: 'already called Grandma and Grandpa and had told the neighbours!',
+                translation: 'đã gọi cho bà và ông và đã kể cho hàng xóm rồi!',
+                explanation: '"Already" (rồi) được dùng trong câu khẳng định để chỉ hành động đã hoàn thành. "Yet" (chưa) chỉ dùng trong câu phủ định hoặc nghi vấn. Vì câu này là khẳng định và "already" đã được dùng, "yet" là từ thừa và không phù hợp về nghĩa.',
+                grammar_note: '"Already" dùng trong câu khẳng định, "yet" dùng trong câu phủ định/nghi vấn của thì Hoàn thành.'
+            }
+        };
+
+        /**
+         * Normalizes a string by converting to lowercase, trimming whitespace,
+         * and replacing multiple spaces with a single space.
+         * @param {string} answer - The string to normalize.
+         * @returns {string} The normalized string.
+         */
+        function normalizeAnswer(answer) {
+            return answer.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question ID in the questionsData
+            Object.keys(questionsData).forEach(qId => {
+                const inputElement = document.getElementById(qId);
+                // If input element doesn't exist, skip
+                if (!inputElement) return;
+
+                const userAnswer = normalizeAnswer(inputElement.value);
+                const questionInfo = questionsData[qId];
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`); // e.g., icon1 for q1
+
+                // Reset feedback
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    feedbackIcon.style.display = 'none';
+                }
+
+                let isCorrect = false;
+                if (questionInfo.answers.some(ans => normalizeAnswer(ans) === userAnswer)) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-valid');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const originalLineHtml = `<strong>${questionNumber}.</strong> ${questionInfo.originalLine}`;
+                const correctActionHtml = `<strong>Đáp án:</strong> <span class="correct-answer-text">${questionInfo.answers[0] === '✔' ? '✔ (Đúng)' : questionInfo.answers[0]}</span>`;
+                const grammarExplanationHtml = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                const translationHtml = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+
+                solutionItem.innerHTML = `
+                    <div class="original-line">${originalLineHtml}</div>
+                    <div>${correctActionHtml}</div>
+                    <div class="grammar-explanation">${grammarExplanationHtml}</div>
+                    <div class="translation">${translationHtml}</div>
+                `;
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing inputs, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const inputElements = document.querySelectorAll('.error-input');
+            inputElements.forEach(input => {
+                input.value = ''; // Clear input value
+                input.classList.remove('is-valid', 'is-invalid'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

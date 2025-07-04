@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Hiện Tại Hoàn Thành Đơn và Tiếp diễn</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        .question-item .form-check {
+            margin-bottom: 10px;
+            padding-left: 2.5em; /* Space for custom radio button */
+        }
+        .question-item .form-check-input {
+            margin-top: 0.3em;
+            margin-left: -1.5em;
+        }
+        .question-item .form-check-label {
+            font-size: 1em;
+            color: #555;
+            cursor: pointer;
+        }
+        .question-item .form-check-label:hover {
+            color: #007bff;
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .question-item .form-check-label {
+                font-size: 0.95em;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp</h1>
+        </div>
+        <h2>Chọn từ hoặc cụm từ đúng</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Circle the correct word or phrase.
+            <br>
+            <strong>Hướng dẫn:</strong> Khoanh tròn từ hoặc cụm từ đúng.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="multipleChoiceForm">
+            <div class="question-item">
+                <p class="question-text">1. I think I've <span class="fw-bold">heard / been hearing</span> that song before.</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q1" id="q1_a" value="heard">
+                    <label class="form-check-label" for="q1_a">heard</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q1" id="q1_b" value="been hearing">
+                    <label class="form-check-label" for="q1_b">been hearing</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">2. They haven't <span class="fw-bold">arrived / been arriving</span> yet, but they should be here soon.</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q2" id="q2_a" value="arrived">
+                    <label class="form-check-label" for="q2_a">arrived</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q2" id="q2_b" value="been arriving">
+                    <label class="form-check-label" for="q2_b">been arriving</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">3. You've <span class="fw-bold">written / been writing</span> that e-mail for over an hour. How long is it going to take you?</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q3" id="q3_a" value="written">
+                    <label class="form-check-label" for="q3_a">written</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q3" id="q3_b" value="been writing">
+                    <label class="form-check-label" for="q3_b">been writing</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">4. Have you <span class="fw-bold">talked / been talking</span> on the phone since eight o'clock?</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q4" id="q4_a" value="talked">
+                    <label class="form-check-label" for="q4_a">talked</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q4" id="q4_b" value="been talking">
+                    <label class="form-check-label" for="q4_b">been talking</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">5. Jo has already <span class="fw-bold">invited / been inviting</span> Shirley to dinner.</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q5" id="q5_a" value="invited">
+                    <label class="form-check-label" for="q5_a">invited</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q5" id="q5_b" value="been inviting">
+                    <label class="form-check-label" for="q5_b">been inviting</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">6. I've <span class="fw-bold">read / been reading</span> an interview with Brad Pitt, but I haven't finished it yet.</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q6" id="q6_a" value="read">
+                    <label class="form-check-label" for="q6_a">read</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q6" id="q6_b" value="been reading">
+                    <label class="form-check-label" for="q6_b">been reading</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">7. Have the boys <span class="fw-bold">played / been playing</span> computer games since this morning?</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q7" id="q7_a" value="played">
+                    <label class="form-check-label" for="q7_a">played</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q7" id="q7_b" value="been playing">
+                    <label class="form-check-label" for="q7_b">been playing</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon7"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, options, explanations, and translations
+        const questionsData = {
+            'q1': {
+                text: 'I think I\'ve {answer} that song before.',
+                options: {
+                    'heard': 'heard',
+                    'been hearing': 'been hearing'
+                },
+                correct: 'heard',
+                fullSentence: 'I think I\'ve heard that song before.',
+                translation: 'Tôi nghĩ tôi đã nghe bài hát đó trước đây rồi.',
+                explanation: 'Động từ "hear" (nghe) là một động từ trạng thái (stative verb) và thường không được sử dụng ở thì tiếp diễn. Hơn nữa, "before" (trước đây) chỉ một kinh nghiệm đã xảy ra trong quá khứ mà không nhấn mạnh quá trình.',
+                grammar_note: 'Động từ trạng thái (stative verbs) không dùng ở thì tiếp diễn. "Before" thường đi với Hiện tại Hoàn thành Đơn.'
+            },
+            'q2': {
+                text: 'They haven\'t {answer} yet, but they should be here soon.',
+                options: {
+                    'arrived': 'arrived',
+                    'been arriving': 'been arriving'
+                },
+                correct: 'arrived',
+                fullSentence: 'They haven\'t arrived yet, but they should be here soon.',
+                translation: 'Họ vẫn chưa đến, nhưng họ sẽ sớm đến đây thôi.',
+                explanation: '"Yet" (chưa) thường đi với thì Hiện tại Hoàn thành Đơn để diễn tả một hành động chưa hoàn thành tính đến thời điểm hiện tại. Hành động "arrive" (đến) là một hành động có điểm kết thúc rõ ràng, không phải là một quá trình liên tục.',
+                grammar_note: '"Yet" thường đi với Hiện tại Hoàn thành Đơn ở dạng phủ định. "Arrive" là động từ chỉ sự hoàn thành.'
+            },
+            'q3': {
+                text: 'You\'ve {answer} that e-mail for over an hour. How long is it going to take you?',
+                options: {
+                    'written': 'written',
+                    'been writing': 'been writing'
+                },
+                correct: 'been writing',
+                fullSentence: 'You\'ve been writing that e-mail for over an hour. How long is it going to take you?',
+                translation: 'Bạn đã viết email đó hơn một giờ rồi. Bạn sẽ mất bao lâu nữa?',
+                explanation: '"For over an hour" (hơn một giờ) nhấn mạnh khoảng thời gian mà hành động "writing" (viết) đã diễn ra liên tục và vẫn đang tiếp diễn hoặc vừa mới kết thúc. Câu hỏi "How long is it going to take you?" cũng ngụ ý rằng hành động chưa hoàn thành.',
+                grammar_note: 'Sử dụng Hiện tại Hoàn thành Tiếp diễn để nhấn mạnh quá trình và thời gian của hành động kéo dài đến hiện tại.'
+            },
+            'q4': {
+                text: 'Have you {answer} on the phone since eight o\'clock?',
+                options: {
+                    'talked': 'talked',
+                    'been talking': 'been talking'
+                },
+                correct: 'been talking',
+                fullSentence: 'Have you been talking on the phone since eight o\'clock?',
+                translation: 'Bạn đã nói chuyện điện thoại từ tám giờ phải không?',
+                explanation: '"Since eight o\'clock" (từ tám giờ) chỉ một điểm thời gian trong quá khứ và hành động "talking" (nói chuyện) đã diễn ra liên tục từ đó đến hiện tại. Thì Hiện tại Hoàn thành Tiếp diễn phù hợp để nhấn mạnh sự liên tục này.',
+                grammar_note: 'Sử dụng Hiện tại Hoàn thành Tiếp diễn với "since" để nhấn mạnh quá trình liên tục của hành động.'
+            },
+            'q5': {
+                text: 'Jo has already {answer} Shirley to dinner.',
+                options: {
+                    'invited': 'invited',
+                    'been inviting': 'been inviting'
+                },
+                correct: 'invited',
+                fullSentence: 'Jo has already invited Shirley to dinner.',
+                translation: 'Jo đã mời Shirley đi ăn tối rồi.',
+                explanation: '"Already" (rồi) thường đi với thì Hiện tại Hoàn thành Đơn để chỉ một hành động đã hoàn thành trước thời điểm hiện tại. Hành động "invite" (mời) là một hành động có điểm kết thúc, không phải là một quá trình liên tục.',
+                grammar_note: '"Already" thường đi với Hiện tại Hoàn thành Đơn.'
+            },
+            'q6': {
+                text: 'I\'ve {answer} an interview with Brad Pitt, but I haven\'t finished it yet.',
+                options: {
+                    'read': 'read',
+                    'been reading': 'been reading'
+                },
+                correct: 'been reading',
+                fullSentence: 'I\'ve been reading an interview with Brad Pitt, but I haven\'t finished it yet.',
+                translation: 'Tôi đã và đang đọc một bài phỏng vấn với Brad Pitt, nhưng tôi vẫn chưa đọc xong.',
+                explanation: 'Cụm từ "but I haven\'t finished it yet" (nhưng tôi vẫn chưa đọc xong) cho thấy hành động "reading" (đọc) vẫn đang tiếp diễn hoặc vừa mới kết thúc và chưa hoàn thành. Điều này nhấn mạnh quá trình, do đó dùng Hiện tại Hoàn thành Tiếp diễn.',
+                grammar_note: 'Sử dụng Hiện tại Hoàn thành Tiếp diễn khi hành động chưa hoàn thành và quá trình được nhấn mạnh.'
+            },
+            'q7': {
+                text: 'Have the boys {answer} computer games since this morning?',
+                options: {
+                    'played': 'played',
+                    'been playing': 'been playing'
+                },
+                correct: 'been playing',
+                fullSentence: 'Have the boys been playing computer games since this morning?',
+                translation: 'Các cậu bé đã chơi game máy tính từ sáng nay phải không?',
+                explanation: '"Since this morning" (từ sáng nay) chỉ một điểm thời gian trong quá khứ và hành động "playing" (chơi) đã diễn ra liên tục từ đó đến hiện tại. Thì Hiện tại Hoàn thành Tiếp diễn phù hợp để nhấn mạnh sự liên tục này.',
+                grammar_note: 'Sử dụng Hiện tại Hoàn thành Tiếp diễn với "since" để nhấn mạnh quá trình liên tục của hành động.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const selectedOption = document.querySelector(`input[name="${qId}"]:checked`);
+                const questionInfo = questionsData[qId];
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`); // e.g., icon1 for q1
+
+                // Reset feedback for all options of the current question
+                document.querySelectorAll(`input[name="${qId}"]`).forEach(input => {
+                    const label = input.nextElementSibling;
+                    label.style.color = '#555'; // Reset label color
+                    label.style.fontWeight = 'normal'; // Reset font weight
+                });
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    feedbackIcon.style.display = 'none';
+                }
+
+                let isCorrect = false;
+                if (selectedOption) {
+                    if (selectedOption.value === questionInfo.correct) {
+                        isCorrect = true;
+                        score++;
+                        selectedOption.nextElementSibling.style.color = '#198754'; // Green for correct label
+                    } else {
+                        selectedOption.nextElementSibling.style.color = '#dc3545'; // Red for incorrect label
+                    }
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Highlight correct answer in options
+                const correctOptionInput = document.getElementById(`${qId}_${questionInfo.correct.replace(/\s/g, '-')}`); // Handle spaces in value for ID
+                if (correctOptionInput) {
+                    correctOptionInput.nextElementSibling.style.fontWeight = 'bold';
+                    correctOptionInput.nextElementSibling.style.color = '#007bff'; // Blue for correct answer in options
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                questionTextSolutionDiv.innerHTML = `${questionNumber}. ${questionInfo.text.replace('<span class="fw-bold">heard / been hearing</span>', `<span class="correct-answer-text">${questionInfo.options[questionInfo.correct]}</span>`).replace('<span class="fw-bold">arrived / been arriving</span>', `<span class="correct-answer-text">${questionInfo.options[questionInfo.correct]}</span>`).replace('<span class="fw-bold">written / been writing</span>', `<span class="correct-answer-text">${questionInfo.options[questionInfo.correct]}</span>`).replace('<span class="fw-bold">talked / been talking</span>', `<span class="correct-answer-text">${questionInfo.options[questionInfo.correct]}</span>`).replace('<span class="fw-bold">invited / been inviting</span>', `<span class="correct-answer-text">${questionInfo.options[questionInfo.correct]}</span>`).replace('<span class="fw-bold">read / been reading</span>', `<span class="correct-answer-text">${questionInfo.options[questionInfo.correct]}</span>`).replace('<span class="fw-bold">played / been playing</span>', `<span class="correct-answer-text">${questionInfo.options[questionInfo.correct]}</span>`)}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing selections, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => {
+                radio.checked = false; // Uncheck all radio buttons
+                const label = radio.nextElementSibling;
+                label.style.color = '#555'; // Reset label color
+                label.style.fontWeight = 'normal'; // Reset font weight
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

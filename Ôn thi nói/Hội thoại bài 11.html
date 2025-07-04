@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenges Conversation (Version 2)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0 0 0 / 10%);
+        }
+        .message-hung {
+            background-color: #e0f7fa;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .message-lan {
+            background-color: #e8f5e9;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            text-align: right;
+            margin-left: auto;
+        }
+        .message-wrapper {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .message-wrapper.lan {
+            justify-content: flex-end;
+        }
+        .speaker-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .card-extension {
+            margin-top: 30px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .exercise-section {
+            margin-top: 30px;
+            border: 1px solid #cce5ff;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #e7f5ff;
+        }
+        .exercise-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            border-left: 3px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Challenges Conversation (Version 2)</h1>
+        <hr>
+
+        <div class="conversation">
+            <div class="message-wrapper">
+                <div class="message-hung">
+                    <span class="speaker-name">Hùng:</span> Do you enjoy a difficult challenge? Why or why not?
+                </div>
+            </div>
+            <div class="message-wrapper lan">
+                <div class="message-lan">
+                    <span class="speaker-name">Lan:</span> Yes, I do. I like to try hard things because they help me learn and get better.
+                </div>
+            </div>
+            <div class="message-wrapper">
+                <div class="message-hung">
+                    <span class="speaker-name">Hùng:</span> What physical challenges have you done or have you heard about?
+                </div>
+            </div>
+            <div class="message-wrapper lan">
+                <div class="message-lan">
+                    <span class="speaker-name">Lan:</span> I have done running and jumping challenges. I also heard about people climbing big mountains.
+                </div>
+            </div>
+            <div class="message-wrapper">
+                <div class="message-hung">
+                    <span class="speaker-name">Hùng:</span> What mental challenges can you think of?
+                </div>
+            </div>
+            <div class="message-wrapper lan">
+                <div class="message-lan">
+                    <span class="speaker-name">Lan:</span> I think doing hard tests and puzzles are mental challenges. They need thinking and focus.
+                </div>
+            </div>
+            <div class="message-wrapper">
+                <div class="message-hung">
+                    <span class="speaker-name">Hùng:</span> Have you had any mental challenges in your own life recently?
+                </div>
+            </div>
+            <div class="message-wrapper lan">
+                <div class="message-lan">
+                    <span class="speaker-name">Lan:</span> Yes, I had to study for a big test last week. It was very hard to remember all the lessons.
+                </div>
+            </div>
+            <div class="message-wrapper">
+                <div class="message-hung">
+                    <span class="speaker-name">Hùng:</span> How often do you ask for help?
+                </div>
+            </div>
+            <div class="message-wrapper lan">
+                <div class="message-lan">
+                    <span class="speaker-name">Lan:</span> I ask for help sometimes, especially when I do not understand something.
+                </div>
+            </div>
+            <div class="message-wrapper">
+                <div class="message-hung">
+                    <span class="speaker-name">Hùng:</span> In what situations would you ask for help?
+                </div>
+            </div>
+            <div class="message-wrapper lan">
+                <div class="message-lan">
+                    <span class="speaker-name">Lan:</span> I ask for help when I cannot solve a problem or when I need advice from a teacher or friend.
+                </div>
+            </div>
+            <div class="message-wrapper">
+                <div class="message-hung">
+                    <span class="speaker-name">Hùng:</span> My friend said that he enjoyed a difficult challenge last month.
+                </div>
+            </div>
+            <div class="message-wrapper lan">
+                <div class="message-lan">
+                    <span class="speaker-name">Lan:</span> That is good. I told my brother that I would try a new challenge next week.
+                </div>
+            </div>
+            <div class="message-wrapper">
+                <div class="message-hung">
+                    <span class="speaker-name">Hùng:</span> Could you help me with my homework?
+                </div>
+            </div>
+            <div class="message-wrapper lan">
+                <div class="message-lan">
+                    <span class="speaker-name">Lan:</span> Yes, I can. What do you need help with?
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="card-extension mt-4">
+            <h2 class="text-center mb-3">Tư Duy Trả Lời và Mở Rộng Cuộc Trò Chuyện</h2>
+            <p>Để trả lời tiếng Anh một cách tự nhiên và sinh động hơn, bạn hãy tập trung vào việc **thêm chi tiết, cảm xúc, và ví dụ cụ thể** vào mỗi câu trả lời. Điều này giúp bạn không chỉ trả lời câu hỏi mà còn làm cho cuộc trò chuyện trở nên phong phú và hấp dẫn hơn.</p>
+
+            <h3 class="mt-4">Gợi ý mở rộng cho từng câu trả lời của Lan:</h3>
+
+            <div class="mb-3">
+                <p><strong>Lan: Yes, I do. I like to try hard things because they help me learn and get better.</strong></p>
+                <p><strong>Mở rộng:</strong> "Absolutely, **I really enjoy facing difficult challenges!** I believe that **pushing myself to try hard things is the best way to learn new skills and continuously improve.** There's a great sense of satisfaction when you overcome something you thought you couldn't do."</p>
+                <p class="text-muted"><em>(Nhấn mạnh cảm xúc tích cực, giải thích rõ lợi ích của thử thách, và thêm cụm từ diễn đạt sự hài lòng.)</em></p>
+            </div>
+
+            <div class="mb-3">
+                <p><strong>Lan: I have done running and jumping challenges. I also heard about people climbing big mountains.</strong></p>
+                <p><strong>Mở rộng:</strong> "Physically, I've taken on **running challenges, like completing a 5k race, and even some jumping challenges in sports like basketball.** I also find it incredibly inspiring when I **hear about people climbing huge mountains like Mount Everest; that really takes extreme endurance and mental toughness!**"</p>
+                <p class="text-muted"><em>(Cụ thể hóa loại thử thách, thêm ví dụ nổi bật, và bày tỏ sự ngưỡng mộ.)</em></p>
+            </div>
+
+            <div class="mb-3">
+                <p><strong>Lan: I think doing hard tests and puzzles are mental challenges. They need thinking and focus.</strong></p>
+                <p><strong>Mở rộng:</strong> "For mental challenges, I'd definitely say **tackling really hard tests that require deep understanding and critical thinking.** Also, **complex puzzles like Sudoku or Rubik's Cubes** are great mental workouts. They truly **need intense thinking, problem-solving skills, and a lot of focus to complete.**"</p>
+                <p class="text-muted"><em>(Thêm loại hình thử thách, giải thích rõ hơn về yêu cầu của chúng, và dùng từ mạnh hơn để diễn tả sự tập trung.)</em></p>
+            </div>
+
+            <div class="mb-3">
+                <p><strong>Lan: Yes, I had to study for a big test last week. It was very hard to remember all the lessons.</strong></p>
+                <p><strong>Mở rộng:</strong> "Yes, just last week, I faced a significant mental challenge: **I had to study intensely for a really big history test.** There were so many dates and facts! **It was incredibly hard to remember all the lessons and details, and I felt quite stressed trying to absorb everything.**"</p>
+                <p class="text-muted"><em>(Cụ thể hóa loại bài kiểm tra, thêm chi tiết về độ khó và cảm xúc cá nhân.)</em></p>
+            </div>
+
+            <div class="mb-3">
+                <p><strong>Lan: I ask for help sometimes, especially when I do not understand something.</strong></p>
+                <p><strong>Mở rộng:</strong> "I'd say I ask for help **sometimes, when it's absolutely necessary.** I try to figure things out on my own first, but **especially when I've exhausted all my options and still don't understand something,** I realize it's smarter to ask for guidance rather than struggling alone."</p>
+                <p class="text-muted"><em>(Giải thích rõ hơn về tần suất, khi nào thì hỏi, và lý do hỏi giúp đỡ.)</em></p>
+            </div>
+
+            <div class="mb-3">
+                <p><strong>Lan: I ask for help when I cannot solve a problem or when I need advice from a teacher or friend.</strong></p>
+                <p><strong>Mở rộng:</strong> "I typically ask for help in a couple of situations. Firstly, when I'm confronted with a problem that I **genuinely cannot solve on my own, no matter how hard I try.** Secondly, if I'm facing a difficult decision or a new situation, I'll definitely **seek advice from a trusted teacher or a good friend, as their perspective can be really valuable.**"</p>
+                <p class="text-muted"><em>(Cụ thể hóa các tình huống cần giúp đỡ, thêm lý do tại sao cần lời khuyên.)</em></p>
+            </div>
+
+            <div class="mb-3">
+                <p><strong>Lan: That is good. I told my brother that I would try a new challenge next week.</strong></p>
+                <p><strong>Mở rộng:</strong> "That's good to hear! I'm always happy when people take on challenges. Speaking of which, I actually **told my brother just yesterday that I would try a new fitness challenge next week – maybe a yoga beginner's course.** I'm a bit nervous but excited!"</p>
+                <p class="text-muted"><em>(Diễn đạt cảm xúc tích cực, cụ thể hóa loại thử thách, và thêm cảm xúc cá nhân.)</em></p>
+            </div>
+
+            <div class="mb-3">
+                <p><strong>Lan: Yes, I can. What do you need help with?</strong></p>
+                <p><strong>Mở rộng:</strong> "Yes, **of course I can help you!** What exactly **do you need assistance with?** Is it a math problem, an essay, or something else? I'll do my best to explain it clearly."</p>
+                <p class="text-muted"><em>(Thể hiện sự sẵn lòng giúp đỡ nhiệt tình, và hỏi rõ hơn về vấn đề.)</em></p>
+            </div>
+        </div>
+
+        <div class="card-extension mt-4">
+            <h2 class="text-center mb-3">Ngữ Pháp Trọng Tâm: Reported Speech (Câu gián tiếp)</h2>
+            <p>Đoạn hội thoại này tiếp tục củng cố kiến thức về **Reported Speech (câu gián tiếp)**. Đây là cách chúng ta thuật lại lời nói hoặc suy nghĩ của người khác mà không trích dẫn nguyên văn.</p>
+            <p><strong>Các điểm cần nhớ khi chuyển sang Reported Speech:</strong></p>
+            <ul>
+                <li>**Lùi thì (Backshift of Tense):** Động từ trong mệnh đề chính (reporting clause) ở quá khứ (ví dụ: `said`, `told`), thì động từ trong mệnh đề phụ (reported clause) thường lùi về quá khứ một bậc.
+                    <ul>
+                        <li>Hiện tại đơn → Quá khứ đơn</li>
+                        <li>Hiện tại tiếp diễn → Quá khứ tiếp diễn</li>
+                        <li>Hiện tại hoàn thành → Quá khứ hoàn thành</li>
+                        <li>Quá khứ đơn → Quá khứ hoàn thành</li>
+                        <li>`will` → `would`</li>
+                        <li>`can` → `could`</li>
+                        <li>`may` → `might`</li>
+                        <li>`must` → `had to` (hoặc `would have to`)</li>
+                    </ul>
+                </li>
+                <li>**Thay đổi Đại từ (Pronouns):** Điều chỉnh đại từ để phù hợp với người tường thuật.</li>
+                <li>**Thay đổi Trạng từ chỉ thời gian/nơi chốn:**
+                    <ul>
+                        <li>`now` → `then`</li>
+                        <li>`today` → `that day`</li>
+                        <li>`yesterday` → `the day before / the previous day`</li>
+                        <li>`tomorrow` → `the next day / the following day`</li>
+                        <li>`here` → `there`</li>
+                        <li>`this` → `that`</li>
+                        <li>`these` → `those`</li>
+                    </ul>
+                </li>
+                <li>**Động từ tường thuật (Reporting Verbs):** Sử dụng `said`, `told` (có tân ngữ), `asked` (cho câu hỏi), `suggested`, `explained`, v.v.</li>
+            </ul>
+            <p><strong>Ví dụ cụ thể trong đoạn hội thoại:</strong></p>
+            <ul>
+                <li>**Trực tiếp:** "My friend said that he enjoyed a difficult challenge last month." (Đây đã là gián tiếp rồi, dạng trực tiếp là "My friend said, 'I enjoyed a difficult challenge last month.'")</li>
+                <li>**Trực tiếp:** "I told my brother, 'I will try a new challenge next week.'"</li>
+                <li>**Gián tiếp:** "I told my brother that I **would try** a new challenge **next week**." (will → would; next week giữ nguyên hoặc chuyển thành the following week tùy ngữ cảnh)</li>
+            </ul>
+        </div>
+
+        <div class="exercise-section mt-4">
+            <h2 class="text-center mb-3">Bài Tập Thực Hành Tiếng Anh</h2>
+            <p>Hãy thử các bài tập dưới đây để củng cố khả năng nói và tư duy bằng tiếng Anh của bạn:</p>
+
+            <div class="exercise-item">
+                <h5>1. Mở Rộng Câu Trả Lời Của Bạn:</h5>
+                <p>Hãy chọn 3 câu trả lời của Lan (phiên bản gốc) mà bạn thấy mình có thể trả lời tương tự. Viết lại chúng, mở rộng thêm chi tiết cá nhân, cảm xúc, hoặc ví dụ liên quan đến trải nghiệm của bạn. Hãy tưởng tượng bạn đang kể chuyện cho ai đó.</p>
+                <p><em>Ví dụ:<br>
+                **Original:** "I had to study for a big test last week. It was very hard to remember all the lessons."<br>
+                **Your Expansion:** "Yes, just last week, **I faced a big mental challenge when I had to prepare for my final exam in Math.** The formulas were so complicated, and **it felt incredibly hard to remember all the steps and theories.** I spent hours reviewing!"</em></p>
+            </div>
+
+            <div class="exercise-item">
+                <h5>2. Chuyển Đổi Sang Reported Speech:</h5>
+                <p>Chuyển các câu trực tiếp sau đây sang câu gián tiếp. Đây là bài tập quan trọng để luyện tập ngữ pháp Reported Speech.</p>
+                <ol>
+                    <li>My teacher said, "You must finish this essay by Friday."</li>
+                    <li>He asked, "Where are you going for your summer holiday?"</li>
+                    <li>She told me, "I don't like listening to pop music."</li>
+                    <li>My dad said, "I bought a new car yesterday."</li>
+                </ol>
+            </div>
+
+            <div class="exercise-item">
+                <h5>3. Kể Về Một Thử Thách Của Bạn (có dùng Reported Speech):</h5>
+                <p>Hãy kể về một thử thách mà bạn đã trải qua (có thể là thể chất hoặc tinh thần). Trong bài kể của bạn, hãy lồng ghép ít nhất một câu sử dụng **Reported Speech** để thuật lại lời nói của ai đó (hoặc chính bạn).</p>
+                <p><em>Gợi ý:<br>
+                "Last month, I tried to learn how to play the guitar. It was a big challenge for my fingers! My friend told me, 'Learning guitar is hard, but you can do it if you practice every day.' That helped me keep going."</em></p>
+            </div>
+
+            <div class="exercise-item">
+                <h5>4. Đóng Vai và Hỏi Đáp:</h5>
+                <p>Nếu có thể, hãy tìm một người bạn để đóng vai Hùng và Lan. Đọc đoạn hội thoại, cố gắng sử dụng các phần mở rộng mà bạn đã nghĩ ra. Ghi âm lại và nghe để tự đánh giá.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

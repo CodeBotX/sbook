@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar - Used To</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .exercise-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.05em;
+            color: #34495e;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .exercise-item .form-label {
+            margin-right: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+            width: 30px; /* Numbering width */
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .exercise-item .text-segment {
+            margin-right: 5px;
+        }
+        .exercise-item .answer-input {
+            flex-grow: 1;
+            max-width: 300px; /* Limit input width */
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .exercise-item .answer-input:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .exercise-item .answer-input.is-valid {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .exercise-item .answer-input.is-invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+            background-color: #f8d7da;
+            color: #842029;
+        }
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default */
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <span class="badge bg-primary fs-6 me-2">F</span>
+            <h1>Complete using the correct form of 'used to'. You may have to use some negative forms.</h1>
+        </div>
+        <p class="instruction">
+            Hoàn thành các câu sau bằng cách sử dụng dạng đúng của 'used to'. Bạn có thể phải sử dụng dạng phủ định.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="usedToForm">
+            <div class="exercise-item">
+                <label for="q1" class="form-label">1</label>
+                <span class="text-segment">When I was younger, I</span>
+                <input type="text" class="form-control answer-input" id="q1" name="q1">
+                <span class="text-segment">eat pizza almost every day!</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q2" class="form-label">2</label>
+                <input type="text" class="form-control answer-input" id="q2_part1" name="q2_part1">
+                <span class="text-segment">there</span>
+                <input type="text" class="form-control answer-input" id="q2_part2" name="q2_part2">
+                <span class="text-segment">be a supermarket on the corner?</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q3" class="form-label">3</label>
+                <span class="text-segment">Bradley is a teacher, but he</span>
+                <input type="text" class="form-control answer-input" id="q3" name="q3">
+                <span class="text-segment">want to be a train driver.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q4" class="form-label">4</label>
+                <span class="text-segment">I</span>
+                <input type="text" class="form-control answer-input" id="q4" name="q4">
+                <span class="text-segment">like eating cabbage, but now I love it!</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q5" class="form-label">5</label>
+                <input type="text" class="form-control answer-input" id="q5_part1" name="q5_part1">
+                <span class="text-segment">Rick</span>
+                <input type="text" class="form-control answer-input" id="q5_part2" name="q5_part2">
+                <span class="text-segment">have blond hair when he was a little boy?</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q6" class="form-label">6</label>
+                <span class="text-segment">I know Lily</span>
+                <input type="text" class="form-control answer-input" id="q6" name="q6">
+                <span class="text-segment">cook much, but now I think she makes dinner every day.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTFyMfwGpGFFRKKoXpQf/ZtVKKjoF+L7ffy4qC7zQtxHiJitjEATj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkmXLRV5vfJzJrEPiniwz4rsVZpGgG8Y1r+KNuGMuwtj44gJjEnFqVfXpX5f" crossorigin="anonymous"></script>
+
+    <script>
+        const correctAnswers = {
+            'q1': {
+                answer: ['used to'],
+                originalText: 'When I was younger, I {answer} eat pizza almost every day!',
+                translation: 'Khi tôi còn nhỏ, tôi đã từng ăn pizza gần như mỗi ngày!',
+                explanation: 'Sử dụng "used to" để diễn tả một thói quen hoặc tình trạng đã từng xảy ra thường xuyên trong quá khứ nhưng bây giờ không còn nữa.',
+                grammar_note: 'Cấu trúc khẳng định: S + used to + V (nguyên mẫu).'
+            },
+            'q2_part1': {
+                answer: ['Did'],
+                originalText: '{answer1} there {answer2} be a supermarket on the corner?',
+                translation: 'Có phải đã từng có một siêu thị ở góc phố không?',
+                explanation: 'Đây là câu hỏi về sự tồn tại của một thói quen/tình trạng trong quá khứ. Trong câu hỏi, "used to" biến thành "use to" sau "Did".',
+                grammar_note: 'Cấu trúc câu hỏi: Did + S + use to + V (nguyên mẫu)?'
+            },
+            'q2_part2': {
+                answer: ['use to']
+            },
+            'q3': {
+                answer: ['use to'],
+                originalText: 'Bradley is a teacher, but he {answer} want to be a train driver.',
+                translation: 'Bradley là một giáo viên, nhưng anh ấy đã từng muốn trở thành một người lái tàu.',
+                explanation: 'Sử dụng "used to" để diễn tả một điều đã từng trong quá khứ.',
+                grammar_note: 'Cấu trúc khẳng định: S + used to + V (nguyên mẫu).'
+            },
+            'q4': {
+                answer: ['didn\'t use to', 'did not use to'],
+                originalText: 'I {answer} like eating cabbage, but now I love it!',
+                translation: 'Tôi đã từng không thích ăn bắp cải, nhưng bây giờ thì tôi lại thích nó!',
+                explanation: 'Tương tự câu 3, diễn tả một sở thích đã từng không tồn tại trong quá khứ nhưng đã thay đổi ở hiện tại. Sử dụng dạng phủ định.',
+                grammar_note: 'Cấu trúc phủ định: S + didn\'t use to + V (nguyên mẫu).'
+            },
+            'q5_part1': {
+                answer: ['Did'],
+                originalText: '{answer1} Rick {answer2} have blond hair when he was a little boy?',
+                translation: 'Có phải Rick đã từng có tóc vàng khi anh ấy còn nhỏ không?',
+                explanation: 'Câu hỏi về một tình trạng (có tóc màu gì) trong quá khứ. "Used to" biến thành "use to" sau "Did".',
+                grammar_note: 'Cấu trúc câu hỏi: Did + S + use to + V (nguyên mẫu)?'
+            },
+            'q5_part2': {
+                answer: ['use to']
+            },
+            'q6': {
+                answer: ['didn\'t use to', 'did not use to'],
+                originalText: 'I know Lily {answer} cook much, but now I think she makes dinner every day.',
+                translation: 'Tôi biết Lily đã từng không nấu ăn nhiều, nhưng bây giờ tôi nghĩ cô ấy nấu bữa tối mỗi ngày.',
+                explanation: 'Diễn tả một thói quen (nấu ăn nhiều) đã từng không có trong quá khứ nhưng đã thay đổi. Sử dụng dạng phủ định.',
+                grammar_note: 'Cấu trúc phủ định: S + didn\'t use to + V (nguyên mẫu).'
+            }
+        };
+
+        function normalizeAnswer(answer) {
+            return answer.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        function submitAnswers() {
+            let score = 0;
+            // Count total questions based on unique question numbers (e.g., q1, q2, q3, not q2_part1 and q2_part2)
+            const uniqueQuestions = new Set();
+            Object.keys(correctAnswers).forEach(qId => {
+                uniqueQuestions.add(qId.split('_part')[0]);
+            });
+            const totalQuestions = uniqueQuestions.size;
+
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            const processedQuestions = new Set(); // To ensure each question's explanation is added only once
+
+            Object.keys(correctAnswers).forEach(qId => {
+                const inputElement = document.getElementById(qId);
+                if (!inputElement) return;
+
+                const userAnswer = normalizeAnswer(inputElement.value);
+                const correctInfo = correctAnswers[qId];
+                const feedbackIcon = inputElement.nextElementSibling; // Icon is next to the input
+
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                }
+
+                const isCorrect = correctInfo.answer.some(ans => normalizeAnswer(ans) === userAnswer);
+
+                if (isCorrect) {
+                    // Only increment score if this is the first part of a multi-part question or a single part question
+                    if (!qId.includes('_part') || qId.endsWith('_part1')) {
+                         // For multi-part questions, ensure ALL parts are correct before incrementing score for the whole question
+                        let allPartsCorrect = true;
+                        if (qId.startsWith('q2_') && (normalizeAnswer(document.getElementById('q2_part1').value) !== normalizeAnswer(correctAnswers['q2_part1'].answer[0]) || normalizeAnswer(document.getElementById('q2_part2').value) !== normalizeAnswer(correctAnswers['q2_part2'].answer[0]))) {
+                            allPartsCorrect = false;
+                        }
+                        if (qId.startsWith('q5_') && (normalizeAnswer(document.getElementById('q5_part1').value) !== normalizeAnswer(correctAnswers['q5_part1'].answer[0]) || normalizeAnswer(document.getElementById('q5_part2').value) !== normalizeAnswer(correctAnswers['q5_part2'].answer[0]))) {
+                            allPartsCorrect = false;
+                        }
+                        if (allPartsCorrect && !processedQuestions.has(qId.split('_part')[0])) {
+                             score++;
+                             processedQuestions.add(qId.split('_part')[0]);
+                        }
+                    } else if (isCorrect && !processedQuestions.has(qId.split('_part')[0])) { // For single-part questions
+                        score++;
+                        processedQuestions.add(qId.split('_part')[0]);
+                    }
+                   
+                    inputElement.classList.add('is-valid');
+                    if (feedbackIcon) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    }
+                } else {
+                    inputElement.classList.add('is-invalid');
+                    if (feedbackIcon) {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                }
+                if (feedbackIcon) {
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution for each question
+                // Only add the solution item once per logical question (e.g., for q2_part1, not also for q2_part2)
+                if (!qId.includes('_part') || qId.endsWith('_part1')) {
+                    const solutionItem = document.createElement('div');
+                    solutionItem.classList.add('solution-item');
+
+                    const questionNumber = qId.includes('_part') ? qId.split('_part')[0].substring(1) : qId.substring(1);
+                    const questionTextDiv = document.createElement('div');
+                    questionTextDiv.classList.add('question-text');
+
+                    let fullSentenceHtml = `<label class="form-label">${questionNumber}</label>. `;
+
+                    // Special handling for multi-part questions like Q2 and Q5
+                    if (qId.startsWith('q2_')) {
+                        const ans1 = correctAnswers['q2_part1'].answer[0];
+                        const ans2 = correctAnswers['q2_part2'].answer[0];
+                        fullSentenceHtml += correctAnswers['q2_part1'].originalText
+                            .replace('{answer1}', `<span class="correct-answer-text">${ans1}</span>`)
+                            .replace('{answer2}', `<span class="correct-answer-text">${ans2}</span>`);
+                    } else if (qId.startsWith('q5_')) {
+                        const ans1 = correctAnswers['q5_part1'].answer[0];
+                        const ans2 = correctAnswers['q5_part2'].answer[0];
+                        fullSentenceHtml += correctAnswers['q5_part1'].originalText
+                            .replace('{answer1}', `<span class="correct-answer-text">${ans1}</span>`)
+                            .replace('{answer2}', `<span class="correct-answer-text">${ans2}</span>`);
+                    } else { // For single-part questions
+                        fullSentenceHtml += correctInfo.originalText.replace('{answer}', `<span class="correct-answer-text">${correctInfo.answer[0]}</span>`);
+                    }
+
+                    questionTextDiv.innerHTML = fullSentenceHtml;
+                    solutionItem.appendChild(questionTextDiv);
+
+                    // Add explanation and translation
+                    const infoToDisplay = qId.endsWith('_part1') ? correctAnswers[qId] : correctInfo; // Use _part1 for info
+                    
+                    const grammarExplanationDiv = document.createElement('div');
+                    grammarExplanationDiv.classList.add('grammar-explanation');
+                    grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${infoToDisplay.explanation}<br>${infoToDisplay.grammar_note}`;
+                    solutionItem.appendChild(grammarExplanationDiv);
+
+                    const translationDiv = document.createElement('div');
+                    translationDiv.classList.add('translation');
+                    translationDiv.innerHTML = `<strong>Dịch:</strong> ${infoToDisplay.translation}`;
+                    solutionItem.appendChild(translationDiv);
+                    
+                    solutionListDiv.appendChild(solutionItem);
+                }
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+        }
+
+        function resetExercise() {
+            const inputs = document.querySelectorAll('.answer-input');
+            inputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('is-valid', 'is-invalid');
+                const feedbackIcon = input.nextElementSibling;
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    feedbackIcon.style.display = 'none'; // Hide feedback icon
+                }
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions
+        }
+    </script>
+</body>
+</html>

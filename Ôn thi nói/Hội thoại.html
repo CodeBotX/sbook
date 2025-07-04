@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoạt Động Học Tiếng Anh</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9Oer+RzsfGgqTxkQnHd1j1/2MGFsI4dd3qprGfT7e3u" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .activity-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background-color: #e9f5ff;
+            border-left: 5px solid #0056b3;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .activity-section p {
+            margin-bottom: 10px;
+        }
+        .activity-section strong {
+            color: #0056b3;
+        }
+        .qa-pair {
+            background-color: #f0f8ff;
+            border: 1px solid #cceeff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        .qa-pair strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #212529;
+        }
+        .question {
+            color: red; /* Tô màu đỏ cho câu hỏi */
+            font-weight: bold;
+        }
+        .quiz-option label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        .quiz-option input[type="radio"] {
+            margin-right: 8px;
+        }
+        .btn-check-quiz {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .btn-check-quiz:hover {
+            background-color: #0056b3;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .explanation {
+            background-color: #fdfae6;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        .explanation h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chào Mừng Đến Với Góc Học Tiếng Anh Của Bạn!</h1>
+        <p class="lead text-center">Đây là các hoạt động được thiết kế để giúp bạn nắm vững đoạn hội thoại.</p>
+
+        <hr class="my-4">
+
+        <div class="activity-section">
+            <h2 class="text-center mb-4">Hoạt Động 1: Ôn Tập Hỏi & Đáp</h2>
+            <p>Đọc lại các câu hỏi và câu trả lời. Hãy cố gắng nhớ các ý chính trước khi nhìn lại!</p>
+            <p class="explanation">
+                <h4>Giải thích bằng tiếng Việt:</h4>
+                Phần này giúp bạn xem lại đoạn hội thoại gốc. Mục tiêu là ghi nhớ các câu trả lời của bạn cho mỗi câu hỏi.
+            </p>
+
+            <div class="qa-pair">
+                <p><span class="question">Mai: Who is your favourite inventor?</span></p>
+                <p>💬 Nam: My favourite inventor is <strong>Thomas Edison</strong>, who invented the <strong>light bulb</strong>. He is a person who had many great inventions.</p>
+                <p><em>(Nam: Nhà phát minh yêu thích của tôi là Thomas Edison, người đã phát minh ra bóng đèn. Ông ấy là một người có nhiều phát minh vĩ đại.)</em></p>
+            </div>
+
+            <div class="qa-pair">
+                <p><span class="question">Mai: Why do you admire him?</span></p>
+                <p>💬 Nam: I admire him because he had a lot of <strong>perseverance</strong>. He had many experiments that failed, but he didn’t give up. It inspires me to keep trying when I have problems.</p>
+                <p><em>(Nam: Tôi ngưỡng mộ ông ấy vì ông ấy có rất nhiều sự kiên trì. Ông ấy đã có nhiều thí nghiệm thất bại, nhưng ông ấy không bỏ cuộc. Điều đó truyền cảm hứng cho tôi tiếp tục cố gắng khi tôi gặp vấn đề.)</em></p>
+            </div>
+
+            <div class="qa-pair">
+                <p><span class="question">Mai: Are you interested in the natural world? Why / why not?</span></p>
+                <p>💬 Nam: Yes, I am. I love the natural world, which has many beautiful animals and trees. I want to protect the <strong>environment</strong> and help stop <strong>climate change</strong>. I used to throw away plastic bottles, but now I <strong>recycle</strong> them.</p>
+                <p><em>(Nam: Có, tôi có. Tôi yêu thế giới tự nhiên, nơi có nhiều động vật và cây cối đẹp. Tôi muốn bảo vệ môi trường và giúp ngăn chặn biến đổi khí hậu. Tôi từng vứt bỏ chai nhựa, nhưng bây giờ tôi tái chế chúng.)</em></p>
+            </div>
+
+            <div class="qa-pair">
+                <p><span class="question">Mai: Do you know what a role model is? Do you have one?</span></p>
+                <p>💬 Nam: Yes, I do. A <strong>role model</strong> is a person who you admire and want to be like. My <strong>father</strong> is my role model. He is a person who always helps others and works hard.</p>
+                <p><em>(Nam: Có, tôi có. Một hình mẫu lý tưởng là một người mà bạn ngưỡng mộ và muốn trở thành. Cha tôi là hình mẫu của tôi. Ông ấy là một người luôn giúp đỡ người khác và làm việc chăm chỉ.)</em></p>
+            </div>
+
+            <div class="qa-pair">
+                <p><span class="question">Mai: Who has inspired you in your life? Why?</span></p>
+                <p>💬 Nam: My <strong>teacher</strong> has inspired me. She is someone who <strong>encourages</strong> me to do my best. She gave me the <strong>motivation</strong> to study more and follow my goals.</p>
+                <p><em>(Nam: Cô giáo của tôi đã truyền cảm hứng cho tôi. Cô ấy là người khuyến khích tôi làm hết sức mình. Cô ấy đã cho tôi động lực để học tập nhiều hơn và theo đuổi mục tiêu của mình.)</em></p>
+            </div>
+
+            <div class="qa-pair">
+                <p><span class="question">Mai: What can you learn from him/her?</span></p>
+                <p>💬 Nam: I can learn about <strong>dedication</strong> and <strong>courage</strong>. She always tries to help every student. It makes me want to become a teacher too. She reminds me of the teachers I had when I was small.</p>
+                <p><em>(Nam: Tôi có thể học được về sự cống hiến và lòng dũng cảm. Cô ấy luôn cố gắng giúp đỡ mọi học sinh. Điều đó khiến tôi cũng muốn trở thành một giáo viên. Cô ấy gợi nhớ cho tôi về những giáo viên tôi có khi tôi còn nhỏ.)</em></p>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="activity-section">
+            <h2 class="text-center mb-4">Hoạt Động 2: Tập Trung Từ Vựng</h2>
+            <p>Hãy xem xét một số từ quan trọng từ câu trả lời của bạn. Cố gắng định nghĩa chúng bằng lời của riêng bạn, sau đó kiểm tra định nghĩa.</p>
+            <p class="explanation">
+                <h4>Giải thích bằng tiếng Việt:</h4>
+                Phần này giúp bạn xây dựng vốn từ vựng. Hãy thử đoán nghĩa của từ trước khi xem giải thích để rèn luyện tư duy.
+            </p>
+
+            <ul>
+                <li><strong>Inventor</strong> (Nhà phát minh): A person who creates or designs something new. (Một người tạo ra hoặc thiết kế một cái gì đó mới.)</li>
+                <li><strong>Light bulb</strong> (Bóng đèn): An electric light, typically having a glass bulb enclosing a filament or gas. (Một loại đèn điện, thường có bóng thủy tinh bao bọc một sợi đốt hoặc khí.)</li>
+                <li><strong>Perseverance</strong> (Sự kiên trì): Continuing in a course of action despite difficulties or delay in achieving success. (Tiếp tục một hành động bất chấp khó khăn hoặc trì hoãn trong việc đạt được thành công.)</li>
+                <li><strong>Inspires</strong> (Truyền cảm hứng): To make someone feel that they want to do something and can do it. (Khiến ai đó cảm thấy muốn làm điều gì đó và có thể làm được.)</li>
+                <li><strong>Environment</strong> (Môi trường): The surroundings or conditions in which a person, animal, or plant lives or operates. (Môi trường xung quanh hoặc điều kiện mà một người, động vật, hoặc thực vật sống hoặc hoạt động.)</li>
+                <li><strong>Climate change</strong> (Biến đổi khí hậu): A long-term change in the average weather patterns that characterize a region. (Một sự thay đổi dài hạn trong các kiểu thời tiết trung bình đặc trưng cho một khu vực.)</li>
+                <li><strong>Recycle</strong> (Tái chế): Convert waste into reusable material. (Chuyển đổi chất thải thành vật liệu có thể tái sử dụng.)</li>
+                <li><strong>Role model</strong> (Hình mẫu lý tưởng): A person looked to by others as an example to be imitated. (Một người được người khác noi theo như một tấm gương để học hỏi.)</li>
+                <li><strong>Encourages</strong> (Khuyến khích): To give support, confidence, or hope to someone. (Mang lại sự hỗ trợ, tự tin, hoặc hy vọng cho ai đó.)</li>
+                <li><strong>Motivation</strong> (Động lực): The reason or reasons one has for acting or behaving in a particular way. (Lý do hoặc các lý do một người có để hành động hoặc cư xử theo một cách cụ thể.)</li>
+                <li><strong>Goals</strong> (Mục tiêu): The object of a person's ambition or effort; an aim or desired result. (Đối tượng của tham vọng hoặc nỗ lực của một người; một mục đích hoặc kết quả mong muốn.)</li>
+                <li><strong>Dedication</strong> (Sự cống hiến): The quality of being committed to a task or purpose. (Phẩm chất cam kết với một nhiệm vụ hoặc mục đích.)</li>
+                <li><strong>Courage</strong> (Lòng dũng cảm): The ability to do something that frightens one; bravery. (Khả năng làm điều gì đó khiến mình sợ hãi; sự dũng cảm.)</li>
+            </ul>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="activity-section">
+            <h2 class="text-center mb-4">Hoạt Động 3: Bài Kiểm Tra Nhanh!</h2>
+            <p>Chọn câu trả lời đúng nhất cho mỗi câu hỏi.</p>
+            <p class="explanation">
+                <h4>Giải thích bằng tiếng Việt:</h4>
+                Đây là một bài kiểm tra trắc nghiệm ngắn để kiểm tra sự hiểu biết của bạn về đoạn hội thoại. Hãy thử trả lời mà không nhìn lại đoạn văn trên.
+            </p>
+            <form id="quizForm">
+                <div class="mb-3">
+                    <p><strong>1. Who is Nam's favourite inventor?</strong> (Nhà phát minh yêu thích của Nam là ai?)</p>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q1a" name="q1" value="a">
+                        <label class="form-check-label" for="q1a">Leonardo da Vinci</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q1b" name="q1" value="b">
+                        <label class="form-check-label" for="q1b">Thomas Edison</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q1c" name="q1" value="c">
+                        <label class="form-check-label" for="q1c">Albert Einstein</label>
+                    </div>
+                    <div id="feedback1" class="feedback"></div>
+                </div>
+
+                <div class="mb-3">
+                    <p><strong>2. What quality does Nam admire about Thomas Edison?</strong> (Nam ngưỡng mộ phẩm chất nào ở Thomas Edison?)</p>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q2a" name="q2" value="a">
+                        <label class="form-check-label" for="q2a">His wealth</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q2b" name="q2" value="b">
+                        <label class="form-check-label" for="q2b">His perseverance</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q2c" name="q2" value="c">
+                        <label class="form-check-label" for="q2c">His art skills</label>
+                    </div>
+                    <div id="feedback2" class="feedback"></div>
+                </div>
+
+                <div class="mb-3">
+                    <p><strong>3. What does Nam try to do now regarding plastic bottles?</strong> (Nam cố gắng làm gì bây giờ đối với chai nhựa?)</p>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q3a" name="q3" value="a">
+                        <label class="form-check-label" for="q3a">Throw them away more</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q3b" name="q3" value="b">
+                        <label class="form-check-label" for="q3b">Recycle them</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q3c" name="q3" value="c">
+                        <label class="form-check-label" for="q3c">Ignore them</label>
+                    </div>
+                    <div id="feedback3" class="feedback"></div>
+                </div>
+
+                <div class="mb-3">
+                    <p><strong>4. Who is Nam's role model?</strong> (Ai là hình mẫu lý tưởng của Nam?)</p>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q4a" name="q4" value="a">
+                        <label class="form-check-label" for="q4a">His uncle</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q4b" name="q4" value="b">
+                        <label class="form-check-label" for="q4b">His father</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q4c" name="q4" value="c">
+                        <label class="form-check-label" for="q4c">His friend</label>
+                    </div>
+                    <div id="feedback4" class="feedback"></div>
+                </div>
+
+                <div class="mb-3">
+                    <p><strong>5. Who has inspired Nam in his life?</strong> (Ai đã truyền cảm hứng cho Nam trong cuộc sống của anh ấy?)</p>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q5a" name="q5" value="a">
+                        <label class="form-check-label" for="q5a">His mother</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q5b" name="q5" value="b">
+                        <label class="form-check-label" for="q5b">His teacher</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q5c" name="q5" value="c">
+                        <label class="form-check-label" for="q5c">His older brother</label>
+                    </div>
+                    <div id="feedback5" class="feedback"></div>
+                </div>
+
+                <div class="mb-3">
+                    <p><strong>6. What does Nam want to become because of his teacher?</strong> (Nam muốn trở thành gì vì cô giáo của mình?)</p>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q6a" name="q6" value="a">
+                        <label class="form-check-label" for="q6a">A scientist</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q6b" name="q6" value="b">
+                        <label class="form-check-label" for="q6b">A doctor</label>
+                    </div>
+                    <div class="form-check quiz-option">
+                        <input class="form-check-input" type="radio" id="q6c" name="q6" value="c">
+                        <label class="form-check-label" for="q6c">A teacher</label>
+                    </div>
+                    <div id="feedback6" class="feedback"></div>
+                </div>
+
+
+                <button type="button" class="btn btn-primary btn-check-quiz" onclick="checkQuiz()">Kiểm Tra Câu Trả Lời</button>
+            </form>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="activity-section">
+            <h2 class="text-center mb-4">Hoạt Động 4: Luyện Nói!</h2>
+            <p>Thực hành nói các câu trả lời của bạn thật to. Tập trung vào cách phát âm rõ ràng và ngữ điệu tự nhiên.</p>
+            <p class="explanation">
+                <h4>Giải thích bằng tiếng Việt:</h4>
+                Kỹ năng nói là rất quan trọng. Hãy tưởng tượng bạn đang trò chuyện và cố gắng nói một cách tự nhiên nhất.
+            </p>
+            <ul>
+                <li>Tưởng tượng bạn đang nói chuyện với một người bạn.</li>
+                <li>Tự ghi âm và nghe lại để cải thiện cách phát âm và ngữ điệu.</li>
+                <li>Cố gắng mở rộng mỗi câu trả lời thêm một câu. Ví dụ: "I love the natural world, which has many beautiful animals and trees. <strong>I especially enjoy visiting national parks and seeing wildlife in person.</strong>" (Tôi yêu thế giới tự nhiên, nơi có nhiều động vật và cây cối đẹp. **Tôi đặc biệt thích đến các công viên quốc gia và tận mắt nhìn thấy động vật hoang dã.**)</li>
+            </ul>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="activity-section">
+            <h2 class="text-center mb-4">Hoạt Động 5: Mở Rộng Ý Tưởng Của Bạn</h2>
+            <p>Suy nghĩ về cách bạn có thể thêm chi tiết hơn vào các câu trả lời của mình. Dưới đây là một số gợi ý:</p>
+            <p class="explanation">
+                <h4>Giải thích bằng tiếng Việt:</h4>
+                Hoạt động này giúp bạn phát triển khả năng tư duy và diễn đạt ý tưởng phức tạp hơn trong tiếng Anh, rất hữu ích cho các cuộc hội thoại sâu hơn.
+            </p>
+            <ul>
+                <li>Đối với Thomas Edison: Bạn có thể kể tên một phát minh khác của ông ấy, hoặc một câu nói nổi tiếng của ông ấy không?</li>
+                <li>Đối với môi trường: Bạn có thể đưa ra ví dụ cụ thể về những hành động nhỏ khác bạn làm để giúp bảo vệ môi trường, ngoài việc tái chế không?</li>
+                <li>Đối với cha của bạn: Cha bạn giúp đỡ người khác như thế nào? Có một câu chuyện cụ thể nào về sự chăm chỉ của ông ấy không?</li>
+                <li>Đối với cô giáo của bạn: Cô ấy khuyến khích bạn làm tốt nhất bằng cách nào? Cô ấy giúp đỡ học sinh cụ thể ra sao?</li>
+            </ul>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="activity-section">
+            <h2 class="text-center mb-4">Hoạt Động 6: Viết Lại Câu Trả Lời (Viết Sáng Tạo)</h2>
+            <p>Chọn 2-3 câu hỏi bất kỳ và thử viết lại câu trả lời của bạn, nhưng lần này hãy sử dụng các cấu trúc câu khác hoặc thêm các chi tiết mới. Mục tiêu là diễn đạt cùng một ý tưởng theo những cách khác nhau.</p>
+            <p class="explanation">
+                <h4>Giải thích bằng tiếng Việt:</h4>
+                Đây là một hoạt động luyện viết rất tốt. Nó giúp bạn linh hoạt hơn trong việc sử dụng ngôn ngữ và củng cố ngữ pháp.
+            </p>
+            <p>Ví dụ:</p>
+            <p><strong>Câu hỏi:</strong> Who is your favourite inventor?</p>
+            <p><strong>Câu trả lời gốc:</strong> My favourite inventor is Thomas Edison, who invented the light bulb. He is a person who had many great inventions.</p>
+            <p><strong>Câu trả lời sáng tạo:</strong> If I had to pick an inventor, it would definitely be Thomas Edison, widely known for pioneering the practical light bulb. His prolific mind led to countless groundbreaking innovations that shaped modern life.</p>
+            <p><em>(Bạn có thể viết câu trả lời của mình vào một cuốn sổ hoặc trên máy tính.)</em></p>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        function checkQuiz() {
+            const answers = {
+                q1: 'b',
+                q2: 'b',
+                q3: 'b',
+                q4: 'b',
+                q5: 'b',
+                q6: 'c'
+            };
+
+            let allCorrect = true;
+
+            for (let i = 1; i <= 6; i++) { // Adjusted loop for 6 questions
+                const qName = 'q' + i;
+                const feedbackId = 'feedback' + i;
+                const selectedOption = document.querySelector(`input[name="${qName}"]:checked`);
+                const feedbackDiv = document.getElementById(feedbackId);
+
+                if (selectedOption) {
+                    if (selectedOption.value === answers[qName]) {
+                        feedbackDiv.textContent = 'Chính xác!';
+                        feedbackDiv.className = 'feedback correct';
+                    } else {
+                        feedbackDiv.textContent = 'Sai. Thử lại nhé!';
+                        feedbackDiv.className = 'feedback incorrect';
+                        allCorrect = false;
+                    }
+                } else {
+                    feedbackDiv.textContent = 'Vui lòng chọn một câu trả lời.';
+                    feedbackDiv.className = 'feedback incorrect';
+                    allCorrect = false;
+                }
+            }
+
+            if (allCorrect) {
+                alert('Chúc mừng! Bạn đã trả lời đúng tất cả các câu!');
+            } else {
+                alert('Tiếp tục luyện tập nhé! Hãy xem lại câu trả lời và thử lại.');
+            }
+        }
+    </script>
+</body>
+</html>

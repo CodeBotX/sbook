@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Matching Exercise (Columns)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif; /* Using Open Sans font as per the provided template */
+            background-color: #f0f2f5; /* Light grey background */
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 1000px; /* Increased max-width to accommodate two columns */
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50; /* Darker blue for headings */
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700; /* Bolder headings */
+        }
+        h2 {
+            color: #2c3e50; /* Darker blue for sub-headings */
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9; /* Light green background for instructions */
+            border-left: 6px solid #4CAF50; /* Green border */
+            padding: 20px 25px;
+            border-radius: 10px; /* Rounded corners */
+            color: #388e3c; /* Darker green text */
+        }
+
+        /* Questions Column */
+        .questions-column {
+            padding-right: 20px; /* Space between columns */
+        }
+
+        /* Options Column */
+        .options-column {
+            padding-left: 20px; /* Space between columns */
+            border-left: 1px dashed #e0e0e0; /* Separator line */
+        }
+        .second-half-options-list {
+            padding-top: 5px;
+        }
+        .second-half-options-list p {
+            margin-bottom: 8px; /* Space between options */
+            font-size: 1em;
+            color: #555;
+        }
+        .second-half-options-list p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Styling for each exercise item (question line) */
+        .question-item {
+            margin-bottom: 25px; /* Increased margin for better separation */
+        }
+
+        .question-item .question-line {
+            display: flex;
+            align-items: baseline; /* Align text baselines */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .question-item .question-number {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-right: 10px;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .question-item .first-half-text {
+            flex-grow: 1; /* Allow text to grow */
+            margin-right: 10px;
+            font-size: 1.05em;
+            color: #34495e;
+            white-space: pre-wrap; /* Allow text to wrap naturally */
+        }
+        .question-item .answer-input {
+            width: 60px; /* Fixed width for the input */
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            text-align: center; /* Center the input text */
+            font-weight: bold;
+            text-transform: uppercase; /* Ensure input is uppercase */
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .question-item .answer-input:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        /* Feedback for inputs */
+        .question-item .answer-input.is-valid {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .question-item .answer-input.is-invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+            background-color: #f8d7da;
+            color: #842029;
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            flex-shrink: 0; /* Prevent shrinking of icon */
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .questions-column, .options-column {
+                padding-left: 15px;
+                padding-right: 15px;
+                border-left: none; /* Remove border on small screens */
+            }
+            .options-column {
+                margin-top: 30px; /* Add space when stacked */
+            }
+            .question-item {
+                margin-bottom: 20px;
+            }
+            .question-item .question-line {
+                flex-direction: column; /* Stack elements vertically */
+                align-items: flex-start;
+            }
+            .question-item .question-number {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            .question-item .first-half-text {
+                margin-right: 0;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            .question-item .answer-input {
+                width: 100%; /* Full width input on small screens */
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+            .feedback-icon {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Nối Câu</h1>
+        </div>
+        <h2>Nối hai nửa câu đúng</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Match the two halves of the sentences by typing the correct letter (A-F) in the input box.
+            <br>
+            <strong>Hướng dẫn:</strong> Nối hai nửa câu lại với nhau bằng cách điền chữ cái (A-F) tương ứng vào ô trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="matchingForm">
+            <div class="row">
+                <div class="col-md-7 questions-column">
+                    <div class="question-item">
+                        <div class="question-line">
+                            <span class="question-number">35.</span>
+                            <span class="first-half-text">I waited outside the tennis club for</span>
+                            <input type="text" class="form-control answer-input" id="q35" name="q35" maxlength="1" value="">
+                            <i class="feedback-icon fa-solid" id="icon35"></i>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-line">
+                            <span class="question-number">36.</span>
+                            <span class="first-half-text">When you rang, I was in</span>
+                            <input type="text" class="form-control answer-input" id="q36" name="q36" maxlength="1" value="">
+                            <i class="feedback-icon fa-solid" id="icon36"></i>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-line">
+                            <span class="question-number">37.</span>
+                            <span class="first-half-text">We finally got to the stadium just in</span>
+                            <input type="text" class="form-control answer-input" id="q37" name="q37" maxlength="1" value="">
+                            <i class="feedback-icon fa-solid" id="icon37"></i>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-line">
+                            <span class="question-number">38.</span>
+                            <span class="first-half-text">I just play football for</span>
+                            <input type="text" class="form-control answer-input" id="q38" name="q38" maxlength="1" value="">
+                            <i class="feedback-icon fa-solid" id="icon38"></i>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-line">
+                            <span class="question-number">39.</span>
+                            <span class="first-half-text">I loved that film and when it comes out</span>
+                            <input type="text" class="form-control answer-input" id="q39" name="q39" maxlength="1" value="">
+                            <i class="feedback-icon fa-solid" id="icon39"></i>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-line">
+                            <span class="question-number">40.</span>
+                            <span class="first-half-text">It's great to appear on</span>
+                            <input type="text" class="form-control answer-input" id="q40" name="q40" maxlength="1" value="">
+                            <i class="feedback-icon fa-solid" id="icon40"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 options-column">
+                    <div class="second-half-options-list">
+                        <p>A fun, and I don't want to do it as a job.</p>
+                        <p>B stage, with all the audience clapping.</p>
+                        <p>C time to see the match start.</p>
+                        <p>D a long time, but George didn't appear.</p>
+                        <p>E on DVD, I'll definitely get it.</p>
+                        <p>F the middle of cleaning my football boots.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct matches, full sentences, explanations, and translations
+        const questionsData = {
+            'q35': {
+                firstHalf: 'I waited outside the tennis club for',
+                correctMatch: 'D',
+                secondHalfText: 'a long time, but George didn\'t appear.',
+                fullSentence: 'I waited outside the tennis club for a long time, but George didn\'t appear.',
+                translation: 'Tôi đã đợi bên ngoài câu lạc bộ quần vợt một lúc lâu, nhưng George không xuất hiện.',
+                explanation: '"For a long time" (trong một thời gian dài) là cụm từ chỉ khoảng thời gian kéo dài của hành động "waited" (đợi). Vế sau "but George didn\'t appear" (nhưng George không xuất hiện) là kết quả hợp lý sau một thời gian chờ đợi.',
+                grammar_note: 'Sử dụng "for" để chỉ khoảng thời gian.'
+            },
+            'q36': {
+                firstHalf: 'When you rang, I was in',
+                correctMatch: 'F',
+                secondHalfText: 'the middle of cleaning my football boots.',
+                fullSentence: 'When you rang, I was in the middle of cleaning my football boots.',
+                translation: 'Khi bạn gọi điện, tôi đang dở việc lau giày bóng đá.',
+                explanation: '"In the middle of + V-ing" (đang dở việc gì đó) là cụm từ diễn tả một hành động đang diễn ra thì bị một hành động khác (tiếng chuông điện thoại) cắt ngang.',
+                grammar_note: 'Cấu trúc: be in the middle of + V-ing.'
+            },
+            'q37': {
+                firstHalf: 'We finally got to the stadium just in',
+                correctMatch: 'C',
+                secondHalfText: 'time to see the match start.',
+                fullSentence: 'We finally got to the stadium just in time to see the match start.',
+                translation: 'Cuối cùng chúng tôi đã đến sân vận động vừa kịp lúc để xem trận đấu bắt đầu.',
+                explanation: '"Just in time" (vừa kịp lúc) là một thành ngữ phổ biến có nghĩa là đến đúng vào thời điểm cần thiết, không sớm cũng không muộn.',
+                grammar_note: 'Thành ngữ: just in time.'
+            },
+            'q38': {
+                firstHalf: 'I just play football for',
+                correctMatch: 'A',
+                secondHalfText: 'fun, and I don\'t want to do it as a job.',
+                fullSentence: 'I just play football for fun, and I don\'t want to do it as a job.',
+                translation: 'Tôi chỉ chơi bóng đá cho vui, và tôi không muốn làm nó như một công việc.',
+                explanation: '"For fun" (để giải trí, cho vui) là cụm từ diễn tả mục đích của việc chơi bóng đá, không phải vì công việc hay tiền bạc. Vế sau "and I don\'t want to do it as a job" (và tôi không muốn làm nó như một công việc) củng cố ý nghĩa này.',
+                grammar_note: 'Cấu trúc: for fun (để giải trí).'
+            },
+            'q39': {
+                firstHalf: 'I loved that film and when it comes out',
+                correctMatch: 'E',
+                secondHalfText: 'on DVD, I\'ll definitely get it.',
+                fullSentence: 'I loved that film and when it comes out on DVD, I\'ll definitely get it.',
+                translation: 'Tôi rất thích bộ phim đó và khi nó ra đĩa DVD, tôi chắc chắn sẽ mua nó.',
+                explanation: '"Come out on DVD" (ra mắt trên DVD) là cụm động từ chính xác để diễn tả việc một bộ phim được phát hành trên định dạng đĩa DVD.',
+                grammar_note: 'Cụm động từ: come out on + định dạng (DVD, Blu-ray, etc.).'
+            },
+            'q40': {
+                firstHalf: 'It\'s great to appear on',
+                correctMatch: 'B',
+                secondHalfText: 'stage, with all the audience clapping.',
+                fullSentence: 'It\'s great to appear on stage, with all the audience clapping.',
+                translation: 'Thật tuyệt khi được xuất hiện trên sân khấu, với tất cả khán giả vỗ tay.',
+                explanation: '"Appear on stage" (xuất hiện trên sân khấu) là cụm từ chỉ việc biểu diễn hoặc xuất hiện trước khán giả trên một sân khấu.',
+                grammar_note: 'Cụm từ cố định: appear on stage.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const inputElement = document.getElementById(qId);
+                const userAnswer = inputElement.value.trim().toUpperCase(); // Get input, trim, and convert to uppercase
+                const questionInfo = questionsData[qId];
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`); // e.g., icon35 for q35
+
+                // Reset feedback
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    feedbackIcon.style.display = 'none';
+                }
+
+                let isCorrect = false;
+                if (userAnswer === questionInfo.correctMatch) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-valid');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                questionTextSolutionDiv.innerHTML = `${questionNumber}. ${questionInfo.firstHalf} <span class="correct-answer-text">${questionInfo.correctMatch}. ${questionInfo.secondHalfText}</span>`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing inputs, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const inputElements = document.querySelectorAll('.answer-input');
+            inputElements.forEach(input => {
+                input.value = ''; // Clear input value
+                input.classList.remove('is-valid', 'is-invalid'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

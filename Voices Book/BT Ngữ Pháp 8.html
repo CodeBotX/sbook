@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp A1: Hiện tại hoàn thành, Quá khứ đơn & Yet, Just, Already</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .lead {
+            color: #5f6368;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .question-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8faff;
+            border: 1px solid #dcdfe4;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-section h3 {
+            color: #3c4043;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid #e8eaed;
+            padding-bottom: 10px;
+        }
+        .question-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eceff1;
+        }
+        .question-item label {
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+            color: #202124;
+            font-size: 1.05rem;
+        }
+        .form-check {
+            margin-bottom: 8px;
+        }
+        .form-check-input {
+            margin-right: 8px;
+        }
+        .form-check-label {
+            font-size: 0.95rem;
+            color: #3c4043;
+        }
+        .instructions {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #70757a;
+            padding: 10px 15px;
+            background-color: #e6f4f1;
+            border-left: 5px solid #34a853;
+            border-radius: 5px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #e6ffed;
+            color: #1e8449;
+            border: 1px solid #34a853;
+        }
+        .feedback.incorrect {
+            background-color: #ffebe6;
+            color: #c53929;
+            border: 1px solid #ea4335;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            border-left: 4px solid #aab7b8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            display: none;
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1764cc;
+            border-color: #1764cc;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .d-grid {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Bài Tập Ngữ Pháp A1</h1>
+        <p class="lead text-center">Hiện tại hoàn thành, Quá khứ đơn & Yet, Just, Already</p>
+        <hr>
+
+        <form id="grammarQuizForm">
+            <!-- Phần bài tập Present Perfect and Past Simple -->
+            <div class="question-section">
+                <h3>Phần 1: Hiện tại hoàn thành (Present Perfect) và Quá khứ đơn (Past Simple)</h3>
+                <p class="instructions">Chọn dạng động từ đúng cho mỗi câu.</p>
+                <div id="part1-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Phần bài tập Yet, Just, Already -->
+            <div class="question-section">
+                <h3>Phần 2: Yet, Just, Already</h3>
+                <p class="instructions">Chọn từ đúng (Yet, Just, Already) để hoàn thành các câu.</p>
+                <div id="part2-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-primary" type="button" onclick="submitQuiz()">Nộp bài</button>
+                <button class="btn btn-secondary" type="button" onclick="resetQuiz()">Làm lại</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Dữ liệu câu hỏi cho Phần 1: Present Perfect and Past Simple
+        const questionsPart1 = [
+            {
+                id: "q1_ppps",
+                text: "1. She ______ (visit) Paris three times.",
+                options: {
+                    a: "visited",
+                    b: "has visited",
+                    c: "visits",
+                    d: "is visiting"
+                },
+                correct: "b",
+                explanation: "Đây là kinh nghiệm trong quá khứ mà không rõ thời gian cụ thể, nên dùng thì Hiện tại hoàn thành (Present Perfect)."
+            },
+            {
+                id: "q2_ppps",
+                text: "2. I ______ (finish) my homework an hour ago.",
+                options: {
+                    a: "have finished",
+                    b: "finished",
+                    c: "finish",
+                    d: "had finished"
+                },
+                correct: "b",
+                explanation: "Có mốc thời gian cụ thể trong quá khứ ('an hour ago'), nên dùng thì Quá khứ đơn (Past Simple)."
+            },
+            {
+                id: "q3_ppps",
+                text: "3. They ______ (live) in this city since 2010.",
+                options: {
+                    a: "lived",
+                    b: "have lived",
+                    c: "live",
+                    d: "are living"
+                },
+                correct: "b",
+                explanation: "Hành động bắt đầu trong quá khứ ('since 2010') và vẫn tiếp diễn đến hiện tại, nên dùng thì Hiện tại hoàn thành (Present Perfect)."
+            },
+            {
+                id: "q4_ppps",
+                text: "4. He ______ (buy) a new car last week.",
+                options: {
+                    a: "has bought",
+                    b: "bought",
+                    c: "buys",
+                    d: "had bought"
+                },
+                correct: "b",
+                explanation: "Có mốc thời gian cụ thể trong quá khứ ('last week'), nên dùng thì Quá khứ đơn (Past Simple)."
+            },
+            {
+                id: "q5_ppps",
+                text: "5. We ______ (not see) her for a long time.",
+                options: {
+                    a: "didn't see",
+                    b: "haven't seen",
+                    c: "don't see",
+                    d: "aren't seeing"
+                },
+                correct: "b",
+                explanation: "Hành động kéo dài trong một khoảng thời gian ('for a long time') và vẫn còn ảnh hưởng đến hiện tại, nên dùng thì Hiện tại hoàn thành (Present Perfect)."
+            },
+            {
+                id: "q6_ppps",
+                text: "6. My brother ______ (break) his leg yesterday.",
+                options: {
+                    a: "has broken",
+                    b: "broke",
+                    c: "breaks",
+                    d: "had broken"
+                },
+                correct: "b",
+                explanation: "Có mốc thời gian cụ thể trong quá khứ ('yesterday'), nên dùng thì Quá khứ đơn (Past Simple)."
+            },
+            {
+                id: "q7_ppps",
+                text: "7. I ______ (never eat) sushi before.",
+                options: {
+                    a: "never ate",
+                    b: "have never eaten",
+                    c: "don't eat",
+                    d: "am never eating"
+                },
+                correct: "b",
+                explanation: "Đây là kinh nghiệm từ trước đến giờ chưa từng có, dùng 'never' với thì Hiện tại hoàn thành (Present Perfect)."
+            },
+            {
+                id: "q8_ppps",
+                text: "8. They ______ (go) to the beach two days ago.",
+                options: {
+                    a: "have gone",
+                    b: "went",
+                    c: "go",
+                    d: "are going"
+                },
+                correct: "b",
+                explanation: "Có mốc thời gian cụ thể trong quá khứ ('two days ago'), nên dùng thì Quá khứ đơn (Past Simple)."
+            },
+            {
+                id: "q9_ppps",
+                text: "9. How long ______ you ______ (know) him?",
+                options: {
+                    a: "did...know",
+                    b: "have...known",
+                    c: "do...know",
+                    d: "are...knowing"
+                },
+                correct: "b",
+                explanation: "Hỏi về khoảng thời gian của một trạng thái bắt đầu trong quá khứ và kéo dài đến hiện tại, dùng thì Hiện tại hoàn thành (Present Perfect) với 'How long'."
+            },
+            {
+                id: "q10_ppps",
+                text: "10. He ______ (not come) to the party last night.",
+                options: {
+                    a: "hasn't come",
+                    b: "didn't come",
+                    c: "doesn't come",
+                    d: "hadn't come"
+                },
+                correct: "b",
+                explanation: "Có mốc thời gian cụ thể trong quá khứ ('last night'), nên dùng thì Quá khứ đơn (Past Simple)."
+            },
+            {
+                id: "q11_ppps",
+                text: "11. She ______ (work) as a teacher for five years.",
+                options: {
+                    a: "worked",
+                    b: "has worked",
+                    c: "works",
+                    d: "is working"
+                },
+                correct: "b",
+                explanation: "Hành động kéo dài trong một khoảng thời gian ('for five years') và có thể vẫn tiếp diễn, nên dùng thì Hiện tại hoàn thành (Present Perfect)."
+            },
+            {
+                id: "q12_ppps",
+                text: "12. I ______ (lose) my keys. I can't find them anywhere.",
+                options: {
+                    a: "lost",
+                    b: "have lost",
+                    c: "lose",
+                    d: "had lost"
+                },
+                correct: "b",
+                explanation: "Hành động mất chìa khóa xảy ra trong quá khứ nhưng kết quả (không tìm thấy chìa khóa) vẫn còn ở hiện tại, nên dùng thì Hiện tại hoàn thành (Present Perfect)."
+            },
+            {
+                id: "q13_ppps",
+                text: "13. When ______ you ______ (start) learning English?",
+                options: {
+                    a: "have...started",
+                    b: "did...start",
+                    c: "do...start",
+                    d: "are...starting"
+                },
+                correct: "b",
+                explanation: "Hỏi về thời điểm bắt đầu một hành động trong quá khứ, dùng thì Quá khứ đơn (Past Simple) với 'When'."
+            },
+            {
+                id: "q14_ppps",
+                text: "14. We ______ (live) in New York from 2005 to 2010.",
+                options: {
+                    a: "have lived",
+                    b: "lived",
+                    c: "live",
+                    d: "are living"
+                },
+                correct: "b",
+                explanation: "Hành động sống ở New York đã hoàn thành trong một khoảng thời gian xác định trong quá khứ ('from 2005 to 2010'), nên dùng thì Quá khứ đơn (Past Simple)."
+            },
+            {
+                id: "q15_ppps",
+                text: "15. I ______ (read) this book twice.",
+                options: {
+                    a: "read",
+                    b: "have read",
+                    c: "am reading",
+                    d: "was reading"
+                },
+                correct: "b",
+                explanation: "Diễn tả số lần thực hiện hành động cho đến hiện tại, nên dùng thì Hiện tại hoàn thành (Present Perfect)."
+            }
+        ];
+
+        // Dữ liệu câu hỏi cho Phần 2: Yet, Just, Already
+        const questionsPart2 = [
+            {
+                id: "q1_yja",
+                text: "1. Have you finished your lunch ______?",
+                options: {
+                    a: "just",
+                    b: "already",
+                    c: "yet",
+                    d: "never"
+                },
+                correct: "c",
+                explanation: "'Yet' được dùng trong câu hỏi để hỏi xem liệu điều gì đó đã xảy ra hay chưa tính đến thời điểm hiện tại."
+            },
+            {
+                id: "q2_yja",
+                text: "2. I've ______ seen that movie. It was great!",
+                options: {
+                    a: "yet",
+                    b: "just",
+                    c: "already",
+                    d: "never"
+                },
+                correct: "c",
+                explanation: "'Already' được dùng để nói rằng một điều gì đó đã xảy ra trước thời điểm nói hoặc trước thời điểm mong đợi."
+            },
+            {
+                id: "q3_yja",
+                text: "3. They've ______ arrived home from their trip.",
+                options: {
+                    a: "yet",
+                    b: "just",
+                    c: "already",
+                    d: "ever"
+                },
+                correct: "b",
+                explanation: "'Just' được dùng để nói rằng một hành động vừa mới xảy ra cách đây rất ít thời gian."
+            },
+            {
+                id: "q4_yja",
+                text: "4. He hasn't called me ______. I hope he's okay.",
+                options: {
+                    a: "just",
+                    b: "already",
+                    c: "yet",
+                    d: "ever"
+                },
+                correct: "c",
+                explanation: "'Yet' được dùng trong câu phủ định để nói rằng điều gì đó chưa xảy ra nhưng có thể sẽ xảy ra trong tương lai."
+            },
+            {
+                id: "q5_yja",
+                text: "5. We've ______ completed the first part of the project.",
+                options: {
+                    a: "yet",
+                    b: "just",
+                    c: "already",
+                    d: "ever"
+                },
+                correct: "c",
+                explanation: "'Already' được dùng để nói rằng một điều gì đó đã xảy ra trước thời điểm nói."
+            },
+            {
+                id: "q6_yja",
+                text: "6. Has she sent the email ______?",
+                options: {
+                    a: "just",
+                    b: "already",
+                    c: "yet",
+                    d: "never"
+                },
+                correct: "c",
+                explanation: "'Yet' được dùng trong câu hỏi để hỏi xem liệu điều gì đó đã xảy ra hay chưa."
+            },
+            {
+                id: "q7_yja",
+                text: "7. I've ______ finished my coffee. Do you want more?",
+                options: {
+                    a: "yet",
+                    b: "just",
+                    c: "already",
+                    d: "ever"
+                },
+                correct: "b",
+                explanation: "'Just' được dùng để nói rằng một hành động vừa mới xảy ra cách đây rất ít thời gian."
+            },
+            {
+                id: "q8_yja",
+                text: "8. They haven't decided where to go on holiday ______.",
+                options: {
+                    a: "just",
+                    b: "already",
+                    c: "yet",
+                    d: "never"
+                },
+                correct: "c",
+                explanation: "'Yet' được dùng trong câu phủ định để nói rằng điều gì đó chưa xảy ra."
+            },
+            {
+                id: "q9_yja",
+                text: "9. Don't worry, I've ______ packed my bags.",
+                options: {
+                    a: "yet",
+                    b: "just",
+                    c: "already",
+                    d: "ever"
+                },
+                correct: "c",
+                explanation: "'Already' được dùng để nói rằng một điều gì đó đã xảy ra trước thời điểm nói, thường để trấn an hoặc thông báo tin tức."
+            },
+            {
+                id: "q10_yja",
+                text: "10. He's ______ started a new job last week.",
+                options: {
+                    a: "yet",
+                    b: "just",
+                    c: "already",
+                    d: "ever"
+                },
+                correct: "b",
+                explanation: "'Just' ở đây dùng để chỉ việc anh ấy vừa mới bắt đầu công việc, dù có 'last week' nhưng nó vẫn nhấn mạnh tính gần đây của hành động."
+            },
+            {
+                id: "q11_yja",
+                text: "11. Has the train arrived ______?",
+                options: {
+                    a: "just",
+                    b: "already",
+                    c: "yet",
+                    d: "ever"
+                },
+                correct: "c",
+                explanation: "'Yet' được dùng trong câu hỏi để hỏi xem một sự việc đã xảy ra chưa."
+            },
+            {
+                id: "q12_yja",
+                text: "12. She has ______ finished her painting, it looks beautiful!",
+                options: {
+                    a: "yet",
+                    b: "just",
+                    c: "already",
+                    d: "never"
+                },
+                correct: "b",
+                explanation: "'Just' được dùng để diễn tả một hành động vừa hoàn thành."
+            },
+            {
+                id: "q13_yja",
+                text: "13. I haven't watched that TV series ______.",
+                options: {
+                    a: "just",
+                    b: "already",
+                    c: "yet",
+                    d: "ever"
+                },
+                correct: "c",
+                explanation: "'Yet' được dùng trong câu phủ định để chỉ rằng điều gì đó chưa xảy ra."
+            },
+            {
+                id: "q14_yja",
+                text: "14. We've ______ eaten dinner, so we're not hungry.",
+                options: {
+                    a: "yet",
+                    b: "just",
+                    c: "already",
+                    d: "ever"
+                },
+                correct: "c",
+                explanation: "'Already' được dùng để nói rằng hành động đã xảy ra trước đó, thường kèm theo kết quả hoặc trạng thái ở hiện tại."
+            },
+            {
+                id: "q15_yja",
+                text: "15. Has he called his parents ______?",
+                options: {
+                    a: "just",
+                    b: "already",
+                    c: "yet",
+                    d: "never"
+                },
+                correct: "c",
+                explanation: "'Yet' được dùng trong câu hỏi để hỏi xem điều gì đó đã xảy ra tính đến thời điểm hiện tại hay chưa."
+            }
+        ];
+
+        // Hàm để tải và hiển thị câu hỏi
+        function loadQuestions() {
+            const part1Container = document.getElementById('part1-questions');
+            const part2Container = document.getElementById('part2-questions');
+
+            part1Container.innerHTML = '';
+            part2Container.innerHTML = '';
+
+            // Tải câu hỏi Phần 1
+            questionsPart1.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part1Container.innerHTML += questionHtml;
+            });
+
+            // Tải câu hỏi Phần 2
+            questionsPart2.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part2Container.innerHTML += questionHtml;
+            });
+        }
+
+        // Hàm kiểm tra đáp án và hiển thị giải thích
+        function submitQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+            let allCorrect = true;
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+
+                if (selectedOption) {
+                    if (selectedOption.value === q.correct) {
+                        feedbackDiv.textContent = "Đúng rồi! 🎉";
+                        feedbackDiv.classList.add('correct');
+                    } else {
+                        feedbackDiv.textContent = `Sai rồi. Đáp án đúng là ${q.correct.toUpperCase()}. ❌`;
+                        feedbackDiv.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                } else {
+                    feedbackDiv.textContent = "Bạn chưa chọn đáp án.";
+                    feedbackDiv.classList.add('incorrect');
+                    allCorrect = false;
+                }
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${q.explanation}`;
+            });
+
+            if (allCorrect) {
+                // Có thể thêm thông báo chung nếu muốn, nhưng feedback từng câu đã rõ ràng.
+            }
+        }
+
+        // Hàm làm lại bài
+        function resetQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (selectedOption) {
+                    selectedOption.checked = false;
+                }
+
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'none';
+                explanationDiv.style.display = 'none';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                explanationDiv.innerHTML = '';
+            });
+        }
+
+        // Tải câu hỏi khi trang được tải xong
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+    </script>
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar - Past Simple vs. Continuous</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .exercise-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.05em;
+            color: #34495e;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .exercise-item .form-label {
+            margin-right: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+            width: 30px; /* Numbering width */
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .exercise-item .text-segment {
+            margin-right: 5px;
+        }
+        .exercise-item .answer-select {
+            flex-grow: 0; /* Don't grow too much */
+            width: auto; /* Adjust width based on content */
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .exercise-item .answer-select:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .exercise-item .answer-select.is-valid {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .exercise-item .answer-select.is-invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+            background-color: #f8d7da;
+            color: #842029;
+        }
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default */
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <span class="badge bg-primary fs-6 me-2">D</span>
+            <h1>Circle the correct word or phrase.</h1>
+        </div>
+        <p class="instruction">
+            Hãy chọn từ hoặc cụm từ đúng để hoàn thành các câu.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="circleForm">
+            <div class="exercise-item">
+                <label for="q1" class="form-label">1</label>
+                <span class="text-segment">When we were in Canada, we</span>
+                <select class="form-select answer-select" id="q1" name="q1">
+                    <option value="">-- Chọn --</option>
+                    <option value="went">went</option>
+                    <option value="were going">were going</option>
+                </select>
+                <span class="text-segment">skiing almost every day.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q2" class="form-label">2</label>
+                <span class="text-segment">About four years ago, I</span>
+                <select class="form-select answer-select" id="q2" name="q2">
+                    <option value="">-- Chọn --</option>
+                    <option value="decided">decided</option>
+                    <option value="was deciding">was deciding</option>
+                </select>
+                <span class="text-segment">to become a chef.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q3" class="form-label">3</label>
+                <span class="text-segment">Georgia</span>
+                <select class="form-select answer-select" id="q3" name="q3">
+                    <option value="">-- Chọn --</option>
+                    <option value="had">had</option>
+                    <option value="was having">was having</option>
+                </select>
+                <span class="text-segment">a shower when someone knocked at the door.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q4" class="form-label">4</label>
+                <span class="text-segment">Holly and I ran from the house to the taxi because it</span>
+                <select class="form-select answer-select" id="q4" name="q4">
+                    <option value="">-- Chọn --</option>
+                    <option value="rained">rained</option>
+                    <option value="was raining">was raining</option>
+                </select>
+                <span class="text-segment">heavily.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q5" class="form-label">5</label>
+                <span class="text-segment">Two men</span>
+                <select class="form-select answer-select" id="q5" name="q5">
+                    <option value="">-- Chọn --</option>
+                    <option value="argued">argued</option>
+                    <option value="were arguing">were arguing</option>
+                </select>
+                <span class="text-segment">outside, so I went to see what was happening.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q6" class="form-label">6</label>
+                <span class="text-segment">Daniel</span>
+                <select class="form-select answer-select" id="q6" name="q6">
+                    <option value="">-- Chọn --</option>
+                    <option value="called">called</option>
+                    <option value="was calling">was calling</option>
+                </select>
+                <span class="text-segment">you at one o'clock yesterday, but you were here with me.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q7" class="form-label">7</label>
+                <span class="text-segment">We</span>
+                <select class="form-select answer-select" id="q7" name="q7">
+                    <option value="">-- Chọn --</option>
+                    <option value="ate">ate</option>
+                    <option value="were eating">were eating</option>
+                </select>
+                <span class="text-segment">breakfast when a letter came through the letter box.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q8" class="form-label">8</label>
+                <span class="text-segment">As I walked past the window, I saw that Paula</span>
+                <select class="form-select answer-select" id="q8" name="q8">
+                    <option value="">-- Chọn --</option>
+                    <option value="made">made</option>
+                    <option value="was making">was making</option>
+                </select>
+                <span class="text-segment">a cake.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q9" class="form-label">9</label>
+                <span class="text-segment">I</span>
+                <select class="form-select answer-select" id="q9" name="q9">
+                    <option value="">-- Chọn --</option>
+                    <option value="dreamt">dreamt</option>
+                    <option value="was dreaming">was dreaming</option>
+                </select>
+                <span class="text-segment">about my favourite band when the alarm clock went off.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q10" class="form-label">10</label>
+                <span class="text-segment">While I</span>
+                <select class="form-select answer-select" id="q10" name="q10">
+                    <option value="">-- Chọn --</option>
+                    <option value="practised">practised</option>
+                    <option value="was practising">was practising</option>
+                </select>
+                <span class="text-segment">the trumpet last night, a neighbour came to complain.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTFyMfwGpGFFRKKoXpQf/ZtVKKjoF+L7ffy4qC7zQtxHiJitjEATj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkmXLRV5vfJzJrEPiniwz4rsVZpGgG8Y1r+KNuGMuwtj44gJjEnFqVfXpX5f" crossorigin="anonymous"></script>
+
+    <script>
+        const correctAnswers = {
+            'q1': {
+                answer: 'went',
+                options: ['went', 'were going'],
+                translation: 'Khi chúng tôi ở Canada, chúng tôi đã trượt tuyết gần như mỗi ngày.',
+                explanation: 'Đây là một hành động lặp đi lặp lại (routine) trong quá khứ ("almost every day"), không phải một hành động đang diễn ra tại một thời điểm cụ thể. Vì vậy, dùng Past Simple.',
+                grammar_note: 'Thì Quá khứ đơn (Past Simple) dùng cho các thói quen, hành động lặp lại trong quá khứ.'
+            },
+            'q2': {
+                answer: 'decided',
+                options: ['decided', 'was deciding'],
+                translation: 'Khoảng bốn năm trước, tôi đã quyết định trở thành một đầu bếp.',
+                explanation: 'Hành động "quyết định" là một hành động dứt điểm, xảy ra tại một thời điểm xác định trong quá khứ ("About four years ago"), không phải một quá trình kéo dài. Dùng Past Simple.',
+                grammar_note: 'Past Simple dùng cho các hành động hoàn thành tại một thời điểm cụ thể trong quá khứ.'
+            },
+            'q3': {
+                answer: 'was having',
+                options: ['had', 'was having'],
+                translation: 'Georgia đang tắm thì có người gõ cửa.',
+                explanation: 'Hành động "đang tắm" là hành động đang diễn ra (Past Continuous) thì bị hành động "gõ cửa" (Past Simple) xen vào. "Knocked" là Past Simple, nên hành động còn lại phải là Past Continuous.',
+                grammar_note: 'Cấu trúc: Past Continuous (hành động dài đang xảy ra) + when + Past Simple (hành động ngắn xen vào).'
+            },
+            'q4': {
+                answer: 'was raining',
+                options: ['rained', 'was raining'],
+                translation: 'Holly và tôi chạy từ nhà ra taxi vì trời đang mưa rất to.',
+                explanation: 'Hành động "chạy ra taxi" là kết quả của việc "trời đang mưa" (Past Continuous). Việc trời mưa là một trạng thái, một quá trình kéo dài tại thời điểm đó.',
+                grammar_note: 'Past Continuous thường dùng để mô tả bối cảnh hoặc một hành động đang diễn ra làm nền cho hành động khác.'
+            },
+            'q5': {
+                answer: 'were arguing',
+                options: ['argued', 'were arguing'],
+                translation: 'Hai người đàn ông đang cãi nhau bên ngoài, nên tôi đã ra xem chuyện gì đang xảy ra.',
+                explanation: 'Việc "hai người đàn ông đang cãi nhau" là một hành động đang diễn ra (Past Continuous), khiến người nói phải ra xem. Hành động "went to see" là Past Simple, xen vào hành động đang diễn ra.',
+                grammar_note: 'Tương tự Q3, Past Continuous (hành động đang diễn ra) + so + Past Simple (hành động xảy ra do đó).'
+            },
+            'q6': {
+                answer: 'called',
+                options: ['called', 'was calling'],
+                translation: 'Daniel đã gọi cho bạn lúc một giờ ngày hôm qua, nhưng bạn lại ở đây với tôi.',
+                explanation: 'Hành động "gọi" xảy ra tại một thời điểm cụ thể, đã hoàn thành trong quá khứ ("at one o\'clock yesterday"). Dùng Past Simple.',
+                grammar_note: 'Past Simple dùng để chỉ hành động hoàn thành tại một thời điểm xác định trong quá khứ. "You were here with me" cũng là Past Simple, chỉ trạng thái tại thời điểm đó.'
+            },
+            'q7': {
+                answer: 'were eating',
+                options: ['ate', 'were eating'],
+                translation: 'Chúng tôi đang ăn sáng thì một lá thư được gửi qua hộp thư.',
+                explanation: 'Hành động "đang ăn sáng" (Past Continuous) là hành động đang diễn ra thì bị hành động "một lá thư được gửi qua hộp thư" (Past Simple) xen vào.',
+                grammar_note: 'Cấu trúc: Past Continuous (hành động dài đang xảy ra) + when + Past Simple (hành động ngắn xen vào).'
+            },
+            'q8': {
+                answer: 'was making',
+                options: ['made', 'was making'],
+                translation: 'Khi tôi đi ngang qua cửa sổ, tôi thấy Paula đang làm bánh.',
+                explanation: 'Hành động "Paula đang làm bánh" là một hành động đang diễn ra (Past Continuous) mà người nói đã nhìn thấy khi họ đang "đi ngang qua" (cũng là Past Continuous hoặc một điểm thời gian). Hành động "thấy" (saw) là Past Simple.',
+                grammar_note: 'Past Continuous dùng để mô tả một hành động đang diễn ra vào thời điểm một hành động khác (Past Simple) xảy ra.'
+            },
+            'q9': {
+                answer: 'was dreaming',
+                options: ['dreamt', 'was dreaming'],
+                translation: 'Tôi đang mơ về ban nhạc yêu thích của mình thì chuông báo thức reo lên.',
+                explanation: 'Hành động "đang mơ" (Past Continuous) là hành động đang diễn ra thì bị hành động "chuông báo thức reo" (Past Simple) xen vào.',
+                grammar_note: 'Cấu trúc: Past Continuous (hành động dài đang xảy ra) + when + Past Simple (hành động ngắn xen vào).'
+            },
+            'q10': {
+                answer: 'was practising',
+                options: ['practised', 'was practising'],
+                translation: 'Trong khi tôi đang luyện kèn trumpet tối qua, một người hàng xóm đã đến phàn nàn.',
+                explanation: 'Hành động "đang luyện kèn" (Past Continuous) là hành động đang diễn ra song song hoặc làm nền cho hành động "người hàng xóm đến phàn nàn" (Past Simple). Từ "While" thường đi với Past Continuous.',
+                grammar_note: 'Cấu trúc: While + Past Continuous (hành động dài đang xảy ra) + Past Simple (hành động khác xảy ra).'
+            }
+        };
+
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            Object.keys(correctAnswers).forEach(qId => {
+                const selectElement = document.getElementById(qId);
+                if (!selectElement) return;
+
+                const userAnswer = selectElement.value;
+                const correctInfo = correctAnswers[qId];
+                const feedbackIcon = selectElement.nextElementSibling;
+
+                selectElement.classList.remove('is-valid', 'is-invalid');
+                feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+
+                const isCorrect = (userAnswer === correctInfo.answer);
+
+                if (isCorrect) {
+                    score++;
+                    selectElement.classList.add('is-valid');
+                    feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                } else {
+                    selectElement.classList.add('is-invalid');
+                    feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                }
+                feedbackIcon.style.display = 'inline-block';
+
+                // Add detailed solution for each question
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                // Reconstruct original sentence and highlight correct answer
+                const questionTextDiv = document.createElement('div');
+                questionTextDiv.classList.add('question-text');
+                // Get all text nodes and elements within the parent of the select
+                let sentenceParts = [];
+                let parentElement = selectElement.parentNode;
+                Array.from(parentElement.childNodes).forEach(node => {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        sentenceParts.push(node.textContent.trim());
+                    } else if (node.nodeType === Node.ELEMENT_NODE) {
+                        if (node === selectElement) {
+                            sentenceParts.push(`<span class="correct-answer-text">${correctInfo.answer}</span>`);
+                        } else if (node.classList.contains('form-label') || node.classList.contains('feedback-icon')) {
+                            // Skip these as they are handled or not part of the sentence flow
+                        } else {
+                             // For other elements like text-segment spans
+                            sentenceParts.push(node.textContent.trim());
+                        }
+                    }
+                });
+                questionTextDiv.innerHTML = `<label class="form-label">${qId.substring(1)}</label>. ` + sentenceParts.filter(part => part !== '').join(' ');
+
+                solutionItem.appendChild(questionTextDiv);
+
+                // Grammar explanation
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${correctInfo.explanation}<br>${correctInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                // Translation
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${correctInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+        }
+
+        function resetExercise() {
+            const selects = document.querySelectorAll('.answer-select');
+            selects.forEach(select => {
+                select.value = ''; // Reset to default "Chọn" option
+                select.classList.remove('is-valid', 'is-invalid');
+                const feedbackIcon = select.nextElementSibling;
+                if (feedbackIcon) { // Check if feedbackIcon exists
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    feedbackIcon.style.display = 'none'; // Hide feedback icon
+                }
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions
+        }
+    </script>
+</body>
+</html>
+            

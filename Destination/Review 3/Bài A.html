@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài A: Đánh dấu tích nếu dòng đúng, viết từ thừa nếu có</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Exercise text container */
+        .exercise-text-container {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            font-size: 1.1em;
+            line-height: 1.8; /* Increased line height for readability */
+        }
+        .exercise-text-container p {
+            margin-bottom: 10px; /* Reduced margin between lines */
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .exercise-text-container .line-number {
+            font-weight: 700;
+            margin-right: 10px;
+            color: #007bff;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+
+        /* Input for answer (tick or extra word) */
+        .exercise-text-container .answer-input {
+            border: none;
+            border-bottom: 2px solid #ced4da; /* Underline style */
+            padding: 2px 5px;
+            margin: 0 5px;
+            font-size: 1em;
+            text-align: center;
+            width: 80px; /* Adjust width as needed */
+            background-color: transparent; /* Transparent background */
+            transition: border-color 0.2s ease;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .exercise-text-container .answer-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        /* Feedback styles after submission */
+        .exercise-text-container .answer-input.is-correct {
+            border-color: #198754;
+            color: #198754;
+            font-weight: 600;
+        }
+        .exercise-text-container .answer-input.is-incorrect {
+            border-color: #dc3545;
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        /* Feedback icons (placed next to inputs for this exercise) */
+        .feedback-icon {
+            margin-left: 5px;
+            font-size: 1em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .exercise-text-container {
+                padding: 15px;
+                font-size: 1em;
+            }
+            .exercise-text-container .answer-input {
+                width: 60px; /* Smaller width for mobile */
+                padding: 1px 3px;
+                font-size: 0.9em;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Sửa Lỗi/Tìm Từ Thừa</h1>
+        </div>
+        <h2>Nếu một dòng đúng, hãy đánh dấu tích (✓). Nếu có một từ thừa trong dòng, hãy viết từ đó.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> If a line is correct, put a tick (✓). If there is an extra word in a line, write the word.
+            <br>
+            <strong>Hướng dẫn:</strong> Nếu một dòng đúng, hãy điền "✓". Nếu có một từ thừa trong dòng, hãy viết từ đó vào ô trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="errorCorrectionForm">
+            <div class="exercise-text-container">
+                <p style="font-weight: bold; font-size: 1.5em; text-align: center; margin-bottom: 20px;">Unseen London</p>
+                <p>
+                    <span class="line-number">1</span> <input type="text" class="answer-input" id="q1_input"> Of course, London is famous for that its attractions like Big Ben
+                </p>
+                <p>
+                    <span class="line-number">2</span> <input type="text" class="answer-input" id="q2_input"> and the Tower of London. Millions of tourists look at these
+                </p>
+                <p>
+                    <span class="line-number">3</span> <input type="text" class="answer-input" id="q3_input"> buildings every year – but not far distance from these places,
+                </p>
+                <p>
+                    <span class="line-number">4</span> <input type="text" class="answer-input" id="q4_input"> there are other interesting sights. Next time you set off to visit
+                </p>
+                <p>
+                    <span class="line-number">5</span> <input type="text" class="answer-input" id="q5_input"> London, why not plan to go to some of the places close in to the
+                </p>
+                <p>
+                    <span class="line-number">6</span> <input type="text" class="answer-input" id="q6_input"> centre of the city that tourists rarely go to? Get into of a taxi and
+                </p>
+                <p>
+                    <span class="line-number">7</span> <input type="text" class="answer-input" id="q7_input"> ask the driver to take you to Billingsgate fish market, for
+                </p>
+                <p>
+                    <span class="line-number">8</span> <input type="text" class="answer-input" id="q8_input"> example. When you arrive there at the market, you'll be amazed
+                </p>
+                <p>
+                    <span class="line-number">9</span> <input type="text" class="answer-input" id="q9_input"> at the sights and sounds of real London. You can ask to the fish
+                </p>
+                <p>
+                    <span class="line-number">10</span> <input type="text" class="answer-input" id="q10_input"> sellers about their work – and you don't have to wait on for hours
+                </p>
+                <p>
+                    <span class="line-number">11</span> <input type="text" class="answer-input" id="q11_input"> to get a ticket!
+                </p>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                line_text: 'Of course, London is famous for that its attractions like Big Ben',
+                correct_answer: 'that', // Extra word
+                explanation: '"That" là từ thừa. Cấu trúc đúng là "famous for its attractions".',
+                grammar_note: 'Không dùng "that" sau "famous for" khi nói về lý do nổi tiếng.'
+            },
+            'q2': {
+                line_text: 'and the Tower of London. Millions of tourists look at these',
+                correct_answer: '✓', // Correct line
+                explanation: 'Dòng này đúng ngữ pháp và ý nghĩa.',
+                grammar_note: 'Cấu trúc "look at" (nhìn vào) là chính xác.'
+            },
+            'q3': {
+                line_text: 'buildings every year – but not far distance from these places,',
+                correct_answer: 'distance', // Extra word
+                explanation: '"Distance" là từ thừa. Cụm từ đúng là "not far from".',
+                grammar_note: 'Cụm từ cố định "far from" (xa khỏi).'
+            },
+            'q4': {
+                line_text: 'there are other interesting sights. Next time you set off to visit',
+                correct_answer: '✓', // Correct line
+                explanation: 'Dòng này đúng ngữ pháp và ý nghĩa.',
+                grammar_note: 'Cụm động từ "set off" (khởi hành, bắt đầu chuyến đi) và "to visit" (để thăm) là chính xác.'
+            },
+            'q5': {
+                line_text: 'London, why not plan to go to some of the places close in to the',
+                correct_answer: 'in', // Extra word
+                explanation: '"In" là từ thừa. Cụm từ đúng là "close to".',
+                grammar_note: 'Cụm từ cố định "close to" (gần với).'
+            },
+            'q6': {
+                line_text: 'centre of the city that tourists rarely go to? Get into of a taxi and',
+                correct_answer: 'of', // Extra word
+                explanation: '"Of" là từ thừa. Cụm từ đúng là "Get into a taxi".',
+                grammar_note: 'Cụm động từ "get into" (vào trong) không cần giới từ "of" theo sau.'
+            },
+            'q7': {
+                line_text: 'ask the driver to take you to Billingsgate fish market, for',
+                correct_answer: '✓', // Correct line
+                explanation: 'Dòng này đúng ngữ pháp và ý nghĩa.',
+                grammar_note: 'Cấu trúc "ask someone to do something" (yêu cầu ai làm gì) và "take you to" (đưa bạn đến) là chính xác.'
+            },
+            'q8': {
+                line_text: 'example. When you arrive there at the market, you\'ll be amazed',
+                correct_answer: 'there', // Extra word
+                explanation: '"There" là từ thừa. Khi đã có "at the market", không cần "there" nữa.',
+                grammar_note: 'Tránh lặp từ chỉ địa điểm khi đã có giới từ và danh từ chỉ địa điểm cụ thể.'
+            },
+            'q9': {
+                line_text: 'at the sights and sounds of real London. You can ask to the fish',
+                correct_answer: 'to', // Extra word
+                explanation: '"To" là từ thừa. Cụm từ đúng là "ask the fish sellers".',
+                grammar_note: 'Động từ "ask" khi có tân ngữ trực tiếp (người được hỏi) thì không cần giới từ "to".'
+            },
+            'q10': {
+                line_text: 'sellers about their work – and you don\'t have to wait on for hours',
+                correct_answer: 'on', // Extra word
+                explanation: '"On" là từ thừa. Cụm từ đúng là "wait for".',
+                grammar_note: 'Cụm động từ "wait for" (chờ đợi) không cần thêm giới từ "on".'
+            },
+            'q11': {
+                line_text: 'to get a ticket!',
+                correct_answer: '✓', // Correct line
+                explanation: 'Dòng này đúng ngữ pháp và ý nghĩa.',
+                grammar_note: 'Cấu trúc "to get a ticket" (để lấy vé) là chính xác.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(`${qId}_input`);
+                
+                // Ensure inputElement is not null before proceeding
+                if (!inputElement) {
+                    console.error(`Input element with ID ${qId}_input not found.`);
+                    return; // Skip this question if element is missing
+                }
+
+                const userAnswer = inputElement.value.trim().toLowerCase();
+                const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                // Remove previous feedback classes
+                inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                let isCorrect = false;
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-correct');
+                } else {
+                    inputElement.classList.add('is-incorrect');
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                let solutionText = `${questionNumber}. ${questionInfo.line_text}`;
+                if (questionInfo.correct_answer === '✓') {
+                    solutionText += ` <span class="correct-answer-text">(✓)</span>`;
+                } else {
+                    solutionText += ` <span class="correct-answer-text">(${questionInfo.correct_answer})</span>`;
+                }
+                questionTextSolutionDiv.innerHTML = solutionText;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            document.querySelectorAll('.answer-input').forEach(input => {
+                input.value = ''; // Clear input field
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

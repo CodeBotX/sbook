@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Hiện Tại Đơn (Điền Từ)</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for the word box */
+        .word-box {
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .word-box .word {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .word-box .word:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .word-box .word.used {
+            background-color: #cccccc; /* Grey out used words */
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* Styling for the passage/story */
+        .passage-section {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .passage-section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        /* Styling for input fields within the passage */
+        .passage-section input[type="text"] {
+            display: inline-block;
+            width: 120px; /* Adjust width as needed for single words */
+            margin: 0 5px;
+            padding: 0 5px; /* Reduced padding for underline effect */
+            border: none; /* Remove all borders */
+            border-bottom: 1px solid #ced4da; /* Only bottom border */
+            border-radius: 0; /* Remove border-radius for a clean underline */
+            font-size: 1em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: transparent; /* Ensure background is transparent */
+            text-align: center; /* Center the text in the input */
+        }
+        .passage-section input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: none; /* Remove box-shadow on focus for underline effect */
+            border-bottom-width: 2px; /* Thicker underline on focus */
+        }
+        /* Styles for correct and incorrect input feedback */
+        .passage-section input[type="text"].is-correct {
+            border-color: #198754;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for correct */
+        }
+        .passage-section input[type="text"].is-incorrect {
+            border-color: #dc3545;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for incorrect */
+        }
+
+        /* Feedback icons (placed next to inputs, but hidden by default) */
+        .feedback-icon {
+            margin-left: 5px; /* Smaller margin for inline icons */
+            font-size: 1em; /* Smaller size for inline icons */
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .word-box .word {
+                padding: 6px 12px;
+                font-size: 0.9em;
+            }
+            .passage-section {
+                padding: 15px;
+            }
+            .passage-section p {
+                font-size: 1em;
+            }
+            .passage-section input[type="text"] {
+                width: 80px; /* Smaller width for inputs on small screens */
+                margin: 0 3px;
+                padding: 0 4px; /* Adjusted padding */
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Hiện Tại Đơn (Điền Từ)</h1>
+        </div>
+        <h2>Hoàn thành bằng cách sử dụng dạng hiện tại đơn đúng của các động từ trong hộp.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Complete using the correct present simple form of the verbs in the box.
+            <br>
+            <strong>Hướng dẫn:</strong> Hoàn thành bằng cách sử dụng dạng hiện tại đơn đúng của các động từ trong hộp.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <div class="word-box" id="wordBox">
+            <!-- Words will be populated by JavaScript -->
+        </div>
+
+        <form id="presentSimpleForm">
+            <div class="passage-section">
+                <p>
+                    I'm so excited about my holiday! My plane (1) <input type="text" id="q1" name="q1" class="form-control d-inline-block w-auto"> the airport here at
+                    nine o'clock and we (2) <input type="text" id="q2" name="q2" class="form-control d-inline-block w-auto"> in Paris two hours later. We then
+                    (3) <input type="text" id="q3" name="q3" class="form-control d-inline-block w-auto"> the train from the airport to the city. We'll have a great
+                    week, and then we (4) <input type="text" id="q4" name="q4" class="form-control d-inline-block w-auto"> back on the 17<sup>th</sup>. I can't wait!
+                </p>
+                <!-- Feedback icons for each input -->
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Define the words available in the box
+        const wordBoxWords = ['arrive', 'come', 'leave', 'take'];
+
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                context_sentence: 'I\'m so excited about my holiday! My plane (1) {blank} the airport here at nine o\'clock and we (2) {q2_answer} in Paris two hours later.',
+                correct_answer: 'leaves',
+                fullSentence: 'I\'m so excited about my holiday! My plane leaves the airport here at nine o\'clock and we arrive in Paris two hours later.',
+                translation: 'Tôi rất háo hức về kỳ nghỉ của mình! Máy bay của tôi rời sân bay lúc chín giờ và chúng tôi đến Paris hai giờ sau đó.',
+                explanation: 'Sử dụng thì hiện tại đơn để diễn tả một lịch trình hoặc thời gian biểu cố định (lịch bay). Chủ ngữ "My plane" là số ít nên động từ thêm "s".',
+                grammar_note: 'Thì hiện tại đơn (Present Simple) dùng cho lịch trình, thời gian biểu.'
+            },
+            'q2': {
+                context_sentence: 'My plane (1) {q1_answer} the airport here at nine o\'clock and we (2) {blank} in Paris two hours later.',
+                correct_answer: 'arrive',
+                fullSentence: 'My plane leaves the airport here at nine o\'clock and we arrive in Paris two hours later.',
+                translation: 'Máy bay của tôi rời sân bay lúc chín giờ và chúng tôi đến Paris hai giờ sau đó.',
+                explanation: 'Sử dụng thì hiện tại đơn để diễn tả một sự kiện theo lịch trình. Chủ ngữ "we" là số nhiều nên động từ giữ nguyên dạng nguyên thể.',
+                grammar_note: 'Thì hiện tại đơn (Present Simple) dùng cho lịch trình, thời gian biểu.'
+            },
+            'q3': {
+                context_sentence: 'We then (3) {blank} the train from the airport to the city. We\'ll have a great week, and then we (4) {q4_answer} back on the 17th. I can\'t wait!',
+                correct_answer: 'take',
+                fullSentence: 'We then take the train from the airport to the city. We\'ll have a great week, and then we come back on the 17th. I can\'t wait!',
+                translation: 'Sau đó chúng tôi bắt tàu từ sân bay vào thành phố. Chúng tôi sẽ có một tuần tuyệt vời, và sau đó chúng tôi quay lại vào ngày 17. Tôi không thể chờ đợi được nữa!',
+                explanation: 'Sử dụng thì hiện tại đơn để diễn tả một chuỗi hành động theo kế hoạch hoặc lịch trình. Chủ ngữ "we" là số nhiều nên động từ giữ nguyên dạng nguyên thể.',
+                grammar_note: 'Thì hiện tại đơn (Present Simple) dùng để diễn tả chuỗi hành động theo lịch trình.'
+            },
+            'q4': {
+                context_sentence: 'We then (3) {q3_answer} the train from the airport to the city. We\'ll have a great week, and then we (4) {blank} back on the 17th. I can\'t wait!',
+                correct_answer: 'come',
+                fullSentence: 'We then take the train from the airport to the city. We\'ll have a great week, and then we come back on the 17th. I can\'t wait!',
+                translation: 'Sau đó chúng tôi bắt tàu từ sân bay vào thành phố. Chúng tôi sẽ có một tuần tuyệt vời, và sau đó chúng tôi quay lại vào ngày 17. Tôi không thể chờ đợi được nữa!',
+                explanation: 'Sử dụng thì hiện tại đơn để diễn tả một sự kiện theo lịch trình. Chủ ngữ "we" là số nhiều nên động từ giữ nguyên dạng nguyên thể.',
+                grammar_note: 'Thì hiện tại đơn (Present Simple) dùng cho lịch trình, thời gian biểu.'
+            }
+        };
+
+        // Function to populate the word box
+        function populateWordBox() {
+            const wordBoxDiv = document.getElementById('wordBox');
+            wordBoxDiv.innerHTML = ''; // Clear existing words
+            wordBoxWords.forEach(word => {
+                const span = document.createElement('span');
+                span.classList.add('word');
+                span.textContent = word;
+                span.addEventListener('click', () => {
+                    // Find the currently focused input
+                    const activeElement = document.activeElement;
+                    if (activeElement && activeElement.tagName === 'INPUT' && activeElement.type === 'text' && activeElement.closest('.passage-section')) {
+                        activeElement.value = word;
+                        // Mark the word as used (optional, but good for UX)
+                        span.classList.add('used');
+                    }
+                });
+                wordBoxDiv.appendChild(span);
+            });
+        }
+
+        // Call populateWordBox on page load
+        document.addEventListener('DOMContentLoaded', populateWordBox);
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                let isCorrect = false;
+                const userAnswer = (inputElement ? inputElement.value.trim() : '').toLowerCase();
+                const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                // Reset feedback classes on input
+                if (inputElement) {
+                    inputElement.classList.remove('is-correct', 'is-incorrect');
+                }
+
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    if (inputElement) {
+                        inputElement.classList.add('is-correct');
+                    }
+                } else {
+                    if (inputElement) {
+                        inputElement.classList.add('is-incorrect');
+                    }
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                // Reconstruct the sentence with the correct answer highlighted
+                const fullTextWithCorrectAnswer = questionInfo.context_sentence.replace('{blank}', `<span class="correct-answer-text">${questionInfo.correct_answer}</span>`);
+                
+                // For simplicity, we'll just show the specific blank's solution.
+                // If full passage reconstruction is needed, a more complex logic to fetch other answers would be required.
+                questionTextSolutionDiv.innerHTML = `${qId.substring(1)}. ${questionInfo.fullSentence.replace(questionInfo.correct_answer, `<span class="correct-answer-text">${questionInfo.correct_answer}</span>`)}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = ''; // Clear text input
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+            
+            // Repopulate the word box and remove 'used' class
+            populateWordBox();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose the Correct Answer - English Exercise</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+        }
+        .container-main {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .exercise-item {
+            margin-bottom: 25px;
+            font-size: 1.05em;
+            color: #34495e;
+            padding: 10px 0;
+            display: flex;
+            flex-wrap: wrap; /* Allows options to wrap to the next line */
+            align-items: flex-start;
+        }
+        .exercise-item .question-number {
+            font-weight: 600;
+            color: #2c3e50;
+            width: 30px; /* Numbering width */
+            text-align: right;
+            margin-right: 15px;
+            flex-shrink: 0;
+            padding-top: 5px; /* Align number with the first line of text */
+        }
+        .question-content {
+            flex-grow: 1;
+        }
+        .question-sentence {
+            margin-bottom: 10px;
+        }
+        .option-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Space between options */
+            margin-top: 5px; /* Space between sentence and options */
+        }
+        .option-group .form-check {
+            margin-right: 20px; /* Space between A, B, C options */
+            margin-bottom: 5px; /* Space for wrapped options */
+        }
+        .option-group .form-check-input {
+            margin-top: 0.4em; /* Adjust alignment of radio button */
+        }
+        .option-group .form-check-label {
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px 0; /* Add padding for clickability */
+        }
+        .option-group .form-check-input:checked + .form-check-label {
+            color: #007bff; /* Highlight selected label */
+        }
+
+        /* Feedback styles after checking */
+        .form-check-input.is-valid + .form-check-label {
+            color: #28a745 !important;
+            font-weight: 700;
+        }
+        .form-check-input.is-invalid + .form-check-label {
+            color: #dc3545 !important;
+            font-weight: 700;
+        }
+        /* Style for correct option if user chose wrong */
+        .option-group.show-solution .form-check-input[data-correct="true"] + .form-check-label {
+            color: #28a745 !important;
+            font-weight: 700;
+            text-decoration: underline; /* Highlight the correct answer */
+        }
+        .option-group.show-solution .form-check-input[data-correct="true"] {
+             /* Ensure the radio button for the correct answer is also visible/marked */
+             box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
+             border-color: #28a745;
+        }
+
+
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text-solution {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+        }
+        .solution-list .solution-item .explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <span class="badge bg-primary fs-6 me-2">D</span>
+            <h1>Choose the correct answer.</h1>
+        </div>
+        <p class="instruction">
+            Chọn đáp án đúng nhất để hoàn thành mỗi câu.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="chooseAnswerForm">
+            <div class="exercise-item" data-question="q1">
+                <div class="question-number">1</div>
+                <div class="question-content">
+                    <div class="question-sentence">You should take ............... a sport and then you would get more exercise.</div>
+                    <div class="option-group" data-q="q1">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1_A" value="off">
+                            <label class="form-check-label" for="q1_A">A off</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1_B" value="up">
+                            <label class="form-check-label" for="q1_B">B up</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1_C" value="down">
+                            <label class="form-check-label" for="q1_C">C down</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q2">
+                <div class="question-number">2</div>
+                <div class="question-content">
+                    <div class="question-sentence">I'm trying to work! Could you please turn your music ...............?</div>
+                    <div class="option-group" data-q="q2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2_A" value="down">
+                            <label class="form-check-label" for="q2_A">A down</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2_B" value="in">
+                            <label class="form-check-label" for="q2_B">B in</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2_C" value="out">
+                            <label class="form-check-label" for="q2_C">C out</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q3">
+                <div class="question-number">3</div>
+                <div class="question-content">
+                    <div class="question-sentence">Just ask and I'm sure the other children will let you join ............... .</div>
+                    <div class="option-group" data-q="q3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3_A" value="out">
+                            <label class="form-check-label" for="q3_A">A out</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3_B" value="up">
+                            <label class="form-check-label" for="q3_B">B up</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3_C" value="in">
+                            <label class="form-check-label" for="q3_C">C in</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q4">
+                <div class="question-number">4</div>
+                <div class="question-content">
+                    <div class="question-sentence">The referee sent David ............... for arguing with him.</div>
+                    <div class="option-group" data-q="q4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4_A" value="off">
+                            <label class="form-check-label" for="q4_A">A off</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4_B" value="down">
+                            <label class="form-check-label" for="q4_B">B down</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" id="q4_C" value="up">
+                            <label class="form-check-label" for="q4_C">C up</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q5">
+                <div class="question-number">5</div>
+                <div class="question-content">
+                    <div class="question-sentence">This is my favourite song! Turn it ............... !</div>
+                    <div class="option-group" data-q="q5">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5_A" value="off">
+                            <label class="form-check-label" for="q5_A">A off</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5_B" value="up">
+                            <label class="form-check-label" for="q5_B">B up</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q5" id="q5_C" value="out">
+                            <label class="form-check-label" for="q5_C">C out</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q6">
+                <div class="question-number">6</div>
+                <div class="question-content">
+                    <div class="question-sentence">A mobile phone rang, but the musician just carried ............... playing.</div>
+                    <div class="option-group" data-q="q6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6_A" value="on">
+                            <label class="form-check-label" for="q6_A">A on</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6_B" value="up">
+                            <label class="form-check-label" for="q6_B">B up</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q6" id="q6_C" value="in">
+                            <label class="form-check-label" for="q6_C">C in</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q7">
+                <div class="question-number">7</div>
+                <div class="question-content">
+                    <div class="question-sentence">We can't afford to eat ............... very often.</div>
+                    <div class="option-group" data-q="q7">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7_A" value="off">
+                            <label class="form-check-label" for="q7_A">A off</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7_B" value="up">
+                            <label class="form-check-label" for="q7_B">B up</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q7" id="q7_C" value="out">
+                            <label class="form-check-label" for="q7_C">C out</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q8">
+                <div class="question-number">8</div>
+                <div class="question-content">
+                    <div class="question-sentence">I've decided to become a vegetarian and give ............... meat.</div>
+                    <div class="option-group" data-q="q8">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8_A" value="up">
+                            <label class="form-check-label" for="q8_A">A up</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8_B" value="off">
+                            <label class="form-check-label" for="q8_B">B off</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q8" id="q8_C" value="out">
+                            <label class="form-check-label" for="q8_C">C out</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTFyMfwGpGFFRKKoXpQf/ZtVKKjoF+L7ffy4qC7zQtxHiJitjEATj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkmXLRV5vfJzJrEPiniwz4rsVZpGgG8Y1r+KNuGMuwtj44gJjEnFqVfXpX5f" crossorigin="anonymous"></script>
+
+    <script>
+        const correctAnswers = {
+            'q1': {
+                correct: 'up',
+                sentence: 'You should take %s a sport and then you would get more exercise.',
+                explanation: 'Cụm động từ "take up" có nghĩa là bắt đầu một sở thích, một môn thể thao, hoặc một hoạt động mới. Câu này khuyên nên bắt đầu một môn thể thao để tập thể dục nhiều hơn.',
+                translation: 'Bạn nên bắt đầu một môn thể thao và sau đó bạn sẽ tập thể dục nhiều hơn.',
+            },
+            'q2': {
+                correct: 'down',
+                sentence: "I'm trying to work! Could you please turn your music %s?",
+                explanation: 'Cụm động từ "turn down" có nghĩa là giảm âm lượng. Trong ngữ cảnh này, người nói đang cố gắng làm việc và muốn nhạc nhỏ tiếng hơn.',
+                translation: 'Tôi đang cố gắng làm việc! Bạn có thể làm ơn vặn nhỏ nhạc của bạn không?',
+            },
+            'q3': {
+                correct: 'in',
+                sentence: "Just ask and I'm sure the other children will let you join %s.",
+                explanation: 'Cụm động từ "join in" có nghĩa là tham gia vào một hoạt động hoặc trò chơi cùng với những người khác.',
+                translation: 'Cứ hỏi đi và tôi chắc những đứa trẻ khác sẽ cho bạn tham gia cùng.',
+            },
+            'q4': {
+                correct: 'off',
+                sentence: 'The referee sent David %s for arguing with him.',
+                explanation: 'Cụm động từ "send off" có nghĩa là đuổi một cầu thủ ra khỏi sân trong một trận đấu thể thao (thường do lỗi vi phạm nghiêm trọng).',
+                translation: 'Trọng tài đã đuổi David ra khỏi sân vì cãi cọ với ông ta.',
+            },
+            'q5': {
+                correct: 'up',
+                sentence: 'This is my favourite song! Turn it %s !',
+                explanation: 'Cụm động từ "turn up" có nghĩa là tăng âm lượng. Câu này thể hiện sự hào hứng và muốn nghe nhạc to hơn.',
+                translation: 'Đây là bài hát yêu thích của tôi! Vặn to nó lên!',
+            },
+            'q6': {
+                correct: 'on',
+                sentence: 'A mobile phone rang, but the musician just carried %s playing.',
+                explanation: 'Cụm động từ "carry on" có nghĩa là tiếp tục làm gì đó. Mặc dù điện thoại reo, người nhạc sĩ vẫn tiếp tục chơi nhạc.',
+                translation: 'Một chiếc điện thoại di động reo, nhưng người nhạc sĩ vẫn tiếp tục chơi nhạc.',
+            },
+            'q7': {
+                correct: 'out',
+                sentence: "We can't afford to eat %s very often.",
+                explanation: 'Cụm động từ "eat out" có nghĩa là ăn ở nhà hàng, không ăn ở nhà. Câu này nói rằng họ không đủ tiền để ăn nhà hàng thường xuyên.',
+                translation: 'Chúng tôi không đủ tiền để ăn ngoài thường xuyên.',
+            },
+            'q8': {
+                correct: 'up',
+                sentence: "I've decided to become a vegetarian and give %s meat.",
+                explanation: 'Cụm động từ "give up" có nghĩa là từ bỏ một thói quen, một hoạt động, hoặc một loại thức ăn. Trong trường hợp này, người nói từ bỏ thịt để trở thành người ăn chay.',
+                translation: 'Tôi đã quyết định trở thành người ăn chay và từ bỏ thịt.',
+            },
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // No direct click listener for options needed as they are radio buttons
+            // and the form will handle selection naturally.
+            // We just need to ensure initial state is clean.
+            resetExercise(); // Ensure all states are reset on page load
+        });
+
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            Object.keys(correctAnswers).forEach(qId => {
+                const exerciseItem = document.querySelector(`.exercise-item[data-question="${qId}"]`);
+                if (!exerciseItem) return;
+
+                const selectedInput = document.querySelector(`input[name="${qId}"]:checked`);
+                const correctWord = correctAnswers[qId].correct;
+                const optionGroup = exerciseItem.querySelector('.option-group');
+
+                // Clear previous feedback styles
+                optionGroup.classList.remove('show-solution');
+                optionGroup.querySelectorAll('.form-check-input').forEach(input => {
+                    input.classList.remove('is-valid', 'is-invalid');
+                    input.removeAttribute('data-correct'); // Remove correct marker
+                });
+                optionGroup.querySelectorAll('.form-check-label').forEach(label => {
+                    label.classList.remove('is-valid', 'is-invalid');
+                });
+
+                // Mark the correct option in the UI for review
+                const correctInput = exerciseItem.querySelector(`input[name="${qId}"][value="${correctWord}"]`);
+                if (correctInput) {
+                    correctInput.setAttribute('data-correct', 'true'); // Mark it as correct for styling
+                    optionGroup.classList.add('show-solution'); // Enable solution highlighting
+                }
+
+
+                if (selectedInput) {
+                    const userAnswer = selectedInput.value;
+
+                    if (userAnswer === correctWord) {
+                        score++;
+                        selectedInput.classList.add('is-valid');
+                        selectedInput.nextElementSibling.classList.add('is-valid');
+                    } else {
+                        selectedInput.classList.add('is-invalid');
+                        selectedInput.nextElementSibling.classList.add('is-invalid');
+                    }
+                } else {
+                    // If no option was selected, just the correct one will be underlined
+                    // No action needed here, as the 'show-solution' class already handles underlining the correct one.
+                }
+
+                // Add detailed solution for each question
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextDiv = document.createElement('div');
+                questionTextDiv.classList.add('question-text-solution');
+
+                // Reconstruct sentence with correct answer
+                const originalSentenceTemplate = correctAnswers[qId].sentence;
+                const fullSentenceHtml = originalSentenceTemplate.replace('%s', `<span class="correct-answer-text-solution">${correctWord}</span>`);
+                
+                questionTextDiv.innerHTML = `<strong>Câu ${questionNumber}:</strong> ${fullSentenceHtml}`;
+                solutionItem.appendChild(questionTextDiv);
+
+                // Add explanation
+                const explanationDiv = document.createElement('div');
+                explanationDiv.classList.add('explanation');
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${correctAnswers[qId].explanation}`;
+                solutionItem.appendChild(explanationDiv);
+
+                // Add translation
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${correctAnswers[qId].translation}`;
+                solutionItem.appendChild(translationDiv);
+                
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+        }
+
+        function resetExercise() {
+            const inputs = document.querySelectorAll('input[type="radio"]');
+            inputs.forEach(input => {
+                input.checked = false;
+                input.classList.remove('is-valid', 'is-invalid');
+                input.removeAttribute('data-correct'); // Remove correct marker
+                if (input.nextElementSibling) {
+                    input.nextElementSibling.classList.remove('is-valid', 'is-invalid');
+                }
+            });
+            document.querySelectorAll('.option-group').forEach(group => {
+                group.classList.remove('show-solution');
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions
+        }
+    </script>
+</body>
+</html>

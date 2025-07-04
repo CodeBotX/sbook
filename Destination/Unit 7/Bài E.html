@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Chọn Từ Đúng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center; /* Align content */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 5px; /* Space between words */
+        }
+
+        /* Styling for clickable word options */
+        .question-item .word-option {
+            cursor: pointer;
+            padding: 2px 5px;
+            border-bottom: 1px dashed #ced4da; /* Subtle underline */
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+            user-select: none; /* Prevent text selection on double click */
+            display: inline-block; /* Ensure padding/margin works */
+        }
+        .question-item .word-option:hover {
+            background-color: #e9ecef;
+            border-color: #a7aeb4;
+        }
+        .question-item .word-option.selected {
+            background-color: #d1e7dd; /* Light green for selected */
+            border-color: #198754; /* Green underline */
+            color: #198754;
+            font-weight: 700;
+        }
+        /* Feedback styles after submission */
+        .question-item .word-option.is-correct {
+            background-color: #d1e7dd; /* Green background */
+            border-color: #198754; /* Green underline */
+            color: #198754;
+            font-weight: 700;
+        }
+        .question-item .word-option.is-incorrect {
+            background-color: #f8d7da; /* Red background */
+            border-color: #dc3545; /* Red underline */
+            color: #dc3545;
+            font-weight: 700;
+        }
+        /* Style for correct answer when user chose incorrectly */
+        .question-item .word-option.correct-but-not-selected {
+            background-color: #e6f7ff; /* Light blue */
+            border-color: #007bff; /* Blue underline */
+            color: #007bff;
+            font-weight: 700;
+        }
+
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .question-item .word-option {
+                padding: 1px 3px;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Chọn Từ Đúng</h1>
+        </div>
+        <h2>E. Circle the correct word or phrase.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Circle the correct word.
+            <br>
+            <strong>Hướng dẫn:</strong> Nhấn vào từ đúng trong câu.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="circleTheWordForm">
+            <div class="question-item" data-question-id="q1">
+                <p class="question-text">
+                    1. Oscar says he <span class="word-option" data-option-value="is doing">is doing</span> / <span class="word-option" data-option-value="will do">will do</span> the washing-up after dinner.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q2">
+                <p class="question-text">
+                    2. I'm a bit scared because I <span class="word-option" data-option-value="am seeing">am seeing</span> / <span class="word-option" data-option-value="will see">will see</span> the dentist this afternoon.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q3">
+                <p class="question-text">
+                    3. What <span class="word-option" data-option-value="are you going to do">are you going to do</span> / <span class="word-option" data-option-value="do you do">do you do</span> this evening?
+                </p>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q4">
+                <p class="question-text">
+                    4. <span class="word-option" data-option-value="Shall you tell">Shall you tell</span> / <span class="word-option" data-option-value="Will you tell">Will you tell</span> Rupert I'm sorry about yesterday?
+                </p>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q5">
+                <p class="question-text">
+                    5. My dad <span class="word-option" data-option-value="will grow">will grow</span> / <span class="word-option" data-option-value="is going to grow">is going to grow</span> a beard, but my mum doesn't like the idea.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q6">
+                <p class="question-text">
+                    6. I have to revise tonight because we <span class="word-option" data-option-value="are having">are having</span> / <span class="word-option" data-option-value="will have">will have</span> an exam tomorrow.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q7">
+                <p class="question-text">
+                    7. I <span class="word-option" data-option-value="am remembering">am remembering</span> / <span class="word-option" data-option-value="will remember">will remember</span> this day for the rest of my life!
+                </p>
+                <i class="feedback-icon fa-solid" id="icon7"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q8">
+                <p class="question-text">
+                    8. <span class="word-option" data-option-value="Do you go">Do you go</span> / <span class="word-option" data-option-value="Are you going">Are you going</span> to Australia next Christmas?
+                </p>
+                <i class="feedback-icon fa-solid" id="icon8"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q9">
+                <p class="question-text">
+                    9. I'm sure you <span class="word-option" data-option-value="are passing">are passing</span> / <span class="word-option" data-option-value="will pass">will pass</span> your driving test. Don't worry.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon9"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q10">
+                <p class="question-text">
+                    10. If you want me to, I <span class="word-option" data-option-value="will complain">will complain</span> / <span class="word-option" data-option-value="am going to complain">am going to complain</span> to the manager about it.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon10"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                question_text: 'Oscar says he {option1} / {option2} the washing-up after dinner.',
+                options: {
+                    "is doing": { text: 'is doing', correct: false },
+                    "will do": { text: 'will do', correct: true }
+                },
+                correct_option_value: 'will do',
+                fullSentence: 'Oscar says he will do the washing-up after dinner.',
+                translation: 'Oscar nói anh ấy sẽ rửa bát sau bữa tối.',
+                explanation: 'Sử dụng "will do" cho hành động quyết định tại thời điểm nói hoặc lời hứa.',
+                grammar_note: 'Dùng "will" để diễn tả quyết định tại thời điểm nói hoặc lời hứa.'
+            },
+            'q2': {
+                question_text: "I'm a bit scared because I {option1} / {option2} the dentist this afternoon.",
+                options: {
+                    "am seeing": { text: 'am seeing', correct: true },
+                    "will see": { text: 'will see', correct: false }
+                },
+                correct_option_value: 'am seeing',
+                fullSentence: "I'm a bit scared because I am seeing the dentist this afternoon.",
+                translation: 'Tôi hơi sợ vì tôi sẽ gặp nha sĩ chiều nay.',
+                explanation: 'Sử dụng "present continuous" (am seeing) cho các kế hoạch đã được sắp xếp hoặc cuộc hẹn trong tương lai gần.',
+                grammar_note: 'Thì hiện tại tiếp diễn dùng cho các sắp xếp, kế hoạch đã định trước trong tương lai gần.'
+            },
+            'q3': {
+                question_text: "What {option1} / {option2} this evening?",
+                options: {
+                    "are you going to do": { text: 'are you going to do', correct: true },
+                    "do you do": { text: 'do you do', correct: false }
+                },
+                correct_option_value: 'are you going to do',
+                fullSentence: "What are you going to do this evening?",
+                translation: 'Tối nay bạn sẽ làm gì?',
+                explanation: 'Sử dụng "be going to" để hỏi về kế hoạch hoặc ý định trong tương lai.',
+                grammar_note: '"Be going to" dùng để hỏi về ý định hoặc kế hoạch đã có từ trước.'
+            },
+            'q4': {
+                question_text: "{option1} / {option2} Rupert I'm sorry about yesterday?",
+                options: {
+                    "Shall you tell": { text: 'Shall you tell', correct: false },
+                    "Will you tell": { text: 'Will you tell', correct: true }
+                },
+                correct_option_value: 'Will you tell',
+                fullSentence: "Will you tell Rupert I'm sorry about yesterday?",
+                translation: 'Bạn sẽ nói với Rupert rằng tôi xin lỗi về hôm qua chứ?',
+                explanation: 'Sử dụng "Will you...?" để yêu cầu ai đó làm gì, hoặc hỏi về một hành động tự nguyện trong tương lai. "Shall you" ít phổ biến và thường dùng cho gợi ý hoặc đề xuất.',
+                grammar_note: '"Will you...?" dùng để yêu cầu, đề nghị hoặc hỏi về sự sẵn lòng.'
+            },
+            'q5': {
+                question_text: "My dad {option1} / {option2} a beard, but my mum doesn't like the idea.",
+                options: {
+                    "will grow": { text: 'will grow', correct: false },
+                    "is going to grow": { text: 'is going to grow', correct: true }
+                },
+                correct_option_value: 'is going to grow',
+                fullSentence: "My dad is going to grow a beard, but my mum doesn't like the idea.",
+                translation: 'Bố tôi định để râu, nhưng mẹ tôi không thích ý đó.',
+                explanation: 'Sử dụng "be going to" khi có bằng chứng hoặc ý định rõ ràng cho một hành động trong tương lai (ý định của bố tôi).',
+                grammar_note: '"Be going to" dùng để diễn tả ý định hoặc dự đoán dựa trên bằng chứng hiện có.'
+            },
+            'q6': {
+                question_text: "I have to revise tonight because we {option1} / {option2} an exam tomorrow.",
+                options: {
+                    "are having": { text: 'are having', correct: true },
+                    "will have": { text: 'will have', correct: false }
+                },
+                correct_option_value: 'are having',
+                fullSentence: "I have to revise tonight because we are having an exam tomorrow.",
+                translation: 'Tối nay tôi phải ôn bài vì ngày mai chúng tôi có một kỳ thi.',
+                explanation: 'Sử dụng "present continuous" (are having) cho các sự kiện đã được lên lịch hoặc sắp xếp trong tương lai.',
+                grammar_note: 'Thì hiện tại tiếp diễn dùng cho các sự kiện đã được sắp xếp, thường có thời gian cụ thể.'
+            },
+            'q7': {
+                question_text: "I {option1} / {option2} this day for the rest of my life!",
+                options: {
+                    "am remembering": { text: 'am remembering', correct: false },
+                    "will remember": { text: 'will remember', correct: true }
+                },
+                correct_option_value: 'will remember',
+                fullSentence: "I will remember this day for the rest of my life!",
+                translation: 'Tôi sẽ nhớ ngày này suốt đời!',
+                explanation: 'Sử dụng "will remember" để diễn tả một sự kiện tự nhiên sẽ xảy ra trong tương lai hoặc một cam kết.',
+                grammar_note: '"Will" dùng để diễn tả một dự đoán hoặc sự kiện tự nhiên trong tương lai.'
+            },
+            'q8': {
+                question_text: "{option1} / {option2} to Australia next Christmas?",
+                options: {
+                    "Do you go": { text: 'Do you go', correct: false },
+                    "Are you going": { text: 'Are you going', correct: true }
+                },
+                correct_option_value: 'Are you going',
+                fullSentence: "Are you going to Australia next Christmas?",
+                translation: 'Bạn sẽ đi Úc vào Giáng sinh tới chứ?',
+                explanation: 'Sử dụng "present continuous" (Are you going) cho các kế hoạch du lịch đã được sắp xếp hoặc hỏi về kế hoạch của ai đó.',
+                grammar_note: 'Thì hiện tại tiếp diễn dùng cho các kế hoạch cá nhân, du lịch đã được sắp xếp.'
+            },
+            'q9': {
+                question_text: "I'm sure you {option1} / {option2} your driving test. Don't worry.",
+                options: {
+                    "are passing": { text: 'are passing', correct: false },
+                    "will pass": { text: 'will pass', correct: true }
+                },
+                correct_option_value: 'will pass',
+                fullSentence: "I'm sure you will pass your driving test. Don't worry.",
+                translation: 'Tôi chắc chắn bạn sẽ vượt qua bài kiểm tra lái xe của mình. Đừng lo lắng.',
+                explanation: 'Sử dụng "will pass" để diễn tả một dự đoán hoặc sự tự tin về một sự kiện trong tương lai.',
+                grammar_note: '"Will" dùng để đưa ra dự đoán hoặc thể hiện sự tin tưởng vào tương lai.'
+            },
+            'q10': {
+                question_text: "If you want me to, I {option1} / {option2} to the manager about it.",
+                options: {
+                    "will complain": { text: 'will complain', correct: true },
+                    "am going to complain": { text: 'am going to complain', correct: false }
+                },
+                correct_option_value: 'will complain',
+                fullSentence: "If you want me to, I will complain to the manager about it.",
+                translation: 'Nếu bạn muốn, tôi sẽ phàn nàn với quản lý về điều đó.',
+                explanation: 'Sử dụng "will complain" cho một quyết định hoặc lời đề nghị được đưa ra tại thời điểm nói, thường sau một mệnh đề điều kiện.',
+                grammar_note: '"Will" dùng cho quyết định tức thời, lời hứa hoặc đề nghị có điều kiện.'
+            }
+        };
+
+        // Event listener for word options
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.word-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionItem = this.closest('.question-item');
+                    // Remove 'selected' class from all options within the same question
+                    questionItem.querySelectorAll('.word-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    // Add 'selected' class to the clicked option
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const questionItem = document.querySelector(`[data-question-id="${qId}"]`);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+                const allOptions = questionItem.querySelectorAll('.word-option');
+
+                let isCorrect = false;
+                let selectedOptionValue = null;
+
+                // Reset all option styles first
+                allOptions.forEach(option => {
+                    option.classList.remove('selected', 'is-correct', 'is-incorrect', 'correct-but-not-selected');
+                });
+
+                const selectedOption = questionItem.querySelector('.word-option.selected');
+
+                if (selectedOption) {
+                    selectedOptionValue = selectedOption.dataset.optionValue;
+                    if (selectedOptionValue.toLowerCase() === questionInfo.correct_option_value.toLowerCase()) {
+                        isCorrect = true;
+                        score++;
+                        selectedOption.classList.add('is-correct');
+                    } else {
+                        selectedOption.classList.add('is-incorrect');
+                        // Highlight the correct answer if the user chose incorrectly
+                        questionItem.querySelector(`[data-option-value="${questionInfo.correct_option_value}"]`).classList.add('correct-but-not-selected');
+                    }
+                } else {
+                    // If no option was selected, it's incorrect. Highlight the correct one.
+                    questionItem.querySelector(`[data-option-value="${questionInfo.correct_option_value}"]`).classList.add('correct-but-not-selected');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                // Constructing the sentence for solution with correct answer highlighted
+                let sentenceForSolution = questionInfo.question_text;
+                const option1Text = questionInfo.options[Object.keys(questionInfo.options)[0]].text;
+                const option2Text = questionInfo.options[Object.keys(questionInfo.options)[1]].text;
+
+                if (questionInfo.correct_option_value === option1Text) {
+                    sentenceForSolution = sentenceForSolution.replace(`{option1}`, `<span class="correct-answer-text">${option1Text}</span>`);
+                    sentenceForSolution = sentenceForSolution.replace(`{option2}`, `<span>${option2Text}</span>`); // Ensure other option is not highlighted
+                } else {
+                    sentenceForSolution = sentenceForSolution.replace(`{option1}`, `<span>${option1Text}</span>`);
+                    sentenceForSolution = sentenceForSolution.replace(`{option2}`, `<span class="correct-answer-text">${option2Text}</span>`);
+                }
+                
+                // Remove the " / " separator if not needed in the solution sentence or adjust as desired
+                sentenceForSolution = sentenceForSolution.replace(' / ', ' '); // Example: remove " / " for cleaner sentence
+
+                questionTextSolutionDiv.innerHTML = `${questionNumber}. ${sentenceForSolution}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}`;
+                if (questionInfo.grammar_note) {
+                    grammarExplanationDiv.innerHTML += `<br><em>${questionInfo.grammar_note}</em>`;
+                }
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing selections, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const wordOptions = document.querySelectorAll('.word-option');
+            wordOptions.forEach(option => {
+                option.classList.remove('selected', 'is-correct', 'is-incorrect', 'correct-but-not-selected'); // Remove all feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+             window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+        }
+    </script>
+</body>
+</html>

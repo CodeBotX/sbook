@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài H: Điền một từ vào mỗi chỗ trống</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: baseline; /* Align text baselines */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 5px; /* Space between words */
+        }
+
+        /* Styling for input fields with underline */
+        .question-item .underline-input {
+            border: none;
+            border-bottom: 2px solid #ced4da; /* Underline style */
+            padding: 2px 5px;
+            margin: 0 5px;
+            font-size: 1em;
+            text-align: center;
+            width: 120px; /* Adjust width as needed */
+            background-color: transparent; /* Transparent background */
+            transition: border-color 0.2s ease;
+        }
+        .question-item .underline-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        /* Feedback styles after submission */
+        .question-item .underline-input.is-correct {
+            border-color: #198754;
+            color: #198754;
+            font-weight: 600;
+        }
+        .question-item .underline-input.is-incorrect {
+            border-color: #dc3545;
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .question-item .underline-input {
+                width: 80px; /* Smaller width for mobile */
+                padding: 1px 3px;
+                font-size: 0.9em;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Điền Từ</h1>
+        </div>
+        <h2>Điền một từ vào mỗi chỗ trống.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Write one word in each gap.
+            <br>
+            <strong>Hướng dẫn:</strong> Điền một từ vào mỗi chỗ trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="fillInTheGapForm">
+            <div class="question-item" data-question-id="q1">
+                <p class="question-text">
+                    1. Sydney is famous <input type="text" class="underline-input" id="q1_b1_input"> its harbour. You should also look <input type="text" class="underline-input" id="q1_b2_input"> the Opera House and the bridge while you're there.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon1_b1"></i>
+                <i class="feedback-icon fa-solid" id="icon1_b2"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q2">
+                <p class="question-text">
+                    2. We arrived <input type="text" class="underline-input" id="q2_b1_input"> the hotel and they provided us <input type="text" class="underline-input" id="q2_b2_input"> a map of the area.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon2_b1"></i>
+                <i class="feedback-icon fa-solid" id="icon2_b2"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q3">
+                <p class="question-text">
+                    3. When you're preparing <input type="text" class="underline-input" id="q3_b1_input"> a holiday, pack clothes that are suitable <input type="text" class="underline-input" id="q3_b2_input"> the place where you're going.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon3_b1"></i>
+                <i class="feedback-icon fa-solid" id="icon3_b2"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q4">
+                <p class="question-text">
+                    4. I prefer to be far <input type="text" class="underline-input" id="q4_b1_input"> other people when I'm on holiday. I don't like being close <input type="text" class="underline-input" id="q4_b2_input"> crowds of tourists.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon4_b1"></i>
+                <i class="feedback-icon fa-solid" id="icon4_b2"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q5">
+                <p class="question-text">
+                    5. While we were waiting <input type="text" class="underline-input" id="q5_b1_input"> our train, I asked someone <input type="text" class="underline-input" id="q5_b2_input"> the delay.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon5_b1"></i>
+                <i class="feedback-icon fa-solid" id="icon5_b2"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q6">
+                <p class="question-text">
+                    6. Will was late <input type="text" class="underline-input" id="q6_b1_input"> his appointment so he asked me <input type="text" class="underline-input" id="q6_b2_input"> some money for a taxi.
+                </p>
+                <i class="feedback-icon fa-solid" id="icon6_b1"></i>
+                <i class="feedback-icon fa-solid" id="icon6_b2"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                question_text_parts: [
+                    'Sydney is famous ',
+                    ' its harbour. You should also look ',
+                    ' the Opera House and the bridge while you\'re there.'
+                ],
+                blanks: [
+                    { id: 'q1_b1', correct_answer: 'for' },
+                    { id: 'q1_b2', correct_answer: 'at' }
+                ],
+                fullSentence: 'Sydney is famous for its harbour. You should also look at the Opera House and the bridge while you\'re there.',
+                translation: 'Sydney nổi tiếng vì bến cảng của nó. Bạn cũng nên ngắm Nhà hát Opera và cây cầu khi bạn ở đó.',
+                explanation: '"Famous for" là cụm từ cố định có nghĩa là nổi tiếng về điều gì. "Look at" là cụm động từ có nghĩa là nhìn vào, hướng sự chú ý đến.',
+                grammar_note: 'Giới từ "for" đi với "famous". Cụm động từ "look at".'
+            },
+            'q2': {
+                question_text_parts: [
+                    'We arrived ',
+                    ' the hotel and they provided us ',
+                    ' a map of the area.'
+                ],
+                blanks: [
+                    { id: 'q2_b1', correct_answer: 'at' },
+                    { id: 'q2_b2', correct_answer: 'with' }
+                ],
+                fullSentence: 'We arrived at the hotel and they provided us with a map of the area.',
+                translation: 'Chúng tôi đến khách sạn và họ đã cung cấp cho chúng tôi một bản đồ khu vực.',
+                explanation: '"Arrive at" được dùng khi đến một địa điểm cụ thể (như khách sạn, sân bay, nhà ga). "Provide someone with something" có nghĩa là cung cấp cho ai đó cái gì.',
+                grammar_note: 'Sử dụng "at" với "arrive" khi đến một địa điểm cụ thể. Cụm động từ "provide with".'
+            },
+            'q3': {
+                question_text_parts: [
+                    'When you\'re preparing ',
+                    ' a holiday, pack clothes that are suitable ',
+                    ' the place where you\'re going.'
+                ],
+                blanks: [
+                    { id: 'q3_b1', correct_answer: 'for' },
+                    { id: 'q3_b2', correct_answer: 'for' }
+                ],
+                fullSentence: 'When you\'re preparing for a holiday, pack clothes that are suitable for the place where you\'re going.',
+                translation: 'Khi bạn chuẩn bị cho một kỳ nghỉ, hãy đóng gói quần áo phù hợp với nơi bạn sẽ đến.',
+                explanation: '"Prepare for" có nghĩa là chuẩn bị cho điều gì. "Suitable for" có nghĩa là phù hợp với cái gì/ai.',
+                grammar_note: 'Cụm từ cố định "prepare for" và "suitable for".'
+            },
+            'q4': {
+                question_text_parts: [
+                    'I prefer to be far ',
+                    ' other people when I\'m on holiday. I don\'t like being close ',
+                    ' crowds of tourists.'
+                ],
+                blanks: [
+                    { id: 'q4_b1', correct_answer: 'from' },
+                    { id: 'q4_b2', correct_answer: 'to' }
+                ],
+                fullSentence: 'I prefer to be far from other people when I\'m on holiday. I don\'t like being close to crowds of tourists.',
+                translation: 'Tôi thích ở xa những người khác khi đi nghỉ mát. Tôi không thích ở gần đám đông khách du lịch.',
+                explanation: '"Far from" có nghĩa là xa khỏi cái gì/ai. "Close to" có nghĩa là gần với cái gì/ai.',
+                grammar_note: 'Cụm từ cố định "far from" và "close to".'
+            },
+            'q5': {
+                question_text_parts: [
+                    'While we were waiting ',
+                    ' our train, I asked someone ',
+                    ' the delay.'
+                ],
+                blanks: [
+                    { id: 'q5_b1', correct_answer: 'for' },
+                    { id: 'q5_b2', correct_answer: 'about' }
+                ],
+                fullSentence: 'While we were waiting for our train, I asked someone about the delay.',
+                translation: 'Trong khi chúng tôi đang đợi tàu, tôi đã hỏi ai đó về sự chậm trễ.',
+                explanation: '"Wait for" có nghĩa là chờ đợi cái gì/ai. "Ask about" có nghĩa là hỏi về điều gì.',
+                grammar_note: 'Cụm từ cố định "wait for" và "ask about".'
+            },
+            'q6': {
+                question_text_parts: [
+                    'Will was late ',
+                    ' his appointment so he asked me ',
+                    ' some money for a taxi.'
+                ],
+                blanks: [
+                    { id: 'q6_b1', correct_answer: 'for' },
+                    { id: 'q6_b2', correct_answer: 'for' }
+                ],
+                fullSentence: 'Will was late for his appointment so he asked me for some money for a taxi.',
+                translation: 'Will đã trễ cuộc hẹn nên anh ấy đã hỏi tôi xin ít tiền để đi taxi.',
+                explanation: '"Late for" có nghĩa là trễ hẹn/trễ cho cái gì. "Ask for" có nghĩa là xin cái gì.',
+                grammar_note: 'Cụm từ cố định "late for" và "ask for".'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            let totalBlanks = 0;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const questionNumber = qId.substring(1);
+                let questionCorrect = true; // Track if all blanks in this question are correct
+
+                // Build the full sentence with user answers for display in solution
+                let userFullSentence = questionInfo.question_text_parts[0];
+
+                questionInfo.blanks.forEach((blank, index) => {
+                    totalBlanks++;
+                    const inputElement = document.getElementById(`${blank.id}_input`);
+                    
+                    // Ensure inputElement is not null before proceeding
+                    if (!inputElement) {
+                        console.error(`Input element with ID ${blank.id}_input not found.`);
+                        return; // Skip this blank if element is missing
+                    }
+
+                    const userAnswer = inputElement.value.trim().toLowerCase();
+                    const correctAnswer = blank.correct_answer.toLowerCase();
+
+                    // Remove previous feedback classes
+                    inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                    if (userAnswer === correctAnswer) {
+                        score++;
+                        inputElement.classList.add('is-correct');
+                    } else {
+                        questionCorrect = false; // Mark question as incorrect if any blank is wrong
+                        inputElement.classList.add('is-incorrect');
+                    }
+
+                    // Add user's answer (or correct answer if incorrect) to the full sentence for solution display
+                    userFullSentence += `<span class="${userAnswer === correctAnswer ? 'correct-answer-text' : 'text-danger'}">${userAnswer || '______'}</span>`;
+                    if (questionInfo.question_text_parts[index + 1]) {
+                        userFullSentence += questionInfo.question_text_parts[index + 1];
+                    }
+                });
+
+                // Add detailed solution for the entire question
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                questionTextSolutionDiv.innerHTML = `${questionNumber}. ${questionInfo.fullSentence}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalBlanks} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalBlanks) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalBlanks / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            document.querySelectorAll('.underline-input').forEach(input => {
+                input.value = ''; // Clear input field
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            document.querySelectorAll('.feedback-icon').forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

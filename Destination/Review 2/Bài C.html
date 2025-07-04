@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Thay Đổi Dạng Từ (Tiếp theo)</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center; /* Align content */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 5px; /* Space between words */
+        }
+
+        /* Styling for input fields */
+        .question-item .question-text input[type="text"] {
+            display: inline-block;
+            width: 150px; /* Adjust width as needed */
+            margin: 0 5px;
+            padding: 0 5px; /* Reduced padding for underline effect */
+            border: none; /* Remove all borders */
+            border-bottom: 1px solid #ced4da; /* Only bottom border */
+            border-radius: 0; /* Remove border-radius for a clean underline */
+            font-size: 1em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: transparent; /* Ensure background is transparent */
+            text-align: center; /* Center the text in the input */
+        }
+        .question-item .question-text input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: none; /* Remove box-shadow on focus for underline effect */
+            border-bottom-width: 2px; /* Thicker underline on focus */
+        }
+        /* Styles for correct and incorrect input feedback */
+        .question-item .question-text input[type="text"].is-correct {
+            border-color: #198754;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for correct */
+        }
+        .question-item .question-text input[type="text"].is-incorrect {
+            border-color: #dc3545;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for incorrect */
+        }
+
+        /* Styling for the capitalized hint word */
+        .question-item .hint-word {
+            font-weight: bold;
+            color: #6c757d; /* Grey color for hint */
+            margin-left: 10px;
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .question-item .question-text input[type="text"] {
+                width: 100px; /* Smaller width for inputs on small screens */
+                margin: 0 3px;
+                padding: 0 4px; /* Adjusted padding */
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Thay Đổi Dạng Từ (Tiếp theo)</h1>
+        </div>
+        <h2>Hoàn thành bằng cách thay đổi dạng của từ in hoa.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Complete by changing the form of the word in capitals.
+            <br>
+            <strong>Hướng dẫn:</strong> Hoàn thành bằng cách thay đổi dạng của từ in hoa.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="wordFormChangeFormC">
+            <div class="question-item">
+                <p class="question-text">16. What's the name of Dave's driving <input type="text" id="q16" name="q16" class="form-control d-inline-block w-auto">? <span class="hint-word">INSTRUCT</span></p>
+                <i class="feedback-icon fa-solid" id="icon16"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">17. Dictionaries and encyclopaedias are examples of <input type="text" id="q17" name="q17" class="form-control d-inline-block w-auto"> books. <span class="hint-word">REFER</span></p>
+                <i class="feedback-icon fa-solid" id="icon17"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">18. I've only been learning Arabic for a few months, so I'm still a <input type="text" id="q18" name="q18" class="form-control d-inline-block w-auto">. <span class="hint-word">BEGIN</span></p>
+                <i class="feedback-icon fa-solid" id="icon18"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">19. In maths, you have to learn to do addition, subtraction, multiplication and <input type="text" id="q19" name="q19" class="form-control d-inline-block w-auto">. <span class="hint-word">DIVIDE</span></p>
+                <i class="feedback-icon fa-solid" id="icon19"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">20. Three of your answers were <input type="text" id="q20" name="q20" class="form-control d-inline-block w-auto">, so you got 17 out of 20. <span class="hint-word">CORRECT</span></p>
+                <i class="feedback-icon fa-solid" id="icon20"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">21. Are you really going to take part in the singing competition? I admire your <input type="text" id="q21" name="q21" class="form-control d-inline-block w-auto">! <span class="hint-word">BRAVE</span></p>
+                <i class="feedback-icon fa-solid" id="icon21"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">22. I think every child should get a good <input type="text" id="q22" name="q22" class="form-control d-inline-block w-auto">. <span class="hint-word">EDUCATE</span></p>
+                <i class="feedback-icon fa-solid" id="icon22"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">23. There's a <input type="text" id="q23" name="q23" class="form-control d-inline-block w-auto"> to Albert Einstein in the town square. <span class="hint-word">MEMORY</span></p>
+                <i class="feedback-icon fa-solid" id="icon23"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">24. I want complete <input type="text" id="q24" name="q24" class="form-control d-inline-block w-auto">, so no talking at all! <span class="hint-word">SILENT</span></p>
+                <i class="feedback-icon fa-solid" id="icon24"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">25. This maths problem is too difficult for you, so I'll <input type="text" id="q25" name="q25" class="form-control d-inline-block w-auto"> it a little. <span class="hint-word">SIMPLE</span></p>
+                <i class="feedback-icon fa-solid" id="icon25"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q16': {
+                question_text_parts: ['What\'s the name of Dave\'s driving ', '?'],
+                hint_word: 'INSTRUCT',
+                correct_answer: 'instructor',
+                fullSentence: 'What\'s the name of Dave\'s driving instructor?',
+                translation: 'Tên của người hướng dẫn lái xe của Dave là gì?',
+                explanation: 'Từ "instruct" (động từ) cần được chuyển thành danh từ chỉ người "instructor" (người hướng dẫn) để phù hợp với ngữ cảnh "Dave\'s driving..."',
+                grammar_note: 'Thay đổi dạng từ từ động từ sang danh từ chỉ người.'
+            },
+            'q17': {
+                question_text_parts: ['Dictionaries and encyclopaedias are examples of ', ' books.'],
+                hint_word: 'REFER',
+                correct_answer: 'reference',
+                fullSentence: 'Dictionaries and encyclopaedias are examples of reference books.',
+                translation: 'Từ điển và bách khoa toàn thư là ví dụ về sách tham khảo.',
+                explanation: 'Từ "refer" (động từ) cần được chuyển thành tính từ/danh từ "reference" để bổ nghĩa cho "books" (sách tham khảo).',
+                grammar_note: 'Thay đổi dạng từ từ động từ sang danh từ/tính từ.'
+            },
+            'q18': {
+                question_text_parts: ['I\'ve only been learning Arabic for a few months, so I\'m still a ', '.'],
+                hint_word: 'BEGIN',
+                correct_answer: 'beginner',
+                fullSentence: 'I\'ve only been learning Arabic for a few months, so I\'m still a beginner.',
+                translation: 'Tôi mới học tiếng Ả Rập được vài tháng, vì vậy tôi vẫn là người mới bắt đầu.',
+                explanation: 'Từ "begin" (động từ) cần được chuyển thành danh từ chỉ người "beginner" (người mới bắt đầu) để chỉ một người.',
+                grammar_note: 'Thay đổi dạng từ từ động từ sang danh từ chỉ người.'
+            },
+            'q19': {
+                question_text_parts: ['In maths, you have to learn to do addition, subtraction, multiplication and ', '.'],
+                hint_word: 'DIVIDE',
+                correct_answer: 'division',
+                fullSentence: 'In maths, you have to learn to do addition, subtraction, multiplication and division.',
+                translation: 'Trong toán học, bạn phải học cách làm phép cộng, trừ, nhân và chia.',
+                explanation: 'Từ "divide" (động từ) cần được chuyển thành danh từ "division" (phép chia) để hoàn thành chuỗi các phép toán.',
+                grammar_note: 'Thay đổi dạng từ từ động từ sang danh từ.'
+            },
+            'q20': {
+                question_text_parts: ['Three of your answers were ', ', so you got 17 out of 20.'],
+                hint_word: 'CORRECT',
+                correct_answer: 'incorrect',
+                fullSentence: 'Three of your answers were incorrect, so you got 17 out of 20.',
+                translation: 'Ba trong số các câu trả lời của bạn không đúng, vì vậy bạn được 17 trên 20 điểm.',
+                explanation: 'Ngữ cảnh "got 17 out of 20" ngụ ý rằng có 3 câu trả lời sai. Từ "correct" (tính từ) cần được chuyển thành dạng phủ định "incorrect" (không đúng).',
+                grammar_note: 'Thay đổi dạng từ từ tính từ sang tính từ phủ định.'
+            },
+            'q21': {
+                question_text_parts: ['Are you really going to take part in the singing competition? I admire your ', '!'],
+                hint_word: 'BRAVE',
+                correct_answer: 'bravery',
+                fullSentence: 'Are you really going to take part in the singing competition? I admire your bravery!',
+                translation: 'Bạn thực sự sẽ tham gia cuộc thi hát sao? Tôi ngưỡng mộ lòng dũng cảm của bạn!',
+                explanation: 'Từ "brave" (tính từ) cần được chuyển thành danh từ "bravery" (lòng dũng cảm) để đi sau "your".',
+                grammar_note: 'Thay đổi dạng từ từ tính từ sang danh từ.'
+            },
+            'q22': {
+                question_text_parts: ['I think every child should get a good ', '.'],
+                hint_word: 'EDUCATE',
+                correct_answer: 'education',
+                fullSentence: 'I think every child should get a good education.',
+                translation: 'Tôi nghĩ mỗi đứa trẻ nên được giáo dục tốt.',
+                explanation: 'Từ "educate" (động từ) cần được chuyển thành danh từ "education" (nền giáo dục) để phù hợp với ngữ cảnh "a good..."',
+                grammar_note: 'Thay đổi dạng từ từ động từ sang danh từ.'
+            },
+            'q23': {
+                question_text_parts: ['There\'s a ', ' to Albert Einstein in the town square.'],
+                hint_word: 'MEMORY',
+                correct_answer: 'memorial',
+                fullSentence: 'There\'s a memorial to Albert Einstein in the town square.',
+                translation: 'Có một đài tưởng niệm Albert Einstein ở quảng trường thị trấn.',
+                explanation: 'Từ "memory" (danh từ) cần được chuyển thành danh từ "memorial" (đài tưởng niệm, vật kỷ niệm) để chỉ một công trình tưởng niệm.',
+                grammar_note: 'Thay đổi dạng từ từ danh từ sang danh từ chỉ vật tưởng niệm.'
+            },
+            'q24': {
+                question_text_parts: ['I want complete ', ', so no talking at all!'],
+                hint_word: 'SILENT',
+                correct_answer: 'silence',
+                fullSentence: 'I want complete silence, so no talking at all!',
+                translation: 'Tôi muốn sự im lặng hoàn toàn, vì vậy không được nói chuyện chút nào!',
+                explanation: 'Từ "silent" (tính từ) cần được chuyển thành danh từ "silence" (sự im lặng) để làm tân ngữ cho động từ "want" và đi sau tính từ "complete".',
+                grammar_note: 'Thay đổi dạng từ từ tính từ sang danh từ.'
+            },
+            'q25': {
+                question_text_parts: ['This maths problem is too difficult for you, so I\'ll ', ' it a little.'],
+                hint_word: 'SIMPLE',
+                correct_answer: 'simplify',
+                fullSentence: 'This maths problem is too difficult for you, so I\'ll simplify it a little.',
+                translation: 'Bài toán này quá khó đối với bạn, vì vậy tôi sẽ đơn giản hóa nó một chút.',
+                explanation: 'Từ "simple" (tính từ) cần được chuyển thành động từ "simplify" (đơn giản hóa) để phù hợp với cấu trúc "I\'ll + V".',
+                grammar_note: 'Thay đổi dạng từ từ tính từ sang động từ.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                let isCorrect = false;
+                const userAnswer = (inputElement ? inputElement.value.trim() : '').toLowerCase();
+                const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                // Reset feedback classes on input
+                if (inputElement) {
+                    inputElement.classList.remove('is-correct', 'is-incorrect');
+                }
+
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    if (inputElement) {
+                        inputElement.classList.add('is-correct');
+                    }
+                } else {
+                    if (inputElement) {
+                        inputElement.classList.add('is-incorrect');
+                    }
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                // Reconstruct the sentence with the correct answer highlighted
+                const fullTextWithCorrectAnswer = questionInfo.question_text_parts[0] + 
+                                                   `<span class="correct-answer-text">${questionInfo.correct_answer}</span>` + 
+                                                   (questionInfo.question_text_parts[1] || '');
+                questionTextSolutionDiv.innerHTML = `${qId.substring(1)}. ${fullTextWithCorrectAnswer} <span class="hint-word">(${questionInfo.hint_word})</span>`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = ''; // Clear text input
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

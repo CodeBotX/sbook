@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Vocabulary - Crossword</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Ensure padding/border is included in element's total width/height */
+        }
+        .container-main {
+            max-width: 1050px;
+            margin: 40px auto; /* Centered with auto margins */
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .crossword-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .crossword-grid-wrapper {
+            border: 1px solid #ccc;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            background-color: #eee;
+            position: relative;
+            max-width: fit-content;
+            margin-bottom: 20px;
+            /* Ensure the grid doesn't get squished if content is wider */
+            flex-shrink: 0;
+        }
+
+        .crossword-grid {
+            display: grid;
+            grid-template-columns: repeat(14, 38px); /* Default cell size for larger screens */
+            grid-template-rows: repeat(12, 38px);
+            gap: 1px;
+            background-color: #ccc;
+        }
+        .crossword-cell {
+            width: 38px;
+            height: 38px;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            position: relative;
+        }
+        .crossword-cell.empty {
+            background-color: #34495e;
+            border: 1px solid #2c3e50;
+        }
+        .crossword-cell input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-transform: uppercase;
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+            outline: none;
+            color: #2c3e50;
+        }
+        .crossword-cell .cell-number {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            font-size: 0.7em;
+            font-weight: bold;
+            color: #555;
+            z-index: 1;
+        }
+
+        /* Input validation styles (unchanged) */
+        .crossword-cell input.is-valid { background-color: #d1e7dd; border: 1px solid #198754; }
+        .crossword-cell input.is-invalid { background-color: #f8d7da; border: 1px solid #dc3545; }
+        .crossword-cell .feedback-icon {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 0.7em;
+            display: none;
+            z-index: 2;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+
+        .crossword-clues-section {
+            flex-grow: 1;
+            min-width: 300px; /* Minimum width before wrapping */
+            max-width: 450px; /* Max width for clues section */
+        }
+        .crossword-clues-section h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+        .clue-item {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+            color: #34495e;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .clue-item .clue-number {
+            font-weight: bold;
+            flex-shrink: 0;
+            width: 25px;
+            text-align: right;
+        }
+        .clue-item .clue-text {
+            flex-grow: 1;
+        }
+
+        .buttons-section {
+            text-align: center;
+            margin-top: 30px;
+            width: 100%;
+        }
+        .buttons-section .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons-section .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score and Solution sections (unchanged, as they are already block-level) */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none;
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+            text-transform: uppercase;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* ===================================================================== */
+        /* RESPONSIVE DESIGN - MEDIA QUERIES */
+        /* ===================================================================== */
+
+        /* Small screens (e.g., phones, up to 767px) */
+        @media (max-width: 767.98px) {
+            .container-main {
+                margin: 20px 10px; /* Reduce margin on smaller screens */
+                padding: 20px;
+                border-radius: 10px;
+            }
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            .instruction {
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+
+            .crossword-container {
+                flex-direction: column; /* Stack elements vertically */
+                align-items: center; /* Center items in column */
+                gap: 30px;
+            }
+
+            /* Adjust cell size for smaller screens */
+            .crossword-grid {
+                grid-template-columns: repeat(14, 28px); /* Smaller cell width */
+                grid-template-rows: repeat(12, 28px);  /* Smaller cell height */
+            }
+            .crossword-cell {
+                width: 28px;
+                height: 28px;
+            }
+            .crossword-cell input {
+                font-size: 1em; /* Smaller font for input */
+            }
+            .crossword-cell .cell-number {
+                font-size: 0.6em; /* Smaller font for clue number */
+                top: 1px;
+                left: 1px;
+            }
+            .crossword-cell .feedback-icon {
+                width: 15px;
+                height: 15px;
+                font-size: 0.6em;
+                top: -3px;
+                right: -3px;
+            }
+
+            .crossword-clues-section {
+                width: 100%; /* Clues take full width */
+                max-width: none; /* Remove max-width constraint */
+                margin-top: 0; /* Adjust margin if needed */
+            }
+
+            .clues-column {
+                min-width: unset; /* Remove min-width for columns */
+                flex: none; /* Prevent flex shrinking/growing too much */
+            }
+
+            /* Stack clue columns on very small screens */
+            .crossword-clues-section {
+                display: flex;
+                flex-direction: column; /* Stack across and down clues */
+                gap: 20px; /* Space between the two clue sections */
+            }
+
+            .buttons-section .btn {
+                padding: 10px 20px;
+                font-size: 1em;
+                margin: 0 10px;
+            }
+
+            .score-display {
+                font-size: 1.1em;
+                padding: 8px 15px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .question-text {
+                font-size: 0.95em;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.8em;
+            }
+        }
+
+        /* Medium screens (e.g., tablets, 768px to 991px) */
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .container-main {
+                margin: 30px auto;
+                padding: 30px;
+            }
+            .crossword-grid {
+                grid-template-columns: repeat(14, 32px); /* Slightly smaller cells */
+                grid-template-rows: repeat(12, 32px);
+            }
+            .crossword-cell {
+                width: 32px;
+                height: 32px;
+            }
+            .crossword-cell input {
+                font-size: 1.1em;
+            }
+            .crossword-cell .cell-number {
+                font-size: 0.65em;
+            }
+            .crossword-clues-section {
+                min-width: 250px; /* Adjust min-width if necessary */
+            }
+        }
+
+        /* Large screens (e.g., desktops, 992px and up) - Default styles apply */
+        @media (min-width: 992px) {
+            .crossword-container {
+                flex-wrap: nowrap; /* Prevent wrapping on large screens */
+            }
+            .crossword-clues-section {
+                display: flex;
+                flex-direction: row; /* Ensure side-by-side on large screens */
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <span class="badge bg-primary fs-6 me-2">A</span>
+            <h1>Complete the crossword.</h1>
+        </div>
+        <p class="instruction">
+            Hoàn thành ô chữ bằng cách điền từ đúng vào các ô trống. (Mỗi số trong ngoặc là số chữ cái của từ).
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <div class="crossword-container">
+            <div class="crossword-grid-wrapper">
+                <div class="crossword-grid" id="crosswordGrid">
+                    </div>
+            </div>
+
+            <div class="crossword-clues-section">
+                <div class="clues-column">
+                    <h3>Across</h3>
+                    <div class="clue-item">
+                        <span class="clue-number">1</span>
+                        <span class="clue-text">If he wins this match, he'll be the world ........................! (8)</span>
+                    </div>
+                    <div class="clue-item">
+                        <span class="clue-number">4</span>
+                        <span class="clue-text">I'm thinking of joining a ........................ to get more exercise. (3)</span>
+                    </div>
+                    <div class="clue-item">
+                        <span class="clue-number">5</span>
+                        <span class="clue-text">Our basketball ........................ said that I can play on Saturday! (5)</span>
+                    </div>
+                    <div class="clue-item">
+                        <span class="clue-number">8</span>
+                        <span class="clue-text">The ........................ blew his whistle and the game started. (7)</span>
+                    </div>
+                    <div class="clue-item">
+                        <span class="clue-number">9</span>
+                        <span class="clue-text">Which team do you ........................? (7)</span>
+                    </div>
+                    <div class="clue-item">
+                        <span class="clue-number">11</span>
+                        <span class="clue-text">Mark's band play traditional ........................ music - they often perform at country fairs and festivals. (4)</span>
+                    </div>
+                </div>
+
+                <div class="clues-column">
+                    <h3>Down</h3>
+                    <div class="clue-item">
+                        <span class="clue-number">2</span>
+                        <span class="clue-text">I'm sorry, but you have to be a ........................ of the golf club to play here. (6)</span>
+                    </div>
+                    <div class="clue-item">
+                        <span class="clue-number">3</span>
+                        <span class="clue-text">My ........................ was a brilliant player and I didn't manage to win the match. (8)</span>
+                    </div>
+                    <div class="clue-item">
+                        <span class="clue-number">6</span>
+                        <span class="clue-text">Tom is really good at cards. He would never ........................! (5)</span>
+                    </div>
+                    <div class="clue-item">
+                        <span class="clue-number">7</span>
+                        <span class="clue-text">Lisa\'s ........................ has just reached number one with their new song! (5)</span>
+                    </div>
+                    <div class="clue-item">
+                        <span class="clue-number">10</span>
+                        <span class="clue-text">I took a big ........................ by doing the parachute jump, but I loved every second of it! (4)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons-section">
+            <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+            <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+        </div>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTFyMfwGpGFFRKKoXpQf/ZtVKKjoF+L7ffy4qC7zQtxHiJitjEATj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkmXLRV5vfJzJrEPiniwz4rsVZpGgG8Y1r+KNuGMuwtj44gJjEnFqVfXpX5f" crossorigin="anonymous"></script>
+
+    <script>
+        // Define the crossword grid structure and answers
+        const crosswordData = {
+            grid: [
+                ['', '', '', '', '', '', '', '', '', '', '', '', '', ''], // Row 0 (empty)
+                ['C', 'H', 'A', 'M', 'P', 'I', 'O', 'N', '', '', '', '', '', ''], // Row 1: 1 Across - CHAMPION
+                ['', '', 'E', '', '', '', '', '', '', '', '', '', '', ''], // Row 2: 2 Down - MEMBER (starts at C3)
+                ['', '', 'M', '', '', '', '', '', '', '', '', '', '', ''], // Row 3: 3 Down - OPPONENT (starts at C3)
+                ['', '', 'B', 'G', 'Y', 'M', '', '', '', '', '', '', '', ''], // Row 4: 4 Across - GYM (interacts with 3 Down)
+                ['', '', 'E', '', '', '', '', 'C', 'O', 'A', 'C', 'H', '', ''], // Row 5: 5 Across - COACH (interacts with 2 Down)
+                ['', '', 'R', '', '', '', 'C', '', '', '', '', '', '', ''], // Row 6: 6 Down - CHEAT (starts at C7)
+                ['', '', '', '', '', '', 'H', '', '', '', '', '', '', ''], // Row 7
+                ['R', 'E', 'F', 'E', 'R', 'E', 'E', '', '', '', '', '', '', ''], // Row 8: 8 Across - REFEREE (interacts with 7 Down)
+                ['', '', 'N', 'L', '', '', 'S', 'U', 'P', 'P', 'O', 'R', 'T', ''], // Row 9: 9 Across - SUPPORT (interacts with 3 Down, 7 Down)
+                ['', '', 'T', 'B', '', '', 'A', '', '', 'R', '', '', '', ''], // Row 10: 10 Down - RISK (starts at C10)
+                ['F', 'O', 'L', 'K', '', '', 'T', '', '', 'I', '', '', '', ''], // Row 11: 11 Across - FOLK (interacts with 6 Down)
+                ['', '', '', 'U', '', '', '', '', '', 'S', '', '', '', '']  // Row 12
+            ],
+            clues: {
+                across: {
+                    1: {
+                        answer: 'CHAMPION',
+                        start: { row: 1, col: 0 },
+                        length: 8,
+                        originalText: 'If he wins this match, he\'ll be the world {answer}!',
+                        translation: 'Nếu anh ấy thắng trận đấu này, anh ấy sẽ trở thành nhà vô địch thế giới!',
+                        explanation: 'Trong ngữ cảnh một trận đấu, người chiến thắng để trở thành số một thế giới là "champion" (nhà vô địch).'
+                    },
+                    4: {
+                        answer: 'GYM',
+                        start: { row: 4, col: 3 },
+                        length: 3,
+                        originalText: 'I\'m thinking of joining a {answer} to get more exercise.',
+                        translation: 'Tôi đang nghĩ đến việc tham gia một phòng gym để tập thể dục nhiều hơn.',
+                        explanation: 'Để tập thể dục, người ta thường tham gia "gym" (phòng tập thể hình).'
+                    },
+                    5: {
+                        answer: 'COACH',
+                        start: { row: 5, col: 7 },
+                        length: 5,
+                        originalText: 'Our basketball {answer} said that I can play on Saturday!',
+                        translation: 'Huấn luyện viên bóng rổ của chúng tôi nói rằng tôi có thể chơi vào thứ Bảy!',
+                        explanation: 'Người hướng dẫn hoặc huấn luyện một đội thể thao là "coach" (huấn luyện viên).'
+                    },
+                    8: {
+                        answer: 'REFEREE',
+                        start: { row: 8, col: 0 },
+                        length: 7,
+                        originalText: 'The {answer} blew his whistle and the game started.',
+                        translation: 'Trọng tài đã thổi còi và trận đấu bắt đầu.',
+                        explanation: 'Người điều khiển trận đấu và thổi còi là "referee" (trọng tài).'
+                    },
+                    9: {
+                        answer: 'SUPPORT',
+                        start: { row: 9, col: 6 },
+                        length: 7,
+                        originalText: 'Which team do you {answer}?',
+                        translation: 'Bạn ủng hộ đội nào?',
+                        explanation: 'Khi hỏi về đội thể thao yêu thích hoặc đội mà bạn cổ vũ, dùng động từ "support" (ủng hộ).'
+                    },
+                    11: {
+                        answer: 'FOLK',
+                        start: { row: 11, col: 0 },
+                        length: 4,
+                        originalText: 'Mark\'s band play traditional {answer} music - they often perform at country fairs and festivals.',
+                        translation: 'Ban nhạc của Mark chơi nhạc dân gian truyền thống - họ thường biểu diễn tại các hội chợ và lễ hội nông thôn.',
+                        explanation: 'Loại nhạc truyền thống thường biểu diễn tại các hội chợ và lễ hội là "folk music" (nhạc dân gian).'
+                    }
+                },
+                down: {
+                    2: {
+                        answer: 'MEMBER',
+                        start: { row: 1, col: 2 },
+                        length: 6,
+                        originalText: 'I\'m sorry, but you have to be a {answer} of the golf club to play here.',
+                        translation: 'Tôi xin lỗi, nhưng bạn phải là một thành viên của câu lạc bộ golf mới có thể chơi ở đây.',
+                        explanation: 'Để được chơi tại một câu lạc bộ, bạn cần là "member" (thành viên) của câu lạc bộ đó.'
+                    },
+                    3: {
+                        answer: 'OPPONENT',
+                        start: { row: 3, col: 2 },
+                        length: 8,
+                        originalText: 'My {answer} was a brilliant player and I didn\'t manage to win the match.',
+                        translation: 'Đối thủ của tôi là một cầu thủ xuất sắc và tôi đã không thể thắng trận đấu.',
+                        explanation: 'Người đấu với bạn trong một trò chơi hoặc trận đấu là "opponent" (đối thủ).'
+                    },
+                    6: {
+                        answer: 'CHEAT',
+                        start: { row: 6, col: 6 },
+                        length: 5,
+                        originalText: 'Tom is really good at cards. He would never {answer}!',
+                        translation: 'Tom rất giỏi chơi bài. Anh ấy sẽ không bao giờ gian lận!',
+                        explanation: 'Một người giỏi chơi bài thì sẽ không cần phải "cheat" (gian lận).'
+                    },
+                    7: {
+                        answer: 'ALBUM',
+                        start: { row: 8, col: 3 },
+                        length: 5,
+                        originalText: 'Lisa\'s {answer} has just reached number one with their new song!',
+                        translation: 'Album của Lisa vừa đạt vị trí số một với bài hát mới của họ!',
+                        explanation: 'Một bộ sưu tập các bài hát của một nghệ sĩ phát hành thường được gọi là "album".'
+                    },
+                    10: {
+                        answer: 'RISK',
+                        start: { row: 10, col: 9 },
+                        length: 4,
+                        originalText: 'I took a big {answer} by doing the parachute jump, but I loved every second of it!',
+                        translation: 'Tôi đã chấp nhận một rủi ro lớn khi nhảy dù, nhưng tôi yêu thích từng giây phút của nó!',
+                        explanation: 'Nhảy dù là một hành động mạo hiểm, đó là một "risk" (rủi ro).'
+                    }
+                }
+            }
+        };
+
+        const gridRows = crosswordData.grid.length;
+        const gridCols = crosswordData.grid[0].length;
+        const crosswordGridElement = document.getElementById('crosswordGrid');
+
+        // Function to create and render the grid
+        function renderCrosswordGrid() {
+            crosswordGridElement.innerHTML = ''; // Clear existing grid
+
+            for (let r = 0; r < gridRows; r++) {
+                for (let c = 0; c < gridCols; c++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('crossword-cell');
+                    cell.dataset.row = r;
+                    cell.dataset.col = c;
+
+                    // Check if this cell is empty (blacked out)
+                    if (crosswordData.grid[r][c] === '') {
+                        cell.classList.add('empty');
+                    } else {
+                        // Create input for this cell
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.maxLength = '1';
+                        input.id = `cell-${r}-${c}`; // Unique ID for each cell
+                        cell.appendChild(input);
+
+                        // Add feedback icon placeholder
+                        const feedbackIcon = document.createElement('i');
+                        feedbackIcon.classList.add('feedback-icon', 'fa-solid');
+                        cell.appendChild(feedbackIcon);
+
+                        // Add event listener for auto-advance
+                        input.addEventListener('input', handleCellInput);
+                        input.addEventListener('keydown', handleCellKeydown);
+                    }
+
+                    // Add clue numbers to the cells
+                    let clueNumber = null;
+                    // Check Across clues
+                    for (const num in crosswordData.clues.across) {
+                        const clue = crosswordData.clues.across[num];
+                        if (clue.start.row === r && clue.start.col === c) {
+                            clueNumber = num;
+                            break;
+                        }
+                    }
+                    // Check Down clues (only if not already an Across start)
+                    if (clueNumber === null) {
+                        for (const num in crosswordData.clues.down) {
+                            const clue = crosswordData.clues.down[num];
+                            if (clue.start.row === r && clue.start.col === c) {
+                                clueNumber = num;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (clueNumber) {
+                        const numSpan = document.createElement('span');
+                        numSpan.classList.add('cell-number');
+                        numSpan.textContent = clueNumber;
+                        cell.appendChild(numSpan);
+                    }
+
+                    crosswordGridElement.appendChild(cell);
+                }
+            }
+        }
+
+        function normalizeAnswer(answer) {
+            return answer.toUpperCase().trim();
+        }
+
+        function handleCellInput(event) {
+            const input = event.target;
+            if (input.value.length === input.maxLength) {
+                const inputs = Array.from(document.querySelectorAll('.crossword-cell input:not([readonly])'));
+                const currentIndex = inputs.indexOf(input);
+                if (currentIndex < inputs.length - 1) {
+                    inputs[currentIndex + 1].focus();
+                }
+            }
+        }
+
+        function handleCellKeydown(event) {
+            const input = event.target;
+            const currentRow = parseInt(input.parentElement.dataset.row);
+            const currentCol = parseInt(input.parentElement.dataset.col);
+
+            const allInputs = Array.from(document.querySelectorAll('.crossword-cell input:not([readonly])'));
+            const currentIndex = allInputs.indexOf(input);
+
+            if (event.key === 'Backspace' && input.value === '') {
+                if (currentIndex > 0) {
+                    allInputs[currentIndex - 1].focus();
+                }
+            } else if (event.key === 'ArrowRight') {
+                if (currentIndex < allInputs.length - 1) {
+                    allInputs[currentIndex + 1].focus();
+                }
+            } else if (event.key === 'ArrowLeft') {
+                if (currentIndex > 0) {
+                    allInputs[currentIndex - 1].focus();
+                }
+            } else if (event.key === 'ArrowDown') {
+                // Find input in the cell below
+                let nextRow = currentRow + 1;
+                let nextInput = null;
+                while (nextRow < gridRows && !nextInput) {
+                    const nextCell = document.querySelector(`.crossword-cell[data-row="${nextRow}"][data-col="${currentCol}"]`);
+                    if (nextCell) {
+                        nextInput = nextCell.querySelector('input');
+                    }
+                    if (!nextInput) nextRow++; // Continue searching if cell below is empty or doesn't have an input
+                }
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            } else if (event.key === 'ArrowUp') {
+                // Find input in the cell above
+                let prevRow = currentRow - 1;
+                let prevInput = null;
+                while (prevRow >= 0 && !prevInput) {
+                    const prevCell = document.querySelector(`.crossword-cell[data-row="${prevRow}"][data-col="${currentCol}"]`);
+                    if (prevCell) {
+                        prevInput = prevCell.querySelector('input');
+                    }
+                    if (!prevInput) prevRow--; // Continue searching if cell above is empty or doesn't have an input
+                }
+                if (prevInput) {
+                    prevInput.focus();
+                }
+            }
+        }
+
+
+        function collectWord(direction, clueNumber) {
+            const clue = crosswordData.clues[direction][clueNumber];
+            let word = '';
+            if (direction === 'across') {
+                for (let c = 0; c < clue.length; c++) {
+                    const cellInput = document.getElementById(`cell-${clue.start.row}-${clue.start.col + c}`);
+                    if (cellInput) {
+                        word += cellInput.value;
+                    }
+                }
+            } else { // 'down'
+                for (let r = 0; r < clue.length; r++) {
+                    const cellInput = document.getElementById(`cell-${clue.start.row + r}-${clue.start.col}`);
+                    if (cellInput) {
+                        word += cellInput.value;
+                    }
+                }
+            }
+            return word;
+        }
+
+        function highlightWord(direction, clueNumber, isValid) {
+            const clue = crosswordData.clues[direction][clueNumber];
+            for (let i = 0; i < clue.length; i++) {
+                let cellId;
+                if (direction === 'across') {
+                    cellId = `cell-${clue.start.row}-${clue.start.col + i}`;
+                } else { // 'down'
+                    cellId = `cell-${clue.start.row + i}-${clue.start.col}`;
+                }
+                const cellInput = document.getElementById(cellId);
+                if (cellInput) {
+                    // Only apply valid/invalid if the cell is part of a word that is being checked.
+                    // If a cell is part of both a correct across word and an incorrect down word, it will show incorrect.
+                    // A more complex logic could manage per-direction validation on each cell.
+                    // For simplicity, we apply the last validation result for the cell.
+                    cellInput.classList.remove('is-valid', 'is-invalid');
+                    if (isValid) {
+                        cellInput.classList.add('is-valid');
+                    } else {
+                        cellInput.classList.add('is-invalid');
+                    }
+                    const feedbackIcon = cellInput.parentElement.querySelector('.feedback-icon');
+                    if (feedbackIcon) {
+                        feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                        if (isValid) {
+                            feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                        } else {
+                            feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                        }
+                        feedbackIcon.style.display = 'flex'; // Show icon
+                    }
+                }
+            }
+        }
+
+        function submitAnswers() {
+            let correctCount = 0;
+            let totalWords = 0;
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Keep track of which cells have been marked as invalid by an incorrect word
+            const invalidCells = new Set();
+
+            // Process Across clues
+            for (const num in crosswordData.clues.across) {
+                totalWords++;
+                const clue = crosswordData.clues.across[num];
+                const userAnswer = normalizeAnswer(collectWord('across', num));
+                const isCorrect = (userAnswer === normalizeAnswer(clue.answer));
+
+                if (isCorrect) {
+                    correctCount++;
+                    highlightWord('across', num, true);
+                } else {
+                    highlightWord('across', num, false);
+                    // Add all cells of this incorrect word to the invalidCells set
+                    for (let c = 0; c < clue.length; c++) {
+                        invalidCells.add(`cell-${clue.start.row}-${clue.start.col + c}`);
+                    }
+                }
+                addSolutionItem(num, 'across', clue, isCorrect);
+            }
+
+            // Process Down clues
+            for (const num in crosswordData.clues.down) {
+                totalWords++;
+                const clue = crosswordData.clues.down[num];
+                const userAnswer = normalizeAnswer(collectWord('down', num));
+                const isCorrect = (userAnswer === normalizeAnswer(clue.answer));
+
+                // If a cell is part of an invalid word (from Across or Down), it should remain marked as invalid.
+                // If it's part of a valid word, but was previously marked invalid by another word, that needs to be handled.
+                // For simplicity, we prioritize "incorrect" over "correct" for a shared cell.
+                // So, we re-highlight all cells based on their current word validity.
+                // If a cell has been marked invalid by ANY word it belongs to, it should display as invalid.
+                // This approach requires clearing and re-applying classes for all cells in a word.
+
+                if (isCorrect) {
+                    highlightWord('down', num, true);
+                } else {
+                    highlightWord('down', num, false);
+                    for (let r = 0; r < clue.length; r++) {
+                        invalidCells.add(`cell-${clue.start.row + r}-${clue.start.col}`);
+                    }
+                }
+                addSolutionItem(num, 'down', clue, isCorrect);
+            }
+
+            // After checking all words, iterate through all inputs and ensure the final state
+            // of the feedback icon and color correctly reflects if ANY word it belongs to is wrong.
+            // This is a simplified approach, a more robust solution might track per-cell correctness
+            // for each word direction separately.
+            document.querySelectorAll('.crossword-cell input').forEach(input => {
+                const cellId = input.id;
+                const cellElement = input.parentElement;
+                const feedbackIcon = cellElement.querySelector('.feedback-icon');
+
+                if (invalidCells.has(cellId)) {
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                    if (feedbackIcon) {
+                        feedbackIcon.classList.remove('fa-check-circle', 'text-success');
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                        feedbackIcon.style.display = 'flex';
+                    }
+                } else {
+                    // If it's not in invalidCells, it means all words it belongs to are correct.
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                    if (feedbackIcon) {
+                        feedbackIcon.classList.remove('fa-times-circle', 'text-danger');
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                        feedbackIcon.style.display = 'flex';
+                    }
+                }
+            });
+
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${correctCount} / ${totalWords} từ đúng.`;
+
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (correctCount === totalWords) {
+                scoreDisplay.classList.add('text-success');
+            } else if (correctCount >= totalWords / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+        }
+
+        function addSolutionItem(number, direction, clue, isCorrect) {
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            const solutionItem = document.createElement('div');
+            solutionItem.classList.add('solution-item');
+
+            const questionTextDiv = document.createElement('div');
+            questionTextDiv.classList.add('question-text');
+            questionTextDiv.innerHTML = `<strong>${number} (${direction}):</strong> ${clue.originalText.replace('{answer}', `<span class="correct-answer-text">${clue.answer}</span>`)}`;
+            solutionItem.appendChild(questionTextDiv);
+
+            const grammarExplanationDiv = document.createElement('div');
+            grammarExplanationDiv.classList.add('grammar-explanation');
+            grammarExplanationDiv.innerHTML = `<strong>Giải thích:</strong> ${clue.explanation}`;
+            solutionItem.appendChild(grammarExplanationDiv);
+
+            const translationDiv = document.createElement('div');
+            translationDiv.classList.add('translation');
+            translationDiv.innerHTML = `<strong>Dịch:</strong> ${clue.translation}`;
+            solutionItem.appendChild(translationDiv);
+
+            solutionListDiv.appendChild(solutionItem);
+        }
+
+        function resetExercise() {
+            const inputs = document.querySelectorAll('.crossword-cell input');
+            inputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('is-valid', 'is-invalid');
+                const feedbackIcon = input.parentElement.querySelector('.feedback-icon');
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    feedbackIcon.style.display = 'none'; // Hide feedback icon
+                }
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions
+        }
+
+        // Initial rendering of the crossword grid
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCrosswordGrid();
+            // Hide all feedback icons initially
+            document.querySelectorAll('.crossword-cell .feedback-icon').forEach(icon => {
+                icon.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+            

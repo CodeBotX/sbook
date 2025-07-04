@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài D: Nối câu</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Matching section layout */
+        .matching-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns for questions and options */
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .sentence-column, .option-column {
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .sentence-item, .option-item {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            color: #34495e;
+            display: flex;
+            align-items: center;
+        }
+        .sentence-item:last-child, .option-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .sentence-item .sentence-number {
+            font-weight: 700;
+            margin-right: 10px;
+            color: #007bff;
+        }
+        .option-item .option-letter {
+            font-weight: 700;
+            margin-right: 10px;
+            color: #28a745;
+        }
+
+        /* Dropdown styling */
+        .matching-dropdown {
+            width: 70px; /* Width for the dropdown */
+            padding: 5px 8px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1em;
+            text-align: center;
+            margin-left: 10px; /* Space between sentence and dropdown */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .matching-dropdown:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        /* Feedback styles for dropdowns */
+        .matching-dropdown.is-correct {
+            border-color: #198754;
+            background-color: #d1e7dd;
+            color: #198754;
+            font-weight: 600;
+        }
+        .matching-dropdown.is-incorrect {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+            color: #dc3545;
+            font-weight: 600;
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .matching-section {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+                gap: 20px;
+            }
+            .sentence-column, .option-column {
+                padding: 10px;
+            }
+            .sentence-item, .option-item {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .matching-dropdown {
+                width: 60px;
+                padding: 3px 6px;
+                font-size: 0.9em;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Nối Câu</h1>
+        </div>
+        <h2>Nối để tạo thành câu.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Match to make sentences.
+            <br>
+            <strong>Hướng dẫn:</strong> Nối các phần để tạo thành câu hoàn chỉnh.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="matchSentencesForm">
+            <div class="matching-section">
+                <div class="sentence-column">
+                    <div class="sentence-item" data-question-id="q1">
+                        <span class="sentence-number">1.</span> As the plane took
+                        <select class="form-select matching-dropdown" id="q1_select">
+                            <option value="">Chọn</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                        </select>
+                        <i class="feedback-icon fa-solid" id="icon1"></i>
+                    </div>
+
+                    <div class="sentence-item" data-question-id="q2">
+                        <span class="sentence-number">2.</span> The door is open, so you can get
+                        <select class="form-select matching-dropdown" id="q2_select">
+                            <option value="">Chọn</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                        </select>
+                        <i class="feedback-icon fa-solid" id="icon2"></i>
+                    </div>
+
+                    <div class="sentence-item" data-question-id="q3">
+                        <span class="sentence-number">3.</span> We were in a hurry and when we got
+                        <select class="form-select matching-dropdown" id="q3_select">
+                            <option value="">Chọn</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                        </select>
+                        <i class="feedback-icon fa-solid" id="icon3"></i>
+                    </div>
+
+                    <div class="sentence-item" data-question-id="q4">
+                        <span class="sentence-number">4.</span> The man selling the tickets told us to go
+                        <select class="form-select matching-dropdown" id="q4_select">
+                            <option value="">Chọn</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                        </select>
+                        <i class="feedback-icon fa-solid" id="icon4"></i>
+                    </div>
+
+                    <div class="sentence-item" data-question-id="q5">
+                        <span class="sentence-number">5.</span> It was raining when we set
+                        <select class="form-select matching-dropdown" id="q5_select">
+                            <option value="">Chọn</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                        </select>
+                        <i class="feedback-icon fa-solid" id="icon5"></i>
+                    </div>
+
+                    <div class="sentence-item" data-question-id="q6">
+                        <span class="sentence-number">6.</span> We loved the hotel so we went
+                        <select class="form-select matching-dropdown" id="q6_select">
+                            <option value="">Chọn</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                        </select>
+                        <i class="feedback-icon fa-solid" id="icon6"></i>
+                    </div>
+
+                    <div class="sentence-item" data-question-id="q7">
+                        <span class="sentence-number">7.</span> Ray fell as he was getting
+                        <select class="form-select matching-dropdown" id="q7_select">
+                            <option value="">Chọn</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                        </select>
+                        <i class="feedback-icon fa-solid" id="icon7"></i>
+                    </div>
+
+                    <div class="sentence-item" data-question-id="q8">
+                        <span class="sentence-number">8.</span> The taxi driver asked us to get
+                        <select class="form-select matching-dropdown" id="q8_select">
+                            <option value="">Chọn</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                        </select>
+                        <i class="feedback-icon fa-solid" id="icon8"></i>
+                    </div>
+                </div>
+
+                <div class="option-column">
+                    <div class="option-item">
+                        <span class="option-letter">A.</span> away and come back again later.
+                    </div>
+                    <div class="option-item">
+                        <span class="option-letter">B.</span> back there the following year.
+                    </div>
+                    <div class="option-item">
+                        <span class="option-letter">C.</span> off, I held my mum's hand tightly.
+                    </div>
+                    <div class="option-item">
+                        <span class="option-letter">D.</span> off the bus and couldn't walk properly.
+                    </div>
+                    <div class="option-item">
+                        <span class="option-letter">E.</span> off on our walk, but it soon stopped.
+                    </div>
+                    <div class="option-item">
+                        <span class="option-letter">F.</span> in the car, if you like.
+                    </div>
+                    <div class="option-item">
+                        <span class="option-letter">G.</span> out on the right because it was safer.
+                    </div>
+                    <div class="option-item">
+                        <span class="option-letter">H.</span> on the bus, I realised I didn't have a ticket.
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                sentence_start: 'As the plane took',
+                correct_match: 'C',
+                full_sentence: 'As the plane took off, I held my mum\'s hand tightly.',
+                translation: 'Khi máy bay cất cánh, tôi nắm chặt tay mẹ.',
+                explanation: '"Take off" là cụm động từ có nghĩa là máy bay cất cánh.',
+                grammar_note: 'Cụm động từ (phrasal verb) "take off" thường dùng cho máy bay.'
+            },
+            'q2': {
+                sentence_start: 'The door is open, so you can get',
+                correct_match: 'F',
+                full_sentence: 'The door is open, so you can get in the car, if you like.',
+                translation: 'Cửa đang mở, vậy bạn có thể vào xe, nếu bạn muốn.',
+                explanation: '"Get in" được dùng khi vào một phương tiện nhỏ như ô tô.',
+                grammar_note: 'Sử dụng "get in" cho các phương tiện nhỏ (car, taxi).'
+            },
+            'q3': {
+                sentence_start: 'We were in a hurry and when we got',
+                correct_match: 'H',
+                full_sentence: 'We were in a hurry and when we got on the bus, I realised I didn\'t have a ticket.',
+                translation: 'Chúng tôi đang vội và khi chúng tôi lên xe buýt, tôi nhận ra mình không có vé.',
+                explanation: '"Get on" được dùng khi lên một phương tiện công cộng lớn hơn như xe buýt, tàu hỏa.',
+                grammar_note: 'Sử dụng "get on" cho các phương tiện công cộng lớn (bus, train, plane).'
+            },
+            'q4': {
+                sentence_start: 'The man selling the tickets told us to go',
+                correct_match: 'A',
+                full_sentence: 'The man selling the tickets told us to go away and come back again later.',
+                translation: 'Người bán vé bảo chúng tôi đi chỗ khác và quay lại sau.',
+                explanation: '"Go away" là cụm động từ có nghĩa là rời đi.',
+                grammar_note: 'Cụm động từ "go away" (rời đi).'
+            },
+            'q5': {
+                sentence_start: 'It was raining when we set',
+                correct_match: 'E',
+                full_sentence: 'It was raining when we set off on our walk, but it soon stopped.',
+                translation: 'Trời đang mưa khi chúng tôi bắt đầu đi bộ, nhưng nó sớm tạnh.',
+                explanation: '"Set off" là cụm động từ có nghĩa là bắt đầu một hành trình hoặc chuyến đi.',
+                grammar_note: 'Cụm động từ "set off" (bắt đầu hành trình).'
+            },
+            'q6': {
+                sentence_start: 'We loved the hotel so we went',
+                correct_match: 'B',
+                full_sentence: 'We loved the hotel so we went back there the following year.',
+                translation: 'Chúng tôi rất thích khách sạn đó nên chúng tôi đã quay lại đó vào năm sau.',
+                explanation: '"Go back" là cụm động từ có nghĩa là quay trở lại.',
+                grammar_note: 'Cụm động từ "go back" (quay trở lại).'
+            },
+            'q7': {
+                sentence_start: 'Ray fell as he was getting',
+                correct_match: 'D',
+                full_sentence: 'Ray fell as he was getting off the bus and couldn\'t walk properly.',
+                translation: 'Ray ngã khi anh ấy đang xuống xe buýt và không thể đi lại bình thường.',
+                explanation: '"Get off" được dùng khi xuống một phương tiện công cộng lớn hơn như xe buýt, tàu hỏa.',
+                grammar_note: 'Sử dụng "get off" cho các phương tiện công cộng lớn (bus, train, plane).'
+            },
+            'q8': {
+                sentence_start: 'The taxi driver asked us to get',
+                correct_match: 'G',
+                full_sentence: 'The taxi driver asked us to get out on the right because it was safer.',
+                translation: 'Tài xế taxi yêu cầu chúng tôi xuống ở bên phải vì an toàn hơn.',
+                explanation: '"Get out" được dùng khi ra khỏi một phương tiện nhỏ như ô tô, taxi.',
+                grammar_note: 'Sử dụng "get out" cho các phương tiện nhỏ (car, taxi).'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const selectElement = document.getElementById(`${qId}_select`);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                // Ensure selectElement is not null before proceeding
+                if (!selectElement) {
+                    console.error(`Select element with ID ${qId}_select not found.`);
+                    return; // Skip this question if element is missing
+                }
+
+                const userAnswer = selectElement.value.trim().toUpperCase();
+                const correctAnswer = questionInfo.correct_match.toUpperCase();
+
+                // Remove previous feedback classes
+                selectElement.classList.remove('is-correct', 'is-incorrect');
+
+                let isCorrect = false;
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    selectElement.classList.add('is-correct');
+                } else {
+                    selectElement.classList.add('is-incorrect');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                const fullTextSolution = `${questionNumber}. ${questionInfo.full_sentence}`;
+                questionTextSolutionDiv.innerHTML = fullTextSolution;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing selections, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            document.querySelectorAll('.matching-dropdown').forEach(select => {
+                select.value = ''; // Reset dropdown to default option
+                select.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            document.querySelectorAll('.feedback-icon').forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

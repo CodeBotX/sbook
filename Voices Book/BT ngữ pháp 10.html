@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp A1.2: Quá khứ hoàn thành & Mạo từ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .lead {
+            color: #5f6368;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .question-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8faff;
+            border: 1px solid #dcdfe4;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-section h3 {
+            color: #3c4043;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid #e8eaed;
+            padding-bottom: 10px;
+        }
+        .question-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eceff1;
+        }
+        .question-item label {
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+            color: #202124;
+            font-size: 1.05rem;
+        }
+        .form-check {
+            margin-bottom: 8px;
+        }
+        .form-check-input {
+            margin-right: 8px;
+        }
+        .form-check-label {
+            font-size: 0.95rem;
+            color: #3c4043;
+        }
+        .instructions {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #70757a;
+            padding: 10px 15px;
+            background-color: #e6f4f1;
+            border-left: 5px solid #34a853;
+            border-radius: 5px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #e6ffed;
+            color: #1e8449;
+            border: 1px solid #34a853;
+        }
+        .feedback.incorrect {
+            background-color: #ffebe6;
+            color: #c53929;
+            border: 1px solid #ea4335;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            border-left: 4px solid #aab7b8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            display: none;
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1764cc;
+            border-color: #1764cc;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .d-grid {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Bài Tập Ngữ Pháp A1.2</h1>
+        <p class="lead text-center">Quá khứ hoàn thành (Past Perfect) & Mạo từ (Articles - a/an/the)</p>
+        <hr>
+
+        <form id="grammarQuizForm">
+            <!-- Phần bài tập Past Perfect -->
+            <div class="question-section">
+                <h3>Phần 1: Quá khứ hoàn thành (Past Perfect)</h3>
+                <p class="instructions">Chọn dạng động từ đúng nhất để hoàn thành các câu. (Gợi ý: chú ý trình tự thời gian của các hành động)</p>
+                <div id="part1-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Phần bài tập Articles (a/an/the) -->
+            <div class="question-section">
+                <h3>Phần 2: Mạo từ (Articles - a/an/the)</h3>
+                <p class="instructions">Chọn mạo từ đúng nhất (a, an, the) hoặc không có mạo từ (X) để hoàn thành các câu.</p>
+                <div id="part2-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-primary" type="button" onclick="submitQuiz()">Nộp bài</button>
+                <button class="btn btn-secondary" type="button" onclick="resetQuiz()">Làm lại</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Dữ liệu câu hỏi cho Phần 1: Past Perfect (20 câu)
+        const questionsPart1 = [
+            {
+                id: "q1_pp",
+                text: "1. When I arrived at the station, the train ______ (already / leave).",
+                options: {
+                    a: "already left",
+                    b: "had already left",
+                    c: "has already left",
+                    d: "was already leaving"
+                },
+                correct: "b",
+                explanation: "Hành động 'the train leave' (tàu rời đi) xảy ra và hoàn thành trước hành động 'I arrived' (tôi đến) trong quá khứ. Đây là trình tự thời gian, sự việc nào xảy ra trước thì dùng Quá khứ hoàn thành. (Khi tôi đến ga, tàu đã rời đi rồi.)"
+            },
+            {
+                id: "q2_pp",
+                text: "2. She ______ (not / finish) her report by the time her boss asked for it.",
+                options: {
+                    a: "didn't finish",
+                    b: "hadn't finished",
+                    c: "hasn't finished",
+                    d: "wasn't finishing"
+                },
+                correct: "b",
+                explanation: "Việc 'not finish report' (chưa hoàn thành báo cáo) kéo dài và vẫn chưa xong trước mốc thời gian trong quá khứ là 'her boss asked for it' (sếp yêu cầu). Dùng Quá khứ hoàn thành. (Cô ấy chưa hoàn thành báo cáo vào lúc sếp cô ấy yêu cầu.)"
+            },
+            {
+                id: "q3_pp",
+                text: "3. By the time he turned 20, he ______ (visit) ten different countries.",
+                options: {
+                    a: "visited",
+                    b: "had visited",
+                    c: "has visited",
+                    d: "was visiting"
+                },
+                correct: "b",
+                explanation: "'By the time he turned 20' là mốc thời gian trong quá khứ, và hành động 'visit countries' (thăm các nước) đã hoàn thành trước mốc đó. Dùng Quá khứ hoàn thành. (Vào lúc anh ấy 20 tuổi, anh ấy đã thăm mười quốc gia khác nhau.)"
+            },
+            {
+                id: "q4_pp",
+                text: "4. I couldn't enter the house because I ______ (forget) my keys inside.",
+                options: {
+                    a: "forgot",
+                    b: "had forgotten",
+                    c: "have forgotten",
+                    d: "was forgetting"
+                },
+                correct: "b",
+                explanation: "Việc 'forget keys' (quên chìa khóa) xảy ra trước và là nguyên nhân trực tiếp dẫn đến việc 'couldn't enter' (không thể vào). Dùng Quá khứ hoàn thành cho hành động xảy ra trước. (Tôi không thể vào nhà vì tôi đã quên chìa khóa bên trong.)"
+            },
+            {
+                id: "q5_pp",
+                text: "5. After they ______ (discuss) the plan, they went to work.",
+                options: {
+                    a: "discussed",
+                    b: "had discussed",
+                    c: "have discussed",
+                    d: "were discussing"
+                },
+                correct: "b",
+                explanation: "'After' chỉ rõ trình tự thời gian, hành động 'discuss the plan' (thảo luận kế hoạch) xảy ra và hoàn thành trước 'they went to work' (họ đi làm). Dùng Quá khứ hoàn thành. (Sau khi họ đã thảo luận kế hoạch, họ đi làm.)"
+            },
+            {
+                id: "q6_pp",
+                text: "6. She finally found the wallet that she ______ (look for) for days.",
+                options: {
+                    a: "looked for",
+                    b: "had looked for",
+                    c: "has looked for",
+                    d: "was looking for"
+                },
+                correct: "b",
+                explanation: "Việc 'look for' (tìm kiếm) đã diễn ra trong một khoảng thời gian dài và kết thúc trước khi 'she finally found the wallet' (cuối cùng cô ấy tìm thấy ví). Dùng Quá khứ hoàn thành. (Cô ấy cuối cùng đã tìm thấy chiếc ví mà cô ấy đã tìm kiếm suốt nhiều ngày.)"
+            },
+            {
+                id: "q7_pp",
+                text: "7. He ______ (live) in Paris for five years before he moved to Rome.",
+                options: {
+                    a: "lived",
+                    b: "had lived",
+                    c: "has lived",
+                    d: "was living"
+                },
+                correct: "b",
+                explanation: "Việc 'live in Paris' (sống ở Paris) đã xảy ra và hoàn thành (hoặc kéo dài trong một giai đoạn) trước hành động 'moved to Rome' (chuyển đến Rome). Dùng Quá khứ hoàn thành. (Anh ấy đã sống ở Paris được năm năm trước khi anh ấy chuyển đến Rome.)"
+            },
+            {
+                id: "q8_pp",
+                text: "8. I didn't recognize him because he ______ (grow) a beard.",
+                options: {
+                    a: "grew",
+                    b: "had grown",
+                    c: "has grown",
+                    d: "was growing"
+                },
+                correct: "b",
+                explanation: "Việc 'grow a beard' (để râu) đã xảy ra trước và là lý do khiến tôi 'didn't recognize him' (không nhận ra anh ấy). Dùng Quá khứ hoàn thành. (Tôi không nhận ra anh ấy vì anh ấy đã để râu.)"
+            },
+            {
+                id: "q9_pp",
+                text: "9. They arrived at the meeting and realized they ______ (come) to the wrong place.",
+                options: {
+                    a: "came",
+                    b: "had come",
+                    c: "have come",
+                    d: "were coming"
+                },
+                correct: "b",
+                explanation: "Việc 'come to the wrong place' (đến nhầm chỗ) đã xảy ra trước khi 'they arrived at the meeting' (họ đến cuộc họp) và họ nhận ra điều đó. Dùng Quá khứ hoàn thành. (Họ đến cuộc họp và nhận ra rằng họ đã đến nhầm chỗ.)"
+            },
+            {
+                id: "q10_pp",
+                text: "10. By the time we got to the cinema, the film ______ (already / begin).",
+                options: {
+                    a: "already began",
+                    b: "had already begun",
+                    c: "has already begun",
+                    d: "was already beginning"
+                },
+                correct: "b",
+                explanation: "Hành động 'film begin' (phim bắt đầu) đã hoàn thành trước mốc thời gian trong quá khứ là 'we got to the cinema' (chúng tôi đến rạp chiếu phim). Dùng Quá khứ hoàn thành. (Vào lúc chúng tôi đến rạp chiếu phim, bộ phim đã bắt đầu rồi.)"
+            },
+            {
+                id: "q11_pp",
+                text: "11. He said that he ______ (never / see) such a beautiful view before.",
+                options: {
+                    a: "never saw",
+                    b: "had never seen",
+                    c: "has never seen",
+                    d: "was never seeing"
+                },
+                correct: "b",
+                explanation: "Việc 'never see such a beautiful view' (chưa bao giờ nhìn thấy cảnh đẹp như vậy) xảy ra trong suốt khoảng thời gian trước một mốc trong quá khứ ('he said that'). Dùng Quá khứ hoàn thành với 'never'. (Anh ấy nói rằng anh ấy chưa bao giờ nhìn thấy một cảnh đẹp như vậy trước đây.)"
+            },
+            {
+                id: "q12_pp",
+                text: "12. When I called him, he ______ (just / finish) his dinner.",
+                options: {
+                    a: "just finished",
+                    b: "had just finished",
+                    c: "has just finished",
+                    d: "was just finishing"
+                },
+                correct: "b",
+                explanation: "Hành động 'just finish dinner' (vừa mới ăn tối xong) xảy ra ngay trước khi 'I called him' (tôi gọi anh ấy). Dùng Quá khứ hoàn thành với 'just'. (Khi tôi gọi anh ấy, anh ấy vừa mới ăn tối xong.)"
+            },
+            {
+                id: "q13_pp",
+                text: "13. She was tired because she ______ (work) all day.",
+                options: {
+                    a: "worked",
+                    b: "had worked",
+                    c: "has worked",
+                    d: "was working"
+                },
+                correct: "b",
+                explanation: "Việc 'work all day' (làm việc cả ngày) xảy ra trước và là nguyên nhân dẫn đến việc 'she was tired' (cô ấy mệt). Dùng Quá khứ hoàn thành. (Cô ấy mệt vì cô ấy đã làm việc cả ngày.)"
+            },
+            {
+                id: "q14_pp",
+                text: "14. We realized we ______ (make) a mistake after we checked the numbers.",
+                options: {
+                    a: "made",
+                    b: "had made",
+                    c: "have made",
+                    d: "were making"
+                },
+                correct: "b",
+                explanation: "Việc 'make a mistake' (mắc lỗi) xảy ra trước hành động 'we checked the numbers' (chúng tôi kiểm tra các con số) và chúng tôi nhận ra điều đó sau đó. Dùng Quá khứ hoàn thành. (Chúng tôi nhận ra mình đã mắc lỗi sau khi kiểm tra các con số.)"
+            },
+            {
+                id: "q15_pp",
+                text: "15. He didn't understand the movie because he ______ (not / read) the book.",
+                options: {
+                    a: "didn't read",
+                    b: "hadn't read",
+                    c: "hasn't read",
+                    d: "wasn't reading"
+                },
+                correct: "b",
+                explanation: "Việc 'not read the book' (chưa đọc sách) xảy ra trước và là nguyên nhân dẫn đến việc 'he didn't understand the movie' (anh ấy không hiểu phim). Dùng Quá khứ hoàn thành. (Anh ấy không hiểu bộ phim vì anh ấy đã không đọc cuốn sách.)"
+            },
+            {
+                id: "q16_pp",
+                text: "16. Before they moved to their new house, they ______ (sell) their old one.",
+                options: {
+                    a: "sold",
+                    b: "had sold",
+                    c: "have sold",
+                    d: "were selling"
+                },
+                correct: "b",
+                explanation: "Việc 'sell their old one' (bán nhà cũ) xảy ra trước hành động 'they moved to their new house' (họ chuyển đến nhà mới). Dùng Quá khứ hoàn thành. (Trước khi chuyển đến nhà mới, họ đã bán nhà cũ rồi.)"
+            },
+            {
+                id: "q17_pp",
+                text: "17. The car broke down because the mechanic ______ (not / check) the engine properly.",
+                options: {
+                    a: "didn't check",
+                    b: "hadn't checked",
+                    c: "hasn't checked",
+                    d: "wasn't checking"
+                },
+                correct: "b",
+                explanation: "Việc 'not check the engine properly' (không kiểm tra động cơ đúng cách) xảy ra trước và là nguyên nhân dẫn đến việc 'the car broke down' (xe bị hỏng). Dùng Quá khứ hoàn thành. (Chiếc xe bị hỏng vì người thợ máy đã không kiểm tra động cơ đúng cách.)"
+            },
+            {
+                id: "q18_pp",
+                text: "18. She was surprised because she ______ (never / receive) such a beautiful gift before.",
+                options: {
+                    a: "never received",
+                    b: "had never received",
+                    c: "has never received",
+                    d: "was never receiving"
+                },
+                correct: "b",
+                explanation: "Việc 'never receive such a beautiful gift' (chưa bao giờ nhận được món quà đẹp như vậy) xảy ra trong suốt khoảng thời gian trước khi 'she was surprised' (cô ấy ngạc nhiên). Dùng Quá khứ hoàn thành với 'never'. (Cô ấy ngạc nhiên vì cô ấy chưa bao giờ nhận được một món quà đẹp như vậy trước đây.)"
+            },
+            {
+                id: "q19_pp",
+                text: "19. By the time I finished my work, it ______ (get) dark.",
+                options: {
+                    a: "got",
+                    b: "had got",
+                    c: "has got",
+                    d: "was getting"
+                },
+                correct: "b",
+                explanation: "Hành động 'get dark' (trời tối) đã xảy ra và hoàn thành trước mốc thời gian trong quá khứ là 'I finished my work' (tôi hoàn thành công việc). Dùng Quá khứ hoàn thành. (Vào lúc tôi hoàn thành công việc, trời đã tối rồi.)"
+            },
+            {
+                id: "q20_pp",
+                text: "20. I knew him because we ______ (meet) before.",
+                options: {
+                    a: "met",
+                    b: "had met",
+                    c: "have met",
+                    d: "were meeting"
+                },
+                correct: "b",
+                explanation: "Việc 'meet before' (gặp trước đó) đã xảy ra trước khi 'I knew him' (tôi biết anh ấy). Dùng Quá khứ hoàn thành. (Tôi biết anh ấy vì chúng tôi đã gặp nhau trước đó.)"
+            }
+        ];
+
+        // Dữ liệu câu hỏi cho Phần 2: Articles (a/an/the/X) (20 câu)
+        const questionsPart2 = [
+            {
+                id: "q1_articles",
+                text: "1. She dreams of becoming ______ astronaut.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "b",
+                explanation: "Dùng 'an' trước danh từ chỉ nghề nghiệp bắt đầu bằng nguyên âm 'a' trong 'astronaut'. (Cô ấy mơ ước trở thành một phi hành gia.)"
+            },
+            {
+                id: "q2_articles",
+                text: "2. I saw ______ very old car on the street.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "a",
+                explanation: "Dùng 'a' trước cụm tính từ-danh từ bắt đầu bằng phụ âm 'v' trong 'very'. (Tôi đã nhìn thấy một chiếc xe hơi rất cũ trên đường.)"
+            },
+            {
+                id: "q3_articles",
+                text: "3. Can you please turn off ______ lights when you leave?",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "c",
+                explanation: "Dùng 'the' khi nói về những thứ cụ thể mà người nói và người nghe đều biết (những bóng đèn trong phòng). (Bạn có thể làm ơn tắt đèn khi bạn rời đi không?)"
+            },
+            {
+                id: "q4_articles",
+                text: "4. ______ happiness is important for everyone.",
+                options: {
+                    a: "A",
+                    b: "An",
+                    c: "The",
+                    d: "X"
+                },
+                correct: "d",
+                explanation: "Không dùng mạo từ trước danh từ không đếm được 'happiness' khi nói chung chung. (Hạnh phúc là quan trọng đối với mọi người.)"
+            },
+            {
+                id: "q5_articles",
+                text: "5. ______ moon is very bright tonight.",
+                options: {
+                    a: "A",
+                    b: "An",
+                    c: "The",
+                    d: "X"
+                },
+                correct: "c",
+                explanation: "Dùng 'the' trước các vật thể là duy nhất (mặt trăng). (Mặt trăng tối nay rất sáng.)"
+            },
+            {
+                id: "q6_articles",
+                text: "6. My favorite city is ______ Rome.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "d",
+                explanation: "Không dùng mạo từ trước tên các thành phố cụ thể. (Thành phố yêu thích của tôi là Rome.)"
+            },
+            {
+                id: "q7_articles",
+                text: "7. He needs ______ umbrella because it's raining.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "b",
+                explanation: "Dùng 'an' trước danh từ bắt đầu bằng nguyên âm 'u' trong 'umbrella'. (Anh ấy cần một cái ô vì trời đang mưa.)"
+            },
+            {
+                id: "q8_articles",
+                text: "8. Could you pass me ______ sugar, please?",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "c",
+                explanation: "Dùng 'the' trước danh từ không đếm được 'sugar' khi nó được xác định trong ngữ cảnh (đường đang ở gần người nói/nghe). (Bạn có thể đưa cho tôi đường được không?)"
+            },
+            {
+                id: "q9_articles",
+                text: "9. ______ Pacific Ocean is the largest ocean.",
+                options: {
+                    a: "A",
+                    b: "An",
+                    c: "The",
+                    d: "X"
+                },
+                correct: "c",
+                explanation: "Dùng 'the' trước tên các đại dương. (Thái Bình Dương là đại dương lớn nhất.)"
+            },
+            {
+                id: "q10_articles",
+                text: "10. I like ______ cats more than dogs.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "d",
+                explanation: "Không dùng mạo từ trước danh từ số nhiều 'cats' và 'dogs' khi nói chung chung về loài vật. (Tôi thích mèo hơn chó.)"
+            },
+            {
+                id: "q11_articles",
+                text: "11. He works at ______ factory that produces cars.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "a",
+                explanation: "Dùng 'a' trước danh từ 'factory' bắt đầu bằng phụ âm. (Anh ấy làm việc tại một nhà máy sản xuất ô tô.)"
+            },
+            {
+                id: "q12_articles",
+                text: "12. What's ______ name of the film you watched?",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "c",
+                explanation: "Dùng 'the' vì 'name' được xác định bởi cụm 'of the film you watched'. (Tên của bộ phim bạn đã xem là gì?)"
+            },
+            {
+                id: "q13_articles",
+                text: "13. My friend bought ______ new phone yesterday.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "a",
+                explanation: "Dùng 'a' khi nhắc đến danh từ 'phone' lần đầu tiên và nó là danh từ đếm được số ít bắt đầu bằng phụ âm. (Bạn tôi đã mua một chiếc điện thoại mới ngày hôm qua.)"
+            },
+            {
+                id: "q14_articles",
+                text: "14. She plays ______ piano very well.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "c",
+                explanation: "Dùng 'the' trước tên các loại nhạc cụ khi chơi chúng. (Cô ấy chơi piano rất giỏi.)"
+            },
+            {
+                id: "q15_articles",
+                text: "15. ______ French is spoken in France.",
+                options: {
+                    a: "A",
+                    b: "An",
+                    c: "The",
+                    d: "X"
+                },
+                correct: "d",
+                explanation: "Không dùng mạo từ trước tên các ngôn ngữ khi nói chung chung. (Tiếng Pháp được nói ở Pháp.)"
+            },
+            {
+                id: "q16_articles",
+                text: "16. He wants to visit ______ highest mountain in the world.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "c",
+                explanation: "Dùng 'the' trước tính từ ở cấp độ so sánh nhất ('highest'). (Anh ấy muốn thăm ngọn núi cao nhất thế giới.)"
+            },
+            {
+                id: "q17_articles",
+                text: "17. This is ______ amazing story!",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "b",
+                explanation: "Dùng 'an' trước tính từ bắt đầu bằng nguyên âm 'a' trong 'amazing'. (Đây là một câu chuyện tuyệt vời!)"
+            },
+            {
+                id: "q18_articles",
+                text: "18. ______ United States is a large country.",
+                options: {
+                    a: "A",
+                    b: "An",
+                    c: "The",
+                    d: "X"
+                },
+                correct: "c",
+                explanation: "Dùng 'the' trước tên một số quốc gia có chứa từ 'States', 'Kingdom', hoặc là dạng số nhiều. (Hoa Kỳ là một quốc gia rộng lớn.)"
+            },
+            {
+                id: "q19_articles",
+                text: "19. She is good at ______ history.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "d",
+                explanation: "Không dùng mạo từ trước tên các môn học khi nói chung chung. (Cô ấy giỏi môn lịch sử.)"
+            },
+            {
+                id: "q20_articles",
+                text: "20. They are having ______ dinner with their friends tonight.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "the",
+                    d: "X"
+                },
+                correct: "d",
+                explanation: "Không dùng mạo từ trước tên các bữa ăn khi nói chung chung. (Họ sẽ ăn tối với bạn bè của họ tối nay.)"
+            }
+        ];
+
+        // Hàm để tải và hiển thị câu hỏi
+        function loadQuestions() {
+            const part1Container = document.getElementById('part1-questions');
+            const part2Container = document.getElementById('part2-questions');
+
+            part1Container.innerHTML = '';
+            part2Container.innerHTML = '';
+
+            // Tải câu hỏi Phần 1
+            questionsPart1.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part1Container.innerHTML += questionHtml;
+            });
+
+            // Tải câu hỏi Phần 2
+            questionsPart2.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part2Container.innerHTML += questionHtml;
+            });
+        }
+
+        // Hàm kiểm tra đáp án và hiển thị giải thích
+        function submitQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+            let allCorrect = true;
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+
+                if (selectedOption) {
+                    if (selectedOption.value === q.correct) {
+                        feedbackDiv.textContent = "Đúng rồi! 🎉";
+                        feedbackDiv.classList.add('correct');
+                    } else {
+                        feedbackDiv.textContent = `Sai rồi. Đáp án đúng là ${q.correct.toUpperCase()}. ❌`;
+                        feedbackDiv.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                } else {
+                    feedbackDiv.textContent = "Bạn chưa chọn đáp án.";
+                    feedbackDiv.classList.add('incorrect');
+                    allCorrect = false;
+                }
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${q.explanation}`;
+            });
+
+            if (allCorrect) {
+                // Có thể thêm thông báo chung nếu muốn, nhưng feedback từng câu đã rõ ràng.
+            }
+        }
+
+        // Hàm làm lại bài
+        function resetQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (selectedOption) {
+                    selectedOption.checked = false;
+                }
+
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'none';
+                explanationDiv.style.display = 'none';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                explanationDiv.innerHTML = '';
+            });
+        }
+
+        // Tải câu hỏi khi trang được tải xong
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+    </script>
+</body>
+</html>

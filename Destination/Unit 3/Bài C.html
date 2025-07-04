@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle the Correct Word - English Exercise</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding: 20px;
+        }
+        .container-main {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .exercise-item {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            color: #34495e;
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start; /* Align text to the top */
+        }
+        .exercise-item .question-number {
+            font-weight: 600;
+            color: #2c3e50;
+            width: 30px; /* Numbering width */
+            text-align: right;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .exercise-item .question-text-part {
+            margin-right: 5px;
+        }
+        .exercise-item .word-option {
+            font-weight: bold;
+            cursor: pointer;
+            padding: 3px 8px;
+            border-radius: 5px;
+            transition: background-color 0.2s ease, color 0.2s ease, border 0.2s ease;
+            border: 1px solid transparent; /* Default transparent border */
+            display: inline-block; /* For proper padding and border */
+            user-select: none; /* Prevent text selection on click */
+        }
+        .exercise-item .word-option:hover {
+            background-color: #e2f0ff;
+            color: #0056b3;
+            border-color: #a8d5ff;
+        }
+        .exercise-item .word-option.selected {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+        .exercise-item .word-option.correct {
+            background-color: #28a745; /* Green for correct */
+            color: #fff;
+            border-color: #28a745;
+        }
+        .exercise-item .word-option.incorrect {
+            background-color: #dc3545; /* Red for incorrect */
+            color: #fff;
+            border-color: #dc3545;
+        }
+        /* No direct feedback icon next to options, but in solution section */
+
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text-solution {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+        }
+        .solution-list .solution-item .explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <span class="badge bg-primary fs-6 me-2">C</span>
+            <h1>Circle the correct word.</h1>
+        </div>
+        <p class="instruction">
+            Chọn từ đúng để hoàn thành mỗi câu.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="circleWordForm">
+            <div class="exercise-item" data-question="q1">
+                <div class="question-number">1</div>
+                <div>
+                    <span class="question-text-part">I really like playing</span>
+                    <span class="word-option" data-value="board">board</span>
+                    <span class="question-text-part">/</span>
+                    <span class="word-option" data-value="video">video</span>
+                    <span class="question-text-part">games like Monopoly and Cluedo.</span>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q2">
+                <div class="question-number">2</div>
+                <div>
+                    <span class="question-text-part">Roy was the best player, so he wasn't surprised when he became</span>
+                    <span class="word-option" data-value="captain">captain</span>
+                    <span class="question-text-part">/</span>
+                    <span class="word-option" data-value="club">club</span>
+                    <span class="question-text-part">of the team.</span>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q3">
+                <div class="question-number">3</div>
+                <div>
+                    <span class="question-text-part">Lots of people get</span>
+                    <span class="word-option" data-value="defeat">defeat</span>
+                    <span class="question-text-part">/</span>
+                    <span class="word-option" data-value="pleasure">pleasure</span>
+                    <span class="question-text-part">from just watching sport from their armchairs.</span>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q4">
+                <div class="question-number">4</div>
+                <div>
+                    <span class="question-text-part">I thought the music at the</span>
+                    <span class="word-option" data-value="concert">concert</span>
+                    <span class="question-text-part">/</span>
+                    <span class="word-option" data-value="rhythm">rhythm</span>
+                    <span class="question-text-part">we went to last night was great.</span>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q5">
+                <div class="question-number">5</div>
+                <div>
+                    <span class="question-text-part">Everyone in my family supports the same</span>
+                    <span class="word-option" data-value="competition">competition</span>
+                    <span class="question-text-part">/</span>
+                    <span class="word-option" data-value="team">team</span>
+                    <span class="question-text-part">.</span>
+                </div>
+            </div>
+
+            <div class="exercise-item" data-question="q6">
+                <div class="question-number">6</div>
+                <div>
+                    <span class="question-text-part">I find</span>
+                    <span class="word-option" data-value="classical">classical</span>
+                    <span class="question-text-part">/</span>
+                    <span class="word-option" data-value="entertaining">entertaining</span>
+                    <span class="question-text-part">music really boring, and I prefer pop.</span>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTFyMfwGpGFFRKKoXpQf/ZtVKKjoF+L7ffy4qC7zQtxHiJitjEATj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkmXLRV5vfJzJrEPiniwz4rsVZpGgG8Y1r+KNuGMuwtj44gJjEnFqVfXpX5f" crossorigin="anonymous"></script>
+
+    <script>
+        const correctAnswers = {
+            'q1': {
+                correct: 'board',
+                options: ['board', 'video'],
+                explanation: 'Monopoly và Cluedo là các loại "board games" (trò chơi cờ bàn), không phải "video games" (trò chơi điện tử).',
+                translation: 'Tôi thực sự thích chơi trò chơi cờ bàn như Monopoly và Cluedo.',
+            },
+            'q2': {
+                correct: 'captain',
+                options: ['captain', 'club'],
+                explanation: '"Captain" (đội trưởng) là người lãnh đạo một đội thể thao. "Club" (câu lạc bộ) là một tổ chức hoặc nhóm người.',
+                translation: 'Roy là cầu thủ giỏi nhất, vì vậy anh ấy không ngạc nhiên khi trở thành đội trưởng của đội.',
+            },
+            'q3': {
+                correct: 'pleasure',
+                options: ['defeat', 'pleasure'],
+                explanation: '"Get pleasure from" (có được niềm vui từ) là một cụm động từ có nghĩa là tận hưởng điều gì đó. "Defeat" (sự thất bại) có nghĩa là bị đánh bại trong một trận đấu.',
+                translation: 'Rất nhiều người có được niềm vui từ việc xem thể thao từ ghế bành của họ.',
+            },
+            'q4': {
+                correct: 'concert',
+                options: ['concert', 'rhythm'],
+                explanation: 'Âm nhạc được trình diễn tại một "concert" (buổi hòa nhạc). "Rhythm" (nhịp điệu) là một yếu tố trong âm nhạc, nhưng không phải là nơi diễn ra âm nhạc.',
+                translation: 'Tôi nghĩ buổi hòa nhạc chúng tôi đã đi tối qua rất tuyệt.',
+            },
+            'q5': {
+                correct: 'team',
+                options: ['competition', 'team'],
+                explanation: 'Gia đình thường ủng hộ một "team" (đội) cụ thể, chứ không phải một "competition" (cuộc thi) chung chung.',
+                translation: 'Mọi người trong gia đình tôi đều ủng hộ cùng một đội.',
+            },
+            'q6': {
+                correct: 'classical',
+                options: ['classical', 'entertaining'],
+                explanation: '"Classical music" (nhạc cổ điển) là một thể loại âm nhạc cụ thể. "Entertaining" (thú vị, giải trí) là một tính từ mô tả chất lượng chung.',
+                translation: 'Tôi thấy nhạc cổ điển thực sự nhàm chán, và tôi thích nhạc pop hơn.',
+            },
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const wordOptions = document.querySelectorAll('.word-option');
+            wordOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const parentItem = this.closest('.exercise-item');
+                    // Remove 'selected' class from all options within the same question
+                    parentItem.querySelectorAll('.word-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    // Add 'selected' class to the clicked option
+                    this.classList.add('selected');
+                });
+            });
+        });
+
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            Object.keys(correctAnswers).forEach(qId => {
+                const exerciseItem = document.querySelector(`.exercise-item[data-question="${qId}"]`);
+                if (!exerciseItem) return;
+
+                const selectedOption = exerciseItem.querySelector('.word-option.selected');
+                const correctWord = correctAnswers[qId].correct;
+                const optionsInQuestion = exerciseItem.querySelectorAll('.word-option');
+
+                // Reset previous feedback styles
+                optionsInQuestion.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+
+                if (selectedOption) {
+                    const userAnswer = selectedOption.dataset.value;
+
+                    if (userAnswer === correctWord) {
+                        score++;
+                        selectedOption.classList.add('correct');
+                    } else {
+                        selectedOption.classList.add('incorrect');
+                        // Highlight the correct answer if the user was wrong
+                        exerciseItem.querySelector(`.word-option[data-value="${correctWord}"]`).classList.add('correct');
+                    }
+                } else {
+                    // If no option was selected, just mark the correct one green
+                    exerciseItem.querySelector(`.word-option[data-value="${correctWord}"]`).classList.add('correct');
+                }
+
+                // Add detailed solution for each question
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextDiv = document.createElement('div');
+                questionTextDiv.classList.add('question-text-solution');
+
+                // Reconstruct original sentence and highlight correct answer
+                let fullSentenceHtml = `<strong>Câu ${questionNumber}:</strong> `;
+                exerciseItem.childNodes.forEach(node => {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        fullSentenceHtml += node.textContent.trim();
+                    } else if (node.classList && node.classList.contains('question-text-part')) {
+                        fullSentenceHtml += node.textContent;
+                    } else if (node.classList && node.classList.contains('word-option')) {
+                        if (node.dataset.value === correctWord) {
+                            fullSentenceHtml += `<span class="correct-answer-text-solution">${node.textContent}</span>`;
+                        } else {
+                            fullSentenceHtml += `${node.textContent}`; // Include incorrect options as plain text
+                        }
+                    }
+                    fullSentenceHtml += ' '; // Add space after each part
+                });
+                
+                questionTextDiv.innerHTML = fullSentenceHtml.trim();
+                solutionItem.appendChild(questionTextDiv);
+
+                // Add explanation
+                const explanationDiv = document.createElement('div');
+                explanationDiv.classList.add('explanation');
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${correctAnswers[qId].explanation}`;
+                solutionItem.appendChild(explanationDiv);
+
+                // Add translation
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${correctAnswers[qId].translation}`;
+                solutionItem.appendChild(translationDiv);
+                
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+        }
+
+        function resetExercise() {
+            const wordOptions = document.querySelectorAll('.word-option');
+            wordOptions.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions
+        }
+    </script>
+</body>
+</html>

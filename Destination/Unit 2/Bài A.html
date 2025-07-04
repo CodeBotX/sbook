@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar - Simple Past</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+        }
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .word-box {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 35px;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+        }
+        .word-item {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95em;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .exercise-item {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 1.05em;
+        }
+        .exercise-item .form-label {
+            margin-right: 10px;
+            font-weight: 600;
+            color: #34495e;
+            width: 30px; /* Numbering width */
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .exercise-item .text-segment {
+            margin-right: 5px;
+        }
+        .exercise-item .answer-input {
+            flex-grow: 1;
+            max-width: 200px; /* Limit input width */
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .exercise-item .answer-input:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .exercise-item .answer-input.is-valid {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .exercise-item .answer-input.is-invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+            background-color: #f8d7da;
+            color: #842029;
+        }
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default */
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .score-display {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .score-display.text-success { color: #198754; }
+        .score-display.text-warning { color: #ffc107; }
+        .score-display.text-danger { color: #dc3545; }
+
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .solution-list .solution-item:hover {
+            background-color: #e9ecef;
+        }
+        .solution-list .solution-item .question-text {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 5px;
+        }
+        .solution-list .solution-item .correct-verb {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <span class="badge bg-primary fs-6 me-2">A</span>
+            <h1>Complete using the correct past simple form of the verbs in the box.</h1>
+        </div>
+        <p class="instruction">
+            Hãy hoàn thành các câu sau bằng cách điền dạng quá khứ đơn đúng của các động từ trong hộp. Bạn có thể sử dụng cả dạng phủ định.
+        </p>
+
+        <div class="word-box">
+            <span class="word-item">come</span>
+            <span class="word-item">give</span>
+            <span class="word-item">go</span>
+            <span class="word-item">have</span>
+            <span class="word-item">know</span>
+            <span class="word-item">make</span>
+            <span class="word-item">send</span>
+            <span class="word-item">take</span>
+        </div>
+
+        <form id="simplePastForm">
+            <div class="exercise-item">
+                <label for="q1" class="form-label">1</label>
+                <span class="text-segment">I got to the post office just before it closed and</span>
+                <input type="text" class="form-control answer-input" id="q1" name="q1">
+                <span class="text-segment">the letter.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q2" class="form-label">2</label>
+                <span class="text-segment">We invited Stephanie to the party, but she</span>
+                <input type="text" class="form-control answer-input" id="q2" name="q2">
+                <span class="text-segment">.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q3" class="form-label">3</label>
+                <span class="text-segment">Jack lost his job because he</span>
+                <input type="text" class="form-control answer-input" id="q3" name="q3">
+                <span class="text-segment">too many mistakes.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q4" class="form-label">4</label>
+                <span class="text-segment">Everyone</span>
+                <input type="text" class="form-control answer-input" id="q4" name="q4">
+                <span class="text-segment">that it was Bill's fault, but nobody said anything.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q5" class="form-label">5</label>
+                <span class="text-segment">Karen</span>
+                <input type="text" class="form-control answer-input" id="q5" name="q5">
+                <span class="text-segment">the keys from the kitchen table and ran out the door.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q6" class="form-label">6</label>
+                <span class="text-segment">I was bored, so Mum</span>
+                <input type="text" class="form-control answer-input" id="q6" name="q6">
+                <span class="text-segment">me some money to go shopping.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q7" class="form-label">7</label>
+                <span class="text-segment">Do you remember the time we</span>
+                <input type="text" class="form-control answer-input" id="q7" name="q7">
+                <span class="text-segment">to India on holiday?</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="exercise-item">
+                <label for="q8" class="form-label">8</label>
+                <span class="text-segment">It started raining, but luckily I</span>
+                <input type="text" class="form-control answer-input" id="q8" name="q8">
+                <span class="text-segment">an umbrella in my bag.</span>
+                <i class="feedback-icon fa-solid"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Bản dịch</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTFyMfwGpGFFRKKoXpQf/ZtVKKjoF+L7ffy4qC7zQtxHiJitjEATj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkmXLRV5vfJzJrEPiniwz4rsVZpGgG8Y1r+KNuGMuwtj44gJjEnFqVfXpX5f" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers for each question
+        // Each key is the input ID, value is an object containing:
+        // - answer: The correct simple past form (can be an array for multiple correct answers or common variations)
+        // - translation: The Vietnamese translation of the full sentence
+        // - originalSentenceParts: An array of strings that make up the original sentence, with a placeholder '{_}' for the blank
+        const correctAnswers = {
+            'q1': {
+                answer: ['sent'],
+                originalSentenceParts: ["I got to the post office just before it closed and", "{_}", "the letter."],
+                translation: "Tôi đến bưu điện ngay trước khi nó đóng cửa và gửi lá thư."
+            },
+            'q2': {
+                answer: ["didn't come", "did not come"],
+                originalSentenceParts: ["We invited Stephanie to the party, but she", "{_}", "."],
+                translation: "Chúng tôi đã mời Stephanie đến bữa tiệc, nhưng cô ấy đã không đến."
+            },
+            'q3': {
+                answer: ['made'],
+                originalSentenceParts: ["Jack lost his job because he", "{_}", "too many mistakes."],
+                translation: "Jack mất việc vì anh ấy đã mắc quá nhiều lỗi."
+            },
+            'q4': {
+                answer: ['knew'],
+                originalSentenceParts: ["Everyone", "{_}", "that it was Bill's fault, but nobody said anything."],
+                translation: "Mọi người đều biết đó là lỗi của Bill, nhưng không ai nói gì."
+            },
+            'q5': {
+                answer: ['took'],
+                originalSentenceParts: ["Karen", "{_}", "the keys from the kitchen table and ran out the door."],
+                translation: "Karen đã lấy chìa khóa từ bàn bếp và chạy ra khỏi cửa."
+            },
+            'q6': {
+                answer: ['gave'],
+                originalSentenceParts: ["I was bored, so Mum", "{_}", "me some money to go shopping."],
+                translation: "Tôi chán, nên mẹ đã cho tôi một ít tiền để đi mua sắm."
+            },
+            'q7': {
+                answer: ['went'],
+                originalSentenceParts: ["Do you remember the time we", "{_}", "to India on holiday?"],
+                translation: "Bạn có nhớ lần chúng ta đã đi Ấn Độ nghỉ mát không?"
+            },
+            'q8': {
+                answer: ['had'],
+                originalSentenceParts: ["It started raining, but luckily I", "{_}", "an umbrella in my bag."],
+                translation: "Trời bắt đầu mưa, nhưng may mắn thay tôi đã có một chiếc ô trong túi."
+            }
+        };
+
+        function normalizeAnswer(answer) {
+            return answer.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qId = `q${i}`;
+                const inputElement = document.getElementById(qId);
+                const userAnswer = normalizeAnswer(inputElement.value);
+                const correctInfo = correctAnswers[qId];
+                const feedbackIcon = inputElement.nextElementSibling; // Get the <i> tag for feedback
+                const isCorrect = correctInfo.answer.some(ans => normalizeAnswer(ans) === userAnswer);
+
+                // Apply Bootstrap validation classes
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+
+                if (isCorrect) {
+                    score++;
+                    inputElement.classList.add('is-valid');
+                    feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                    feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                }
+                feedbackIcon.style.display = 'inline-block'; // Show feedback icon
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionTextDiv = document.createElement('div');
+                questionTextDiv.classList.add('question-text');
+                let sentenceHtml = `${i}. `;
+                correctInfo.originalSentenceParts.forEach(part => {
+                    if (part === '{_}') {
+                        sentenceHtml += `<span class="correct-verb">${correctInfo.answer[0]}</span>`;
+                    } else {
+                        sentenceHtml += part;
+                    }
+                });
+                questionTextDiv.innerHTML = sentenceHtml;
+                solutionItem.appendChild(questionTextDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<em>Dịch:</em> ${correctInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            }
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+        }
+
+        function resetExercise() {
+            const inputs = document.querySelectorAll('.answer-input');
+            inputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('is-valid', 'is-invalid');
+                const feedbackIcon = input.nextElementSibling;
+                feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                feedbackIcon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions
+        }
+    </script>
+</body>
+</html>
+            

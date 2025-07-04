@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp A1.2: Câu tường thuật & Can, Could, Be able to</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .lead {
+            color: #5f6368;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .question-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8faff;
+            border: 1px solid #dcdfe4;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-section h3 {
+            color: #3c4043;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-bottom: 2px solid #e8eaed;
+            padding-bottom: 10px;
+        }
+        .question-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eceff1;
+        }
+        .question-item label {
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+            color: #202124;
+            font-size: 1.05rem;
+        }
+        .form-check {
+            margin-bottom: 8px;
+        }
+        .form-check-input {
+            margin-right: 8px;
+        }
+        .form-check-label {
+            font-size: 0.95rem;
+            color: #3c4043;
+        }
+        .instructions {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #70757a;
+            padding: 10px 15px;
+            background-color: #e6f4f1;
+            border-left: 5px solid #34a853;
+            border-radius: 5px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #e6ffed;
+            color: #1e8449;
+            border: 1px solid #34a853;
+        }
+        .feedback.incorrect {
+            background-color: #ffebe6;
+            color: #c53929;
+            border: 1px solid #ea4335;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            border-left: 4px solid #aab7b8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            display: none;
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1764cc;
+            border-color: #1764cc;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .d-grid {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Bài Tập Ngữ Pháp A1.2</h1>
+        <p class="lead text-center">Câu tường thuật (Reported Speech) & Can, Could, Be able to</p>
+        <hr>
+
+        <form id="grammarQuizForm">
+            <!-- Phần bài tập Reported Speech -->
+            <div class="question-section">
+                <h3>Phần 1: Câu tường thuật (Reported Speech)</h3>
+                <p class="instructions">Chọn câu tường thuật đúng nhất cho mỗi câu trực tiếp.</p>
+                <div id="part1-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Phần bài tập Can, Could, Be able to -->
+            <div class="question-section">
+                <h3>Phần 2: Can, Could, Be able to</h3>
+                <p class="instructions">Chọn từ/cụm từ đúng nhất để hoàn thành các câu.</p>
+                <div id="part2-questions">
+                    <!-- Questions will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-primary" type="button" onclick="submitQuiz()">Nộp bài</button>
+                <button class="btn btn-secondary" type="button" onclick="resetQuiz()">Làm lại</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        // Dữ liệu câu hỏi cho Phần 1: Reported Speech (20 câu)
+        const questionsPart1 = [
+            {
+                id: "q1_rs",
+                text: "1. Direct Speech: 'I am learning English now,' she said.",
+                options: {
+                    a: "She said she is learning English now.",
+                    b: "She said she was learning English then.",
+                    c: "She said I am learning English now.",
+                    d: "She said she learned English then."
+                },
+                correct: "b",
+                explanation: "Khi động từ tường thuật ở quá khứ ('said'), thì hiện tại tiếp diễn ('am learning') lùi thành quá khứ tiếp diễn ('was learning'). Trạng từ 'now' chuyển thành 'then'. (Cô ấy nói rằng cô ấy đang học tiếng Anh lúc đó.)"
+            },
+            {
+                id: "q2_rs",
+                text: "2. Direct Speech: 'We finished the project yesterday,' they told me.",
+                options: {
+                    a: "They told me they finished the project yesterday.",
+                    b: "They told me they had finished the project the day before.",
+                    c: "They told me they have finished the project yesterday.",
+                    d: "They told me we had finished the project the day before."
+                },
+                correct: "b",
+                explanation: "Thì quá khứ đơn ('finished') lùi thành quá khứ hoàn thành ('had finished'). Trạng từ 'yesterday' chuyển thành 'the day before'. (Họ nói với tôi rằng họ đã hoàn thành dự án vào ngày hôm trước.)"
+            },
+            {
+                id: "q3_rs",
+                text: "3. Direct Speech: 'I will call you tomorrow,' he promised.",
+                options: {
+                    a: "He promised he will call me tomorrow.",
+                    b: "He promised he would call me the next day.",
+                    c: "He promised he calls me the next day.",
+                    d: "He promised he would call me tomorrow."
+                },
+                correct: "b",
+                explanation: "Thì tương lai đơn ('will call') lùi thành 'would call'. Trạng từ 'tomorrow' chuyển thành 'the next day'. (Anh ấy hứa rằng anh ấy sẽ gọi cho tôi vào ngày hôm sau.)"
+            },
+            {
+                id: "q4_rs",
+                text: "4. Direct Speech: 'She has never been to Paris,' he said.",
+                options: {
+                    a: "He said she has never been to Paris.",
+                    b: "He said she had never been to Paris.",
+                    c: "He said she was never in Paris.",
+                    d: "He said she is never in Paris."
+                },
+                correct: "b",
+                explanation: "Thì hiện tại hoàn thành ('has never been') lùi thành quá khứ hoàn thành ('had never been'). (Anh ấy nói rằng cô ấy chưa bao giờ đến Paris.)"
+            },
+            {
+                id: "q5_rs",
+                text: "5. Direct Speech: 'I can swim very well,' she boasted.",
+                options: {
+                    a: "She boasted she can swim very well.",
+                    b: "She boasted she could swim very well.",
+                    c: "She boasted I could swim very well.",
+                    d: "She boasted she was able to swim very well."
+                },
+                correct: "b",
+                explanation: "Động từ khuyết thiếu 'can' lùi thành 'could'. (Cô ấy khoe rằng cô ấy có thể bơi rất giỏi.)"
+            },
+            {
+                id: "q6_rs",
+                text: "6. Direct Speech: 'We are leaving for vacation next week,' they announced.",
+                options: {
+                    a: "They announced they are leaving for vacation next week.",
+                    b: "They announced they were leaving for vacation the following week.",
+                    c: "They announced we were leaving for vacation next week.",
+                    d: "They announced they left for vacation the following week."
+                },
+                correct: "b",
+                explanation: "Thì hiện tại tiếp diễn ('are leaving') lùi thành quá khứ tiếp diễn ('were leaving'). Cụm từ 'next week' chuyển thành 'the following week'. (Họ thông báo rằng họ sẽ đi nghỉ vào tuần sau đó.)"
+            },
+            {
+                id: "q7_rs",
+                text: "7. Direct Speech: 'I must finish this task today,' he said.",
+                options: {
+                    a: "He said he must finish that task today.",
+                    b: "He said he had to finish that task that day.",
+                    c: "He said he would finish that task that day.",
+                    d: "He said he has to finish that task today."
+                },
+                correct: "b",
+                explanation: "Động từ khuyết thiếu 'must' thường chuyển thành 'had to'. Trạng từ 'this' chuyển thành 'that' và 'today' chuyển thành 'that day'. (Anh ấy nói rằng anh ấy phải hoàn thành nhiệm vụ đó vào ngày hôm đó.)"
+            },
+            {
+                id: "q8_rs",
+                text: "8. Direct Speech: 'The meeting is here,' she explained.",
+                options: {
+                    a: "She explained the meeting was here.",
+                    b: "She explained the meeting was there.",
+                    c: "She explained the meeting is there.",
+                    d: "She explained the meeting had been here."
+                },
+                correct: "b",
+                explanation: "Thì hiện tại đơn ('is') lùi thành quá khứ đơn ('was'). Trạng từ 'here' chuyển thành 'there'. (Cô ấy giải thích rằng cuộc họp ở đó.)"
+            },
+            {
+                id: "q9_rs",
+                text: "9. Direct Speech: 'I may come late,' he warned.",
+                options: {
+                    a: "He warned he may come late.",
+                    b: "He warned he might come late.",
+                    c: "He warned he would come late.",
+                    d: "He warned he came late."
+                },
+                correct: "b",
+                explanation: "Động từ khuyết thiếu 'may' lùi thành 'might'. (Anh ấy cảnh báo rằng anh ấy có thể sẽ đến muộn.)"
+            },
+            {
+                id: "q10_rs",
+                text: "10. Direct Speech: 'I don't like coffee,' she admitted.",
+                options: {
+                    a: "She admitted she doesn't like coffee.",
+                    b: "She admitted she didn't like coffee.",
+                    c: "She admitted I didn't like coffee.",
+                    d: "She admitted she hasn't liked coffee."
+                },
+                correct: "b",
+                explanation: "Thì hiện tại đơn phủ định ('don't like') lùi thành quá khứ đơn phủ định ('didn't like'). (Cô ấy thừa nhận rằng cô ấy không thích cà phê.)"
+            },
+            {
+                id: "q11_rs",
+                text: "11. Direct Speech: 'I've lived here for five years,' he said.",
+                options: {
+                    a: "He said he's lived there for five years.",
+                    b: "He said he had lived there for five years.",
+                    c: "He said he lives there for five years.",
+                    d: "He said he lived there for five years."
+                },
+                correct: "b",
+                explanation: "Thì hiện tại hoàn thành ('have lived') lùi thành quá khứ hoàn thành ('had lived'). Trạng từ 'here' chuyển thành 'there'. (Anh ấy nói rằng anh ấy đã sống ở đó được năm năm.)"
+            },
+            {
+                id: "q12_rs",
+                text: "12. Direct Speech: 'These flowers are beautiful,' she commented.",
+                options: {
+                    a: "She commented these flowers were beautiful.",
+                    b: "She commented those flowers were beautiful.",
+                    c: "She commented these flowers are beautiful.",
+                    d: "She commented those flowers are beautiful."
+                },
+                correct: "b",
+                explanation: "Thì hiện tại đơn ('are') lùi thành quá khứ đơn ('were'). Đại từ 'these' chuyển thành 'those'. (Cô ấy nhận xét rằng những bông hoa đó rất đẹp.)"
+            },
+            {
+                id: "q13_rs",
+                text: "13. Direct Speech: 'I bought a new car last month,' he informed me.",
+                options: {
+                    a: "He informed me he bought a new car last month.",
+                    b: "He informed me he had bought a new car the month before.",
+                    c: "He informed me he has bought a new car the month before.",
+                    d: "He informed me I had bought a new car last month."
+                },
+                correct: "b",
+                explanation: "Thì quá khứ đơn ('bought') lùi thành quá khứ hoàn thành ('had bought'). Cụm từ 'last month' chuyển thành 'the month before'. (Anh ấy thông báo với tôi rằng anh ấy đã mua một chiếc xe hơi mới vào tháng trước đó.)"
+            },
+            {
+                id: "q14_rs",
+                text: "14. Direct Speech: 'We must try harder,' the coach told his team.",
+                options: {
+                    a: "The coach told his team they must try harder.",
+                    b: "The coach told his team they had to try harder.",
+                    c: "The coach told his team we had to try harder.",
+                    d: "The coach told his team to try harder."
+                },
+                correct: "b",
+                explanation: "Động từ khuyết thiếu 'must' thường chuyển thành 'had to'. (Huấn luyện viên nói với đội của mình rằng họ phải cố gắng hơn.)"
+            },
+            {
+                id: "q15_rs",
+                text: "15. Direct Speech: 'It's snowing outside,' she mentioned.",
+                options: {
+                    a: "She mentioned it's snowing outside.",
+                    b: "She mentioned it was snowing outside.",
+                    c: "She mentioned it had been snowing outside.",
+                    d: "She mentioned it snows outside."
+                },
+                correct: "b",
+                explanation: "Thì hiện tại tiếp diễn ('is snowing') lùi thành quá khứ tiếp diễn ('was snowing'). (Cô ấy đề cập rằng trời đang có tuyết bên ngoài.)"
+            },
+            {
+                id: "q16_rs",
+                text: "16. Direct Speech: 'I will be there at 5 PM,' he confirmed.",
+                options: {
+                    a: "He confirmed he will be there at 5 PM.",
+                    b: "He confirmed he would be there at 5 PM.",
+                    c: "He confirmed he was there at 5 PM.",
+                    d: "He confirmed I would be there at 5 PM."
+                },
+                correct: "b",
+                explanation: "Thì tương lai đơn ('will be') lùi thành 'would be'. (Anh ấy xác nhận rằng anh ấy sẽ có mặt ở đó vào lúc 5 giờ chiều.)"
+            },
+            {
+                id: "q17_rs",
+                text: "17. Direct Speech: 'You look tired,' she told him.",
+                options: {
+                    a: "She told him he looked tired.",
+                    b: "She told him you look tired.",
+                    c: "She told him he looks tired.",
+                    d: "She told him he had looked tired."
+                },
+                correct: "a",
+                explanation: "Thì hiện tại đơn ('look') lùi thành quá khứ đơn ('looked'). Đại từ 'you' chuyển thành 'he'. (Cô ấy nói với anh ấy rằng anh ấy trông mệt mỏi.)"
+            },
+            {
+                id: "q18_rs",
+                text: "18. Direct Speech: 'We have never met before,' they said.",
+                options: {
+                    a: "They said they have never met before.",
+                    b: "They said they had never met before.",
+                    c: "They said we had never met before.",
+                    d: "They said they were never meeting before."
+                },
+                correct: "b",
+                explanation: "Thì hiện tại hoàn thành ('have never met') lùi thành quá khứ hoàn thành ('had never met'). (Họ nói rằng họ chưa bao giờ gặp nhau trước đây.)"
+            },
+            {
+                id: "q19_rs",
+                text: "19. Direct Speech: 'I found a great restaurant here,' she announced.",
+                options: {
+                    a: "She announced she found a great restaurant here.",
+                    b: "She announced she had found a great restaurant there.",
+                    c: "She announced she found a great restaurant there.",
+                    d: "She announced she has found a great restaurant here."
+                },
+                correct: "b",
+                explanation: "Thì quá khứ đơn ('found') lùi thành quá khứ hoàn thành ('had found'). Trạng từ 'here' chuyển thành 'there'. (Cô ấy thông báo rằng cô ấy đã tìm thấy một nhà hàng tuyệt vời ở đó.)"
+            },
+            {
+                id: "q20_rs",
+                text: "20. Direct Speech: 'I am going to the cinema tonight,' he said.",
+                options: {
+                    a: "He said he is going to the cinema tonight.",
+                    b: "He said he was going to the cinema tonight.",
+                    c: "He said he was going to the cinema that night.",
+                    d: "He said he went to the cinema that night."
+                },
+                correct: "c",
+                explanation: "Thì hiện tại tiếp diễn ('am going') lùi thành quá khứ tiếp diễn ('was going'). Trạng từ 'tonight' chuyển thành 'that night'. (Anh ấy nói rằng anh ấy sẽ đi xem phim vào tối hôm đó.)"
+            }
+        ];
+
+        // Dữ liệu câu hỏi cho Phần 2: Can, Could, Be able to (20 câu)
+        const questionsPart2 = [
+            {
+                id: "q1_ccb",
+                text: "1. She ______ speak French fluently.",
+                options: {
+                    a: "could",
+                    b: "is able to",
+                    c: "can",
+                    d: "has able to"
+                },
+                correct: "c",
+                explanation: "'Can' được dùng để diễn tả khả năng ở hiện tại. (Cô ấy có thể nói tiếng Pháp trôi chảy.)"
+            },
+            {
+                id: "q2_ccb",
+                text: "2. When I was younger, I ______ run faster than anyone.",
+                options: {
+                    a: "can",
+                    b: "am able to",
+                    c: "could",
+                    d: "will be able to"
+                },
+                correct: "c",
+                explanation: "'Could' là dạng quá khứ của 'can', dùng để diễn tả khả năng trong quá khứ. (Khi tôi còn trẻ, tôi có thể chạy nhanh hơn bất kỳ ai.)"
+            },
+            {
+                id: "q3_ccb",
+                text: "3. I ______ meet you tomorrow, I'm very busy.",
+                options: {
+                    a: "can't",
+                    b: "couldn't",
+                    c: "won't be able to",
+                    d: "am not able to"
+                },
+                correct: "c",
+                explanation: "Để diễn tả sự không có khả năng ở tương lai, dùng 'won't be able to'. (Tôi sẽ không thể gặp bạn vào ngày mai, tôi rất bận.)"
+            },
+            {
+                id: "q4_ccb",
+                text: "4. After years of practice, he ______ finally play the guitar well.",
+                options: {
+                    a: "can",
+                    b: "could",
+                    c: "was able to",
+                    d: "is able to"
+                },
+                correct: "c",
+                explanation: "'Was able to' được dùng để diễn tả khả năng thực hiện thành công một hành động cụ thể trong quá khứ, sau một nỗ lực hoặc khó khăn. (Sau nhiều năm luyện tập, cuối cùng anh ấy đã có thể chơi guitar giỏi.)"
+            },
+            {
+                id: "q5_ccb",
+                text: "5. ______ you please help me with this heavy box?",
+                options: {
+                    a: "Can",
+                    b: "Could",
+                    c: "Are able to",
+                    d: "Will be able to"
+                },
+                correct: "b",
+                explanation: "'Could' được dùng để đưa ra yêu cầu một cách lịch sự. (Bạn có thể giúp tôi với chiếc hộp nặng này được không?)"
+            },
+            {
+                id: "q6_ccb",
+                text: "6. I ______ go to the party tonight. I'm not feeling well.",
+                options: {
+                    a: "can't",
+                    b: "couldn't",
+                    c: "am not able to",
+                    d: "won't be able to"
+                },
+                correct: "a",
+                explanation: "'Can't' diễn tả sự không có khả năng hoặc không thể làm gì ở hiện tại/tương lai gần. (Tôi không thể đi dự tiệc tối nay. Tôi không cảm thấy khỏe.)"
+            },
+            {
+                id: "q7_ccb",
+                text: "7. When she lived in Spain, she ______ understand most of the conversations.",
+                options: {
+                    a: "can",
+                    b: "could",
+                    c: "is able to",
+                    d: "will be able to"
+                },
+                correct: "b",
+                explanation: "'Could' diễn tả khả năng chung chung trong quá khứ. (Khi cô ấy sống ở Tây Ban Nha, cô ấy có thể hiểu hầu hết các cuộc trò chuyện.)"
+            },
+            {
+                id: "q8_ccb",
+                text: "8. Don't worry, I ______ help you with your homework later.",
+                options: {
+                    a: "can",
+                    b: "could",
+                    c: "will be able to",
+                    d: "am able to"
+                },
+                correct: "c",
+                explanation: "Để diễn tả khả năng ở tương lai, dùng 'will be able to'. (Đừng lo lắng, tôi sẽ có thể giúp bạn làm bài tập về nhà sau.)"
+            },
+            {
+                id: "q9_ccb",
+                text: "9. He tried hard, but he ______ open the stuck window.",
+                options: {
+                    a: "can't",
+                    b: "couldn't",
+                    c: "isn't able to",
+                    d: "won't be able to"
+                },
+                correct: "b",
+                explanation: "'Couldn't' diễn tả sự không có khả năng trong quá khứ. (Anh ấy đã cố gắng rất nhiều, nhưng anh ấy không thể mở được cái cửa sổ bị kẹt.)"
+            },
+            {
+                id: "q10_ccb",
+                text: "10. This car is broken, so we ______ drive it.",
+                options: {
+                    a: "can't",
+                    b: "couldn't",
+                    c: "aren't able to",
+                    d: "won't be able to"
+                },
+                correct: "a",
+                explanation: "'Can't' diễn tả sự không có khả năng ở hiện tại. (Chiếc xe này bị hỏng, vì vậy chúng tôi không thể lái nó.)"
+            },
+            {
+                id: "q11_ccb",
+                text: "11. She ______ swim across the lake when she was only five years old.",
+                options: {
+                    a: "could",
+                    b: "can",
+                    c: "is able to",
+                    d: "will be able to"
+                },
+                correct: "a",
+                explanation: "'Could' diễn tả khả năng trong quá khứ (khi cô ấy 5 tuổi). (Cô ấy có thể bơi qua hồ khi cô ấy chỉ mới năm tuổi.)"
+            },
+            {
+                id: "q12_ccb",
+                text: "12. I ______ hear you very well. The music is too loud.",
+                options: {
+                    a: "can't",
+                    b: "couldn't",
+                    c: "am not able to",
+                    d: "won't be able to"
+                },
+                correct: "a",
+                explanation: "'Can't' diễn tả sự không có khả năng ở hiện tại. (Tôi không thể nghe rõ bạn. Nhạc quá lớn.)"
+            },
+            {
+                id: "q13_ccb",
+                text: "13. With more training, they ______ compete in the Olympics next year.",
+                options: {
+                    a: "can",
+                    b: "could",
+                    c: "will be able to",
+                    d: "are able to"
+                },
+                correct: "c",
+                explanation: "Để diễn tả khả năng ở tương lai ('next year'), dùng 'will be able to'. (Với nhiều luyện tập hơn, họ sẽ có thể thi đấu tại Thế vận hội năm tới.)"
+            },
+            {
+                id: "q14_ccb",
+                text: "14. He has been studying hard, so now he ______ speak English quite well.",
+                options: {
+                    a: "could",
+                    b: "can",
+                    c: "was able to",
+                    d: "has been able to"
+                },
+                correct: "b",
+                explanation: "'Can' diễn tả khả năng ở hiện tại, là kết quả của việc học tập. (Anh ấy đã học chăm chỉ, vì vậy bây giờ anh ấy có thể nói tiếng Anh khá tốt.)"
+            },
+            {
+                id: "q15_ccb",
+                text: "15. I ______ believe he said that! It was so rude.",
+                options: {
+                    a: "can't",
+                    b: "couldn't",
+                    c: "am not able to",
+                    d: "won't be able to"
+                },
+                correct: "a",
+                explanation: "'Can't believe' là một cách diễn đạt sự ngạc nhiên mạnh mẽ ở hiện tại. (Tôi không thể tin anh ấy đã nói điều đó! Nó thật thô lỗ.)"
+            },
+            {
+                id: "q16_ccb",
+                text: "16. Even though it was very dark, she ______ see her way home.",
+                options: {
+                    a: "can",
+                    b: "could",
+                    c: "was able to",
+                    d: "is able to"
+                },
+                correct: "c",
+                explanation: "'Was able to' được dùng để diễn tả khả năng thành công trong một tình huống khó khăn cụ thể trong quá khứ. (Mặc dù trời rất tối, cô ấy vẫn có thể nhìn thấy đường về nhà.)"
+            },
+            {
+                id: "q17_ccb",
+                text: "17. ______ you tell me the time, please?",
+                options: {
+                    a: "Can",
+                    b: "Could",
+                    c: "Are able to",
+                    d: "Will be able to"
+                },
+                correct: "b",
+                explanation: "'Could' dùng để hỏi một cách lịch sự hơn 'Can'. (Bạn có thể cho tôi biết mấy giờ được không?)"
+            },
+            {
+                id: "q18_ccb",
+                text: "18. I have searched everywhere, but I ______ find my glasses.",
+                options: {
+                    a: "can't",
+                    b: "couldn't",
+                    c: "haven't been able to",
+                    d: "won't be able to"
+                },
+                correct: "c",
+                explanation: "Để diễn tả khả năng không thể làm được điều gì đó từ quá khứ đến hiện tại, dùng 'haven't been able to'. (Tôi đã tìm khắp nơi, nhưng tôi vẫn không thể tìm thấy kính của mình.)"
+            },
+            {
+                id: "q19_ccb",
+                text: "19. After the surgery, he ______ walk without help.",
+                options: {
+                    a: "can",
+                    b: "could",
+                    c: "is able to",
+                    d: "was able to"
+                },
+                correct: "d",
+                explanation: "'Was able to' diễn tả khả năng có được (hoặc khôi phục) trong quá khứ. (Sau ca phẫu thuật, anh ấy đã có thể đi bộ mà không cần giúp đỡ.)"
+            },
+            {
+                id: "q20_ccb",
+                text: "20. We hope that one day, everyone ______ have access to clean water.",
+                options: {
+                    a: "can",
+                    b: "could",
+                    c: "will be able to",
+                    d: "is able to"
+                },
+                correct: "c",
+                explanation: "Để diễn tả khả năng trong tương lai ('one day'), dùng 'will be able to'. (Chúng tôi hy vọng một ngày nào đó, mọi người sẽ có thể tiếp cận nước sạch.)"
+            }
+        ];
+
+        // Hàm để tải và hiển thị câu hỏi
+        function loadQuestions() {
+            const part1Container = document.getElementById('part1-questions');
+            const part2Container = document.getElementById('part2-questions');
+
+            part1Container.innerHTML = '';
+            part2Container.innerHTML = '';
+
+            // Tải câu hỏi Phần 1
+            questionsPart1.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part1Container.innerHTML += questionHtml;
+            });
+
+            // Tải câu hỏi Phần 2
+            questionsPart2.forEach(q => {
+                const questionHtml = `
+                    <div class="question-item">
+                        <label>${q.text}</label>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                part2Container.innerHTML += questionHtml;
+            });
+        }
+
+        // Hàm kiểm tra đáp án và hiển thị giải thích
+        function submitQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+            let allCorrect = true;
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+
+                if (selectedOption) {
+                    if (selectedOption.value === q.correct) {
+                        feedbackDiv.textContent = "Đúng rồi! 🎉";
+                        feedbackDiv.classList.add('correct');
+                    } else {
+                        feedbackDiv.textContent = `Sai rồi. Đáp án đúng là ${q.correct.toUpperCase()}. ❌`;
+                        feedbackDiv.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                } else {
+                    feedbackDiv.textContent = "Bạn chưa chọn đáp án.";
+                    feedbackDiv.classList.add('incorrect');
+                    allCorrect = false;
+                }
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${q.explanation}`;
+            });
+
+            if (allCorrect) {
+                // Có thể thêm thông báo chung nếu muốn, nhưng feedback từng câu đã rõ ràng.
+            }
+        }
+
+        // Hàm làm lại bài
+        function resetQuiz() {
+            const allQuestions = [...questionsPart1, ...questionsPart2];
+
+            allQuestions.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (selectedOption) {
+                    selectedOption.checked = false;
+                }
+
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'none';
+                explanationDiv.style.display = 'none';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                explanationDiv.innerHTML = '';
+            });
+        }
+
+        // Tải câu hỏi khi trang được tải xong
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+    </script>
+</body>
+</html>

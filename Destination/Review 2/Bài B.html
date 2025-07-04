@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Thay Thế Cụm Động Từ</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center; /* Align content */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 5px; /* Space between words */
+        }
+
+        /* Styling for input fields */
+        .question-item .question-text input[type="text"] {
+            display: inline-block;
+            width: 200px; /* Adjust width as needed for phrasal verbs */
+            margin: 0 5px;
+            padding: 0 5px; /* Reduced padding for underline effect */
+            border: none; /* Remove all borders */
+            border-bottom: 1px solid #ced4da; /* Only bottom border */
+            border-radius: 0; /* Remove border-radius for a clean underline */
+            font-size: 1em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: transparent; /* Ensure background is transparent */
+            text-align: center; /* Center the text in the input */
+        }
+        .question-item .question-text input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: none; /* Remove box-shadow on focus for underline effect */
+            border-bottom-width: 2px; /* Thicker underline on focus */
+        }
+        /* Styles for correct and incorrect input feedback */
+        .question-item .question-text input[type="text"].is-correct {
+            border-color: #198754;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for correct */
+        }
+        .question-item .question-text input[type="text"].is-incorrect {
+            border-color: #dc3545;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for incorrect */
+        }
+
+        /* Styling for the bolded phrase to be replaced */
+        .question-item .phrase-to-replace {
+            font-weight: bold;
+            color: #007bff; /* A neutral color to indicate it's the phrase to be replaced */
+            text-decoration: underline;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        /* Styling for the hint letter */
+        .question-item .hint-letter {
+            font-weight: bold;
+            color: #6c757d; /* Grey color for hint */
+            margin-right: 5px;
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .question-item .question-text input[type="text"] {
+                width: 150px; /* Smaller width for inputs on small screens */
+                margin: 0 3px;
+                padding: 0 4px; /* Adjusted padding */
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Thay Thế Cụm Động Từ</h1>
+        </div>
+        <h2>Viết một cụm động từ ở dạng đúng để thay thế các từ in đậm. Chữ cái đầu tiên của từ đầu tiên đã được cho sẵn.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Write a phrasal verb in the correct form to replace the words in bold. The first letter of the first word is given to help you.
+            <br>
+            <strong>Hướng dẫn:</strong> Viết một cụm động từ ở dạng đúng để thay thế các từ in đậm. Chữ cái đầu tiên của từ đầu tiên đã được cho sẵn để giúp bạn.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="phrasalVerbForm">
+            <div class="question-item">
+                <p class="question-text">9. Simon <span class="hint-letter">r</span><input type="text" id="q9" name="q9" class="form-control d-inline-block w-auto"> the wrong answer and wrote the right one. (<span class="phrase-to-replace">removed with a rubber</span>)</p>
+                <i class="feedback-icon fa-solid" id="icon9"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">10. Why did you <span class="hint-letter">r</span><input type="text" id="q10" name="q10" class="form-control d-inline-block w-auto"> that piece of paper? (<span class="phrase-to-replace">tear into pieces</span>)</p>
+                <i class="feedback-icon fa-solid" id="icon10"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">11. If you make a mistake, just <span class="hint-letter">c</span><input type="text" id="q11" name="q11" class="form-control d-inline-block w-auto"> it <span class="hint-letter">o</span><input type="text" id="q11_b" name="q11_b" class="form-control d-inline-block w-auto">. (<span class="phrase-to-replace">draw a line through</span>)</p>
+                <i class="feedback-icon fa-solid" id="icon11"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">12. You should <span class="hint-letter">l</span><input type="text" id="q12" name="q12" class="form-control d-inline-block w-auto"> words you don't know in a dictionary. (<span class="phrase-to-replace">find information about</span>)</p>
+                <i class="feedback-icon fa-solid" id="icon12"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">13. Carol, will you <span class="hint-letter">r</span><input type="text" id="q13" name="q13" class="form-control d-inline-block w-auto"> your poem to the class, please? (<span class="phrase-to-replace">say out loud</span>)</p>
+                <i class="feedback-icon fa-solid" id="icon13"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">14. Our teacher <span class="hint-letter">p</span><input type="text" id="q14" name="q14" class="form-control d-inline-block w-auto"> that we only had five minutes left. (<span class="phrase-to-replace">said</span>)</p>
+                <i class="feedback-icon fa-solid" id="icon14"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">15. Have you all <span class="hint-letter">w</span><input type="text" id="q15" name="q15" class="form-control d-inline-block w-auto"> what the homework is? (<span class="phrase-to-replace">made a note of</span>)</p>
+                <i class="feedback-icon fa-solid" id="icon15"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q9': {
+                question_text_parts: ['Simon ', ' the wrong answer and wrote the right one. (', ')'],
+                hint_letter: 'r',
+                correct_answer: 'rubbed out',
+                phrase_to_replace: 'removed with a rubber',
+                fullSentence: 'Simon rubbed out the wrong answer and wrote the right one.',
+                translation: 'Simon đã tẩy xóa câu trả lời sai và viết câu đúng.',
+                explanation: 'Cụm động từ "rub out" có nghĩa là xóa bỏ bằng cục tẩy. Câu này ở thì quá khứ đơn, nên "rub" chuyển thành "rubbed".',
+                grammar_note: 'Cụm động từ: "rub out" (xóa, tẩy).'
+            },
+            'q10': {
+                question_text_parts: ['Why did you ', ' that piece of paper? (', ')'],
+                hint_letter: 'r',
+                correct_answer: 'rip up',
+                phrase_to_replace: 'tear into pieces',
+                fullSentence: 'Why did you rip up that piece of paper?',
+                translation: 'Tại sao bạn lại xé nát mảnh giấy đó?',
+                explanation: 'Cụm động từ "rip up" có nghĩa là xé thành nhiều mảnh. Câu này ở thì quá khứ đơn (did), nên động từ chính giữ nguyên dạng nguyên thể.',
+                grammar_note: 'Cụm động từ: "rip up" (xé nát).'
+            },
+            'q11': {
+                question_text_parts: ['If you make a mistake, just ', ' it ', '. (', ')'],
+                hint_letter: 'c',
+                correct_answer_parts: ['cross', 'out'], // For multiple inputs
+                phrase_to_replace: 'draw a line through',
+                fullSentence: 'If you make a mistake, just cross it out.',
+                translation: 'Nếu bạn mắc lỗi, chỉ cần gạch bỏ nó đi.',
+                explanation: 'Cụm động từ "cross out" có nghĩa là gạch bỏ, xóa bỏ bằng cách gạch một đường. Đây là câu mệnh lệnh, nên động từ ở dạng nguyên thể.',
+                grammar_note: 'Cụm động từ: "cross out" (gạch bỏ).'
+            },
+            'q12': {
+                question_text_parts: ['You should ', ' words you don\'t know in a dictionary. (', ')'],
+                hint_letter: 'l',
+                correct_answer: 'look up',
+                phrase_to_replace: 'find information about',
+                fullSentence: 'You should look up words you don\'t know in a dictionary.',
+                translation: 'Bạn nên tra cứu những từ bạn không biết trong từ điển.',
+                explanation: 'Cụm động từ "look up" có nghĩa là tra cứu thông tin trong sách, từ điển.',
+                grammar_note: 'Cụm động từ: "look up" (tra cứu).'
+            },
+            'q13': {
+                question_text_parts: ['Carol, will you ', ' your poem to the class, please? (', ')'],
+                hint_letter: 'r',
+                correct_answer: 'read out',
+                phrase_to_replace: 'say out loud',
+                fullSentence: 'Carol, will you read out your poem to the class, please?',
+                translation: 'Carol, bạn có thể đọc to bài thơ của mình cho cả lớp nghe không?',
+                explanation: 'Cụm động từ "read out" có nghĩa là đọc to thành tiếng.',
+                grammar_note: 'Cụm động từ: "read out" (đọc to).'
+            },
+            'q14': {
+                question_text_parts: ['Our teacher ', ' that we only had five minutes left. (', ')'],
+                hint_letter: 'p',
+                correct_answer: 'pointed out',
+                phrase_to_replace: 'said',
+                fullSentence: 'Our teacher pointed out that we only had five minutes left.',
+                translation: 'Giáo viên của chúng tôi đã chỉ ra rằng chúng tôi chỉ còn năm phút.',
+                explanation: 'Cụm động từ "point out" có nghĩa là chỉ ra, làm rõ một điều gì đó. Câu này ở thì quá khứ đơn, nên "point" chuyển thành "pointed".',
+                grammar_note: 'Cụm động từ: "point out" (chỉ ra).'
+            },
+            'q15': {
+                question_text_parts: ['Have you all ', ' what the homework is? (', ')'],
+                hint_letter: 'w',
+                correct_answer: 'written down',
+                phrase_to_replace: 'made a note of',
+                fullSentence: 'Have you all written down what the homework is?',
+                translation: 'Các bạn đã ghi lại bài tập về nhà là gì chưa?',
+                explanation: 'Cụm động từ "write down" có nghĩa là ghi lại, viết ra. Câu này ở thì hiện tại hoàn thành, nên "write" chuyển thành "written".',
+                grammar_note: 'Cụm động từ: "write down" (ghi lại).'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                let isCorrect = false;
+                let userAnswerCombined = ''; // To store the combined user answer for multi-part questions
+
+                // Handle multi-part questions (like q11)
+                if (questionInfo.correct_answer_parts) {
+                    const input1 = document.getElementById(qId);
+                    const input2 = document.getElementById(`${qId}_b`);
+
+                    // Reset feedback classes
+                    input1.classList.remove('is-correct', 'is-incorrect');
+                    input2.classList.remove('is-correct', 'is-incorrect');
+
+                    const userVal1 = input1.value.trim().toLowerCase();
+                    const userVal2 = input2.value.trim().toLowerCase();
+                    const correctVal1 = questionInfo.correct_answer_parts[0].toLowerCase();
+                    const correctVal2 = questionInfo.correct_answer_parts[1].toLowerCase();
+
+                    if (userVal1 === correctVal1 && userVal2 === correctVal2) {
+                        isCorrect = true;
+                        score++;
+                        input1.classList.add('is-correct');
+                        input2.classList.add('is-correct');
+                    } else {
+                        input1.classList.add('is-incorrect');
+                        input2.classList.add('is-incorrect');
+                    }
+                    userAnswerCombined = `${input1.value.trim()} ${input2.value.trim()}`;
+                } else { // Handle single input questions
+                    const inputElement = document.getElementById(qId);
+                    
+                    // Reset feedback classes
+                    inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                    const userAnswer = (inputElement ? inputElement.value.trim() : '').toLowerCase();
+                    const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                    if (userAnswer === correctAnswer) {
+                        isCorrect = true;
+                        score++;
+                        if (inputElement) {
+                            inputElement.classList.add('is-correct');
+                        }
+                    } else {
+                        if (inputElement) {
+                            inputElement.classList.add('is-incorrect');
+                        }
+                    }
+                    userAnswerCombined = inputElement ? inputElement.value.trim() : '';
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                // Reconstruct the sentence with the correct answer highlighted
+                let fullTextWithCorrectAnswer;
+                if (questionInfo.correct_answer_parts) {
+                    fullTextWithCorrectAnswer = questionInfo.question_text_parts[0] + 
+                                                `<span class="correct-answer-text">${questionInfo.correct_answer_parts[0]}</span> ` + 
+                                                questionInfo.question_text_parts[1] + 
+                                                `<span class="correct-answer-text">${questionInfo.correct_answer_parts[1]}</span>` + 
+                                                (questionInfo.question_text_parts[2] || '');
+                } else {
+                    fullTextWithCorrectAnswer = questionInfo.question_text_parts[0] + 
+                                                `<span class="correct-answer-text">${questionInfo.correct_answer}</span>` + 
+                                                (questionInfo.question_text_parts[1] || '');
+                }
+                
+                // Add the original phrase to replace in parentheses
+                questionTextSolutionDiv.innerHTML = `${qId.substring(1)}. ${fullTextWithCorrectAnswer} (<span class="phrase-to-replace">${questionInfo.phrase_to_replace}</span>)`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = ''; // Clear text input
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

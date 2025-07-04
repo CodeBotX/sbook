@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Điền Một Từ (Dạng Đoạn Văn)</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for the passage/story */
+        .passage-section {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .passage-section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 1rem;
+        }
+
+        /* Styling for input fields within the passage */
+        .passage-section input[type="text"] {
+            display: inline-block;
+            width: 100px; /* Adjust width as needed for single words */
+            margin: 0 5px;
+            padding: 0 5px; /* Reduced padding for underline effect */
+            border: none; /* Remove all borders */
+            border-bottom: 1px solid #ced4da; /* Only bottom border */
+            border-radius: 0; /* Remove border-radius for a clean underline */
+            font-size: 1em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: transparent; /* Ensure background is transparent */
+            text-align: center; /* Center the text in the input */
+        }
+        .passage-section input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: none; /* Remove box-shadow on focus for underline effect */
+            border-bottom-width: 2px; /* Thicker underline on focus */
+        }
+        /* Styles for correct and incorrect input feedback */
+        .passage-section input[type="text"].is-correct {
+            border-color: #198754;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for correct */
+        }
+        .passage-section input[type="text"].is-incorrect {
+            border-color: #dc3545;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for incorrect */
+        }
+
+        /* Feedback icons (placed next to inputs, but hidden by default) */
+        .feedback-icon {
+            margin-left: 5px; /* Smaller margin for inline icons */
+            font-size: 1em; /* Smaller size for inline icons */
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .passage-section {
+                padding: 15px;
+            }
+            .passage-section p {
+                font-size: 1em;
+            }
+            .passage-section input[type="text"] {
+                width: 80px; /* Smaller width for inputs on small screens */
+                margin: 0 3px;
+                padding: 0 4px; /* Adjusted padding */
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Điền Một Từ (Dạng Đoạn Văn)</h1>
+        </div>
+        <h2>Điền một từ vào mỗi chỗ trống.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Write one word in each gap.
+            <br>
+            <strong>Hướng dẫn:</strong> Điền một từ thích hợp vào mỗi chỗ trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="fillInPassageForm">
+            <div class="passage-section">
+                <h3 class="text-center text-primary mb-4">Cheating</h3>
+                <p>
+                    You're doing a history test. Your friend, who's sitting next to you, really wants to succeed
+                    <input type="text" id="q34" name="q34" class="form-control d-inline-block w-auto"> the test. There's a question
+                    <input type="text" id="q35" name="q35" class="form-control d-inline-block w-auto"> the First
+                    World War, which you've been learning
+                    <input type="text" id="q36" name="q36" class="form-control d-inline-block w-auto"> recently. You know a lot
+                    <input type="text" id="q37" name="q37" class="form-control d-inline-block w-auto"> it, but your friend isn't really capable
+                    <input type="text" id="q38" name="q38" class="form-control d-inline-block w-auto"> answering the question properly. Your friend whispers 'Help me!' to you. What should you do?
+                    Should you help your friend
+                    <input type="text" id="q39" name="q39" class="form-control d-inline-block w-auto"> the question, or just continue
+                    <input type="text" id="q40" name="q40" class="form-control d-inline-block w-auto"> your own test?
+                    Every student has to cope
+                    <input type="text" id="q41" name="q41" class="form-control d-inline-block w-auto"> this difficult situation at some point.
+                    What's your opinion
+                    <input type="text" id="q42" name="q42" class="form-control d-inline-block w-auto"> cheating? Should you help your friend cheat
+                    <input type="text" id="q43" name="q43" class="form-control d-inline-block w-auto"> the test or not?
+                </p>
+                <!-- Feedback icons for each input -->
+                <i class="feedback-icon fa-solid" id="icon34"></i>
+                <i class="feedback-icon fa-solid" id="icon35"></i>
+                <i class="feedback-icon fa-solid" id="icon36"></i>
+                <i class="feedback-icon fa-solid" id="icon37"></i>
+                <i class="feedback-icon fa-solid" id="icon38"></i>
+                <i class="feedback-icon fa-solid" id="icon39"></i>
+                <i class="feedback-icon fa-solid" id="icon40"></i>
+                <i class="feedback-icon fa-solid" id="icon41"></i>
+                <i class="feedback-icon fa-solid" id="icon42"></i>
+                <i class="feedback-icon fa-solid" id="icon43"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q34': {
+                context_sentence: "You're doing a history test. Your friend, who's sitting next to you, really wants to succeed {blank} the test.",
+                correct_answer: 'in',
+                fullSentence: "You're doing a history test. Your friend, who's sitting next to you, really wants to succeed in the test.",
+                translation: 'Bạn đang làm bài kiểm tra lịch sử. Bạn của bạn, người đang ngồi cạnh bạn, thực sự muốn thành công trong bài kiểm tra.',
+                explanation: 'Cụm động từ "succeed in" có nghĩa là thành công trong việc gì đó (ví dụ: một kỳ thi, một nhiệm vụ).',
+                grammar_note: 'Cụm từ: "succeed in something".'
+            },
+            'q35': {
+                context_sentence: "There's a question {blank} the First World War, which you've been learning {q36_answer} recently.",
+                correct_answer: 'about',
+                fullSentence: "There's a question about the First World War, which you've been learning about recently.",
+                translation: 'Có một câu hỏi về Chiến tranh thế giới thứ nhất, mà bạn đã học về nó gần đây.',
+                explanation: 'Giới từ "about" được dùng với "question" để chỉ chủ đề của câu hỏi.',
+                grammar_note: 'Cụm từ: "a question about something".'
+            },
+            'q36': {
+                context_sentence: "There's a question {q35_answer} the First World War, which you've been learning {blank} recently.",
+                correct_answer: 'about',
+                fullSentence: "There's a question about the First World War, which you've been learning about recently.",
+                translation: 'Có một câu hỏi về Chiến tranh thế giới thứ nhất, mà bạn đã học về nó gần đây.',
+                explanation: 'Giới từ "about" được dùng với "learn" để chỉ việc học về một chủ đề nào đó.',
+                grammar_note: 'Cụm từ: "learn about something".'
+            },
+            'q37': {
+                context_sentence: "You know a lot {blank} it, but your friend isn't really capable {q38_answer} answering the question properly.",
+                correct_answer: 'about',
+                fullSentence: "You know a lot about it, but your friend isn't really capable of answering the question properly.",
+                translation: 'Bạn biết rất nhiều về nó, nhưng bạn của bạn thực sự không có khả năng trả lời câu hỏi một cách đúng đắn.',
+                explanation: 'Cụm từ "know a lot about" có nghĩa là biết nhiều về điều gì đó.',
+                grammar_note: 'Cụm từ: "know about something".'
+            },
+            'q38': {
+                context_sentence: "You know a lot {q37_answer} it, but your friend isn't really capable {blank} answering the question properly.",
+                correct_answer: 'of',
+                fullSentence: "You know a lot about it, but your friend isn't really capable of answering the question properly.",
+                translation: 'Bạn biết rất nhiều về nó, nhưng bạn của bạn thực sự không có khả năng trả lời câu hỏi một cách đúng đắn.',
+                explanation: 'Cụm tính từ "capable of" có nghĩa là có khả năng làm gì đó.',
+                grammar_note: 'Cụm từ: "capable of + V-ing".'
+            },
+            'q39': {
+                context_sentence: "Should you help your friend {blank} the question, or just continue {q40_answer} your own test?",
+                correct_answer: 'with',
+                fullSentence: "Should you help your friend with the question, or just continue with your own test?",
+                translation: 'Bạn có nên giúp bạn của bạn với câu hỏi đó, hay chỉ tiếp tục làm bài kiểm tra của riêng bạn?',
+                explanation: 'Cụm động từ "help with" có nghĩa là giúp đỡ về một việc gì đó.',
+                grammar_note: 'Cụm từ: "help with something".'
+            },
+            'q40': {
+                context_sentence: "Should you help your friend {q39_answer} the question, or just continue {blank} your own test?",
+                correct_answer: 'with',
+                fullSentence: "Should you help your friend with the question, or just continue with your own test?",
+                translation: 'Bạn có nên giúp bạn của bạn với câu hỏi đó, hay chỉ tiếp tục làm bài kiểm tra của riêng bạn?',
+                explanation: 'Cụm động từ "continue with" có nghĩa là tiếp tục làm một việc gì đó đã bắt đầu.',
+                grammar_note: 'Cụm từ: "continue with something".'
+            },
+            'q41': {
+                context_sentence: "Every student has to cope {blank} this difficult situation at some point.",
+                correct_answer: 'with',
+                fullSentence: "Every student has to cope with this difficult situation at some point.",
+                translation: 'Mỗi học sinh đều phải đối phó với tình huống khó khăn này vào một thời điểm nào đó.',
+                explanation: 'Cụm động từ "cope with" có nghĩa là đối phó, xoay sở với điều gì đó.',
+                grammar_note: 'Cụm từ: "cope with something".'
+            },
+            'q42': {
+                context_sentence: "What's your opinion {blank} cheating? Should you help your friend cheat {q43_answer} the test or not?",
+                correct_answer: 'on',
+                fullSentence: "What's your opinion on cheating? Should you help your friend cheat in the test or not?",
+                translation: 'Ý kiến của bạn về việc gian lận là gì? Bạn có nên giúp bạn của bạn gian lận trong bài kiểm tra hay không?',
+                explanation: 'Giới từ "on" thường được dùng với "opinion" để hỏi ý kiến về một vấn đề cụ thể.',
+                grammar_note: 'Cụm từ: "opinion on something".'
+            },
+            'q43': {
+                context_sentence: "What's your opinion {q42_answer} cheating? Should you help your friend cheat {blank} the test or not?",
+                correct_answer: 'in',
+                fullSentence: "What's your opinion on cheating? Should you help your friend cheat in the test or not?",
+                translation: 'Ý kiến của bạn về việc gian lận là gì? Bạn có nên giúp bạn của bạn gian lận trong bài kiểm tra hay không?',
+                explanation: 'Giới từ "in" thường được dùng với "cheat" để chỉ việc gian lận trong một kỳ thi/bài kiểm tra.',
+                grammar_note: 'Cụm từ: "cheat in an exam".'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                let isCorrect = false;
+                const userAnswer = (inputElement ? inputElement.value.trim() : '').toLowerCase();
+                const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                // Reset feedback classes on input
+                if (inputElement) {
+                    inputElement.classList.remove('is-correct', 'is-incorrect');
+                }
+
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    if (inputElement) {
+                        inputElement.classList.add('is-correct');
+                    }
+                } else {
+                    if (inputElement) {
+                        inputElement.classList.add('is-incorrect');
+                    }
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                // Reconstruct the sentence with the correct answer highlighted
+                const fullTextWithCorrectAnswer = questionInfo.context_sentence.replace('{blank}', `<span class="correct-answer-text">${questionInfo.correct_answer}</span>`);
+                
+                // Replace other blanks in the context sentence with their correct answers for full context in solution
+                let finalSentenceForSolution = fullTextWithCorrectAnswer;
+                // This part is a bit tricky as it needs to know answers to other questions.
+                // For simplicity, we'll just show the specific blank's solution.
+                // If full passage reconstruction is needed, a more complex logic to fetch other answers would be required.
+                // For now, let's just use the `fullSentence` property if available, or just the blank's part.
+                
+                questionTextSolutionDiv.innerHTML = `${qId.substring(1)}. ${questionInfo.fullSentence.replace(questionInfo.correct_answer, `<span class="correct-answer-text">${questionInfo.correct_answer}</span>`)}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = ''; // Clear text input
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

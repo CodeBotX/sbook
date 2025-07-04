@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Trắc Nghiệm - Bài F</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86wA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center; /* Align content */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 5px; /* Space between words */
+        }
+        .question-item .dialogue {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 15px;
+            background-color: #f0f8ff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 4px solid #a0c4ff;
+        }
+        .question-item .dialogue strong {
+            color: #2c3e50;
+        }
+
+        /* Styling for radio button options */
+        .form-check {
+            margin-bottom: 10px;
+            padding-left: 35px; /* Space for custom radio button */
+            cursor: pointer;
+        }
+        .form-check-input {
+            margin-right: 10px;
+            transform: scale(1.2); /* Slightly larger radio buttons */
+            cursor: pointer;
+        }
+        .form-check-label {
+            font-size: 1.05em;
+            color: #495057;
+            cursor: pointer;
+        }
+
+        /* Feedback styles after submission */
+        .form-check.is-correct .form-check-label {
+            color: #198754; /* Green for correct */
+            font-weight: 700;
+        }
+        .form-check.is-incorrect .form-check-label {
+            color: #dc3545; /* Red for incorrect */
+            font-weight: 700;
+        }
+        .form-check.correct-but-not-selected .form-check-label {
+            color: #007bff; /* Blue for correct, if user chose otherwise */
+            font-weight: 700;
+        }
+
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .dialogue {
+                font-size: 0.95em;
+                padding: 8px 12px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .form-check-label {
+                font-size: 0.95em;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Trắc Nghiệm</h1>
+        </div>
+        <h2>F. Choose the correct answer.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Choose the correct answer for each question.
+            <br>
+            <strong>Hướng dẫn:</strong> Chọn đáp án đúng cho mỗi câu hỏi.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="chooseTheAnswerForm">
+            <div class="question-item" data-question-id="q1">
+                <p class="dialogue"><strong>'Have you made plans for the summer?'</strong><br>'Yes. ........................ to Spain.'</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q1" id="q1_optionA" value="A We'll go">
+                    <label class="form-check-label" for="q1_optionA">A We'll go</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q1" id="q1_optionB" value="B We're going">
+                    <label class="form-check-label" for="q1_optionB">B We're going</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q1" id="q1_optionC" value="C We go">
+                    <label class="form-check-label" for="q1_optionC">C We go</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q2">
+                <p class="dialogue"><strong>'We're moving house tomorrow.'</strong><br>'Really? ........................ you with the furniture.'</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q2" id="q2_optionA" value="A I help">
+                    <label class="form-check-label" for="q2_optionA">A I help</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q2" id="q2_optionB" value="B I'm helping">
+                    <label class="form-check-label" for="q2_optionB">B I'm helping</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q2" id="q2_optionC" value="C I'll help">
+                    <label class="form-check-label" for="q2_optionC">C I'll help</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q3">
+                <p class="dialogue"><strong>'Do you need this paintbrush?'</strong><br>'Ah, yes. ........................ it to me, please?'</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q3" id="q3_optionA" value="A Do you pass">
+                    <label class="form-check-label" for="q3_optionA">A Do you pass</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q3" id="q3_optionB" value="B Will you pass">
+                    <label class="form-check-label" for="q3_optionB">B Will you pass</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q3" id="q3_optionC" value="C Are you passing">
+                    <label class="form-check-label" for="q3_optionC">C Are you passing</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q4">
+                <p class="dialogue"><strong>'What do you want to be when you grow up, Stevie?'</strong><br>'........................ a scientist. That's what I want to do, anyway.'</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q4" id="q4_optionA" value="A I be">
+                    <label class="form-check-label" for="q4_optionA">A I be</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q4" id="q4_optionB" value="B I'm going to be">
+                    <label class="form-check-label" for="q4_optionB">B I'm going to be</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q4" id="q4_optionC" value="C I'm being">
+                    <label class="form-check-label" for="q4_optionC">C I'm being</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q5">
+                <p class="dialogue"><strong>'John is a better player than Martin, isn't he?'</strong><br>'Oh, yes. ........................ the match tomorrow, I expect.'</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q5" id="q5_optionA" value="A He'll win">
+                    <label class="form-check-label" for="q5_optionA">A He'll win</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q5" id="q5_optionB" value="B He wins">
+                    <label class="form-check-label" for="q5_optionB">B He wins</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q5" id="q5_optionC" value="C He's winning">
+                    <label class="form-check-label" for="q5_optionC">C He's winning</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q6">
+                <p class="dialogue"><strong>'The weather has been terrible, hasn't it?'</strong><br>'Yes, I think ........................ again later.'</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q6" id="q6_optionA" value="A it's going to rain">
+                    <label class="form-check-label" for="q6_optionA">A it's going to rain</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q6" id="q6_optionB" value="B it's raining">
+                    <label class="form-check-label" for="q6_optionB">B it's raining</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q6" id="q6_optionC" value="C it rains">
+                    <label class="form-check-label" for="q6_optionC">C it rains</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                question_text: "<strong>'Have you made plans for the summer?'</strong><br>'Yes. {answer} to Spain.'",
+                options: {
+                    "A We'll go": { text: "We'll go", correct: false },
+                    "B We're going": { text: "We're going", correct: true },
+                    "C We go": { text: "We go", correct: false }
+                },
+                correct_option_value: "B We're going",
+                fullSentence: "'Have you made plans for the summer?' 'Yes. We're going to Spain.'",
+                translation: "'Bạn đã có kế hoạch gì cho mùa hè chưa?' 'Rồi. Chúng tôi sẽ đi Tây Ban Nha.'",
+                explanation: 'Sử dụng "be going to" hoặc hiện tại tiếp diễn cho các kế hoạch đã được thực hiện hoặc sắp xếp. Trong trường hợp này, "We\'re going" (hiện tại tiếp diễn) là cách dùng phổ biến hơn cho các kế hoạch đã định trước.',
+                grammar_note: 'Thì hiện tại tiếp diễn (Present Continuous) được dùng để diễn tả một hành động đã được sắp xếp hoặc một kế hoạch chắc chắn sẽ xảy ra trong tương lai gần.'
+            },
+            'q2': {
+                question_text: "<strong>'We're moving house tomorrow.'</strong><br>'Really? {answer} you with the furniture.'",
+                options: {
+                    "A I help": { text: "I help", correct: false },
+                    "B I'm helping": { text: "I'm helping", correct: false },
+                    "C I'll help": { text: "I'll help", correct: true }
+                },
+                correct_option_value: "C I'll help",
+                fullSentence: "'We're moving house tomorrow.' 'Really? I'll help you with the furniture.'",
+                translation: "'Ngày mai chúng tôi chuyển nhà.' 'Thật sao? Tôi sẽ giúp bạn với đồ đạc.'",
+                explanation: 'Sử dụng "will" để đưa ra một quyết định hoặc lời đề nghị giúp đỡ ngay tại thời điểm nói (spontaneous decision).',
+                grammar_note: 'Dùng "will" để diễn tả một quyết định tức thời, lời đề nghị, hoặc lời hứa được đưa ra tại thời điểm nói.'
+            },
+            'q3': {
+                question_text: "<strong>'Do you need this paintbrush?'</strong><br>'Ah, yes. {answer} it to me, please?'",
+                options: {
+                    "A Do you pass": { text: "Do you pass", correct: false },
+                    "B Will you pass": { text: "Will you pass", correct: true },
+                    "C Are you passing": { text: "Are you passing", correct: false }
+                },
+                correct_option_value: "B Will you pass",
+                fullSentence: "'Do you need this paintbrush?' 'Ah, yes. Will you pass it to me, please?'",
+                translation: "'Bạn có cần cái cọ này không?' 'À, có. Bạn chuyền nó cho tôi được không?'",
+                explanation: 'Sử dụng "Will you...?" để đưa ra yêu cầu hoặc đề nghị một cách lịch sự.',
+                grammar_note: '"Will you...?" được dùng để yêu cầu ai đó làm gì, hoặc hỏi về sự sẵn lòng của họ.'
+            },
+            'q4': {
+                question_text: "<strong>'What do you want to be when you grow up, Stevie?'</strong><br>'{answer} a scientist. That's what I want to do, anyway.'",
+                options: {
+                    "A I be": { text: "I be", correct: false },
+                    "B I'm going to be": { text: "I'm going to be", correct: true },
+                    "C I'm being": { text: "I'm being", correct: false }
+                },
+                correct_option_value: "B I'm going to be",
+                fullSentence: "'What do you want to be when you grow up, Stevie?' 'I'm going to be a scientist. That's what I want to do, anyway.'",
+                translation: "'Stevie, lớn lên con muốn làm gì?' 'Con sẽ làm một nhà khoa học. Dù sao thì đó cũng là điều con muốn làm.'",
+                explanation: 'Sử dụng "be going to" để diễn tả ý định hoặc kế hoạch cá nhân trong tương lai.',
+                grammar_note: '"Be going to" dùng để diễn tả ý định, dự định hoặc kế hoạch trong tương lai.'
+            },
+            'q5': {
+                question_text: "<strong>'John is a better player than Martin, isn't he?'</strong><br>'Oh, yes. {answer} the match tomorrow, I expect.'",
+                options: {
+                    "A He'll win": { text: "He'll win", correct: true },
+                    "B He wins": { text: "He wins", correct: false },
+                    "C He's winning": { text: "He's winning", correct: false }
+                },
+                correct_option_value: "A He'll win",
+                fullSentence: "'John is a better player than Martin, isn't he?' 'Oh, yes. He'll win the match tomorrow, I expect.'",
+                translation: "'John chơi giỏi hơn Martin phải không?' 'Ồ, đúng vậy. Tôi nghĩ anh ấy sẽ thắng trận đấu ngày mai.'",
+                explanation: 'Sử dụng "will" để đưa ra một dự đoán về tương lai, thường đi kèm với các cụm từ như "I expect", "I think", "I hope".',
+                grammar_note: '"Will" được dùng để đưa ra dự đoán về tương lai, đặc biệt khi dựa trên ý kiến hoặc niềm tin cá nhân.'
+            },
+            'q6': {
+                question_text: "<strong>'The weather has been terrible, hasn't it?'</strong><br>'Yes, I think {answer} again later.'",
+                options: {
+                    "A it's going to rain": { text: "it's going to rain", correct: true },
+                    "B it's raining": { text: "it's raining", correct: false },
+                    "C it rains": { text: "it rains", correct: false }
+                },
+                correct_option_value: "A it's going to rain",
+                fullSentence: "'The weather has been terrible, hasn't it?' 'Yes, I think it's going to rain again later.'",
+                translation: "'Thời tiết tệ quá nhỉ?' 'Vâng, tôi nghĩ lát nữa trời sẽ mưa nữa.'",
+                explanation: 'Sử dụng "be going to" để diễn tả một dự đoán dựa trên bằng chứng hiện tại (thời tiết đã tệ).',
+                grammar_note: '"Be going to" dùng để dự đoán một sự kiện trong tương lai dựa trên bằng chứng hoặc dấu hiệu rõ ràng ở hiện tại.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const questionItem = document.querySelector(`[data-question-id="${qId}"]`);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+                const allOptions = questionItem.querySelectorAll('.form-check'); // Get all form-check divs
+                const radioButtons = questionItem.querySelectorAll(`input[name="${qId}"]`);
+
+                let isCorrect = false;
+                let selectedOptionValue = null;
+
+                // Reset all option styles first
+                allOptions.forEach(optionDiv => {
+                    optionDiv.classList.remove('is-correct', 'is-incorrect', 'correct-but-not-selected');
+                });
+
+                // Determine selected option and apply feedback
+                radioButtons.forEach(radio => {
+                    const parentFormCheck = radio.closest('.form-check');
+                    if (radio.checked) {
+                        selectedOptionValue = radio.value;
+                        if (selectedOptionValue === questionInfo.correct_option_value) {
+                            isCorrect = true;
+                            score++;
+                            parentFormCheck.classList.add('is-correct');
+                        } else {
+                            parentFormCheck.classList.add('is-incorrect');
+                        }
+                    }
+                });
+
+                // If user didn't select or selected incorrectly, highlight the correct one
+                if (!isCorrect) {
+                     questionItem.querySelector(`input[value="${questionInfo.correct_option_value}"]`).closest('.form-check').classList.add('correct-but-not-selected');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+
+                // Replace {answer} placeholder with the correct answer, highlighted
+                let dialogueText = questionInfo.question_text.replace('{answer}', `<span class="correct-answer-text">${questionInfo.options[questionInfo.correct_option_value].text}</span>`);
+                questionTextSolutionDiv.innerHTML = `${questionNumber}. ${dialogueText}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}`;
+                if (questionInfo.grammar_note) {
+                    grammarExplanationDiv.innerHTML += `<br><em>${questionInfo.grammar_note}</em>`;
+                }
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing selections, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false; // Uncheck all radio buttons
+                radio.closest('.form-check').classList.remove('is-correct', 'is-incorrect', 'correct-but-not-selected'); // Remove all feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+        }
+    </script>
+</body>
+</html>

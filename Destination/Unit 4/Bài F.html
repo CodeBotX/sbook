@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Điền Từ - Hiện Tại Hoàn Thành</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Word box styling */
+        .word-box {
+            background-color: #e0f2f7; /* Light blue background */
+            border: 1px solid #b3e0f2;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #01579b;
+        }
+        .word-box span {
+            margin: 0 8px;
+            display: inline-block; /* Ensure spacing */
+        }
+        .word-box span::after {
+            content: ' •'; /* Bullet separator */
+            color: #01579b;
+        }
+        .word-box span:last-child::after {
+            content: ''; /* No bullet after the last word */
+        }
+
+        /* Styling for each exercise item (question line) */
+        .exercise-item {
+            margin-bottom: 25px; /* Increased margin for better separation */
+            display: flex;
+            align-items: baseline; /* Align text baselines */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .exercise-item .question-number {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .exercise-item .text-segment {
+            margin-right: 5px;
+            display: inline;
+            white-space: pre-wrap;
+        }
+        .exercise-item .answer-input {
+            flex-grow: 1; /* Allow input to grow and fill space */
+            min-width: 100px; /* Minimum width for input */
+            max-width: 200px; /* Max width to prevent overly long inputs */
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            font-size: 1em; /* Ensure font size is readable */
+        }
+        .exercise-item .answer-input:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        /* Feedback borders for inputs */
+        .exercise-item .answer-input.is-valid {
+            border-color: #198754 !important;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25) !important;
+            background-color: #d1e7dd;
+            color: #0f5132;
+        }
+        .exercise-item .answer-input.is-invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+            background-color: #f8d7da;
+            color: #842029;
+        }
+
+        /* Feedback icons (check/cross) */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            flex-shrink: 0;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none;
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .exercise-item {
+                flex-direction: column; /* Stack elements vertically */
+                align-items: flex-start;
+            }
+            .exercise-item .question-number {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            .exercise-item .text-segment {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            .exercise-item .answer-input {
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Điền Từ</h1>
+        </div>
+        <h2>Hoàn thành câu sử dụng các từ trong hộp</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Complete using the words in the box.
+            <br>
+            <strong>Hướng dẫn:</strong> Hoàn thành các câu sau bằng cách sử dụng các từ trong hộp.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <div class="word-box">
+            <span>already</span><span>ever</span><span>for</span><span>just</span><span>never</span><span>since</span><span>yet</span>
+        </div>
+
+        <form id="grammarForm">
+            <div class="exercise-item">
+                <span class="question-number">1.</span>
+                <span class="text-segment">I haven't listened to their new CD</span>
+                <input type="text" class="form-control answer-input" id="q1" name="q1">
+                <span class="text-segment">. Is it any good?</span>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">2.</span>
+                <span class="text-segment">We've been waiting for you</span>
+                <input type="text" class="form-control answer-input" id="q2" name="q2">
+                <span class="text-segment">over an hour. Where have you been?</span>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">3.</span>
+                <span class="text-segment">Have you</span>
+                <input type="text" class="form-control answer-input" id="q3" name="q3">
+                <span class="text-segment">been to the UK before?</span>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">4.</span>
+                <span class="text-segment">I'm afraid we've</span>
+                <input type="text" class="form-control answer-input" id="q4" name="q4">
+                <span class="text-segment">made plans for this weekend, so we won't be free.</span>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">5.</span>
+                <span class="text-segment">Pedro has been having English lessons</span>
+                <input type="text" class="form-control answer-input" id="q5" name="q5">
+                <span class="text-segment">he was five years old.</span>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">6.</span>
+                <span class="text-segment">It's strange that you mention the film Crash. I've</span>
+                <input type="text" class="form-control answer-input" id="q6" name="q6">
+                <span class="text-segment">been reading about it in the paper.</span>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">7.</span>
+                <span class="text-segment">I've</span>
+                <input type="text" class="form-control answer-input" id="q7" name="q7">
+                <span class="text-segment">heard of a 'sudoku'. What is it?</span>
+                <i class="feedback-icon fa-solid" id="icon7"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, original text templates, translations, and explanations for each question
+        const questionsData = {
+            'q1': {
+                answers: ['yet'],
+                originalText: 'I haven\'t listened to their new CD {answer}. Is it any good?',
+                translation: 'Tôi vẫn chưa nghe CD mới của họ. Nó có hay không?',
+                explanation: '"Yet" được dùng trong câu phủ định của thì Hiện tại Hoàn thành để chỉ một hành động chưa xảy ra tính đến thời điểm hiện tại.',
+                grammar_note: '"Yet" thường đứng ở cuối câu phủ định hoặc câu hỏi của thì Hiện tại Hoàn thành.'
+            },
+            'q2': {
+                answers: ['for'],
+                originalText: 'We\'ve been waiting for you {answer} over an hour. Where have you been?',
+                translation: 'Chúng tôi đã đợi bạn hơn một giờ rồi. Bạn đã ở đâu vậy?',
+                explanation: '"For" được dùng để chỉ khoảng thời gian mà một hành động đã diễn ra (over an hour).',
+                grammar_note: '"For" + khoảng thời gian (duration).'
+            },
+            'q3': {
+                answers: ['ever'],
+                originalText: 'Have you {answer} been to the UK before?',
+                translation: 'Bạn đã từng đến Vương quốc Anh bao giờ chưa?',
+                explanation: '"Ever" được dùng trong câu hỏi của thì Hiện tại Hoàn thành để hỏi về kinh nghiệm hoặc trải nghiệm đã từng xảy ra trong cuộc đời.',
+                grammar_note: '"Ever" thường đứng giữa chủ ngữ và quá khứ phân từ trong câu hỏi của thì Hiện tại Hoàn thành.'
+            },
+            'q4': {
+                answers: ['already'],
+                originalText: 'I\'m afraid we\'ve {answer} made plans for this weekend, so we won\'t be free.',
+                translation: 'Tôi e là chúng tôi đã lên kế hoạch cho cuối tuần này rồi, nên chúng tôi sẽ không rảnh.',
+                explanation: '"Already" được dùng trong câu khẳng định của thì Hiện tại Hoàn thành để chỉ một hành động đã hoàn thành sớm hơn dự kiến hoặc trước thời điểm hiện tại.',
+                grammar_note: '"Already" thường đứng giữa "have/has" và quá khứ phân từ.'
+            },
+            'q5': {
+                answers: ['since'],
+                originalText: 'Pedro has been having English lessons {answer} he was five years old.',
+                translation: 'Pedro đã học tiếng Anh từ khi anh ấy năm tuổi.',
+                explanation: '"Since" được dùng để chỉ mốc thời gian bắt đầu của một hành động đã diễn ra và vẫn tiếp diễn đến hiện tại.',
+                grammar_note: '"Since" + mốc thời gian (point in time).'
+            },
+            'q6': {
+                answers: ['just'],
+                originalText: 'It\'s strange that you mention the film Crash. I\'ve {answer} been reading about it in the paper.',
+                translation: 'Thật lạ khi bạn nhắc đến bộ phim Crash. Tôi vừa mới đọc về nó trên báo.',
+                explanation: '"Just" được dùng trong thì Hiện tại Hoàn thành Tiếp diễn để chỉ một hành động vừa mới kết thúc hoặc vừa mới diễn ra trong thời gian rất gần.',
+                grammar_note: '"Just" thường đứng giữa "have/has" và "been" trong Hiện tại Hoàn thành Tiếp diễn.'
+            },
+            'q7': {
+                answers: ['never'],
+                originalText: 'I\'ve {answer} heard of a \'sudoku\'. What is it?',
+                translation: 'Tôi chưa bao giờ nghe nói về \'sudoku\'. Nó là gì vậy?',
+                explanation: '"Never" được dùng trong thì Hiện tại Hoàn thành để diễn tả một kinh nghiệm hoặc trải nghiệm chưa từng xảy ra trong cuộc đời.',
+                grammar_note: '"Never" thường đứng giữa "have/has" và quá khứ phân từ.'
+            }
+        };
+
+        /**
+         * Normalizes a string by converting to lowercase, trimming whitespace,
+         * and replacing multiple spaces with a single space.
+         * @param {string} answer - The string to normalize.
+         * @returns {string} The normalized string.
+         */
+        function normalizeAnswer(answer) {
+            return answer.toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question ID in the questionsData
+            Object.keys(questionsData).forEach(qId => {
+                const inputElement = document.getElementById(qId);
+                // If input element doesn't exist, skip (shouldn't happen with correct IDs)
+                if (!inputElement) return;
+
+                const userAnswer = normalizeAnswer(inputElement.value);
+                const questionInfo = questionsData[qId];
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`); // e.g., icon1 for q1
+
+                // Reset feedback
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    feedbackIcon.style.display = 'none';
+                }
+
+                let isCorrect = false;
+                if (questionInfo.answers.some(ans => normalizeAnswer(ans) === userAnswer)) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-valid');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                questionTextSolutionDiv.innerHTML = `${questionNumber}. ${questionInfo.originalText.replace('{answer}', `<span class="correct-answer-text">${questionInfo.answers[0]}</span>`)}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing inputs, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const inputElements = document.querySelectorAll('.answer-input');
+            inputElements.forEach(input => {
+                input.value = ''; // Clear input value
+                input.classList.remove('is-valid', 'is-invalid'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Thi Mẫu Tiếng Anh - TACS2 (Mở rộng)</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 30px;
+        }
+        .container {
+            max-width: 950px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e0e0e0;
+        }
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .lead {
+            color: #5f6368;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section-title {
+            color: #007bff;
+            margin-top: 35px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e8eaed;
+        }
+        .question-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background-color: #f8faff;
+            border: 1px solid #dcdfe4;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-section h4 {
+            color: #3c4043;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .question-item {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eceff1;
+        }
+        .question-item p {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #202124;
+            font-size: 1.05rem;
+        }
+        .form-check {
+            margin-bottom: 8px;
+        }
+        .form-check-input {
+            margin-right: 8px;
+        }
+        .form-check-label {
+            font-size: 0.95rem;
+            color: #3c4043;
+        }
+        .instructions {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #70757a;
+            padding: 10px 15px;
+            background-color: #e6f4f1;
+            border-left: 5px solid #34a853;
+            border-radius: 5px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: none;
+        }
+        .feedback.correct {
+            background-color: #e6ffed;
+            color: #1e8449;
+            border: 1px solid #34a853;
+        }
+        .feedback.incorrect {
+            background-color: #ffebe6;
+            color: #c53929;
+            border: 1px solid #ea4335;
+        }
+        .explanation {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            border-left: 4px solid #aab7b8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #5f6368;
+            display: none;
+        }
+        .score-display {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a73e8;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e6f7ff;
+            border-radius: 8px;
+            border: 1px solid #a8d6ff;
+            display: none; /* Hidden initially */
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #1764cc;
+            border-color: #1764cc;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            margin-left: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+        .d-grid {
+            margin-top: 30px;
+        }
+        .image-placeholder {
+            width: 100%;
+            max-width: 250px; /* Adjust as needed */
+            height: auto;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 0.9rem;
+            color: #888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Đề Thi Mẫu Tiếng Anh - TACS2 (Mở rộng)</h1>
+        <p class="lead text-center">Final Test TACS2</p>
+        <hr>
+
+        <p class="instructions">
+            Chào mừng bạn đến với bài kiểm tra mẫu! Vui lòng chọn đáp án đúng nhất cho mỗi câu hỏi.
+            Sau khi hoàn thành, nhấn nút "Nộp bài" để xem kết quả và giải thích chi tiết.
+            <br><strong>Lưu ý:</strong>
+            <ul>
+                <li>Phần Nghe và Viết không được chuyển đổi sang định dạng này.</li>
+                <li>Phần Đọc hiểu (Câu 21-25) có tham chiếu hình ảnh/biển báo. Vui lòng thêm các hình ảnh thực tế vào thư mục 'static/' với tên tương ứng (ví dụ: static/B2-hinhanhminhhoa-21.png).</li>
+            </ul>
+        </p>
+
+        <form id="quizForm">
+            <!-- READING SECTION -->
+            <h2 class="section-title">READING SECTION</h2>
+
+            <!-- Part 1. Questions 16-20 (Reading Comprehension) -->
+            <div class="question-section">
+                <h4>Part 1. Questions 16-20: Read the article and choose the correct answer A, B, C or D.</h4>
+                <div class="reading-passage mb-4 p-3 border rounded bg-light">
+                    <h5>JACQUES COUSTEAU: A REMARKABLE MAN</h5>
+                    <p>Jacques-Yves Cousteau was an explorer, ecologist, filmmaker, inventor and conservationist. He was a man, who spent nearly his whole life underwater exploring the hidden depths of the ocean and who did more to educate the world about the mysteries of the deep sea than any other scientist before or since. He was born in June, 1910 in the village of Saint-André-de-Cubzac, in south western France. Jacques was a sickly boy and spent much of his time in bed, reading books and dreaming about a life at sea. In 1920, Jacques' family moved to New York and he was encouraged to start swimming to build up his strength. This was the beginning of his fascination with water and the more he learnt through his own experiences, the more passionate he became about "looking through nature's keyhole". Nevertheless, his career in underwater exploration came about by accident. After entering France's naval academy and travelling around the world, he was involved in an almost fatal car accident that left him seriously injured with two broken arms. He began swimming in the Mediterranean Sea to strengthen his arm muscles as part of his recovery process and rediscovered his love of the ocean. Cousteau developed a pair of underwater breathing apparatus to allow him to stay underwater for long periods of time. His experiments led to the development of the first Aqua-Lung which was a great commercial success. During World War II, he worked for the French Resistance and experimented with underwater photographic equipment. He helped to get rid of German mines and was awarded the Legion D'Honneur and the Croix de Guerre medals for his bravery. In 1942, he filmed his first underwater film Sixty Feet Down. It was 18 minutes long and was entered in the Cannes Film Festival.</p>
+                </div>
+                <div id="reading-part1-questions"></div>
+            </div>
+
+            <!-- Part 2. Questions 21-25 (Sign/Message Interpretation) -->
+            <div class="question-section">
+                <h4>Part 2. Questions 21-25: Look at the sign/message in each question. What does it say? Choose the correct explanation (A, B or C).</h4>
+                <p class="instructions"><em>(Lưu ý: Bạn cần thêm ảnh minh họa vào thư mục 'static/' theo tên gợi ý để hiển thị đầy đủ biển báo/tin nhắn.)</em></p>
+                <div id="reading-part2-questions"></div>
+            </div>
+
+            <!-- Part 3. Questions 26-35 (Cloze Test) -->
+            <div class="question-section">
+                <h4>Part 3. Questions 26-35: Read the text below and choose the correct word for each space.</h4>
+                <div class="cloze-passage mb-4 p-3 border rounded bg-light">
+                    <h5>The Price of Fame</h5>
+                    <p>Charlotte Church looks like a (0) ........ teenager, but she is far from average. She has an amazing voice. Her fans stand in (26) ........ for hours to get tickets for her concerts and she is often on television. Charlotte’s singing (27) ........ began when she performed on a TV show at the age of 11. The head of a record company was so impressed by her voice that he (28) ........her up on the spot. Her first album rose to number one in the charts.</p>
+                    <p>Charlotte still attends school in her home town when she can. (29) ........ , she is often away on tour for weeks at a time. She doesn’t miss out on lessons, though, because she takes her own tutor with her! She (30) ........ three hours every morning with him. Her exam results in all the (31) ........ she studies are impressive.</p>
+                    <p>But how does she (32) ........ with this unusual way of life? She (33) ........ that she has the same friends as before. That may be true, but she can no longer go into town with them because everybody stops her in the street to ask for her (34) ........ . It seems that, like most stars, she must learn to (35) ........ these restrictions and the lack of privacy. It’s the price of fame!</p>
+                </div>
+                <div id="reading-part3-questions"></div>
+            </div>
+
+            <!-- GRAMMAR – VOCABULARY SECTION -->
+            <h2 class="section-title">GRAMMAR – VOCABULARY</h2>
+            <div class="question-section">
+                <h4>Questions 36-55: Choose a correct word or phrase to complete each of the following sentences.</h4>
+                <div id="grammar-vocab-questions"></div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-primary" type="button" onclick="submitQuiz()">Nộp bài</button>
+                <button class="btn btn-secondary" type="button" onclick="resetQuiz()">Làm lại</button>
+            </div>
+            
+            <div class="score-display mt-4" id="scoreDisplay"></div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script>
+        const questionsData = [
+            // READING SECTION - Part 1 (Reading Comprehension)
+            {
+                id: "q16",
+                section: "reading-part1-questions",
+                text: "16. What is the writer trying to do in the text?",
+                options: {
+                    a: "teach readers how to make films",
+                    b: "explain how Jacques-Yves Cousteau has made a lot of money",
+                    c: "introduce readers to the filmmaker Jacques-Yves Cousteau",
+                    d: "describe particular films directed by Jacques Cousteau"
+                },
+                correct: "c",
+                explanation: "Đoạn văn giới thiệu về Jacques-Yves Cousteau, một nhà thám hiểm, nhà làm phim, nhà phát minh và nhà bảo tồn nổi tiếng, tập trung vào cuộc đời và sự nghiệp đáng chú ý của ông. (The passage introduces Jacques-Yves Cousteau, a famous explorer, filmmaker, inventor, and conservationist, focusing on his notable life and career.)"
+            },
+            {
+                id: "q17",
+                section: "reading-part1-questions",
+                text: "17. Being a child, Cousteau had ....",
+                options: {
+                    a: "strong will",
+                    b: "bright mind.",
+                    c: "heart attacks",
+                    d: "delicate health"
+                },
+                correct: "d",
+                explanation: "Đoạn văn nói 'Jacques was a sickly boy and spent much of his time in bed'. 'Sickly' có nghĩa là ốm yếu, ám chỉ sức khỏe yếu ớt hay 'delicate health'. (The passage states 'Jacques was a sickly boy and spent much of his time in bed'. 'Sickly' means prone to illness, implying delicate health.)"
+            },
+            {
+                id: "q18",
+                section: "reading-part1-questions",
+                text: "18. In a car accident he ...",
+                options: {
+                    a: "burnt both of his arm",
+                    b: "broke his extremities",
+                    c: "injured his leg",
+                    d: "hurt his eyes"
+                },
+                correct: "b",
+                explanation: "Đoạn văn ghi 'involved in an almost fatal car accident that left him seriously injured with two broken arms'. 'Broken arms' ám chỉ 'extremities' (chi, bộ phận cơ thể ngoài cùng). (The passage states he was 'involved in an almost fatal car accident that left him seriously injured with two broken arms'. 'Broken arms' refers to his 'extremities'.)"
+            },
+            {
+                id: "q19",
+                section: "reading-part1-questions",
+                text: "19. Cousteau developed underwater breathing equipment",
+                options: {
+                    a: "to extend his underwater investigations",
+                    b: "to gain fame",
+                    c: "to achieve commercial success",
+                    d: "having no certain goals"
+                },
+                correct: "a",
+                explanation: "Đoạn văn nói 'Cousteau developed a pair of underwater breathing apparatus to allow him to stay underwater for long periods of time'. Điều này nhằm mục đích kéo dài thời gian khám phá dưới nước của ông. (The passage states 'Cousteau developed a pair of underwater breathing apparatus to allow him to stay underwater for long periods of time'. This was intended to extend his underwater investigations.)"
+            },
+            {
+                id: "q20",
+                section: "reading-part1-questions",
+                text: "20. During World War II Cousteau collaborated with ...",
+                options: {
+                    a: "Polish resistance movement",
+                    b: "German antifascists",
+                    c: "American troops",
+                    d: "underground resistance fighters in France"
+                },
+                correct: "d",
+                explanation: "Đoạn văn nêu rõ 'During World War II, he worked for the French Resistance'. 'French Resistance' là lực lượng kháng chiến ngầm ở Pháp. (The passage explicitly states 'During World War II, he worked for the French Resistance', which refers to underground resistance fighters in France.)"
+            },
+            // READING SECTION - Part 2 (Sign/Message Interpretation)
+            {
+                id: "q21",
+                section: "reading-part2-questions",
+                text: "21. Biển báo: UNIVERSITY LIBRARY, Please wait here while we check your books.",
+                image: "static/B2-hinhanhminhhoa-21.png",
+                alt: "Hình ảnh biển báo thư viện yêu cầu chờ kiểm tra sách",
+                options: {
+                    a: "Do not go away until we have checked your books.",
+                    b: "Check you have all your books before you leave the library.",
+                    c: "Do not leave books here for checking without telling us."
+                },
+                correct: "a",
+                explanation: "Biển báo yêu cầu 'Please wait here while we check your books', nghĩa là bạn phải ở lại đây cho đến khi sách của bạn được kiểm tra. (The sign requests 'Please wait here while we check your books', meaning you must remain here until your books have been checked.)"
+            },
+            {
+                id: "q22",
+                section: "reading-part2-questions",
+                text: "22. Biển báo: NO BICYCLES AGAINST GLASS PLEASE.",
+                image: "static/B2-hinhanhminhhoa-22.png",
+                alt: "Hình ảnh biển báo không dựa xe đạp vào kính",
+                options: {
+                    a: "Do not leave your bicycle touching the window.",
+                    b: "Broken glass may damage your bicycle tyres.",
+                    c: "Your bicycle may not be safe here."
+                },
+                correct: "a",
+                explanation: "Biển báo 'NO BICYCLES AGAINST GLASS PLEASE' trực tiếp cảnh báo không được để xe đạp chạm vào kính. (The sign 'NO BICYCLES AGAINST GLASS PLEASE' directly warns against leaning bicycles against the glass.)"
+            },
+            {
+                id: "q23",
+                section: "reading-part2-questions",
+                text: "23. Biển báo: HOSPITAL WAITING ROOM, PLEASE PUT ALL CHILDREN’S TOYS BACK IN THIS ROOM BEFORE YOU LEAVE.",
+                image: "static/B2-hinhanhminhhoa-23.png",
+                alt: "Hình ảnh biển báo phòng chờ bệnh viện về đồ chơi trẻ em",
+                options: {
+                    a: "We leave some toys at the back of this room for children.",
+                    b: "Please don’t leave any toys outside this room when you go.",
+                    c: "Remember to take your children’s toys with you when you leave."
+                },
+                correct: "b",
+                explanation: "Biển báo yêu cầu 'PUT ALL CHILDREN’S TOYS BACK IN THIS ROOM BEFORE YOU LEAVE', tức là đừng để đồ chơi trẻ em ở bên ngoài phòng khi rời đi. (The sign asks to 'PUT ALL CHILDREN’S TOYS BACK IN THIS ROOM BEFORE YOU LEAVE', meaning not to leave children's toys outside this room when departing.)"
+            },
+            {
+                id: "q24",
+                section: "reading-part2-questions",
+                text: "24. Thông báo: Please inform the college office of any change in your contact details.",
+                image: "static/B2-hinhanhminhhoa-24.png",
+                alt: "Hình ảnh thông báo thay đổi thông tin liên hệ",
+                options: {
+                    a: "Details of student’s new timetables are available from the college office.",
+                    b: "You should let the college office know if you get a new phone number.",
+                    c: "All requests for course changes must be made through the college office."
+                },
+                correct: "b",
+                explanation: "Thông báo yêu cầu 'inform the college office of any change in your contact details' (thông báo cho văn phòng trường học về bất kỳ thay đổi nào trong thông tin liên hệ của bạn), ví dụ như một số điện thoại mới. (The notice requests to 'inform the college office of any change in your contact details', such as a new phone number.)"
+            },
+            {
+                id: "q25",
+                section: "reading-part2-questions",
+                text: "25. Biển báo: THIS CAR PARK IS RESERVED FOR MEMBERS OF STAFF.",
+                image: "static/B2-hinhanhminhhoa-25.png",
+                alt: "Hình ảnh biển báo bãi đậu xe chỉ dành cho nhân viên",
+                options: {
+                    a: "You can only park here if you work here",
+                    b: "You can only park here if you book in advance.",
+                    c: "You can only park here for short periods."
+                },
+                correct: "a",
+                explanation: "Biển báo 'RESERVED FOR MEMBERS OF STAFF' có nghĩa là chỉ những người làm việc ở đây mới được đỗ xe. (The sign 'RESERVED FOR MEMBERS OF STAFF' means only those who work here are permitted to park.)"
+            },
+            // READING SECTION - Part 3 (Cloze Test)
+            {
+                id: "q26",
+                section: "reading-part3-questions",
+                text: "26. Charlotte Church looks like a (0) ........ teenager, but she is far from average. She has an amazing voice. Her fans stand in ______ for hours to get tickets for her concerts and she is often on television.",
+                options: {
+                    a: "rows",
+                    b: "queues",
+                    c: "ranks",
+                    d: "files"
+                },
+                correct: "b",
+                explanation: "'Queues' (hàng dài người chờ) là từ phù hợp nhất với ngữ cảnh người hâm mộ đứng chờ để mua vé concert. (Queues' (lines of people waiting) is the most suitable word in the context of fans waiting to buy concert tickets.)"
+            },
+            {
+                id: "q27",
+                section: "reading-part3-questions",
+                text: "27. Charlotte’s singing ______ began when she performed on a TV show at the age of 11.",
+                options: {
+                    a: "profession",
+                    b: "job",
+                    c: "labor",
+                    d: "career"
+                },
+                correct: "d",
+                explanation: "'Career' (sự nghiệp) là từ phù hợp nhất để chỉ con đường chuyên nghiệp mà Charlotte bắt đầu với ca hát. (Career' is the most appropriate word to describe the professional path Charlotte embarked on with singing.)"
+            },
+            {
+                id: "q28",
+                section: "reading-part3-questions",
+                text: "28. The head of a record company was so impressed by her voice that he ______ her up on the spot.",
+                options: {
+                    a: "signed",
+                    b: "wrote",
+                    c: "made",
+                    d: "picked"
+                },
+                correct: "a",
+                explanation: "'Signed up' (ký hợp đồng) là cụm động từ thường dùng khi một công ty thu âm ký hợp đồng với một nghệ sĩ. (Signed up' is a common phrasal verb used when a record company contracts an artist.)"
+            },
+            {
+                id: "q29",
+                section: "reading-part3-questions",
+                text: "29. Charlotte still attends school in her home town when she can. ______, she is often away on tour for weeks at a time.",
+                options: {
+                    a: "Although",
+                    b: "While",
+                    c: "For",
+                    d: "However"
+                },
+                correct: "d",
+                explanation: "'However' (tuy nhiên) là liên từ thích hợp để chỉ sự đối lập giữa việc cô ấy vẫn đi học và việc cô ấy thường xuyên đi lưu diễn. (However' is the appropriate conjunction to indicate a contrast between her attending school and her frequent touring.)"
+            },
+            {
+                id: "q30",
+                section: "reading-part3-questions",
+                text: "30. She ______ three hours every morning with him.",
+                options: {
+                    a: "takes",
+                    b: "utilizes",
+                    c: "spends",
+                    d: "uses"
+                },
+                correct: "c",
+                explanation: "Cụm 'spend time' (dành thời gian) là cách diễn đạt chính xác nhất. (The phrase 'spend time' is the most accurate expression.)"
+            },
+            {
+                id: "q31",
+                section: "reading-part3-questions",
+                text: "31. Her exam results in all the ______ she studies are impressive.",
+                options: {
+                    a: "titles",
+                    b: "materials",
+                    c: "subjects",
+                    d: "lessons"
+                },
+                correct: "c",
+                explanation: "'Subjects' (các môn học) là từ phù hợp nhất để chỉ các lĩnh vực mà cô ấy học ở trường. (Subjects' is the most appropriate word to refer to the academic disciplines she studies at school.)"
+            },
+            {
+                id: "q32",
+                section: "reading-part3-questions",
+                text: "32. But how does she ______ with this unusual way of life?",
+                options: {
+                    a: "cope",
+                    b: "adjust",
+                    c: "bear",
+                    d: "tolerate"
+                },
+                correct: "a",
+                explanation: "Cụm động từ 'cope with' (đối phó/xoay sở với) có nghĩa là xử lý một tình huống khó khăn. (The phrasal verb 'cope with' means to manage a difficult situation.)"
+            },
+            {
+                id: "q33",
+                section: "reading-part3-questions",
+                text: "33. She ______ that she has the same friends as before.",
+                options: {
+                    a: "denies",
+                    b: "refuses",
+                    c: "insists",
+                    d: "complains"
+                },
+                correct: "c",
+                explanation: "'Insists' (khẳng định, nhấn mạnh) phù hợp với ngữ cảnh cô ấy nhấn mạnh rằng cô ấy vẫn giữ những người bạn cũ. (Insists' (asserts, emphasizes) fits the context where she emphasizes that she still maintains her old friendships.)"
+            },
+            {
+                id: "q34",
+                section: "reading-part3-questions",
+                text: "34. ...everybody stops her in the street to ask for her ______.",
+                options: {
+                    a: "signature",
+                    b: "autograph",
+                    c: "sign",
+                    d: "writing"
+                },
+                correct: "b",
+                explanation: "'Autograph' (chữ ký của người nổi tiếng) là từ phù hợp khi người hâm mộ dừng một ngôi sao để xin chữ ký. ('Autograph' is the appropriate term when fans stop a celebrity to request their signature.)"
+            },
+            {
+                id: "q35",
+                section: "reading-part3-questions",
+                text: "35. It seems that, like most stars, she must learn to ______ these restrictions and the lack of privacy. It’s the price of fame!",
+                options: {
+                    a: "look down on",
+                    b: "make do with",
+                    c: "put up with",
+                    d: "run out of"
+                },
+                correct: "c",
+                explanation: "'Put up with' (chịu đựng, chấp nhận) là cụm động từ phù hợp để nói về việc phải chấp nhận những hạn chế và thiếu riêng tư của cuộc sống nổi tiếng. (Put up with' (to tolerate, to accept) is the appropriate phrasal verb to describe having to accept the restrictions and lack of privacy that come with fame.)"
+            },
+            // GRAMMAR – VOCABULARY SECTION
+            {
+                id: "q36",
+                section: "grammar-vocab-questions",
+                text: "36. “_____ we drive to Daisy’s wedding?” – “No, I _____ to take a bus. The traffic will be bad tomorrow.”",
+                options: {
+                    a: "Let’s/prefer",
+                    b: "Shall/would prefer",
+                    c: "How about/would rather",
+                    d: "Why don’t/would rather"
+                },
+                correct: "b",
+                explanation: "'Shall we...?' dùng để đưa ra đề nghị. 'Would prefer to V' diễn tả sự thích hơn một cách lịch sự, phù hợp với câu trả lời. (Shall we...?' is used to make a suggestion. 'Would prefer to V' expresses a polite preference, fitting the response.)"
+            },
+            {
+                id: "q37",
+                section: "grammar-vocab-questions",
+                text: "37. The team _____ 18 goals altogether this year. Last year they scored only 10.",
+                options: {
+                    a: "scored",
+                    b: "has scored",
+                    c: "has been scoring",
+                    d: "was scoring"
+                },
+                correct: "b",
+                explanation: "'This year' chỉ một khoảng thời gian từ quá khứ đến hiện tại, hành động đã hoàn thành và có kết quả rõ ràng ('18 goals'). Do đó, dùng thì Hiện tại hoàn thành. (This year' refers to a period from the past up to the present, and the action is completed with a clear result ('18 goals'). Therefore, the Present Perfect tense is used.)"
+            },
+            {
+                id: "q38",
+                section: "grammar-vocab-questions",
+                text: "38. Economics _____ a very interesting subject that I’m studying at university.",
+                options: {
+                    a: "is",
+                    b: "was",
+                    c: "are",
+                    d: "were"
+                },
+                correct: "a",
+                explanation: "'Economics' (kinh tế học) mặc dù có 's' ở cuối nhưng là một danh từ số ít, chỉ tên một môn học. Do đó, động từ chia theo số ít 'is'. (Economics', despite ending in 's', is a singular noun referring to an academic subject. Therefore, the singular verb 'is' is used.)"
+            },
+            {
+                id: "q39",
+                section: "grammar-vocab-questions",
+                text: "39. People use a/an _____ machine to get money from their bank account.",
+                options: {
+                    a: "foreign currency",
+                    b: "credit card",
+                    c: "cashpoint",
+                    d: "exchange rate"
+                },
+                correct: "c",
+                explanation: "'Cashpoint' (máy rút tiền tự động, ATM) là máy dùng để rút tiền từ tài khoản ngân hàng. (A 'cashpoint' (ATM) is a machine used to withdraw money from a bank account.)"
+            },
+            {
+                id: "q40",
+                section: "grammar-vocab-questions",
+                text: "40. Employees in small businesses _____ lose their job due to the current economic crisis.",
+                options: {
+                    a: "should",
+                    b: "might",
+                    c: "can",
+                    d: "have to"
+                },
+                correct: "b",
+                explanation: "'Might' (có thể) diễn tả khả năng có thể xảy ra nhưng không chắc chắn, phù hợp với ngữ cảnh 'economic crisis' (khủng hoảng kinh tế) gây ra rủi ro mất việc. (Might' expresses a possibility, fitting the context of job loss risk due to an 'economic crisis'.)"
+            },
+            {
+                id: "q41",
+                section: "grammar-vocab-questions",
+                text: "41. My parents have always wanted _____ into top university.",
+                options: {
+                    a: "me get",
+                    b: "get",
+                    c: "me to get",
+                    d: "getting"
+                },
+                correct: "c",
+                explanation: "Cấu trúc 'want + O + to V' (muốn ai đó làm gì) là cách dùng đúng. (The structure 'want + object + to-infinitive' (to want someone to do something) is the correct usage.)"
+            },
+            {
+                id: "q42",
+                section: "grammar-vocab-questions",
+                text: "42. “ Have you got ______ for a $ 50 note? ” –“ Yes, here you are.”",
+                options: {
+                    a: "change",
+                    b: "bill",
+                    c: "receipt",
+                    d: "PIN number"
+                },
+                correct: "a",
+                explanation: "'Change' (tiền lẻ) là số tiền bạn nhận lại khi trả một tờ tiền có mệnh giá lớn hơn. (Change' refers to the smaller denomination currency you receive back when paying with a larger note.)"
+            },
+            {
+                id: "q43",
+                section: "grammar-vocab-questions",
+                text: "43. There are a few dormant and many active volcanoes that _____ in South Africa, but no extinct.",
+                options: {
+                    a: "is found",
+                    b: "was found",
+                    c: "are found",
+                    d: "will be found"
+                },
+                correct: "c",
+                explanation: "Đây là câu ở thể bị động thì Hiện tại đơn, diễn tả một sự thật hoặc thông tin chung. 'Volcanoes' là danh từ số nhiều, nên dùng 'are found'. (This is a passive voice sentence in the Present Simple tense, expressing a general fact or information. 'Volcanoes' is a plural noun, so 'are found' is used.)"
+            },
+            {
+                id: "q44",
+                section: "grammar-vocab-questions",
+                text: "44. Lucy _____ the living room for three hours. There are still two walls to paint.",
+                options: {
+                    a: "has been painting",
+                    b: "painted",
+                    c: "is going to paint",
+                    d: "will paint"
+                },
+                correct: "a",
+                explanation: "Thì Hiện tại hoàn thành tiếp diễn ('has been painting') diễn tả hành động bắt đầu trong quá khứ, kéo dài liên tục đến hiện tại và vẫn chưa hoàn thành ('There are still two walls to paint'). (The Present Perfect Continuous tense ('has been painting') describes an action that started in the past, has been ongoing up to the present, and is still incomplete ('There are still two walls to paint').)"
+            },
+            {
+                id: "q45",
+                section: "grammar-vocab-questions",
+                text: "45. The classroom teacher must be _____ to a child’s needs, or feelings, showing understanding of them.",
+                options: {
+                    a: "affectionate",
+                    b: "patient",
+                    c: "open",
+                    d: "sensitive"
+                },
+                correct: "d",
+                explanation: "'Sensitive' (nhạy cảm) có nghĩa là dễ dàng hiểu được cảm xúc hoặc nhu cầu của người khác, phù hợp với ngữ cảnh người giáo viên cần hiểu nhu cầu/cảm xúc của trẻ. (Sensitive' means easily understanding others' feelings or needs, fitting the context that a teacher needs to understand a child's needs/feelings.)"
+            },
+            {
+                id: "q46",
+                section: "grammar-vocab-questions",
+                text: "46. The first ever windshield wiper _____ by Mary Anderson, a real estate developer in 1903.",
+                options: {
+                    a: "are created",
+                    b: "was created",
+                    c: "is created",
+                    d: "were created"
+                },
+                correct: "b",
+                explanation: "Câu này ở thể bị động thì Quá khứ đơn, vì có mốc thời gian cụ thể trong quá khứ ('in 1903'). 'Windshield wiper' là chủ ngữ số ít, nên dùng 'was created'. (This sentence is in the Past Simple passive voice, as there is a specific time marker in the past ('in 1903'). 'Windshield wiper' is a singular subject, so 'was created' is used.)"
+            },
+            {
+                id: "q47",
+                section: "grammar-vocab-questions",
+                text: "47. I asked the clerk if anyone handed the purse I _____ but it seemed that nobody had seen it.",
+                options: {
+                    a: "lost",
+                    b: "lose",
+                    c: "had lost",
+                    d: "have lost"
+                },
+                correct: "c",
+                explanation: "Việc 'lose the purse' (làm mất ví) xảy ra trước khi 'I asked the clerk' (tôi hỏi nhân viên) và trước cả việc 'nobody had seen it'. Do đó, dùng thì Quá khứ hoàn thành. (The action of 'lose the purse' occurred before 'I asked the clerk' and even before 'nobody had seen it'. Therefore, the Past Perfect tense is used.)"
+            },
+            {
+                id: "q48",
+                section: "grammar-vocab-questions",
+                text: "48. Coca-Cola has been number one in the list of World’s top 15 _____ brands for several years.",
+                options: {
+                    a: "cosmetics",
+                    b: "accessories",
+                    c: "electronics",
+                    d: "soft drinks"
+                },
+                correct: "d",
+                explanation: "Coca-Cola là một loại 'soft drink' (nước giải khát không cồn). (Coca-Cola is a type of 'soft drink'.)"
+            },
+            {
+                id: "q49",
+                section: "grammar-vocab-questions",
+                text: "49. In order to find a good job, last year students should learn how to _____. ",
+                options: {
+                    a: "take exams",
+                    b: "write a CV",
+                    c: "spend money",
+                    d: "choose a course"
+                },
+                correct: "b",
+                explanation: "Để tìm được việc làm tốt, sinh viên cần học cách 'write a CV' (viết sơ yếu lý lịch) để nộp cho nhà tuyển dụng. (To find a good job, students need to learn how to 'write a CV' to submit to employers.)"
+            },
+            {
+                id: "q50",
+                section: "grammar-vocab-questions",
+                text: "50. The authority needs to care more about _____ poor during a pandemic.",
+                options: {
+                    a: "a",
+                    b: "an",
+                    c: "---",
+                    d: "the"
+                },
+                correct: "d",
+                explanation: "Cụm 'the poor' (người nghèo) dùng mạo từ 'the' với tính từ để chỉ một nhóm người trong xã hội. (The phrase 'the poor' uses the article 'the' with an adjective to refer to a group of people in society.)"
+            },
+            {
+                id: "q51",
+                section: "grammar-vocab-questions",
+                text: "51.” Why did you choose the first candidate? ” – “_____.”",
+                options: {
+                    a: "Because she knows a lot about technology",
+                    b: "Because there are many candidates",
+                    c: "Because candidates are talented",
+                    d: "Because all candidates are incapable"
+                },
+                correct: "a",
+                explanation: "Câu trả lời A cung cấp lý do trực tiếp và hợp lý nhất cho việc chọn một ứng viên (cô ấy biết nhiều về công nghệ). Các lựa chọn khác không phải là lý do trực tiếp hoặc không hợp lý để chọn. (Option A provides the most direct and logical reason for choosing a candidate (she knows a lot about technology). Other options are either not direct reasons or illogical for choosing.)"
+            },
+            {
+                id: "q52",
+                section: "grammar-vocab-questions",
+                text: "52. We _____ not able to stay overnight at the hotel since we_____ not reserved a room in advance.",
+                options: {
+                    a: "was/did",
+                    b: "were/had",
+                    c: "were/did",
+                    d: "was/had"
+                },
+                correct: "b",
+                explanation: "Phần đầu là 'We were not able to' (chúng tôi không thể), 'were' là đúng cho 'We'. Phần sau, việc 'not reserved a room in advance' (chưa đặt phòng trước) xảy ra trước việc không thể ở lại khách sạn, nên dùng Quá khứ hoàn thành ('had not reserved'). (The first part is 'We were not able to', with 'were' being correct for 'We'. For the second part, 'not reserved a room in advance' occurred before the inability to stay overnight, so the Past Perfect tense ('had not reserved') is used.)"
+            },
+            {
+                id: "q53",
+                section: "grammar-vocab-questions",
+                text: "53. _____ was invented in the 1920s. At first, the colors were only reds and purples.",
+                options: {
+                    a: "Moisturizer",
+                    b: "Shaving foam",
+                    c: "Perfume",
+                    d: "Nail varnish"
+                },
+                correct: "d",
+                explanation: "'Nail varnish' (sơn móng tay) phù hợp với mô tả về màu sắc (đỏ và tím) và thời gian phát minh (những năm 1920s). (Nail varnish' fits the description of colors (reds and purples) and the invention period (1920s).)"
+            },
+            {
+                id: "q54",
+                section: "grammar-vocab-questions",
+                text: "54. My uncle _____ working on his latest novel for 9 months. He has _____ 5 novels so far.",
+                options: {
+                    a: "has been/written",
+                    b: "started/given",
+                    c: "was/made",
+                    d: "finished/got"
+                },
+                correct: "a",
+                explanation: "Phần đầu, 'for 9 months' và hành động vẫn đang tiếp diễn cho đến hiện tại ('latest novel'), dùng thì Hiện tại hoàn thành tiếp diễn ('has been working'). Phần sau, 'so far' chỉ kết quả tính đến hiện tại, dùng thì Hiện tại hoàn thành ('has written'). (For the first blank, 'for 9 months' and the ongoing action up to the present ('latest novel') indicate the Present Perfect Continuous ('has been working'). For the second blank, 'so far' indicates a result up to the present, so the Present Perfect ('has written') is used.)"
+            },
+            {
+                id: "q55",
+                section: "grammar-vocab-questions",
+                text: "55. The company’s _____ is really good at creating a friendly atmosphere at work.",
+                options: {
+                    a: "employment",
+                    b: "employer",
+                    c: "employed",
+                    d: "unemployed"
+                },
+                correct: "b",
+                explanation: "'Employer' (người sử dụng lao động/chủ công ty) là người có vai trò trong việc tạo ra không khí làm việc thân thiện. (The 'employer' (the company owner or manager) is the person responsible for creating a friendly atmosphere at work.)"
+            }
+        ];
+
+        // Hàm để tải và hiển thị câu hỏi
+        function loadQuestions() {
+            questionsData.forEach(q => {
+                const sectionContainer = document.getElementById(q.section);
+                if (!sectionContainer) return; // Skip if section not found
+
+                let imageHtml = '';
+                if (q.image) {
+                    imageHtml = `<img src="${q.image}" alt="${q.alt}" class="image-placeholder d-block mb-3">`;
+                }
+
+                const questionHtml = `
+                    <div class="question-item">
+                        ${imageHtml}
+                        <p>${q.text}</p>
+                        ${Object.keys(q.options).map(key => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="${q.id}" id="${q.id}-${key}" value="${key}">
+                                <label class="form-check-label" for="${q.id}-${key}">
+                                    ${key.toUpperCase()}. ${q.options[key]}
+                                </label>
+                            </div>
+                        `).join('')}
+                        <div class="feedback" id="feedback-${q.id}"></div>
+                        <div class="explanation" id="explanation-${q.id}"></div>
+                    </div>
+                `;
+                sectionContainer.innerHTML += questionHtml;
+            });
+        }
+
+        // Hàm kiểm tra đáp án và hiển thị giải thích
+        function submitQuiz() {
+            let score = 0;
+            const totalQuestions = questionsData.length;
+
+            questionsData.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'block';
+                explanationDiv.style.display = 'block';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+
+                if (selectedOption) {
+                    if (selectedOption.value === q.correct) {
+                        feedbackDiv.textContent = "Đúng rồi! 🎉";
+                        feedbackDiv.classList.add('correct');
+                        score++;
+                    } else {
+                        feedbackDiv.textContent = `Sai rồi. Đáp án đúng là ${q.correct.toUpperCase()}. ❌`;
+                        feedbackDiv.classList.add('incorrect');
+                    }
+                } else {
+                    feedbackDiv.textContent = "Bạn chưa chọn đáp án.";
+                    feedbackDiv.classList.add('incorrect');
+                }
+                explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${q.explanation}`;
+            });
+
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt được: ${score} / ${totalQuestions} điểm.`;
+            scoreDisplay.style.display = 'block';
+        }
+
+        // Hàm làm lại bài
+        function resetQuiz() {
+            questionsData.forEach(q => {
+                const selectedOption = document.querySelector(`input[name="${q.id}"]:checked`);
+                if (selectedOption) {
+                    selectedOption.checked = false;
+                }
+
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const explanationDiv = document.getElementById(`explanation-${q.id}`);
+
+                feedbackDiv.style.display = 'none';
+                explanationDiv.style.display = 'none';
+                feedbackDiv.classList.remove('correct', 'incorrect');
+                feedbackDiv.textContent = '';
+                explanationDiv.innerHTML = '';
+            });
+
+            document.getElementById('scoreDisplay').style.display = 'none';
+        }
+
+        // Tải câu hỏi khi trang được tải xong
+        document.addEventListener('DOMContentLoaded', loadQuestions);
+    </script>
+</body>
+</html>

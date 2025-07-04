@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài D: Chọn đáp án đúng</title>
+    <!-- Bootstrap 5 CSS for responsive design and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., check/times circles) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        .question-item .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .question-item .form-check {
+            padding-left: 2.5em; /* Space for custom radio button */
+            margin-bottom: 0.5em;
+        }
+        .question-item .form-check-input {
+            margin-top: 0.3em;
+            margin-left: -1.5em; /* Adjust alignment */
+        }
+        .question-item .form-check-label {
+            font-size: 1em;
+            color: #555;
+            cursor: pointer;
+        }
+
+        /* Feedback styles for radio buttons */
+        .question-item .form-check-label.is-correct {
+            color: #198754;
+            font-weight: 600;
+        }
+        .question-item .form-check-label.is-incorrect {
+            color: #dc3545;
+            font-weight: 600;
+        }
+        /* Highlight correct answer if user chose incorrectly */
+        .question-item .form-check-label.correct-but-not-selected {
+            color: #007bff; /* Blue for correct answer not chosen */
+            font-weight: 600;
+        }
+
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Chọn Đáp Án Đúng</h1>
+        </div>
+        <h2>Chọn đáp án đúng.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Choose the correct answer.
+            <br>
+            <strong>Hướng dẫn:</strong> Chọn đáp án đúng.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="multipleChoiceForm">
+            <div class="question-item" data-question-id="q27">
+                <p class="question-text">
+                    27. I <span class="blank-placeholder"></span> around the world one day.
+                </p>
+                <div class="options-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q27_option" id="q27_optionA" value="A">
+                        <label class="form-check-label" for="q27_optionA">A travel</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q27_option" id="q27_optionB" value="B">
+                        <label class="form-check-label" for="q27_optionB">B am going to travel</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q27_option" id="q27_optionC" value="C">
+                        <label class="form-check-label" for="q27_optionC">C am travelling</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q27_option" id="q27_optionD" value="D">
+                        <label class="form-check-label" for="q27_optionD">D travelled</label>
+                    </div>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon27"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q28">
+                <p class="question-text">
+                    28. Do you think Curtis <span class="blank-placeholder"></span> the car race tomorrow?
+                </p>
+                <div class="options-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q28_option" id="q28_optionA" value="A">
+                        <label class="form-check-label" for="q28_optionA">A will win</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q28_option" id="q28_optionB" value="B">
+                        <label class="form-check-label" for="q28_optionB">B wins</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q28_option" id="q28_optionC" value="C">
+                        <label class="form-check-label" for="q28_optionC">C is winning</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q28_option" id="q28_optionD" value="D">
+                        <label class="form-check-label" for="q28_optionD">D won</label>
+                    </div>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon28"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q29">
+                <p class="question-text">
+                    29. What's the weather like <span class="blank-placeholder"></span> Russia at the moment?
+                </p>
+                <div class="options-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q29_option" id="q29_optionA" value="A">
+                        <label class="form-check-label" for="q29_optionA">A on</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q29_option" id="q29_optionB" value="B">
+                        <label class="form-check-label" for="q29_optionB">B at</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q29_option" id="q29_optionC" value="C">
+                        <label class="form-check-label" for="q29_optionC">C in</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q29_option" id="q29_optionD" value="D">
+                        <label class="form-check-label" for="q29_optionD">D to</label>
+                    </div>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon29"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q30">
+                <p class="question-text">
+                    30. I can't come to your party because I <span class="blank-placeholder"></span> my cousin that week.
+                </p>
+                <div class="options-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q30_option" id="q30_optionA" value="A">
+                        <label class="form-check-label" for="q30_optionA">A visit</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q30_option" id="q30_optionB" value="B">
+                        <label class="form-check-label" for="q30_optionB">B will visit</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q30_option" id="q30_optionC" value="C">
+                        <label class="form-check-label" for="q30_optionC">C visited</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q30_option" id="q30_optionD" value="D">
+                        <label class="form-check-label" for="q30_optionD">D am visiting</label>
+                    </div>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon30"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q31">
+                <p class="question-text">
+                    31. I think there's a picture of the hotel <span class="blank-placeholder"></span> the first page.
+                </p>
+                <div class="options-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q31_option" id="q31_optionA" value="A">
+                        <label class="form-check-label" for="q31_optionA">A on</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q31_option" id="q31_optionB" value="B">
+                        <label class="form-check-label" for="q31_optionB">B at</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q31_option" id="q31_optionC" value="C">
+                        <label class="form-check-label" for="q31_optionC">C in</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q31_option" id="q31_optionD" value="D">
+                        <label class="form-check-label" for="q31_optionD">D to</label>
+                    </div>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon31"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q32">
+                <p class="question-text">
+                    32. We usually go away somewhere on holiday <span class="blank-placeholder"></span> New Year.
+                </p>
+                <div class="options-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q32_option" id="q32_optionA" value="A">
+                        <label class="form-check-label" for="q32_optionA">A on</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q32_option" id="q32_optionB" value="B">
+                        <label class="form-check-label" for="q32_optionB">B at</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q32_option" id="q32_optionC" value="C">
+                        <label class="form-check-label" for="q32_optionC">C in</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q32_option" id="q32_optionD" value="D">
+                        <label class="form-check-label" for="q32_optionD">D to</label>
+                    </div>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon32"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q33">
+                <p class="question-text">
+                    33. Watch out, or you <span class="blank-placeholder"></span> off the boat!
+                </p>
+                <div class="options-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q33_option" id="q33_optionA" value="A">
+                        <label class="form-check-label" for="q33_optionA">A fall</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q33_option" id="q33_optionB" value="B">
+                        <label class="form-check-label" for="q33_optionB">B are going to fall</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q33_option" id="q33_optionC" value="C">
+                        <label class="form-check-label" for="q33_optionC">C are falling</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q33_option" id="q33_optionD" value="D">
+                        <label class="form-check-label" for="q33_optionD">D fell</label>
+                    </div>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon33"></i>
+            </div>
+
+            <div class="question-item" data-question-id="q34">
+                <p class="question-text">
+                    34. It's my birthday <span class="blank-placeholder"></span> Friday, so we're spending the weekend in London.
+                </p>
+                <div class="options-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q34_option" id="q34_optionA" value="A">
+                        <label class="form-check-label" for="q34_optionA">A on</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q34_option" id="q34_optionB" value="B">
+                        <label class="form-check-label" for="q34_optionB">B at</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q34_option" id="q34_optionC" value="C">
+                        <label class="form-check-label" for="q34_optionC">C in</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q34_option" id="q34_optionD" value="D">
+                        <label class="form-check-label" for="q34_optionD">D to</label>
+                    </div>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon34"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q27': {
+                question_text: 'I {blank} around the world one day.',
+                options: {
+                    'A': 'travel',
+                    'B': 'am going to travel',
+                    'C': 'am travelling',
+                    'D': 'travelled'
+                },
+                correct_answer: 'B',
+                fullSentence: 'I am going to travel around the world one day.',
+                translation: 'Một ngày nào đó tôi sẽ đi du lịch vòng quanh thế giới.',
+                explanation: '"Am going to travel" được dùng để diễn tả một kế hoạch hoặc ý định trong tương lai.',
+                grammar_note: 'Sử dụng "be going to + V (nguyên thể)" cho các kế hoạch hoặc dự định trong tương lai.'
+            },
+            'q28': {
+                question_text: 'Do you think Curtis {blank} the car race tomorrow?',
+                options: {
+                    'A': 'will win',
+                    'B': 'wins',
+                    'C': 'is winning',
+                    'D': 'won'
+                },
+                correct_answer: 'A',
+                fullSentence: 'Do you think Curtis will win the car race tomorrow?',
+                translation: 'Bạn có nghĩ Curtis sẽ thắng cuộc đua ô tô vào ngày mai không?',
+                explanation: '"Will win" được dùng để hỏi về một dự đoán trong tương lai.',
+                grammar_note: 'Sử dụng "will + V (nguyên thể)" cho các dự đoán trong tương lai, đặc biệt sau "Do you think...".'
+            },
+            'q29': {
+                question_text: 'What\'s the weather like {blank} Russia at the moment?',
+                options: {
+                    'A': 'on',
+                    'B': 'at',
+                    'C': 'in',
+                    'D': 'to'
+                },
+                correct_answer: 'C',
+                fullSentence: 'What\'s the weather like in Russia at the moment?',
+                translation: 'Thời tiết ở Nga hiện tại như thế nào?',
+                explanation: '"In" được dùng với các quốc gia hoặc khu vực lớn.',
+                grammar_note: 'Sử dụng "in" cho các quốc gia, thành phố lớn, châu lục.'
+            },
+            'q30': {
+                question_text: 'I can\'t come to your party because I {blank} my cousin that week.',
+                options: {
+                    'A': 'visit',
+                    'B': 'will visit',
+                    'C': 'visited',
+                    'D': 'am visiting'
+                },
+                correct_answer: 'D',
+                fullSentence: 'I can\'t come to your party because I am visiting my cousin that week.',
+                translation: 'Tôi không thể đến bữa tiệc của bạn vì tôi sẽ đi thăm anh họ vào tuần đó.',
+                explanation: '"Am visiting" (thì hiện tại tiếp diễn) được dùng để diễn tả một kế hoạch đã được sắp xếp chắc chắn trong tương lai gần.',
+                grammar_note: 'Thì hiện tại tiếp diễn (Present Continuous) dùng để diễn tả các sắp xếp hoặc kế hoạch đã định trong tương lai.'
+            },
+            'q31': {
+                question_text: 'I think there\'s a picture of the hotel {blank} the first page.',
+                options: {
+                    'A': 'on',
+                    'B': 'at',
+                    'C': 'in',
+                    'D': 'to'
+                },
+                correct_answer: 'A',
+                fullSentence: 'I think there\'s a picture of the hotel on the first page.',
+                translation: 'Tôi nghĩ có một bức ảnh của khách sạn ở trang đầu tiên.',
+                explanation: '"On" được dùng để chỉ vị trí trên một bề mặt, bao gồm cả trang giấy.',
+                grammar_note: 'Sử dụng "on" cho các bề mặt (on the table, on the wall, on the page).'
+            },
+            'q32': {
+                question_text: 'We usually go away somewhere on holiday {blank} New Year.',
+                options: {
+                    'A': 'on',
+                    'B': 'at',
+                    'C': 'in',
+                    'D': 'to'
+                },
+                correct_answer: 'B',
+                fullSentence: 'We usually go away somewhere on holiday at New Year.',
+                translation: 'Chúng tôi thường đi nghỉ mát vào dịp năm mới.',
+                explanation: '"At New Year" là cụm từ cố định dùng với các dịp lễ hội.',
+                grammar_note: 'Sử dụng "at" cho các dịp lễ, kỳ nghỉ (at Christmas, at Easter, at New Year).'
+            },
+            'q33': {
+                question_text: 'Watch out, or you {blank} off the boat!',
+                options: {
+                    'A': 'fall',
+                    'B': 'are going to fall',
+                    'C': 'are falling',
+                    'D': 'fell'
+                },
+                correct_answer: 'B',
+                fullSentence: 'Watch out, or you are going to fall off the boat!',
+                translation: 'Coi chừng, nếu không bạn sẽ ngã khỏi thuyền đấy!',
+                explanation: '"Are going to fall" được dùng để cảnh báo về một điều gì đó sắp xảy ra hoặc có dấu hiệu rõ ràng sẽ xảy ra.',
+                grammar_note: 'Sử dụng "be going to + V (nguyên thể)" cho các dự đoán dựa trên bằng chứng hiện tại hoặc cảnh báo.'
+            },
+            'q34': {
+                question_text: 'It\'s my birthday {blank} Friday, so we\'re spending the weekend in London.',
+                options: {
+                    'A': 'on',
+                    'B': 'at',
+                    'C': 'in',
+                    'D': 'to'
+                },
+                correct_answer: 'A',
+                fullSentence: 'It\'s my birthday on Friday, so we\'re spending the weekend in London.',
+                translation: 'Sinh nhật của tôi vào thứ Sáu, vì vậy chúng tôi sẽ dành cuối tuần ở London.',
+                explanation: '"On" được dùng với các ngày trong tuần.',
+                grammar_note: 'Sử dụng "on" cho các ngày cụ thể (on Monday, on Christmas Day, on Friday).'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const questionItem = document.querySelector(`[data-question-id="${qId}"]`);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+                
+                // Ensure questionItem is not null before proceeding
+                if (!questionItem) {
+                    console.error(`Question item with ID ${qId} not found.`);
+                    return; // Skip this question if element is missing
+                }
+
+                const selectedOptionInput = questionItem.querySelector(`input[name="${qId}_option"]:checked`);
+                const allOptionLabels = questionItem.querySelectorAll('.form-check-label');
+
+                // Reset all option label styles first
+                allOptionLabels.forEach(label => {
+                    label.classList.remove('is-correct', 'is-incorrect', 'correct-but-not-selected');
+                });
+
+                let isCorrect = false;
+                if (selectedOptionInput) {
+                    const userAnswer = selectedOptionInput.value;
+                    const selectedLabel = questionItem.querySelector(`label[for="${selectedOptionInput.id}"]`);
+
+                    if (userAnswer === questionInfo.correct_answer) {
+                        isCorrect = true;
+                        score++;
+                        selectedLabel.classList.add('is-correct');
+                    } else {
+                        selectedLabel.classList.add('is-incorrect');
+                        // Highlight the correct answer if the user chose incorrectly
+                        const correctOptionId = `${qId}_option${questionInfo.correct_answer}`;
+                        questionItem.querySelector(`label[for="${correctOptionId}"]`).classList.add('correct-but-not-selected');
+                    }
+                } else {
+                    // If no option was selected, it's incorrect. Highlight the correct one.
+                    const correctOptionId = `${qId}_option${questionInfo.correct_answer}`;
+                    questionItem.querySelector(`label[for="${correctOptionId}"]`).classList.add('correct-but-not-selected');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                
+                // Replace {blank} with the correct answer, highlighted
+                const correctOptionText = questionInfo.options[questionInfo.correct_answer];
+                const fullTextWithCorrectAnswer = questionInfo.question_text.replace('{blank}', `<span class="correct-answer-text">${correctOptionText}</span>`);
+                questionTextSolutionDiv.innerHTML = `${questionNumber}. ${fullTextWithCorrectAnswer}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing selections, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false; // Uncheck radio button
+            });
+
+            document.querySelectorAll('.form-check-label').forEach(label => {
+                label.classList.remove('is-correct', 'is-incorrect', 'correct-but-not-selected'); // Remove feedback classes
+            });
+
+            document.querySelectorAll('.feedback-icon').forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>
