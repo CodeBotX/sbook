@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Stories - Vocabulary Learning</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        /* CSS Variables for Light and Dark Mode */
+        :root {
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+            --container-bg: #fff;
+            --header-color: #2c3e50;
+            --border-color: #3498db;
+            --story-bg: #e8f4f8;
+            --story-border: #b3e0ff;
+            --highlight-color: #2980b9;
+            --tooltip-bg: #555;
+            --tooltip-text: #fff;
+            --button-bg: #3498db;
+            --button-text: white;
+            --button-hover-bg: #2980b9;
+        }
+
+        body.dark-mode {
+            --bg-color: #2b2b2b;
+            --text-color: #e0e0e0;
+            --container-bg: #3c3c3c;
+            --header-color: #bbd0ff;
+            --border-color: #7abaff;
+            --story-bg: #364958;
+            --story-border: #5a7b90;
+            --highlight-color: #87cefa;
+            --tooltip-bg: #eee;
+            --tooltip-text: #333;
+            --button-bg: #7abaff;
+            --button-text: #2b2b2b;
+            --button-hover-bg: #5a9bff;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: var(--container-bg);
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        h1, h2 {
+            color: var(--header-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+        h1 { font-size: 2.2em; }
+        h2 { font-size: 1.8em; }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        /* Story Box Styling */
+        .story-box {
+            background-color: var(--story-bg);
+            border: 1px solid var(--story-border);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .story-box h3 {
+            color: var(--highlight-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            transition: color 0.3s;
+        }
+
+        .story-box p {
+            margin-bottom: 1em;
+        }
+
+        .story-box .translation {
+            font-style: italic;
+            color: #666;
+            margin-top: 15px;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+        }
+        body.dark-mode .story-box .translation {
+            color: #a0a0a0;
+            border-top-color: #555;
+        }
+
+        /* Vocabulary Word and Tooltip */
+        .vocabulary-word {
+            font-weight: bold;
+            color: var(--highlight-color);
+            cursor: help; /* Indicates interactivity */
+            position: relative;
+            text-decoration: underline dotted;
+            text-underline-offset: 3px;
+        }
+
+        .vocabulary-word .tooltip {
+            visibility: hidden;
+            width: 180px; /* Increased width for longer meanings/IPAs */
+            background-color: var(--tooltip-bg);
+            color: var(--tooltip-text);
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position above the text */
+            left: 50%;
+            transform: translateX(-50%); /* Center horizontally */
+            opacity: 0;
+            transition: opacity 0.3s, visibility 0.3s;
+            font-size: 0.9em;
+            line-height: 1.4;
+            pointer-events: none; /* Allows click-through to the word */
+        }
+
+        .vocabulary-word .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--tooltip-bg) transparent transparent transparent;
+        }
+
+        .vocabulary-word.active .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle-button {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, color 0.3s, transform 0.2s ease;
+        }
+
+        .theme-toggle-button:hover {
+            background-color: var(--button-hover-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 15px;
+            }
+            .theme-toggle-button {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            .story-box { padding: 15px; }
+            .story-box h3 { font-size: 1.3em; }
+            .vocabulary-word .tooltip {
+                width: 140px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle-button">Chế độ tối</button>
+
+    <div class="container">
+        <h1>Mini Stories for Vocabulary Learning</h1>
+        <p>Click vào các từ được <span style="color: #2980b9; font-weight: bold; text-decoration: underline dotted;">tô đậm</span> trong các câu chuyện tiếng Anh để xem nghĩa tiếng Việt và phiên âm IPA của từ đó.</p>
+
+        <hr style="margin: 40px 0; border: 0; border-top: 1px dashed var(--text-color);">
+
+        <div class="section">
+            <h2>Story 1: Anna's Cooking Class</h2>
+            <div class="story-box">
+                <h3>Learning a New Skill</h3>
+                <p>Anna wanted to learn something new. She thought about it and decided to <span class="vocabulary-word" data-meaning="bắt đầu một sở thích" data-ipa="/teɪk ʌp/">take up</span> cooking. She found a simple cooking <span class="vocabulary-word" data-meaning="khóa học" data-ipa="/kɔːrs/">course</span> online. Anna was a <span class="vocabulary-word" data-meaning="cô gái thông minh" data-ipa="/ˈklev.ər ɡɜːrl/">clever girl</span>, so she quickly understood the <span class="vocabulary-word" data-meaning="chỉ dẫn" data-ipa="/ɪnˈstrʌk.ʃən/">instructions</span>. She tried to <span class="vocabulary-word" data-meaning="tập trung" data-ipa="/ˈkɒn.sən.treɪt/">concentrate</span> on each step. She would <span class="vocabulary-word" data-meaning="viết xuống" data-ipa="/raɪt daʊn/">write down</span> new recipes. Anna always wanted to <span class="vocabulary-word" data-meaning="tiến bộ" data-ipa="/meɪk ˈprəʊ.ɡres/">make progress</span>. She didn't want to <span class="vocabulary-word" data-meaning="thất bại" data-ipa="/feɪl/">fail</span>, so she worked hard. Sometimes, she had to <span class="vocabulary-word" data-meaning="tra cứu" data-ipa="/lʊk ʌp/">look up</span> words she didn't know. It was a fun <span class="vocabulary-word" data-meaning="thử thách" data-ipa="/ˈtʃæl.ɪndʒ/">challenge</span>, and she felt <span class="vocabulary-word" data-meaning="niềm vui" data-ipa="/ˈpleʒ.ər/">pleasure</span> when her food tasted good. She was <span class="vocabulary-word" data-meaning="có khả năng" data-ipa="/ˈkeɪ.pə.bəl əv/">capable of</span> learning many new <span class="vocabulary-word" data-meaning="kỹ năng" data-ipa="/skɪl/">skills</span>.</p>
+                <p class="translation">Anna muốn học điều gì đó mới. Cô ấy suy nghĩ và quyết định bắt đầu học nấu ăn. Cô tìm thấy một khóa học nấu ăn đơn giản trực tuyến. Anna là một cô gái thông minh, vì vậy cô nhanh chóng hiểu các chỉ dẫn. Cô cố gắng tập trung vào từng bước. Cô sẽ ghi chép các công thức mới. Anna luôn muốn tiến bộ. Cô không muốn thất bại, vì vậy cô ấy làm việc chăm chỉ. Đôi khi, cô phải tra cứu những từ mà cô không biết. Đó là một thử thách thú vị, và cô cảm thấy niềm vui khi món ăn của mình ngon. Cô có khả năng học được nhiều kỹ năng mới.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 2: The School Play Practice</h2>
+            <div class="story-box">
+                <h3>Getting Ready for the Show</h3>
+                <p>The school drama <span class="vocabulary-word" data-meaning="câu lạc bộ" data-ipa="/klʌb/">club</span> was <span class="vocabulary-word" data-meaning="tổ chức" data-ipa="/ˈɔː.ɡən.aɪzɪŋ/">organizing</span> a play. Leo, a <span class="vocabulary-word" data-meaning="thành viên" data-ipa="/ˈmem.bər/">member</span>, was nervous. He had to <span class="vocabulary-word" data-meaning="ghi nhớ" data-ipa="/ˈmem.ə.raɪz/">memorise</span> his lines <span class="vocabulary-word" data-meaning="thuộc lòng" data-ipa="/baɪ hɑːrt/">by heart</span>. The director, who was an <span class="vocabulary-word" data-meaning="chuyên gia" data-ipa="/ˈek.spɜːrt/">expert</span>, would <span class="vocabulary-word" data-meaning="chỉ ra" data-ipa="/pɔɪnt aʊt/">point out</span> his mistakes. Leo tried not to <span class="vocabulary-word" data-meaning="do dự" data-ipa="/ˈhez.ɪ.teɪt/">hesitate</span> when practicing <span class="vocabulary-word" data-meaning="trên sân khấu" data-ipa="/ɒn steɪdʒ/">on stage</span>. He had to <span class="vocabulary-word" data-meaning="ôn tập" data-ipa="/rɪˈvaɪz/">revise</span> his movements. <span class="vocabulary-word" data-meaning="Nói chung" data-ipa="/ɪn ˈdʒen.ər.əl/">In general</span>, everyone in the <span class="vocabulary-word" data-meaning="nhóm" data-ipa="/ɡruːp/">group</span> worked hard. They wanted the play to be very <span class="vocabulary-word" data-meaning="thú vị" data-ipa="/ˌen.təˈteɪ.nɪŋ/">entertaining</span>. <span class="vocabulary-word" data-meaning="Thực tế là" data-ipa="/ɪn fækt/">In fact</span>, they all had <span class="vocabulary-word" data-meaning="vui vẻ" data-ipa="/hæv fʌn/">fun</span> during rehearsals. It was a great <span class="vocabulary-word" data-meaning="trải nghiệm" data-ipa="/ɪkˈspɪə.ri.əns/">experience</span> for everyone involved.</p>
+                <p class="translation">Câu lạc bộ kịch của trường đang tổ chức một vở kịch. Leo, một thành viên, rất lo lắng. Anh ấy phải ghi nhớ lời thoại của mình thuộc lòng. Đạo diễn, một chuyên gia, sẽ chỉ ra lỗi của anh ấy. Leo cố gắng không do dự khi tập luyện trên sân khấu. Anh ấy phải ôn tập các động tác của mình. Nói chung, mọi người trong nhóm đều làm việc chăm chỉ. Họ muốn vở kịch thật thú vị. Thực tế là, tất cả họ đều vui vẻ trong các buổi tập. Đó là một trải nghiệm tuyệt vời cho tất cả mọi người.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 3: A Friendly Chess Game</h2>
+            <div class="story-box">
+                <h3>Learning and Playing</h3>
+                <p>Alex and Ben decided to play a <span class="vocabulary-word" data-meaning="trò chơi cờ bàn" data-ipa="/bɔːrd ɡeɪm/">board game</span> of chess. It was a friendly <span class="vocabulary-word" data-meaning="trận đấu" data-ipa="/ɡeɪm/">game</span>, not a big <span class="vocabulary-word" data-meaning="cuộc thi đấu" data-ipa="/ˌkɒm.pəˈtɪʃ.ən/">competition</span>. Alex was the <span class="vocabulary-word" data-meaning="đội trưởng" data-ipa="/ˈkæp.tɪn/">captain</span> of his school <span class="vocabulary-word" data-meaning="đội" data-ipa="/tiːm/">team</span>, so he was very <span class="vocabulary-word" data-meaning="thông minh" data-ipa="/smɑːrt/">smart</span>. Ben was his <span class="vocabulary-word" data-meaning="đối thủ" data-ipa="/əˈpəʊ.nənt/">opponent</span>. Alex had to <span class="vocabulary-word" data-meaning="cân nhắc" data-ipa="/kənˈsɪd.ər/">consider</span> each move carefully with his <span class="vocabulary-word" data-meaning="não bộ" data-ipa="/breɪn/">brain</span>. His <span class="vocabulary-word" data-meaning="huấn luyện viên" data-ipa="/kəʊtʃ/">coach</span> always told him to <span class="vocabulary-word" data-meaning="tập trung" data-ipa="/ˈkɒn.sən.treɪt/">concentrate</span>. Ben tried to <span class="vocabulary-word" data-meaning="đoán" data-ipa="/ɡes/">guess</span> Alex's next move. Alex managed to <span class="vocabulary-word" data-meaning="ghi điểm" data-ipa="/skɔːr/">score</span> a win and <span class="vocabulary-word" data-meaning="đánh bại" data-ipa="/biːt/">beat</span> Ben. Ben accepted his <span class="vocabulary-word" data-meaning="sự thất bại" data-ipa="/dɪˈfiːt/">defeat</span> and said, "Good <span class="vocabulary-word" data-meaning="trận đấu" data-ipa="/ɡeɪm/">game</span>!" Alex felt happy to <span class="vocabulary-word" data-meaning="thành công trong" data-ipa="/səkˈsiːd ɪn/">succeed in</span> the game. He was <span class="vocabulary-word" data-meaning="giỏi về" data-ipa="/ɡʊd æt/">good at</span> chess.</p>
+                <p class="translation">Alex và Ben quyết định chơi một ván cờ bàn. Đó là một trận đấu thân thiện, không phải một cuộc thi đấu lớn. Alex là đội trưởng đội cờ vua của trường, vì vậy anh ấy rất thông minh. Ben là đối thủ của anh ấy. Alex phải cân nhắc từng nước đi cẩn thận bằng bộ não của mình. Huấn luyện viên của anh ấy luôn bảo anh ấy tập trung. Ben cố gắng đoán nước đi tiếp theo của Alex. Alex đã giành chiến thắng và đánh bại Ben. Ben chấp nhận thất bại của mình và nói, "Trận đấu hay!" Alex cảm thấy vui khi thành công trong trận đấu. Anh ấy giỏi cờ vua.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 4: The Outdoor Concert</h2>
+            <div class="story-box">
+                <h3>Music in the Park</h3>
+                <p>Last weekend, our family went to a music <span class="vocabulary-word" data-meaning="buổi hòa nhạc" data-ipa="/ˈkɒn.sɜːrt/">concert</span> in the park. Many <span class="vocabulary-word" data-meaning="nhóm" data-ipa="/ɡruːp/">groups</span> played different kinds of <span class="vocabulary-word" data-meaning="nhạc" data-ipa="/ˈmjuː.zɪk/">music</span>. We heard some beautiful <span class="vocabulary-word" data-meaning="nhạc cổ điển" data-ipa="/ˈklæs.ɪ.kəl ˈmjuː.zɪk/">classical music</span> and lively <span class="vocabulary-word" data-meaning="nhạc dân gian" data-ipa="/fəʊk ˈmjuː.zɪk/">folk music</span>. My sister, Mia, is a big <span class="vocabulary-word" data-meaning="người hâm mộ của" data-ipa="/ə fæn əv/">a fan of</span> folk songs. She loved their <span class="vocabulary-word" data-meaning="nhịp điệu" data-ipa="/ˈrɪð.əm/">rhythm</span>. I was <span class="vocabulary-word" data-meaning="phát cuồng vì" data-ipa="/ˈkreɪ.zi əˈbaʊt/">crazy about</span> the lead singer's voice. We had to <span class="vocabulary-word" data-meaning="đảm bảo" data-ipa="/meɪk ʃʊər/">make sure</span> we arrived <span class="vocabulary-word" data-meaning="kịp lúc" data-ipa="/ɪn taɪm fɔːr/">in time for</span> the best part. We didn't record it <span class="vocabulary-word" data-meaning="trên video" data-ipa="/ɒn ˈvɪd.i.əʊ/">on video</span>; we just wanted to <span class="vocabulary-word" data-meaning="lắng nghe" data-ipa="/ˈlɪs.ən tə/">listen to</span> the live show. It was a wonderful <span class="vocabulary-word" data-meaning="trải nghiệm" data-ipa="/ɪkˈspɪə.ri.əns/">experience</span> for all of us. We all had <span class="vocabulary-word" data-meaning="vui vẻ" data-ipa="/hæv fʌn/">fun</span>.</p>
+                <p class="translation">Cuối tuần trước, gia đình chúng tôi đi xem buổi hòa nhạc ở công viên. Nhiều nhóm nhạc đã chơi nhiều thể loại nhạc khác nhau. Chúng tôi nghe một số bản nhạc cổ điển hay và nhạc dân gian sôi động. Chị gái tôi, Mia, là một người hâm mộ lớn của các bài hát dân gian. Cô ấy yêu thích nhịp điệu của chúng. Tôi phát cuồng vì giọng hát của ca sĩ chính. Chúng tôi phải đảm bảo đến kịp lúc để xem phần hay nhất. Chúng tôi không quay lại trên video; chúng tôi chỉ muốn lắng nghe buổi biểu diễn trực tiếp. Đó là một trải nghiệm tuyệt vời cho tất cả chúng tôi. Tất cả chúng tôi đều vui vẻ.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 5: The Study Session</h2>
+            <div class="story-box">
+                <h3>Working Together</h3>
+                <p>Our study <span class="vocabulary-word" data-meaning="nhóm" data-ipa="/ɡruːp/">group</span> met to <span class="vocabulary-word" data-meaning="ôn tập" data-ipa="/rɪˈvaɪz/">revise</span> for our history <span class="vocabulary-word" data-meaning="môn học" data-ipa="/ˈsʌb.dʒɪkt/">subject</span>. We needed to <span class="vocabulary-word" data-meaning="giúp đỡ" data-ipa="/help wɪð/">help with</span> the upcoming <span class="vocabulary-word" data-meaning="kỳ thi" data-ipa="/ɪɡˈzæm/">exam</span>. Some of us were <span class="vocabulary-word" data-meaning="chán nản với" data-ipa="/bɔːrd wɪð/">bored with</span> just reading notes. So, we decided to <span class="vocabulary-word" data-meaning="đọc to" data-ipa="/riːd aʊt/">read out</span> questions. If someone answered <span class="vocabulary-word" data-meaning="không đúng" data-ipa="/ˌɪn.kəˈrekt/">incorrectly</span>, we would <span class="vocabulary-word" data-meaning="gạch bỏ" data-ipa="/krɒs aʊt/">cross out</span> the wrong part and make a <span class="vocabulary-word" data-meaning="sửa chữa" data-ipa="/kəˈrek.ʃən/">correction</span>. We learned to <span class="vocabulary-word" data-meaning="đối phó với" data-ipa="/kəʊp wɪð/">cope with</span> difficult topics together. It was good to <span class="vocabulary-word" data-meaning="học về" data-ipa="/lɜːrn əˈbaʊt/">learn about</span> different views. <span class="vocabulary-word" data-meaning="Tóm lại" data-ipa="/ɪn kənˈkluː.ʒən/">In conclusion</span>, our teamwork helped us all <span class="vocabulary-word" data-meaning="thành công trong" data-ipa="/səkˈsiːd ɪn/">succeed in</span> the exam. We got a good <span class="vocabulary-word" data-meaning="điểm số" data-ipa="/mɑːrk/">mark</span>.</p>
+                <p class="translation">Nhóm học tập của chúng tôi đã gặp nhau để ôn tập cho môn lịch sử. Chúng tôi cần giúp đỡ nhau cho kỳ thi sắp tới. Một số người trong chúng tôi chán nản với việc chỉ đọc ghi chú. Vì vậy, chúng tôi quyết định đọc to các câu hỏi. Nếu ai đó trả lời không đúng, chúng tôi sẽ gạch bỏ phần sai và sửa chữa. Chúng tôi học cách đối phó với các chủ đề khó cùng nhau. Thật tốt khi tìm hiểu về các quan điểm khác nhau. Tóm lại, tinh thần làm việc nhóm của chúng tôi đã giúp tất cả chúng tôi thành công trong kỳ thi. Chúng tôi đã đạt được điểm tốt.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 6: Liam's New Game</h2>
+            <div class="story-box">
+                <h3>Playing and Learning</h3>
+                <p>Liam got a new <span class="vocabulary-word" data-meaning="trò chơi điện tử" data-ipa="/ˈvɪd.i.əʊ ɡeɪm/">video game</span>. He was a <span class="vocabulary-word" data-meaning="người mới bắt đầu" data-ipa="/bɪˈɡɪn.ər/">beginner</span>, but he wanted to <span class="vocabulary-word" data-meaning="trở nên giỏi" data-ipa="/ɡet ɡʊd æt/">get good at</span> it. The game had many new <span class="vocabulary-word" data-meaning="kỹ năng" data-ipa="/skɪl/">skills</span> to learn. He often had to <span class="vocabulary-word" data-meaning="tra cứu" data-ipa="/lʊk ʌp/">look up</span> how to play online. Sometimes he would <span class="vocabulary-word" data-meaning="đoán" data-ipa="/ɡes/">guess</span> what to do. He was <span class="vocabulary-word" data-meaning="phát cuồng vì" data-ipa="/ˈkreɪ.zi əˈbaʊt/">crazy about</span> the game's cool pictures. He played <span class="vocabulary-word" data-meaning="thời gian dài" data-ipa="/fɔːr ə lɒŋ taɪm/">for a long time</span>. His mom had to <span class="vocabulary-word" data-meaning="nhắc nhở" data-ipa="/rɪˈmaɪnd/">remind</span> him to stop. He didn't want to <span class="vocabulary-word" data-meaning="từ bỏ" data-ipa="/ɡɪv ʌp/">give up</span> until he could <span class="vocabulary-word" data-meaning="đánh bại" data-ipa="/biːt/">beat</span> the last level. He felt very <span class="vocabulary-word" data-meaning="thông minh" data-ipa="/smɑːrt/">smart</span> when he won.</p>
+                <p class="translation">Liam có một trò chơi điện tử mới. Anh ấy là người mới bắt đầu, nhưng anh ấy muốn trở nên giỏi. Trò chơi có nhiều kỹ năng mới để học. Anh ấy thường phải tra cứu cách chơi trực tuyến. Đôi khi anh ấy sẽ đoán phải làm gì. Anh ấy phát cuồng vì những hình ảnh đẹp của trò chơi. Anh ấy chơi trong một thời gian dài. Mẹ anh ấy phải nhắc nhở anh ấy dừng lại. Anh ấy không muốn từ bỏ cho đến khi anh ấy có thể đánh bại cấp độ cuối cùng. Anh ấy cảm thấy rất thông minh khi thắng.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 7: Mark's Gym Journey</h2>
+            <div class="story-box">
+                <h3>Getting Stronger</h3>
+                <p>Mark wanted to be healthy, so he joined a <span class="vocabulary-word" data-meaning="phòng tập thể hình" data-ipa="/dʒɪm/">gym</span>. He wanted to improve his <span class="vocabulary-word" data-meaning="thể chất" data-ipa="/ˈfɪz.ɪ.kəl/">physical</span> and <span class="vocabulary-word" data-meaning="tinh thần" data-ipa="/ˈmen.təl/">mental</span> strength. His <span class="vocabulary-word" data-meaning="huấn luyện viên" data-ipa="/kəʊtʃ/">coach</span> gave him clear <span class="vocabulary-word" data-meaning="chỉ dẫn" data-ipa="/ɪnˈstrʌk.ʃən/">instructions</span> for <span class="vocabulary-word" data-meaning="tập luyện" data-ipa="/treɪn/">training</span>. Mark was <span class="vocabulary-word" data-meaning="có tài năng" data-ipa="/ˈtæl.ən.tɪd/">talented</span> <span class="vocabulary-word" data-meaning="trong việc" data-ipa="/æt/">at</span> lifting weights. He always had to <span class="vocabulary-word" data-meaning="đảm bảo" data-ipa="/meɪk ʃʊər/">make sure</span> he didn't <span class="vocabulary-word" data-meaning="mạo hiểm" data-ipa="/rɪsk/">risk</span> getting hurt. He tried to <span class="vocabulary-word" data-meaning="tiến bộ" data-ipa="/meɪk ˈprəʊ.ɡres/">make progress</span> every time. He would <span class="vocabulary-word" data-meaning="ghi điểm" data-ipa="/skɔːr/">score</span> his workouts to see how well he did. Mark was <span class="vocabulary-word" data-meaning="quan tâm đến" data-ipa="/ˈɪn.trə.stɪd ɪn/">interested in</span> learning about healthy food. <span class="vocabulary-word" data-meaning="Tóm lại" data-ipa="/ɪn kənˈkluː.ʒən/">In conclusion</span>, his hard work helped him <span class="vocabulary-word" data-meaning="đạt được" data-ipa="/əˈtʃiːv/">achieve</span> his goals. He felt strong and happy.</p>
+                <p class="translation">Mark muốn khỏe mạnh, vì vậy anh ấy đã tham gia một phòng tập thể hình. Anh ấy muốn cải thiện sức mạnh thể chất và tinh thần của mình. Huấn luyện viên của anh ấy đã đưa ra những chỉ dẫn rõ ràng cho việc tập luyện. Mark có tài năng trong việc nâng tạ. Anh ấy luôn phải đảm bảo không mạo hiểm bị thương. Anh ấy cố gắng tiến bộ mỗi lần. Anh ấy sẽ ghi điểm các buổi tập của mình để xem mình đã làm tốt đến mức nào. Mark quan tâm đến việc tìm hiểu về thực phẩm lành mạnh. Tóm lại, sự chăm chỉ của anh ấy đã giúp anh ấy đạt được mục tiêu của mình. Anh ấy cảm thấy khỏe mạnh và hạnh phúc.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 8: The School Debate</h2>
+            <div class="story-box">
+                <h3>Speaking Up</h3>
+                <p>The debate <span class="vocabulary-word" data-meaning="câu lạc bộ" data-ipa="/klʌb/">club</span> had a <span class="vocabulary-word" data-meaning="cuộc thi đấu" data-ipa="/ˌkɒm.pəˈtɪʃ.ən/">competition</span>. Sarah, a <span class="vocabulary-word" data-meaning="thành viên" data-ipa="/ˈmem.bər/">member</span>, had to prepare her speech. She had to <span class="vocabulary-word" data-meaning="xem xét" data-ipa="/kənˈsɪd.ər/">consider</span> all sides of the topic. She was <span class="vocabulary-word" data-meaning="ủng hộ" data-ipa="/ɪn ˈfeɪ.vər əv/">in favour of</span> protecting the environment. Her <span class="vocabulary-word" data-meaning="đối thủ" data-ipa="/əˈpəʊ.nənt/">opponent</span> spoke well, but Sarah was ready. She did a lot of <span class="vocabulary-word" data-meaning="tìm kiếm" data-ipa="/sɜːtʃ/">search</span> for facts. She was <span class="vocabulary-word" data-meaning="có khả năng" data-ipa="/ˈkeɪ.pə.bəl əv/">capable of</span> speaking clearly. She knew that even if she didn't <span class="vocabulary-word" data-meaning="đánh bại" data-ipa="/biːt/">beat</span> her opponent, she would <span class="vocabulary-word" data-meaning="học được" data-ipa="/lɜːrn əˈbaʊt/">learn about</span> how to debate better. It was a good way to improve her speaking <span class="vocabulary-word" data-meaning="kỹ năng" data-ipa="/skɪl/">skills</span>. She felt proud after her speech.</p>
+                <p class="translation">Câu lạc bộ tranh luận có một cuộc thi. Sarah, một thành viên, phải chuẩn bị bài phát biểu của mình. Cô phải xem xét tất cả các mặt của chủ đề. Cô ủng hộ việc bảo vệ môi trường. Đối thủ của cô nói tốt, nhưng Sarah đã sẵn sàng. Cô đã tìm kiếm rất nhiều thông tin. Cô có khả năng nói rõ ràng. Cô biết rằng ngay cả khi cô không đánh bại đối thủ, cô vẫn sẽ học được cách tranh luận tốt hơn. Đó là một cách tốt để cải thiện kỹ năng nói của cô. Cô cảm thấy tự hào sau bài phát biểu của mình.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 9: Board Game Fun Night</h2>
+            <div class="story-box">
+                <h3>Playing Fairly</h3>
+                <p>Every Friday, our <span class="vocabulary-word" data-meaning="nhóm" data-ipa="/ɡruːp/">group</span> of friends plays a <span class="vocabulary-word" data-meaning="trò chơi cờ bàn" data-ipa="/bɔːrd ɡeɪm/">board game</span>. We play <span class="vocabulary-word" data-meaning="để cho vui" data-ipa="/fɔːr fʌn/">for fun</span>. Last night, we played a new game. My friend Tom tried to <span class="vocabulary-word" data-meaning="gian lận" data-ipa="/tʃiːt/">cheat</span> <span class="vocabulary-word" data-meaning="trong" data-ipa="/ɪn/">in</span> the game. We quickly <span class="vocabulary-word" data-meaning="chỉ ra" data-ipa="/pɔɪnt aʊt/">pointed out</span> his mistake. He had to <span class="vocabulary-word" data-meaning="gạch bỏ" data-ipa="/krɒs aʊt/">cross out</span> his wrong move. We had to <span class="vocabulary-word" data-meaning="nhắc nhở" data-ipa="/rɪˈmaɪnd/">remind</span> him about the rules. He then tried to <span class="vocabulary-word" data-meaning="đoán" data-ipa="/ɡes/">guess</span> our next moves. It was a close <span class="vocabulary-word" data-meaning="trận đấu" data-ipa="/ɡeɪm/">game</span>. I managed to <span class="vocabulary-word" data-meaning="ghi điểm" data-ipa="/skɔːr/">score</span> the last points. Tom accepted his <span class="vocabulary-word" data-meaning="sự thất bại" data-ipa="/dɪˈfiːt/">defeat</span> with a smile. We decided to <span class="vocabulary-word" data-meaning="ăn ở nhà hàng" data-ipa="/iːt aʊt/">eat out</span> after the game. It was always <span class="vocabulary-word" data-meaning="vui vẻ" data-ipa="/hæv fʌn/">fun</span> when we played together.</p>
+                <p class="translation">Mỗi thứ Sáu, nhóm bạn của chúng tôi chơi một trò chơi cờ bàn. Chúng tôi chơi để cho vui. Tối qua, chúng tôi chơi một trò chơi mới. Bạn tôi Tom đã cố gắng gian lận trong trò chơi. Chúng tôi nhanh chóng chỉ ra lỗi của anh ấy. Anh ấy phải gạch bỏ nước đi sai của mình. Chúng tôi phải nhắc nhở anh ấy về các quy tắc. Sau đó anh ấy cố gắng đoán các nước đi tiếp theo của chúng tôi. Đó là một trận đấu sát nút. Tôi đã ghi được những điểm cuối cùng. Tom chấp nhận thất bại của mình với một nụ cười. Chúng tôi quyết định ăn ở nhà hàng sau trận đấu. Luôn luôn vui vẻ khi chúng tôi chơi cùng nhau.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 10: The School Project</h2>
+            <div class="story-box">
+                <h3>Working on a Report</h3>
+                <p>For their school <span class="vocabulary-word" data-meaning="dự án" data-ipa="/ˈprɒdʒ.ekt/">project</span>, the students had to write a <span class="vocabulary-word" data-meaning="báo cáo" data-ipa="/rɪˈpɔːrt/">report</span>. It was a big task with many parts, like a <span class="vocabulary-word" data-meaning="phép chia" data-ipa="/dɪˈvɪʒ.ən/">division</span> of work. They had to <span class="vocabulary-word" data-meaning="đảm bảo" data-ipa="/meɪk ʃʊər/">make sure</span> all information was <span class="vocabulary-word" data-meaning="đúng" data-ipa="/kəˈrekt/">correct</span>. One student kept <span class="vocabulary-word" data-meaning="nhầm lẫn" data-ipa="/kənˈfjuːzɪŋ/">confusing</span> new facts <span class="vocabulary-word" data-meaning="với" data-ipa="/wɪð/">with</span> old ones. His friends helped him make a <span class="vocabulary-word" data-meaning="sửa chữa" data-ipa="/kəˈrek.ʃən/">correction</span>. They spent <span class="vocabulary-word" data-meaning="thời gian dài" data-ipa="/fɔːr ə lɒŋ taɪm/">for a long time</span> doing <span class="vocabulary-word" data-meaning="sự tìm kiếm" data-ipa="/sɜːtʃ/">search</span> in books. Their teacher gave them clear <span class="vocabulary-word" data-meaning="chỉ dẫn" data-ipa="/ɪnˈstrʌk.ʃən/">instructions</span>. They had some <span class="vocabulary-word" data-meaning="câu hỏi về" data-ipa="/ə ˈkwes.tʃən əˈbaʊt/">questions about</span> how to start. But they worked hard and <span class="vocabulary-word" data-meaning="thành công trong" data-ipa="/səkˈsiːd ɪn/">succeeded in</span> finishing the report. They got a good <span class="vocabulary-word" data-meaning="điểm số" data-ipa="/mɑːrk/">mark</span> for their effort.</p>
+                <p class="translation">Đối với dự án trường học của họ, các học sinh phải viết một báo cáo. Đó là một nhiệm vụ lớn với nhiều phần, giống như một sự phân chia công việc. Họ phải đảm bảo tất cả thông tin đều đúng. Một học sinh cứ nhầm lẫn các sự kiện mới với những thông tin cũ. Bạn bè của anh ấy đã giúp anh ấy sửa chữa. Họ đã dành thời gian dài để tìm kiếm trong sách. Giáo viên của họ đã đưa ra những chỉ dẫn rõ ràng. Họ có một số câu hỏi về cách bắt đầu. Nhưng họ đã làm việc chăm chỉ và thành công trong việc hoàn thành báo cáo. Họ đã đạt được điểm tốt cho nỗ lực của mình.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 11: Emily's Running Goal</h2>
+            <div class="story-box">
+                <h3>Running for Health</h3>
+                <p>Emily decided to <span class="vocabulary-word" data-meaning="bắt đầu một sở thích" data-ipa="/teɪk ʌp/">take up</span> running. She wanted to run a marathon. It was a big <span class="vocabulary-word" data-meaning="thử thách" data-ipa="/ˈtʃæl.ɪndʒ/">challenge</span> for her <span class="vocabulary-word" data-meaning="tinh thần" data-ipa="/ˈmen.təl/">mental</span> and <span class="vocabulary-word" data-meaning="thể chất" data-ipa="/ˈfɪz.ɪ.kəl/">physical</span> strength. Her <span class="vocabulary-word" data-meaning="huấn luyện viên" data-ipa="/kəʊtʃ/">coach</span> was an <span class="vocabulary-word" data-meaning="chuyên gia" data-ipa="/ˈek.spɜːrt/">expert</span> runner. Emily had to <span class="vocabulary-word" data-meaning="tập luyện" data-ipa="/treɪn/">train</span> every day. She was <span class="vocabulary-word" data-meaning="có khả năng" data-ipa="/ˈkeɪ.pə.bəl əv/">capable of</span> running longer each week. She learned to <span class="vocabulary-word" data-meaning="đối phó với" data-ipa="/kəʊp wɪð/">cope with</span> being tired. Her goal was to <span class="vocabulary-word" data-meaning="đạt được" data-ipa="/əˈtʃiːv/">achieve</span> her best time. She felt great <span class="vocabulary-word" data-meaning="niềm vui" data-ipa="/ˈpleʒ.ər/">pleasure</span> after each run. She often <span class="vocabulary-word" data-meaning="tự hỏi" data-ipa="/ˈwʌn.dər/">wondered</span> if she would ever be a <span class="vocabulary-word" data-meaning="nhà vô địch" data-ipa="/ˈtʃæm.pi.ən/">champion</span>. For now, she was happy to <span class="vocabulary-word" data-meaning="tiếp tục" data-ipa="/ˈkær.i ɒn/">carry on</span> improving her running.</p>
+                <p class="translation">Emily quyết định bắt đầu chạy bộ. Cô ấy muốn chạy marathon. Đó là một thử thách lớn đối với sức bền tinh thần và thể chất của cô. Huấn luyện viên của cô là một vận động viên chuyên gia. Emily phải tập luyện mỗi ngày. Cô có khả năng chạy dài hơn mỗi tuần. Cô học cách đối phó với sự mệt mỏi. Mục tiêu của cô là đạt được thời gian tốt nhất của mình. Cô cảm thấy niềm vui lớn sau mỗi lần chạy. Cô thường tự hỏi liệu mình có bao giờ trở thành nhà vô địch hay không. Hiện tại, cô hài lòng khi tiếp tục cải thiện việc chạy của mình.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 12: Studying in the Library</h2>
+            <div class="story-box">
+                <h3>A Quiet Place to Learn</h3>
+                <p>The library was always a place of <span class="vocabulary-word" data-meaning="sự im lặng" data-ipa="/ˈsaɪ.ləns/">silence</span>. Students sat <span class="vocabulary-word" data-meaning="một cách im lặng" data-ipa="/ˈsaɪ.lənt.li/">silently</span>, reading their books. Lisa liked to <span class="vocabulary-word" data-meaning="tập trung" data-ipa="/ˈkɒn.sən.treɪt/">concentrate</span> on her science <span class="vocabulary-word" data-meaning="môn học" data-ipa="/ˈsʌb.dʒɪkt/">subject</span> there. She often had to <span class="vocabulary-word" data-meaning="tra cứu" data-ipa="/lʊk ʌp/">look up</span> many <span class="vocabulary-word" data-meaning="tham khảo" data-ipa="/ˈref.ər.əns/">references</span> for her <span class="vocabulary-word" data-meaning="báo cáo" data-ipa="/rɪˈpɔːrt/">report</span>. She would <span class="vocabulary-word" data-meaning="viết xuống" data-ipa="/raɪt daʊn/">write down</span> important notes and then <span class="vocabulary-word" data-meaning="tẩy xóa" data-ipa="/rʌb aʊt/">rub out</span> any small errors. She always had to <span class="vocabulary-word" data-meaning="đảm bảo" data-ipa="/meɪk ʃʊər/">make sure</span> her work was good. Sometimes, she would <span class="vocabulary-word" data-meaning="lật" data-ipa="/tɜːrn ˈəʊ.vər/">turn over</span> a page to find more information. She found it easy to <span class="vocabulary-word" data-meaning="học về" data-ipa="/lɜːrn əˈbaʊt/">learn about</span> new things in this quiet place. She was never <span class="vocabulary-word" data-meaning="chán nản với" data-ipa="/bɔːrd wɪð/">bored with</span> her studies there.</p>
+                <p class="translation">Thư viện luôn là một nơi yên tĩnh. Học sinh ngồi im lặng, đọc sách. Lisa thích tập trung vào môn khoa học của mình ở đó. Cô thường phải tra cứu nhiều tài liệu tham khảo cho báo cáo của mình. Cô sẽ ghi chép những ghi chú quan trọng và sau đó tẩy xóa bất kỳ lỗi nhỏ nào. Cô luôn phải đảm bảo công việc của mình tốt. Đôi khi, cô sẽ lật một trang để tìm thêm thông tin. Cô thấy dễ dàng học về những điều mới ở nơi yên tĩnh này. Cô không bao giờ chán nản với việc học của mình ở đó.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 13: Sophia the Artist</h2>
+            <div class="story-box">
+                <h3>A World of Colors</h3>
+                <p>Sophia was very <span class="vocabulary-word" data-meaning="có tài năng" data-ipa="/ˈtæl.ən.tɪd/">talented</span> <span class="vocabulary-word" data-meaning="trong việc" data-ipa="/æt/">at</span> drawing and painting. Her <span class="vocabulary-word" data-meaning="não bộ" data-ipa="/breɪn/">brain</span> was full of new ideas. She decided to <span class="vocabulary-word" data-meaning="bắt đầu một sở thích" data-ipa="/teɪk ʌp/">take up</span> a special art <span class="vocabulary-word" data-meaning="khóa học" data-ipa="/kɔːrs/">course</span>. Her <span class="vocabulary-word" data-meaning="người hướng dẫn" data-ipa="/ɪnˈstrʌk.tər/">instructor</span>, who was an <span class="vocabulary-word" data-meaning="chuyên gia" data-ipa="/ˈek.spɜːrt/">expert</span> artist, gave her good <span class="vocabulary-word" data-meaning="chỉ dẫn" data-ipa="/ɪnˈstrʌk.ʃən/">instructions</span>. Sophia quickly <span class="vocabulary-word" data-meaning="tiến bộ" data-ipa="/meɪk ˈprəʊ.ɡres/">made progress</span>. She never <span class="vocabulary-word" data-meaning="do dự" data-ipa="/ˈhez.ɪ.teɪt/">hesitated</span> to try new colors. She would often <span class="vocabulary-word" data-meaning="tự hỏi" data-ipa="/ˈwʌn.dər/">wonder</span> how different colors would look together. Her art became very <span class="vocabulary-word" data-meaning="phổ biến với" data-ipa="/ˈpɒp.jə.lər wɪð/">popular with</span> her friends. She was also <span class="vocabulary-word" data-meaning="quan tâm đến" data-ipa="/ˈɪn.trə.stɪd ɪn/">interested in</span> learning about famous artists. It was a true <span class="vocabulary-word" data-meaning="niềm vui" data-ipa="/ˈpleʒ.ər/">pleasure</span> for her to create beautiful things.</p>
+                <p class="translation">Sophia rất có tài năng trong việc vẽ và tô màu. Bộ não của cô ấy tràn đầy những ý tưởng mới. Cô quyết định bắt đầu một khóa học nghệ thuật đặc biệt. Người hướng dẫn của cô, một nghệ sĩ chuyên gia, đã cho cô những chỉ dẫn tốt. Sophia nhanh chóng tiến bộ. Cô không bao giờ do dự thử những màu sắc mới. Cô thường tự hỏi các màu sắc khác nhau sẽ trông như thế nào khi kết hợp với nhau. Nghệ thuật của cô trở nên rất phổ biến với bạn bè. Cô cũng quan tâm đến việc tìm hiểu về các nghệ sĩ nổi tiếng. Đó là một niềm vui thực sự đối với cô khi tạo ra những thứ đẹp đẽ.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 14: David Learns Japanese</h2>
+            <div class="story-box">
+                <h3>A New Language Journey</h3>
+                <p>David decided to <span class="vocabulary-word" data-meaning="bắt đầu một sở thích" data-ipa="/teɪk ʌp/">take up</span> learning Japanese. It was a new <span class="vocabulary-word" data-meaning="kỹ năng" data-ipa="/skɪl/">skill</span> for him. He joined an online <span class="vocabulary-word" data-meaning="khóa học" data-ipa="/kɔːrs/">course</span>. The <span class="vocabulary-word" data-meaning="chỉ dẫn" data-ipa="/ɪnˈstrʌk.ʃən/">instructions</span> were very clear. He would <span class="vocabulary-word" data-meaning="tập trung" data-ipa="/ˈkɒn.sən.treɪt/">concentrate</span> on speaking and try to <span class="vocabulary-word" data-meaning="ghi nhớ" data-ipa="/ˈmem.ə.raɪz/">memorise</span> new words <span class="vocabulary-word" data-meaning="thuộc lòng" data-ipa="/baɪ hɑːrt/">by heart</span>. He always <span class="vocabulary-word" data-meaning="ôn tập" data-ipa="/rɪˈvaɪz/">revised</span> his lessons. Sometimes he would <span class="vocabulary-word" data-meaning="đoán" data-ipa="/ɡes/">guess</span> a word's meaning, but he always <span class="vocabulary-word" data-meaning="tra cứu" data-ipa="/lʊk ʌp/">looked up</span> the right one. He was <span class="vocabulary-word" data-meaning="rất thích" data-ipa="/kiːn ɒn/">keen on</span> talking to Japanese friends. He felt happy to <span class="vocabulary-word" data-meaning="tiến bộ" data-ipa="/meɪk ˈprəʊ.ɡres/">make progress</span>. He was very <span class="vocabulary-word" data-meaning="thông minh" data-ipa="/smɑːrt/">smart</span> to learn so fast. He hoped to <span class="vocabulary-word" data-meaning="đạt được" data-ipa="/əˈtʃiːv/">achieve</span> fluency one day.</p>
+                <p class="translation">David quyết định bắt đầu học tiếng Nhật. Đó là một kỹ năng mới đối với anh. Anh tham gia một khóa học trực tuyến. Các chỉ dẫn rất rõ ràng. Anh sẽ tập trung vào nói và cố gắng ghi nhớ từ mới thuộc lòng. Anh luôn ôn tập bài học của mình. Đôi khi anh sẽ đoán nghĩa của một từ, nhưng anh luôn tra cứu từ đúng. Anh rất thích nói chuyện với bạn bè người Nhật. Anh cảm thấy vui khi tiến bộ. Anh ấy rất thông minh khi học nhanh như vậy. Anh ấy hy vọng một ngày nào đó sẽ đạt được sự trôi chảy.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Story 15: John the Referee</h2>
+            <div class="story-box">
+                <h3>Making Fair Decisions</h3>
+                <p>John was a respected <span class="vocabulary-word" data-meaning="trọng tài" data-ipa="/ˌref.əˈriː/">referee</span> for the local football <span class="vocabulary-word" data-meaning="giải đấu" data-ipa="/ˈtʊər.nə.mənt/">tournament</span>. His job was to <span class="vocabulary-word" data-meaning="đảm bảo" data-ipa="/meɪk ʃʊər/">make sure</span> the <span class="vocabulary-word" data-meaning="trận đấu" data-ipa="/ɡeɪm/">game</span> was <span class="vocabulary-word" data-meaning="công bằng" data-ipa="/feər/">fair</span>. In one <span class="vocabulary-word" data-meaning="trận đấu" data-ipa="/ɡeɪm/">game</span>, a player broke a rule. John had to <span class="vocabulary-word" data-meaning="đuổi cầu thủ ra khỏi sân" data-ipa="/send ɒf/">send off</span> the player. It was a hard <span class="vocabulary-word" data-meaning="quyết định" data-ipa="/dɪˈsɪʒ.ən/">decision</span>, but he knew it was the <span class="vocabulary-word" data-meaning="đúng" data-ipa="/kəˈrekt/">correct</span> one. The player argued, but John didn't <span class="vocabulary-word" data-meaning="do dự" data-ipa="/ˈhez.ɪ.teɪt/">hesitate</span>. He had to <span class="vocabulary-word" data-meaning="đối phó với" data-ipa="/kəʊp wɪð/">cope with</span> the pressure from both <span class="vocabulary-word" data-meaning="đội" data-ipa="/tiːm/">teams</span>. After the game, he wrote a <span class="vocabulary-word" data-meaning="báo cáo" data-ipa="/rɪˈpɔːrt/">report</span> about what happened. He was <span class="vocabulary-word" data-meaning="một chuyên gia" data-ipa="/ən ˈek.spɜːrt/">an expert</span> at following the rules. His <span class="vocabulary-word" data-meaning="ý kiến về" data-ipa="/ən əˈpɪn.jən əˈbaʊt/">opinion about</span> fair play was very important.</p>
+                <p class="translation">John là một trọng tài được kính trọng cho giải đấu bóng đá địa phương. Công việc của anh ấy là đảm bảo trận đấu công bằng. Trong một trận đấu, một cầu thủ đã vi phạm luật. John phải đuổi cầu thủ đó ra khỏi sân. Đó là một quyết định khó khăn, nhưng anh ấy biết đó là quyết định đúng. Cầu thủ đó tranh cãi, nhưng John không do dự. Anh ấy phải đối phó với áp lực từ cả hai đội. Sau trận đấu, anh ấy viết một báo cáo về những gì đã xảy ra. Anh ấy là một chuyên gia trong việc tuân thủ các quy tắc. Ý kiến của anh ấy về lối chơi công bằng rất quan trọng.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Data for vocabulary words with IPA and meaning
+        const vocabularyData = {
+            // Learning and Doing Vocabulary
+            "achieve": { "meaning": "đạt được", "ipa": "/əˈtʃiːv/" },
+            "brain": { "meaning": "não bộ", "ipa": "/breɪn/" },
+            "clever": { "meaning": "thông minh", "ipa": "/ˈklev.ər/" },
+            "concentrate": { "meaning": "tập trung", "ipa": "/ˈkɒn.sən.treɪt/" },
+            "consider": { "meaning": "xem xét, cân nhắc", "ipa": "/kənˈsɪd.ər/" },
+            "course": { "meaning": "khóa học", "ipa": "/kɔːrs/" },
+            "degree": { "meaning": "bằng cấp", "ipa": "/dɪˈɡriː/" },
+            "experience": { "meaning": "trải nghiệm (v), kinh nghiệm (n)", "ipa": "/ɪkˈspɪə.ri.əns/" },
+            "expert": { "meaning": "chuyên gia (n), thành thạo (adj)", "ipa": "/ˈek.spɜːrt/" },
+            "fail": { "meaning": "thất bại", "ipa": "/feɪl/" },
+            "guess": { "meaning": "đoán (v), phỏng đoán (n)", "ipa": "/ɡes/" },
+            "hesitate": { "meaning": "do dự, ngập ngừng", "ipa": "/ˈhez.ɪ.teɪt/" },
+            "instruction": { "meaning": "chỉ dẫn, hướng dẫn", "ipa": "/ɪnˈstrʌk.ʃən/" },
+            "make progress": { "meaning": "tiến bộ", "ipa": "/meɪk ˈprəʊ.ɡres/" },
+            "make sure": { "meaning": "đảm bảo", "ipa": "/meɪk ʃʊər/" },
+            "mark": { "meaning": "đánh dấu (v), điểm số (n)", "ipa": "/mɑːrk/" },
+            "mental": { "meaning": "thuộc về tinh thần/tâm thần", "ipa": "/ˈmen.təl/" },
+            "pass": { "meaning": "đậu, vượt qua (kỳ thi)", "ipa": "/pɑːs/" },
+            "qualification": { "meaning": "bằng cấp, phẩm chất", "ipa": "/ˌkwɒl.ɪ.fɪˈkeɪ.ʃən/" },
+            "remind": { "meaning": "nhắc nhở", "ipa": "/rɪˈmaɪnd/" },
+            "report": { "meaning": "báo cáo", "ipa": "/rɪˈpɔːrt/" },
+            "revise": { "meaning": "ôn tập", "ipa": "/rɪˈvaɪz/" },
+            "search": { "meaning": "tìm kiếm (v), sự tìm kiếm (n)", "ipa": "/sɜːtʃ/" },
+            "skill": { "meaning": "kỹ năng", "ipa": "/skɪl/" },
+            "smart": { "meaning": "thông minh, lanh lợi", "ipa": "/smɑːrt/" },
+            "subject": { "meaning": "môn học, chủ đề", "ipa": "/ˈsʌb.dʒɪkt/" },
+            "take an exam": { "meaning": "tham gia kỳ thi", "ipa": "/teɪk ən ɪɡˈzæm/" },
+            "talented": { "meaning": "có tài năng", "ipa": "/ˈtæl.ən.tɪd/" },
+            "term": { "meaning": "học kỳ, thuật ngữ", "ipa": "/tɜːm/" },
+            "wonder": { "meaning": "tự hỏi, ngạc nhiên", "ipa": "/ˈwʌn.dər/" },
+
+            // Phrasal Verbs (Learning and Doing)
+            "cross out": { "meaning": "gạch bỏ", "ipa": "/krɒs aʊt/" },
+            "look up": { "meaning": "tra cứu", "ipa": "/lʊk ʌp/" },
+            "point out": { "meaning": "chỉ ra, lưu ý", "ipa": "/pɔɪnt aʊt/" },
+            "read out": { "meaning": "đọc to", "ipa": "/riːd aʊt/" },
+            "rip up": { "meaning": "xé nát", "ipa": "/rɪp ʌp/" },
+            "rub out": { "meaning": "tẩy, xóa", "ipa": "/rʌb aʊt/" },
+            "turn over": { "meaning": "lật (cái gì) sang mặt kia", "ipa": "/tɜːrn ˈəʊ.vər/" },
+            "write down": { "meaning": "viết xuống, ghi chép", "ipa": "/raɪt daʊn/" },
+
+            // Prepositional Phrases (Learning and Doing)
+            "by heart": { "meaning": "thuộc lòng", "ipa": "/baɪ hɑːrt/" },
+            "for instance": { "meaning": "ví dụ", "ipa": "/fɔːr ˈɪn.stəns/" },
+            "in conclusion": { "meaning": "tóm lại, kết luận", "ipa": "/ɪn kənˈkluː.ʒən/" },
+            "in fact": { "meaning": "thực tế là", "ipa": "/ɪn fækt/" },
+            "in favour of": { "meaning": "ủng hộ (cái gì/ai)", "ipa": "/ɪn ˈfeɪ.vər əv/" },
+            "in general": { "meaning": "nói chung", "ipa": "/ɪn ˈdʒen.ər.əl/" },
+
+            // Word Formation (derived forms used directly in stories)
+            "beginner": { "meaning": "người mới bắt đầu", "ipa": "/bɪˈɡɪn.ər/" },
+            "bravery": { "meaning": "sự dũng cảm", "ipa": "/ˈbreɪ.vər.i/" },
+            "correction": { "meaning": "sự sửa chữa", "ipa": "/kəˈrek.ʃən/" },
+            "incorrect": { "meaning": "không đúng", "ipa": "/ˌɪn.kəˈrekt/" },
+            "division": { "meaning": "sự chia, phép chia", "ipa": "/dɪˈvɪʒ.ən/" },
+            "education": { "meaning": "nền giáo dục", "ipa": "/ˌed.jʊˈkeɪ.ʃən/" },
+            "instructor": { "meaning": "người hướng dẫn", "ipa": "/ɪnˈstrʌk.tər/" },
+            "memorise": { "meaning": "ghi nhớ", "ipa": "/ˈmem.ə.raɪz/" },
+            "memorial": { "meaning": "đài tưởng niệm, kỷ niệm", "ipa": "/məˈmɔː.ri.əl/" },
+            "reference": { "meaning": "sự tham khảo", "ipa": "/ˈref.ər.əns/" },
+            "silence": { "meaning": "sự im lặng", "ipa": "/ˈsaɪ.ləns/" },
+            "silently": { "meaning": "một cách im lặng", "ipa": "/ˈsaɪ.lənt.li/" },
+            "simplify": { "meaning": "đơn giản hóa", "ipa": "/ˈsɪm.plɪ.faɪ/" },
+            "simplicity": { "meaning": "sự đơn giản", "ipa": "/sɪmˈplɪs.ə.ti/" },
+
+            // Word Patterns (Learning and Doing)
+            "capable of": { "meaning": "có khả năng làm gì", "ipa": "/ˈkeɪ.pə.bəl əv/" },
+            "talented at": { "meaning": "có tài năng trong việc gì", "ipa": "/ˈtæl.ən.tɪd æt/" },
+            "cheat at": { "meaning": "gian lận trong", "ipa": "/tʃiːt æt/" },
+            "cheat in": { "meaning": "gian lận trong", "ipa": "/tʃiːt ɪn/" },
+            "confusing": { "meaning": "nhầm lẫn", "ipa": "/kənˈfjuːzɪŋ/" }, // For "confusing sth with"
+            "with": { "meaning": "với", "ipa": "/wɪð/" }, // For "confusing sth with"
+            "continue with": { "meaning": "tiếp tục với điều gì đó", "ipa": "/kənˈtɪn.juː wɪð/" },
+            "cope with": { "meaning": "đối phó, xoay sở với điều gì đó", "ipa": "/kəʊp wɪð/" },
+            "help with": { "meaning": "giúp (ai đó) với việc gì", "ipa": "/help wɪð/" },
+            "know about": { "meaning": "biết về điều gì đó/ai đó", "ipa": "/nəʊ əˈbaʊt/" },
+            "learn about": { "meaning": "học về điều gì đó/ai đó", "ipa": "/lɜːrn əˈbaʊt/" },
+            "succeed in": { "meaning": "thành công trong việc gì", "ipa": "/səkˈsiːd ɪn/" },
+            "an opinion about": { "meaning": "ý kiến về điều gì đó/ai đó", "ipa": "/ən əˈpɪn.jən əˈbaʊt/" },
+            "an opinion of": { "meaning": "ý kiến về điều gì đó/ai đó", "ipa": "/ən əˈpɪn.jən ɒv/" },
+            "a question about": { "meaning": "một câu hỏi về điều gì đó/ai đó", "ipa": "/ə ˈkwes.tʃən əˈbaʊt/" },
+
+            // Fun and Games Vocabulary
+            "beat": { "meaning": "đánh bại, thắng", "ipa": "/biːt/" },
+            "board game": { "meaning": "trò chơi cờ bàn", "ipa": "/bɔːrd ɡeɪm/" },
+            "captain": { "meaning": "đội trưởng", "ipa": "/ˈkæp.tɪn/" },
+            "challenge": { "meaning": "thử thách", "ipa": "/ˈtʃæl.ɪndʒ/" },
+            "champion": { "meaning": "nhà vô địch", "ipa": "/ˈtʃæm.pi.ən/" },
+            "cheat": { "meaning": "gian lận", "ipa": "/tʃiːt/" },
+            "classical music": { "meaning": "nhạc cổ điển", "ipa": "/ˈklæs.ɪ.kəl ˈmjuː.zɪk/" },
+            "club": { "meaning": "câu lạc bộ", "ipa": "/klʌb/" },
+            "coach": { "meaning": "huấn luyện viên", "ipa": "/kəʊtʃ/" },
+            "competition": { "meaning": "cuộc thi đấu", "ipa": "/ˌkɒm.pəˈtɪʃ.ən/" },
+            "concert": { "meaning": "buổi hòa nhạc", "ipa": "/ˈkɒn.sɜːrt/" },
+            "defeat": { "meaning": "đánh bại, sự thất bại", "ipa": "/dɪˈfiːt/" },
+            "entertaining": { "meaning": "thú vị, mang tính giải trí", "ipa": "/ˌen.təˈteɪ.nɪŋ/" },
+            "folk music": { "meaning": "nhạc dân gian", "ipa": "/fəʊk ˈmjuː.zɪk/" },
+            "group": { "meaning": "nhóm, ban nhạc", "ipa": "/ɡruːp/" },
+            "gym": { "meaning": "phòng tập thể hình", "ipa": "/dʒɪm/" },
+            "have fun": { "meaning": "vui vẻ", "ipa": "/hæv fʌn/" },
+            "interest": { "meaning": "làm cho hứng thú, sự quan tâm", "ipa": "/ˈɪn.trəst/" },
+            "member": { "meaning": "thành viên", "ipa": "/ˈmem.bər/" },
+            "opponent": { "meaning": "đối thủ", "ipa": "/əˈpəʊ.nənt/" },
+            "organizing": { "meaning": "tổ chức", "ipa": "/ˈɔː.ɡən.aɪzɪŋ/" }, // gerund form
+            "pleasure": { "meaning": "niềm vui, sự thích thú", "ipa": "/ˈpleʒ.ər/" },
+            "referee": { "meaning": "trọng tài", "ipa": "/ˌref.əˈriː/" },
+            "rhythm": { "meaning": "nhịp điệu", "ipa": "/ˈrɪð.əm/" },
+            "risk": { "meaning": "mạo hiểm, rủi ro", "ipa": "/rɪsk/" },
+            "score": { "meaning": "ghi điểm, tỉ số", "ipa": "/skɔːr/" },
+            "support": { "meaning": "ủng hộ, sự ủng hộ", "ipa": "/səˈpɔːrt/" },
+            "team": { "meaning": "đội", "ipa": "/tiːm/" },
+            "train": { "meaning": "huấn luyện, tập luyện", "ipa": "/treɪn/" },
+            "video game": { "meaning": "trò chơi điện tử", "ipa": "/ˈvɪd.i.əʊ ɡeɪm/" },
+
+            // Phrasal Verbs (Fun and Games)
+            "carry on": { "meaning": "tiếp tục", "ipa": "/ˈkær.i ɒn/" },
+            "eat out": { "meaning": "ăn ở nhà hàng", "ipa": "/iːt aʊt/" },
+            "give up": { "meaning": "từ bỏ thói quen", "ipa": "/ɡɪv ʌp/" },
+            "join in": { "meaning": "tham gia vào", "ipa": "/dʒɔɪn ɪn/" },
+            "send off": { "meaning": "đuổi cầu thủ ra khỏi sân", "ipa": "/send ɒf/" },
+            "take up": { "meaning": "bắt đầu một sở thích, môn thể thao", "ipa": "/teɪk ʌp/" },
+            "turn down": { "meaning": "giảm âm lượng", "ipa": "/tɜːrn daʊn/" },
+            "turn up": { "meaning": "tăng âm lượng", "ipa": "/tɜːrn ʌp/" },
+
+            // Prepositional Phrases (Fun and Games)
+            "for a long time": { "meaning": "trong một thời gian dài", "ipa": "/fɔːr ə lɒŋ taɪm/" },
+            "for fun": { "meaning": "để cho vui", "ipa": "/fɔːr fʌn/" },
+            "in the middle of": { "meaning": "ở giữa (của)", "ipa": "/ɪn ðə ˈmɪd.əl əv/" },
+            "in time for": { "meaning": "kịp lúc (cho)", "ipa": "/ɪn taɪm fɔːr/" },
+            "on CD/DVD/video": { "meaning": "trên CD/DVD/video", "ipa": "/ɒn siː diː/diː viː diː/ˈvɪd.i.əʊ/" },
+            "on stage": { "meaning": "trên sân khấu", "ipa": "/ɒn steɪdʒ/" },
+            "on video": { "meaning": "trên video", "ipa": "/ɒn ˈvɪd.i.əʊ/" }, // specific variant
+
+            // Word Patterns (Fun and Games)
+            "bored with": { "meaning": "chán nản với", "ipa": "/bɔːrd wɪð/" },
+            "crazy about": { "meaning": "phát cuồng vì", "ipa": "/ˈkreɪ.zi əˈbaʊt/" },
+            "good at": { "meaning": "giỏi về", "ipa": "/ɡʊd æt/" },
+            "feel like": { "meaning": "cảm thấy muốn", "ipa": "/fiːl laɪk/" },
+            "interested in": { "meaning": "quan tâm đến", "ipa": "/ˈɪn.trə.stɪd ɪn/" },
+            "keen on": { "meaning": "thích thú", "ipa": "/kiːn ɒn/" },
+            "popular with": { "meaning": "phổ biến với", "ipa": "/ˈpɒp.jə.lər wɪð/" },
+            "listen to": { "meaning": "lắng nghe", "ipa": "/ˈlɪs.ən tə/" },
+            "take part in": { "meaning": "tham gia vào", "ipa": "/teɪk pɑːrt ɪn/" },
+            "a book by": { "meaning": "một cuốn sách của (ai đó) về", "ipa": "/ə bʊk baɪ/" },
+            "a fan of": { "meaning": "một người hâm mộ của", "ipa": "/ə fæn əv/" },
+            "a game against": { "meaning": "một trận đấu với", "ipa": "/ə ɡeɪm əˈɡeɪnst/" },
+
+            // Additional context-specific words/phrases
+            "get good at": { "meaning": "trở nên giỏi", "ipa": "/ɡet ɡʊd æt/" },
+            "physical": { "meaning": "thể chất", "ipa": "/ˈfɪz.ɪ.kəl/" },
+            "victory": { "meaning": "chiến thắng", "ipa": "/ˈvɪk.tər.i/" },
+            "tournament": { "meaning": "giải đấu", "ipa": "/ˈtʊər.nə.mənt/" },
+            "game": { "meaning": "trận đấu", "ipa": "/ɡeɪm/" },
+            "decision": { "meaning": "quyết định", "ipa": "/dɪˈsɪʒ.ən/" },
+            "correct": { "meaning": "đúng", "ipa": "/kəˈrekt/" },
+            "fair": { "meaning": "công bằng", "ipa": "/feər/" },
+            "project": { "meaning": "dự án", "ipa": "/ˈprɒdʒ.ekt/" },
+            "clever girl": { "meaning": "cô gái thông minh", "ipa": "/ˈklev.ər ɡɜːrl/" },
+            "bad behavior": { "meaning": "hành vi không đúng", "ipa": "/bæd bɪˈheɪv.jər/" },
+            "correct decision": { "meaning": "quyết định đúng", "ipa": "/kəˈrekt dɪˈsɪʒ.ən/" },
+            "your team": { "meaning": "đội của bạn", "ipa": "/jɔːr tiːm/" },
+            "am interested in": { "meaning": "quan tâm đến", "ipa": "/ˈɪn.trə.stɪd ɪn/" },
+            "hopes": { "meaning": "hy vọng", "ipa": "/həʊp/" },
+            "celebrate": { "meaning": "ăn mừng", "ipa": "/ˈsel.ɪ.breɪt/" },
+            "an expert": { "meaning": "một chuyên gia", "ipa": "/ən ˈek.spɜːrt/" }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const vocabularyWords = document.querySelectorAll('.vocabulary-word');
+            vocabularyWords.forEach(wordElement => {
+                // Use data attributes if they exist, otherwise try to find in vocabularyData
+                let meaning = wordElement.dataset.meaning;
+                let ipa = wordElement.dataset.ipa;
+
+                if (!meaning || !ipa) {
+                    const textContent = wordElement.textContent.trim();
+                    const lowerCaseTextContent = textContent.toLowerCase();
+                    let foundData = null;
+
+                    // Try to find an exact match first
+                    if (vocabularyData[lowerCaseTextContent]) {
+                        foundData = vocabularyData[lowerCaseTextContent];
+                    } else {
+                        // If no exact match, try to find the best partial match
+                        let bestMatchKey = null;
+                        for (const key in vocabularyData) {
+                            const lowerCaseKey = key.toLowerCase();
+                            if (lowerCaseKey === lowerCaseTextContent) {
+                                bestMatchKey = key; // Exact match, prioritize
+                                break;
+                            } else if (lowerCaseKey.includes(lowerCaseTextContent) && lowerCaseTextContent.length > 2) {
+                                // For partial matches, prioritize longer keys (more specific phrases)
+                                if (!bestMatchKey || key.length > bestMatchKey.length) {
+                                    bestMatchKey = key;
+                                }
+                            }
+                        }
+                        if (bestMatchKey) {
+                            foundData = vocabularyData[bestMatchKey];
+                        }
+                    }
+
+                    if (foundData) {
+                        meaning = foundData.meaning;
+                        ipa = foundData.ipa;
+                    }
+                }
+
+                // Only create tooltip if meaning and IPA are available
+                if (meaning && ipa) {
+                    const tooltip = document.createElement('span');
+                    tooltip.classList.add('tooltip');
+                    tooltip.innerHTML = `<strong>${meaning}</strong><br>${ipa}`;
+                    wordElement.appendChild(tooltip);
+
+                    wordElement.addEventListener('click', function(event) {
+                        event.stopPropagation(); // Prevent click from bubbling up
+                        // Close other active tooltips
+                        document.querySelectorAll('.vocabulary-word.active').forEach(activeWord => {
+                            if (activeWord !== wordElement) {
+                                activeWord.classList.remove('active');
+                            }
+                        });
+                        // Toggle the current word's tooltip
+                        wordElement.classList.toggle('active');
+                    });
+                } else {
+                    console.warn(`No vocabulary data found for: "${wordElement.textContent.trim()}"`);
+                    // If no data, remove interactive styling
+                    wordElement.style.fontWeight = 'normal';
+                    wordElement.style.color = 'inherit';
+                    wordElement.style.textDecoration = 'none';
+                    wordElement.style.cursor = 'default';
+                }
+            });
+
+            // Close tooltips when clicking anywhere else on the document
+            document.addEventListener('click', function(event) {
+                document.querySelectorAll('.vocabulary-word.active').forEach(activeWord => {
+                    if (!activeWord.contains(event.target)) {
+                        activeWord.classList.remove('active');
+                    }
+                });
+            });
+
+            // Theme Toggle
+            const themeToggleBtn = document.getElementById('themeToggle');
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    themeToggleBtn.textContent = 'Chế độ sáng';
+                } else {
+                    themeToggleBtn.textContent = 'Chế độ tối';
+                }
+            });
+
+            // Set initial theme based on user's preference or saved setting
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark-mode');
+                themeToggleBtn.textContent = 'Chế độ sáng';
+            }
+        });
+    </script>
+</body>
+</html>
