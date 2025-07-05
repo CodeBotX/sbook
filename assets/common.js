@@ -1,13 +1,73 @@
 /**
- * Displays the score on the page.
- * @param {number} score - The number of correct answers.
+ * Normalizes a string by converting to lowercase, trimming whitespace,
+ * and replacing multiple spaces with a single space.
+ * @param {string} inputString - The string to normalize.
+ * @returns {string} The normalized string.
+ */
+function normalizeAnswer(inputString) {
+    if (typeof inputString !== 'string') {
+        return '';
+    }
+    return inputString.toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+// Hàm displayFeedback đã được loại bỏ khỏi đây
+
+/**
+ * Creates and appends a detailed solution item to the solution list.
+ * This function is designed to be reusable across different exercise types,
+ * assuming a similar structure for displaying solutions.
+ * @param {number} questionNumber - The sequential number of the question.
+ * @param {object} questionData - The data object for the specific question, containing originalText, fixedTextTemplate, correctAnswers, explanation, and grammarNote.
+ * @param {string} userAnswer - The user's submitted answer for this question.
+ */
+function addSolutionItem(questionNumber, questionData, userAnswer) {
+    const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+    if (!solutionListDiv) {
+        console.error("Solution list div not found.");
+        return;
+    }
+
+    const solutionItem = document.createElement('div');
+    solutionItem.classList.add('solution-item');
+
+    // Original question text with bold for the wrong part
+    const originalQuestionDiv = document.createElement('div');
+    originalQuestionDiv.classList.add('original-question');
+    originalQuestionDiv.innerHTML = `<strong>${questionNumber}. Câu gốc:</strong> ${questionData.originalText}`;
+    solutionItem.appendChild(originalQuestionDiv);
+
+    // Correct sentence with highlighted answer
+    const correctSentenceDiv = document.createElement('div');
+    correctSentenceDiv.classList.add('correct-sentence');
+    // We use correctAnswers[0] as the primary display answer for the template
+    correctSentenceDiv.innerHTML = `<strong>Câu đúng:</strong> ${questionData.fixedTextTemplate.replace('{answer}', questionData.correctAnswers[0])}`;
+    solutionItem.appendChild(correctSentenceDiv);
+
+    // Explanation and grammar note
+    const explanationDiv = document.createElement('div');
+    explanationDiv.classList.add('explanation');
+    explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${questionData.explanation}<br><em>${questionData.grammarNote}</em>`;
+    solutionItem.appendChild(explanationDiv);
+
+    solutionListDiv.appendChild(solutionItem);
+}
+
+/**
+ * Displays the score and applies appropriate styling based on performance.
+ * @param {number} score - The user's score.
  * @param {number} totalQuestions - The total number of questions.
  */
 function displayScore(score, totalQuestions) {
     const scoreDisplay = document.getElementById('scoreDisplay');
-    scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+    if (!scoreDisplay) {
+        console.error("Score display element not found.");
+        return;
+    }
 
+    scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
     scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+
     if (score === totalQuestions) {
         scoreDisplay.classList.add('text-success');
     } else if (score >= totalQuestions / 2) {
@@ -15,145 +75,85 @@ function displayScore(score, totalQuestions) {
     } else {
         scoreDisplay.classList.add('text-danger');
     }
-    scoreDisplay.style.display = 'block'; // Show the score display
-    scoreDisplay.scrollIntoIntoView({ behavior: 'smooth', block: 'center' });
+    scoreDisplay.style.display = 'block'; // Ensure score is visible
+    scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 /**
- * Main function to render detailed solutions based on the exercise type.
- * @param {object} questionsData - The specific questions data for the current exercise.
- * @param {string} exerciseType - A string identifying the type of exercise (e.g., 'fillInBlanks', 'multipleChoice', 'clickableWords', 'rewriteSentence').
+ * Automatically adjusts input width based on content length.
+ * This prevents text from being hidden when users type long answers.
+ * @param {HTMLInputElement} input - The input element to adjust.
  */
-function renderDetailedSolution(questionsData, exerciseType) {
-    const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
-    solutionListDiv.innerHTML = ''; // Clear previous solutions
-    document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+function adjustInputWidth(input) {
+    // Create a temporary span to measure text width
+    const tempSpan = document.createElement('span');
+    tempSpan.style.visibility = 'hidden';
+    tempSpan.style.position = 'absolute';
+    tempSpan.style.whiteSpace = 'pre';
+    tempSpan.style.fontSize = window.getComputedStyle(input).fontSize;
+    tempSpan.style.fontFamily = window.getComputedStyle(input).fontFamily;
+    tempSpan.style.fontWeight = window.getComputedStyle(input).fontWeight;
+    tempSpan.style.letterSpacing = window.getComputedStyle(input).letterSpacing;
+    
+    // Add some padding to account for input padding
+    const padding = 4; // 2px on each side
+    tempSpan.textContent = input.value || input.placeholder || '';
+    
+    document.body.appendChild(tempSpan);
+    const textWidth = tempSpan.offsetWidth + padding;
+    document.body.removeChild(tempSpan);
+    
+    // Calculate new width with constraints
+    const minWidth = parseInt(window.getComputedStyle(input).minWidth) || 40;
+    const maxWidth = parseInt(window.getComputedStyle(input).maxWidth) || 80;
+    const newWidth = Math.max(minWidth, Math.min(maxWidth, textWidth));
+    
+    input.style.width = newWidth + 'px';
+}
 
-    Object.keys(questionsData).forEach(qId => {
-        // Bỏ qua các ID kết thúc bằng '_b' ở đây nếu chúng được xử lý cùng với câu hỏi chính.
-        // Điều này cần được kiểm soát cẩn thận tùy thuộc vào cách bạn cấu trúc questionsData.
-        // Với các dạng bài như Điền từ hoặc Viết lại câu có nhiều chỗ trống,
-        // qID_b sẽ được xử lý khi qID chính được render.
-        if (qId.endsWith('_b') && (exerciseType === 'fillInBlanks' || exerciseType === 'rewriteSentence')) {
-             return;
-        }
-
-        const questionInfo = questionsData[qId];
-        const solutionItem = document.createElement('div');
-        solutionItem.classList.add('solution-item');
-
-        const questionNumber = qId.substring(1); // Lấy số thứ tự câu hỏi
-        const questionTextSolutionDiv = document.createElement('div');
-        questionTextSolutionDiv.classList.add('question-text-solution');
-
-        let fullTextHtml = '';
-        let explanationHtml = '';
-        let translationHtml = '';
-
-        switch (exerciseType) {
-            case 'fillInBlanks':
-            case 'rewriteSentence': // Viết lại câu cũng dùng logic render tương tự điền từ
-                if (questionInfo.correct_answer_parts) { // Multiple blanks
-                    fullTextHtml = `${questionNumber}. ${questionInfo.text_parts[0]} <span class="correct-answer-text">${questionInfo.correct_answer_parts[0]}</span> ${questionInfo.text_parts[1]} <span class="correct-answer-text">${questionInfo.correct_answer_parts[1]}</span> ${questionInfo.text_parts[2] || ''}`;
-                } else { // Single blank
-                    fullTextHtml = `${questionNumber}. ${questionInfo.text_parts[0]} <span class="correct-answer-text">${questionInfo.correct_answer}</span> ${questionInfo.text_parts[1] || ''}`;
-                }
-                
-                // Hiển thị câu gốc cho dạng viết lại câu nếu có
-                if (questionInfo.prompt && exerciseType === 'rewriteSentence') {
-                    fullTextHtml = `<strong>Câu gốc:</strong> ${questionInfo.prompt}<br>` + `<strong>Viết lại:</strong> ` + fullTextHtml;
-                }
-
-                explanationHtml = `<strong>Giải thích:</strong> ${questionInfo.explanation || 'Không có giải thích.'}`;
-                if (questionInfo.grammar_note) { // Thêm ghi chú ngữ pháp nếu có
-                    explanationHtml += `<br><strong>Ghi chú ngữ pháp:</strong> ${questionInfo.grammar_note}`;
-                }
-                translationHtml = `<strong>Dịch:</strong> ${questionInfo.translation || 'Không có bản dịch.'}`;
-                break;
-
-            case 'multipleChoice':
-                fullTextHtml = `${questionNumber}. ${questionInfo.question}`;
-                
-                const optionsDiv = document.createElement('div');
-                optionsDiv.classList.add('options-solution');
-                questionInfo.options.forEach(option => {
-                    const optionP = document.createElement('p');
-                    optionP.classList.add('option-text-solution');
-                    if (option.isCorrect) {
-                        optionP.innerHTML = `<span class="correct-answer-text">${option.text}</span>`;
-                    } else {
-                        optionP.textContent = option.text;
-                    }
-                    optionP.innerHTML += ` <span class="grammar-explanation">(${option.rationale})</span>`;
-                    optionsDiv.appendChild(optionP);
-                });
-                solutionItem.appendChild(optionsDiv);
-                
-                explanationHtml = `<strong>Giải thích:</strong> ${questionInfo.explanation || 'Không có giải thích.'}`;
-                translationHtml = `<strong>Dịch:</strong> ${questionInfo.translation || 'Không có bản dịch.'}`;
-                break;
-
-            case 'clickableWords':
-                fullTextHtml = `${questionNumber}. ${questionInfo.text_parts[0]} <span class="correct-answer-text">${questionInfo.correct_answer}</span> ${questionInfo.text_parts[1] || ''}`;
-                explanationHtml = `<strong>Giải thích:</strong> ${questionInfo.explanation || 'Không có giải thích.'}`;
-                translationHtml = `<strong>Dịch:</strong> ${questionInfo.translation || 'Không có bản dịch.'}`;
-                break;
-
-            default:
-                console.warn(`Unknown exercise type: ${exerciseType}. Cannot render detailed solution.`);
-                return;
-        }
-
-        questionTextSolutionDiv.innerHTML = fullTextHtml;
-        solutionItem.appendChild(questionTextSolutionDiv);
-
-        if (explanationHtml) {
-            const grammarExplanationDiv = document.createElement('div');
-            grammarExplanationDiv.classList.add('grammar-explanation');
-            grammarExplanationDiv.innerHTML = explanationHtml;
-            solutionItem.appendChild(grammarExplanationDiv);
-        }
-
-        if (translationHtml) {
-            const translationDiv = document.createElement('div');
-            translationDiv.classList.add('translation');
-            translationDiv.innerHTML = translationHtml;
-            solutionItem.appendChild(translationDiv);
-        }
-
-        solutionListDiv.appendChild(solutionItem);
+/**
+ * Initializes auto-resize functionality for all answer inputs.
+ * This should be called when the page loads or when new inputs are added.
+ */
+function initializeAutoResizeInputs() {
+    const inputs = document.querySelectorAll('.answer-input');
+    inputs.forEach(input => {
+        // Set initial width
+        adjustInputWidth(input);
+        
+        // Add event listeners for input changes
+        input.addEventListener('input', () => adjustInputWidth(input));
+        input.addEventListener('focus', () => adjustInputWidth(input));
+        input.addEventListener('blur', () => adjustInputWidth(input));
     });
 }
 
 /**
- * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
- * This function is generic and should work for various input types.
- * It attempts to reset all forms and remove common feedback classes.
+ * Resets the state of the exercise by clearing inputs, hiding feedback, score, and solutions.
+ * This function is generic and can be used for any exercise type.
  */
 function resetExercise() {
-    // Reset tất cả các form trên trang
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.reset(); // Reset tất cả các trường trong form đó
-    });
-
-    // Xóa các class feedback và selected từ tất cả các phần tử có thể có
-    const allElementsWithFeedback = document.querySelectorAll(
-        'input, select, textarea, .clickable-word, label, .form-check-input' // Thêm .form-check-input cho radio/checkbox
-    );
-    allElementsWithFeedback.forEach(el => {
-        el.classList.remove('is-correct', 'is-incorrect', 'selected', 'correct-selection', 'incorrect-selection', 'text-success', 'text-danger', 'fw-bold');
+    const inputElements = document.querySelectorAll('.answer-input');
+    inputElements.forEach(input => {
+        input.value = '';
+        input.classList.remove('is-valid', 'is-invalid');
+        // Reset input width to minimum after clearing
+        adjustInputWidth(input);
     });
 
     const feedbackIcons = document.querySelectorAll('.feedback-icon');
     feedbackIcons.forEach(icon => {
         icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
-        icon.style.display = 'none'; // Ẩn biểu tượng feedback
+        icon.style.display = 'none';
     });
 
-    // Ẩn và xóa nội dung hiển thị điểm và lời giải chi tiết
     document.getElementById('scoreDisplay').textContent = '';
     document.getElementById('scoreDisplay').style.display = 'none';
     document.getElementById('detailedSolution').style.display = 'none';
     document.querySelector('#detailedSolution .solution-list').innerHTML = '';
 }
+
+// Initialize auto-resize functionality when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializeAutoResizeInputs();
+});

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp: Passive Voice - Phần B (Chọn từ)</title>
+    <!-- Bootstrap CSS for styling and responsiveness -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for "Open Sans" -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for feedback icons (check/cross) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom stylesheet for additional styling -->
+    <link rel="stylesheet" href="../../assets/style.css">
+    <style>
+        /* Styling for clickable options */
+        .option-group {
+            display: inline-block;
+            vertical-align: middle;
+            white-space: nowrap; /* Keep options on one line */
+        }
+
+        .clickable-option {
+            display: inline-block;
+            padding: 2px 5px; /* Reduced padding for a less "boxy" look */
+            margin: 0 2px;
+            border: none; /* Removed border */
+            border-radius: 4px; /* Slightly smaller border-radius */
+            cursor: pointer;
+            background-color: transparent; /* Transparent background by default */
+            transition: all 0.2s ease-in-out;
+            font-weight: bold; /* Already bold */
+            color: #333; /* Default text color */
+        }
+
+        .clickable-option:hover {
+            background-color: #e9ecef; /* Very light grey background on hover */
+            color: #0056b3; /* Slightly darker blue on hover */
+        }
+
+        .clickable-option.selected {
+            background-color: rgba(0, 123, 255, 0.1); /* Very light blue tint */
+            color: #007bff; /* Blue text for selected */
+            border-bottom: 2px solid #007bff; /* Subtle underline effect */
+            box-shadow: none; /* Removed box-shadow */
+        }
+
+        /* Feedback styling for selected options */
+        .clickable-option.is-valid {
+            background-color: rgba(25, 135, 84, 0.1); /* Light green tint */
+            color: #198754; /* Green text */
+            border-bottom: 2px solid #198754; /* Green underline */
+            box-shadow: none; /* Removed box-shadow */
+        }
+
+        .clickable-option.is-invalid {
+            background-color: rgba(220, 53, 69, 0.1); /* Light red tint */
+            color: #dc3545; /* Red text */
+            border-bottom: 2px solid #dc3545; /* Red underline */
+            box-shadow: none; /* Removed box-shadow */
+        }
+
+        /* Adjust feedback icon alignment for inline elements */
+        .exercise-item .feedback-icon {
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <!-- Main heading of the exercise -->
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp</h1>
+        </div>
+        <!-- Sub-heading for this specific exercise part -->
+        <h2>B. Look at the picture again and circle the correct word.</h2>
+        <!-- Instructions for the user -->
+        <p class="instruction">
+            <strong>Hướng dẫn:</strong> Nhìn vào bức tranh một lần nữa và khoanh tròn từ đúng.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <!-- REMOVED: Image for the exercise as per user's correction -->
+
+        <!-- Form containing all the exercise questions -->
+        <form id="grammarForm">
+            <!-- Question 1 -->
+            <div class="exercise-item">
+                <span class="question-number">1.</span>
+                <span class="text-segment">The balloons had all been </span>
+                <span class="option-group" id="q1_options">
+                    <span class="clickable-option" data-question="q1" data-value="blowing">blowing</span> /
+                    <span class="clickable-option" data-question="q1" data-value="blown">blown</span>
+                </span>
+                <span class="text-segment"> up before the carnival started.</span>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+                <input type="hidden" id="q1_selected_answer" name="q1_selected_answer">
+            </div>
+
+            <!-- Question 2 -->
+            <div class="exercise-item">
+                <span class="question-number">2.</span>
+                <span class="text-segment">The bananas </span>
+                <span class="option-group" id="q2_options">
+                    <span class="clickable-option" data-question="q2" data-value="haven't">haven't</span> /
+                    <span class="clickable-option" data-question="q2" data-value="aren't">aren't</span>
+                </span>
+                <span class="text-segment"> all been eaten yet.</span>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+                <input type="hidden" id="q2_selected_answer" name="q2_selected_answer">
+            </div>
+
+            <!-- Question 3 -->
+            <div class="exercise-item">
+                <span class="question-number">3.</span>
+                <span class="text-segment">The lorry isn't </span>
+                <span class="option-group" id="q3_options">
+                    <span class="clickable-option" data-question="q3" data-value="been">been</span> /
+                    <span class="clickable-option" data-question="q3" data-value="being">being</span>
+                </span>
+                <span class="text-segment"> driven by the gorilla.</span>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+                <input type="hidden" id="q3_selected_answer" name="q3_selected_answer">
+            </div>
+
+            <!-- Question 4 -->
+            <div class="exercise-item">
+                <span class="question-number">4.</span>
+                <span class="text-segment">A young boy </span>
+                <span class="option-group" id="q4_options">
+                    <span class="clickable-option" data-question="q4" data-value="was">was</span> /
+                    <span class="clickable-option" data-question="q4" data-value="has">has</span>
+                </span>
+                <span class="text-segment"> just taken a balloon from the astronaut.</span>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+                <input type="hidden" id="q4_selected_answer" name="q4_selected_answer">
+            </div>
+
+            <!-- Question 5 -->
+            <div class="exercise-item">
+                <span class="question-number">5.</span>
+                <span class="text-segment">A prize is going to </span>
+                <span class="option-group" id="q5_options">
+                    <span class="clickable-option" data-question="q5" data-value="have">have</span> /
+                    <span class="clickable-option" data-question="q5" data-value="be">be</span>
+                </span>
+                <span class="text-segment"> given to the person in the best fancy dress.</span>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+                <input type="hidden" id="q5_selected_answer" name="q5_selected_answer">
+            </div>
+
+            <!-- Question 6 -->
+            <div class="exercise-item">
+                <span class="question-number">6.</span>
+                <span class="text-segment">The prize might not be </span>
+                <span class="option-group" id="q6_options">
+                    <span class="clickable-option" data-question="q6" data-value="awarding">awarding</span> /
+                    <span class="clickable-option" data-question="q6" data-value="awarded">awarded</span>
+                </span>
+                <span class="text-segment"> to the clown.</span>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+                <input type="hidden" id="q6_selected_answer" name="q6_selected_answer">
+            </div>
+
+            <!-- Question 7 -->
+            <div class="exercise-item">
+                <span class="question-number">7.</span>
+                <span class="option-group" id="q7_options">
+                    <span class="clickable-option" data-question="q7" data-value="Has">Has</span> /
+                    <span class="clickable-option" data-question="q7" data-value="Is">Is</span>
+                </span>
+                <span class="text-segment"> the lorry been decorated well?</span>
+                <i class="feedback-icon fa-solid" id="icon7"></i>
+                <input type="hidden" id="q7_selected_answer" name="q7_selected_answer">
+            </div>
+
+            <!-- Question 8 -->
+            <div class="exercise-item">
+                <span class="question-number">8.</span>
+                <span class="text-segment">Can songs be sung </span>
+                <span class="option-group" id="q8_options">
+                    <span class="clickable-option" data-question="q8" data-value="by">by</span> /
+                    <span class="clickable-option" data-question="q8" data-value="with">with</span>
+                </span>
+                <span class="text-segment"> people in the crowd, too?</span>
+                <i class="feedback-icon fa-solid" id="icon8"></i>
+                <input type="hidden" id="q8_selected_answer" name="q8_selected_answer">
+            </div>
+
+            <!-- Action buttons -->
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <!-- Score display area -->
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <!-- Detailed solution section, hidden by default -->
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                <!-- Solutions will be dynamically added here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Link to common JavaScript functions -->
+    <script src="../../assets/common.js"></script>
+
+    <script>
+        // Data containing correct answers, original text, fixed text templates, explanations, and grammar notes for each question.
+        const questionsData = {
+            'q1': {
+                correctAnswers: ['blown'],
+                originalText: 'The balloons had all been <strong>blowing / blown</strong> up before the carnival started.',
+                fixedTextTemplate: 'The balloons had all been <span class="correct-answer-text">{answer}</span> up before the carnival started.',
+                explanation: 'Thì quá khứ hoàn thành bị động: "had been" + quá khứ phân từ (P.P.). "Blown" là quá khứ phân từ của "blow".',
+                grammarNote: 'Cấu trúc: S + had + been + P.P.'
+            },
+            'q2': {
+                correctAnswers: ['haven\'t'],
+                originalText: 'The bananas <strong>haven\'t / aren\'t</strong> all been eaten yet.',
+                fixedTextTemplate: 'The bananas <span class="correct-answer-text">{answer}</span> all been eaten yet.',
+                explanation: 'Thì hiện tại hoàn thành bị động, diễn tả hành động chưa xảy ra tính đến thời điểm hiện tại ("yet"). "Bananas" là số nhiều, nên dùng "haven\'t".',
+                grammarNote: 'Cấu trúc: S + have/has + not + been + P.P.'
+            },
+            'q3': {
+                correctAnswers: ['being'],
+                originalText: 'The lorry isn\'t <strong>been / being</strong> driven by the gorilla.',
+                fixedTextTemplate: 'The lorry isn\'t <span class="correct-answer-text">{answer}</span> driven by the gorilla.',
+                explanation: 'Thì hiện tại tiếp diễn bị động: "is/are" + "being" + quá khứ phân từ (P.P.). "Lorry" là số ít, nên dùng "isn\'t being driven".',
+                grammarNote: 'Cấu trúc: S + am/is/are + being + P.P.'
+            },
+            'q4': {
+                correctAnswers: ['has'],
+                originalText: 'A young boy <strong>was / has</strong> just taken a balloon from the astronaut.',
+                fixedTextTemplate: 'A young boy <span class="correct-answer-text">{answer}</span> just taken a balloon from the astronaut.',
+                explanation: 'Đây là câu chủ động ở thì hiện tại hoàn thành, diễn tả hành động vừa mới xảy ra ("just"). "A young boy" là chủ ngữ số ít, nên dùng "has".',
+                grammarNote: 'Cấu trúc: S + has/have + P.P.'
+            },
+            'q5': {
+                correctAnswers: ['be'],
+                originalText: 'A prize is going to <strong>have / be</strong> given to the person in the best fancy dress.',
+                fixedTextTemplate: 'A prize is going to <span class="correct-answer-text">{answer}</span> given to the person in the best fancy dress.',
+                explanation: 'Cấu trúc bị động với "be going to": "be going to" + "be" + quá khứ phân từ (P.P.). "A prize" là số ít, nên dùng "is going to be given".',
+                grammarNote: 'Cấu trúc: S + am/is/are + going to + be + P.P.'
+            },
+            'q6': {
+                correctAnswers: ['awarded'],
+                originalText: 'The prize might not be <strong>awarding / awarded</strong> to the clown.',
+                fixedTextTemplate: 'The prize might not be <span class="correct-answer-text">{answer}</span> to the clown.',
+                explanation: 'Cấu trúc bị động với động từ khuyết thiếu: "modal verb" + "be" + quá khứ phân từ (P.P.). "Awarded" là quá khứ phân từ của "award".',
+                grammarNote: 'Cấu trúc: S + modal verb + be + P.P.'
+            },
+            'q7': {
+                correctAnswers: ['Has'],
+                originalText: '<strong>Has / Is</strong> the lorry been decorated well?',
+                fixedTextTemplate: '<span class="correct-answer-text">{answer}</span> the lorry been decorated well?',
+                explanation: 'Đây là câu hỏi ở thì hiện tại hoàn thành bị động: "Has/Have" + chủ ngữ + "been" + quá khứ phân từ (P.P.). "The lorry" là số ít, nên dùng "Has".',
+                grammarNote: 'Cấu trúc câu hỏi: Has/Have + S + been + P.P.?'
+            },
+            'q8': {
+                correctAnswers: ['by'],
+                originalText: 'Can songs be sung <strong>by / with</strong> people in the crowd, too?',
+                fixedTextTemplate: 'Can songs be sung <span class="correct-answer-text">{answer}</span> people in the crowd, too?',
+                explanation: 'Trong câu bị động, "by" được dùng để chỉ tác nhân thực hiện hành động. "People in the crowd" là tác nhân.',
+                grammarNote: 'Sử dụng "by" để chỉ tác nhân (agent) trong câu bị động.'
+            }
+        };
+
+        // Event listener for clickable options
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.clickable-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionId = this.dataset.question;
+                    const selectedValue = this.dataset.value;
+                    const optionGroup = this.closest('.option-group');
+
+                    // Remove 'selected' class from all options in this group
+                    optionGroup.querySelectorAll('.clickable-option').forEach(opt => {
+                        opt.classList.remove('selected', 'is-valid', 'is-invalid'); // Also remove feedback classes
+                    });
+
+                    // Add 'selected' class to the clicked option
+                    this.classList.add('selected');
+
+                    // Update the hidden input with the selected value
+                    document.getElementById(`${questionId}_selected_answer`).value = selectedValue;
+
+                    // Clear feedback icon for this question immediately on new selection
+                    const feedbackIcon = document.getElementById(`icon${questionId.replace('q', '')}`);
+                    if (feedbackIcon) {
+                        feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                        feedbackIcon.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        /**
+         * Submits the user's answers for the Passive Voice exercise,
+         * calculates the score, provides feedback, and displays detailed solutions.
+         * This function uses generic helpers from common.js.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            // Clear previous solutions and show solution section
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = '';
+            document.getElementById('detailedSolution').style.display = 'block';
+
+            // Loop through all questions
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qId = `q${i}`;
+                const hiddenInputElement = document.getElementById(`${qId}_selected_answer`);
+                const feedbackIcon = document.getElementById(`icon${i}`);
+                const questionData = questionsData[qId];
+                const optionGroup = document.getElementById(`${qId}_options`);
+
+                if (!hiddenInputElement || !questionData || !optionGroup) {
+                    console.warn(`Missing element or data for ${qId}`);
+                    continue;
+                }
+
+                const userAnswer = normalizeAnswer(hiddenInputElement.value); // Get selected value from hidden input
+                let isCorrect = false;
+
+                // Check if the user's selected answer matches any of the correct answers
+                isCorrect = questionData.correctAnswers.some(correctAns => normalizeAnswer(correctAns) === userAnswer);
+
+                // Apply feedback styling to the selected clickable option
+                optionGroup.querySelectorAll('.clickable-option').forEach(option => {
+                    option.classList.remove('is-valid', 'is-invalid'); // Clear previous feedback
+                    if (normalizeAnswer(option.dataset.value) === userAnswer) {
+                        if (isCorrect) {
+                            option.classList.add('is-valid');
+                        } else {
+                            option.classList.add('is-invalid');
+                        }
+                    }
+                });
+
+                // Display feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                if (isCorrect) {
+                    score++;
+                }
+
+                // Add detailed solution using the common function
+                addSolutionItem(i, questionData, userAnswer); // Use addSolutionItem from common.js
+            }
+
+            // Display the final score using the common function
+            displayScore(score, totalQuestions); // Use displayScore from common.js
+        }
+
+        /**
+         * Overriding the common.js resetExercise to handle clickable options.
+         * Resets the state of the exercise by clearing selections, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            // Reset hidden inputs
+            document.querySelectorAll('input[type="hidden"][name^="q"]').forEach(input => {
+                input.value = '';
+            });
+
+            // Remove 'selected', 'is-valid', 'is-invalid' classes from all clickable options
+            document.querySelectorAll('.clickable-option').forEach(option => {
+                option.classList.remove('selected', 'is-valid', 'is-invalid');
+            });
+
+            // Hide all feedback icons
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none';
+            });
+
+            // Clear and hide score display
+            document.getElementById('scoreDisplay').textContent = '';
+            document.getElementById('scoreDisplay').style.display = 'none';
+
+            // Clear and hide detailed solution section
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            if (solutionListDiv) {
+                solutionListDiv.innerHTML = '';
+            }
+            document.getElementById('detailedSolution').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

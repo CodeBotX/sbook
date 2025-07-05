@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp: Passive Voice - Phần E</title>
+    <!-- Bootstrap CSS for styling and responsiveness -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for "Open Sans" -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for feedback icons (check/cross) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom stylesheet for additional styling -->
+    <link rel="stylesheet" href="../../assets/style.css">
+    <style>
+        /* Adjust input width for longer answers if needed */
+        .exercise-item .answer-input.long-answer {
+            min-width: 200px; /* Adjust as necessary */
+            max-width: 300px;
+        }
+        .exercise-item .given-word {
+            font-weight: bold;
+            color: #007bff; /* Highlight the given word */
+            margin: 0 5px;
+        }
+        .exercise-item .original-sentence {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 5px;
+            display: block; /* Ensure it takes its own line */
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <!-- Main heading of the exercise -->
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp</h1>
+        </div>
+        <!-- Sub-heading for this specific exercise part -->
+        <h2>E. Complete each second sentence using the word given, so that it has a similar meaning to the first sentence. Write between two and five words.</h2>
+        <!-- Instructions for the user -->
+        <p class="instruction">
+            <strong>Hướng dẫn:</strong> Hoàn thành câu thứ hai bằng cách sử dụng từ cho sẵn, sao cho nó có ý nghĩa tương tự với câu đầu tiên. Viết từ hai đến năm từ.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <!-- Form containing all the exercise questions -->
+        <form id="grammarForm">
+            <!-- Question 1 -->
+            <div class="exercise-item">
+                <span class="question-number">1.</span>
+                <span class="original-sentence">Will they send the letters first class?</span>
+                <span class="text-segment">Will </span>
+                <input type="text" class="form-control answer-input long-answer" id="q1" name="q1">
+                <span class="text-segment"> first class? <span class="given-word">(sent)</span></span>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="exercise-item">
+                <span class="question-number">2.</span>
+                <span class="original-sentence">I'm not sure if they eat pizza in China.</span>
+                <span class="text-segment">I'm not sure if pizza </span>
+                <input type="text" class="form-control answer-input long-answer" id="q2" name="q2">
+                <span class="text-segment"> in China. <span class="given-word">(is)</span></span>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="exercise-item">
+                <span class="question-number">3.</span>
+                <span class="original-sentence">Someone told me that they don't make cars in the UK anymore.</span>
+                <span class="text-segment">Someone told me that cars </span>
+                <input type="text" class="form-control answer-input long-answer" id="q3" name="q3">
+                <span class="text-segment"> in the UK anymore. <span class="given-word">(made)</span></span>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="exercise-item">
+                <span class="question-number">4.</span>
+                <span class="original-sentence">Do they usually feed the animals three times a day?</span>
+                <span class="text-segment">Are </span>
+                <input type="text" class="form-control answer-input long-answer" id="q4" name="q4">
+                <span class="text-segment"> three times a day? <span class="given-word">(fed)</span></span>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="exercise-item">
+                <span class="question-number">5.</span>
+                <span class="original-sentence">Mr Jones is ill, so he won't give us a geography test today!</span>
+                <span class="text-segment">Mr Jones is ill, so </span>
+                <input type="text" class="form-control answer-input long-answer" id="q5" name="q5">
+                <span class="text-segment"> a geography test today! <span class="given-word">(be)</span></span>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="exercise-item">
+                <span class="question-number">6.</span>
+                <span class="original-sentence">Did they take her to hospital in an ambulance?</span>
+                <span class="text-segment">Was </span>
+                <input type="text" class="form-control answer-input long-answer" id="q6" name="q6">
+                <span class="text-segment"> to hospital in an ambulance? <span class="given-word">(she)</span></span>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <!-- Score display area -->
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <!-- Detailed solution section, hidden by default -->
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                <!-- Solutions will be dynamically added here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Link to common JavaScript functions -->
+    <script src="../../assets/common.js"></script>
+
+    <script>
+        // Data containing correct answers, original text, fixed text templates, explanations, and grammar notes for each question.
+        const questionsData = {
+            'q1': {
+                correctAnswers: ['the letters be sent'],
+                originalText: 'Will they send the letters first class? <br> Will __________ first class? (sent)',
+                fixedTextTemplate: 'Will they send the letters first class? <br> Will <span class="correct-answer-text">{answer}</span> first class?',
+                explanation: 'Để chuyển câu chủ động "Will they send...?" sang bị động, ta dùng cấu trúc "Will + S + be + P.P.". "Letters" là chủ ngữ bị động, "sent" là quá khứ phân từ của "send".',
+                grammarNote: 'Cấu trúc: Will + S + be + P.P.?'
+            },
+            'q2': {
+                correctAnswers: ['is eaten'],
+                originalText: 'I\'m not sure if they eat pizza in China. <br> I\'m not sure if pizza __________ in China. (is)',
+                fixedTextTemplate: 'I\'m not sure if they eat pizza in China. <br> I\'m not sure if pizza <span class="correct-answer-text">{answer}</span> in China.',
+                explanation: 'Câu này diễn tả một sự thật chung, nên dùng thì hiện tại đơn bị động. "Pizza" là danh từ không đếm được, nên dùng "is eaten".',
+                grammarNote: 'Cấu trúc: S + am/is/are + P.P.'
+            },
+            'q3': {
+                correctAnswers: ['aren\'t made', 'are not made'],
+                originalText: 'Someone told me that they don\'t make cars in the UK anymore. <br> Someone told me that cars __________ in the UK anymore. (made)',
+                fixedTextTemplate: 'Someone told me that they don\'t make cars in the UK anymore. <br> Someone told me that cars <span class="correct-answer-text">{answer}</span> in the UK anymore.',
+                explanation: 'Đây là câu phủ định ở thì hiện tại đơn bị động. "Cars" là số nhiều, nên dùng "aren\'t made" hoặc "are not made".',
+                grammarNote: 'Cấu trúc phủ định: S + am/is/are + not + P.P.'
+            },
+            'q4': {
+                correctAnswers: ['the animals usually fed', 'the animals fed usually'],
+                originalText: 'Do they usually feed the animals three times a day? <br> Are __________ three times a day? (fed)',
+                fixedTextTemplate: 'Do they usually feed the animals three times a day? <br> Are <span class="correct-answer-text">{answer}</span> three times a day?',
+                explanation: 'Đây là câu hỏi ở thì hiện tại đơn bị động, diễn tả hành động thường xuyên. "Animals" là số nhiều, nên dùng "Are". Trạng từ "usually" đứng giữa chủ ngữ và quá khứ phân từ.',
+                grammarNote: 'Cấu trúc câu hỏi: Am/Is/Are + S + (adv) + P.P.?'
+            },
+            'q5': {
+                correctAnswers: ['we won\'t be given', 'we will not be given'],
+                originalText: 'Mr Jones is ill, so he won\'t give us a geography test today! <br> Mr Jones is ill, so __________ a geography test today! (be)',
+                fixedTextTemplate: 'Mr Jones is ill, so <span class="correct-answer-text">{answer}</span> a geography test today!',
+                explanation: 'Đây là thì tương lai đơn bị động, diễn tả việc "chúng ta" sẽ không được "cho" bài kiểm tra. "We" là chủ ngữ bị động. "Won\'t be given" hoặc "will not be given".',
+                grammarNote: 'Cấu trúc phủ định tương lai đơn bị động: S + will + not + be + P.P.'
+            },
+            'q6': {
+                correctAnswers: ['she taken'],
+                originalText: 'Did they take her to hospital in an ambulance? <br> Was __________ to hospital in an ambulance? (she)',
+                fixedTextTemplate: 'Did they take her to hospital in an ambulance? <br> Was <span class="correct-answer-text">{answer}</span> to hospital in an ambulance?',
+                explanation: 'Đây là câu hỏi ở thì quá khứ đơn bị động. "She" là chủ ngữ bị động, "taken" là quá khứ phân từ của "take".',
+                grammarNote: 'Cấu trúc câu hỏi: Was/Were + S + P.P.?'
+            }
+        };
+
+        /**
+         * Submits the user's answers for the Passive Voice exercise,
+         * calculates the score, provides feedback, and displays detailed solutions.
+         * This function uses generic helpers from common.js.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            // Clear previous solutions and show solution section
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = '';
+            document.getElementById('detailedSolution').style.display = 'block';
+
+            // Loop through all questions
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qId = `q${i}`;
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${i}`);
+                const questionData = questionsData[qId];
+
+                if (!inputElement || !questionData) {
+                    console.warn(`Missing element or data for ${qId}`);
+                    continue;
+                }
+
+                const userAnswer = normalizeAnswer(inputElement.value); // Use normalizeAnswer from common.js
+                let isCorrect = false;
+
+                // Check if the user's answer matches any of the correct answers
+                isCorrect = questionData.correctAnswers.some(correctAns => normalizeAnswer(correctAns) === userAnswer);
+
+                // Display feedback on the input field
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (isCorrect) {
+                    inputElement.classList.add('is-valid');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                }
+
+                // Display feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                if (isCorrect) {
+                    score++;
+                }
+
+                // Add detailed solution using the common function
+                addSolutionItem(i, questionData, userAnswer); // Use addSolutionItem from common.js
+            }
+
+            // Display the final score using the common function
+            displayScore(score, totalQuestions); // Use displayScore from common.js
+        }
+
+        // The resetExercise function is imported from common.js and works universally
+    </script>
+</body>
+</html>

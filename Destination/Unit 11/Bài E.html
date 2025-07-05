@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp: Passive Voice - Phần E (Đọc và Trả lời)</title>
+    <!-- Bootstrap CSS for styling and responsiveness -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for "Open Sans" -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for feedback icons (check/cross) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom stylesheet for additional styling -->
+    <link rel="stylesheet" href="../../assets/style.css">
+    <style>
+        /* Styling for the reading passage */
+        .reading-passage {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-size: 1.05em;
+            color: #343a40;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        /* Adjust input width for longer answers if needed */
+        .exercise-item .answer-input {
+            display: inline-block;
+            min-width: 50px; /* Adjust min-width for expected longer answers */
+            padding: 2px 0px;
+            border: none;
+            border-bottom: 2px solid #ced4da;
+            background-color: transparent;
+            border-radius: 0;
+            transition: border-color 0.2s ease;
+            font-size: 1.05em;
+            text-align: left;
+            outline: none;
+            margin-right: 10px;
+            box-sizing: content-box;
+            vertical-align: baseline;
+        }
+        .exercise-item .answer-input:focus {
+            border-color: #007bff;
+            box-shadow: none;
+        }
+        .exercise-item .answer-input.is-valid {
+            border-color: #198754 !important;
+            background-color: transparent !important;
+            color: #0f5132;
+        }
+        .exercise-item .answer-input.is-invalid {
+            border-color: #dc3545 !important;
+            background-color: transparent !important;
+            color: #842029;
+        }
+
+        /* General exercise item and feedback icon styling */
+        .exercise-item {
+            margin-bottom: 20px; /* Slightly less margin for denser questions */
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+        .exercise-item .question-number {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .exercise-item .text-segment {
+            margin-right: 5px;
+            display: inline;
+            white-space: pre-wrap;
+        }
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none;
+            flex-shrink: 0;
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none;
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none;
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .exercise-item {
+                flex-direction: column; /* Stack elements vertically */
+                align-items: flex-start;
+            }
+            .exercise-item .question-number {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            .exercise-item .text-segment {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+            .exercise-item .answer-input {
+                width: 100%; /* Full width input on small screens */
+                max-width: 100%; /* Ensure still full width on mobile */
+                min-width: unset; /* Remove min-width on mobile for auto-sizing */
+                margin-bottom: 10px;
+            }
+            .hint-word {
+                margin-left: 0;
+                text-align: left;
+                width: 100%;
+                margin-top: 5px;
+            }
+            .feedback-icon {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <!-- Main heading of the exercise -->
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp</h1>
+        </div>
+        <!-- Sub-heading for this specific exercise part -->
+        <h2>E. Read the text and answer the questions. Use the correct form of the passive.</h2>
+        <!-- Instructions for the user -->
+        <p class="instruction">
+            <strong>Hướng dẫn:</strong> Đọc đoạn văn và trả lời các câu hỏi. Sử dụng đúng dạng bị động.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <!-- Reading Passage -->
+        <div class="reading-passage">
+            <h3>Doing the housework <small>by Lisa Porter, Class 4b</small></h3>
+            <p>At home, we all share the housework. My dad loves cooking, so he cooks all the food. Sometimes we help him, though. Next weekend, for example, we're having a party so I'm going to help him. In the past, my mum did all the shopping. She started a new job last year though, so I've done most of the shopping since then. It's easy, because I shop online. That means I order everything on the Internet (my dad lets me use his credit card!) and someone from the supermarket delivers it to our house.</p>
+            <p>My brother, Andy, cleans the bathroom nearly every day. He didn't do it yesterday, so he might do it later today. My sister Angelina sweeps the floors. She uses a really old brush. I think she should use a vacuum cleaner! You can save time if you use electrical equipment.</p>
+        </div>
+
+        <!-- Form containing all the exercise questions -->
+        <form id="grammarForm">
+            <!-- Question 1 -->
+            <div class="exercise-item">
+                <span class="question-number">1.</span>
+                <span class="text-segment">Does only one person do the housework in Lisa's house? No, the housework </span>
+                <input type="text" class="form-control answer-input" id="q1" name="q1">
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="exercise-item">
+                <span class="question-number">2.</span>
+                <span class="text-segment">Who cooks the food? The food </span>
+                <input type="text" class="form-control answer-input" id="q2" name="q2">
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="exercise-item">
+                <span class="question-number">3.</span>
+                <span class="text-segment">Who is going to help Lisa's dad next weekend? Lisa's dad </span>
+                <input type="text" class="form-control answer-input" id="q3" name="q3">
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="exercise-item">
+                <span class="question-number">4.</span>
+                <span class="text-segment">Who did all the shopping until about a year ago? Until about a year ago, the shopping </span>
+                <input type="text" class="form-control answer-input" id="q4" name="q4">
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="exercise-item">
+                <span class="question-number">5.</span>
+                <span class="text-segment">Who has done most of the shopping since then? Since then, most of the shopping </span>
+                <input type="text" class="form-control answer-input" id="q5" name="q5">
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="exercise-item">
+                <span class="question-number">6.</span>
+                <span class="text-segment">Does Lisa take the shopping home from the supermarket? No, it </span>
+                <input type="text" class="form-control answer-input" id="q6" name="q6">
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="exercise-item">
+                <span class="question-number">7.</span>
+                <span class="text-segment">How often does someone clean the bathroom? It </span>
+                <input type="text" class="form-control answer-input" id="q7" name="q7">
+                <i class="feedback-icon fa-solid" id="icon7"></i>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="exercise-item">
+                <span class="question-number">8.</span>
+                <span class="text-segment">When might someone next clean the bathroom? It might </span>
+                <input type="text" class="form-control answer-input" id="q8" name="q8">
+                <i class="feedback-icon fa-solid" id="icon8"></i>
+            </div>
+
+            <!-- Question 9 -->
+            <div class="exercise-item">
+                <span class="question-number">9.</span>
+                <span class="text-segment">How does Angelina sweep the floors? The floors </span>
+                <input type="text" class="form-control answer-input" id="q9" name="q9">
+                <i class="feedback-icon fa-solid" id="icon9"></i>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="exercise-item">
+                <span class="question-number">10.</span>
+                <span class="text-segment">What does Lisa think Angelina should use? Lisa thinks a vacuum cleaner </span>
+                <input type="text" class="form-control answer-input" id="q10" name="q10">
+                <i class="feedback-icon fa-solid" id="icon10"></i>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Link to common JavaScript functions -->
+    <script src="../../assets/common.js"></script>
+
+    <script>
+        // Data containing correct answers, original text, fixed text templates, explanations, and grammar notes for each question.
+        const questionsData = {
+            'q1': {
+                correctAnswers: ['is shared by everyone'],
+                originalText: 'Does only one person do the housework in Lisa\'s house? No, the housework __________',
+                fixedTextTemplate: 'No, the housework <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Việc nhà được chia sẻ bởi mọi người. Sử dụng thì hiện tại đơn bị động vì đây là một sự thật chung.',
+                grammarNote: 'Cấu trúc: S + am/is/are + P.P. + by + O.'
+            },
+            'q2': {
+                correctAnswers: ['is cooked by my dad'],
+                originalText: 'Who cooks the food? The food __________',
+                fixedTextTemplate: 'The food <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Thức ăn được nấu bởi bố tôi. Sử dụng thì hiện tại đơn bị động, chỉ ra tác nhân thực hiện hành động.',
+                grammarNote: 'Cấu trúc: S + am/is/are + P.P. + by + O.'
+            },
+            'q3': {
+                correctAnswers: ['is going to be helped by me'],
+                originalText: 'Who is going to help Lisa\'s dad next weekend? Lisa\'s dad __________',
+                fixedTextTemplate: 'Lisa\'s dad <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Bố của Lisa sẽ được giúp bởi tôi. Sử dụng cấu trúc "be going to" bị động để diễn tả một kế hoạch trong tương lai.',
+                grammarNote: 'Cấu trúc: S + am/is/are + going to + be + P.P. + by + O.'
+            },
+            'q4': {
+                correctAnswers: ['was done by my mum'],
+                originalText: 'Who did all the shopping until about a year ago? Until about a year ago, the shopping __________',
+                fixedTextTemplate: 'Until about a year ago, the shopping <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Việc mua sắm được thực hiện bởi mẹ tôi. Sử dụng thì quá khứ đơn bị động để diễn tả hành động đã xảy ra trong quá khứ.',
+                grammarNote: 'Cấu trúc: S + was/were + P.P. + by + O.'
+            },
+            'q5': {
+                correctAnswers: ['has been done by me'],
+                originalText: 'Who has done most of the shopping since then? Since then, most of the shopping __________',
+                fixedTextTemplate: 'Since then, most of the shopping <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Hầu hết việc mua sắm đã được thực hiện bởi tôi. Sử dụng thì hiện tại hoàn thành bị động để diễn tả hành động đã hoàn thành và có kết quả ở hiện tại.',
+                grammarNote: 'Cấu trúc: S + has/have + been + P.P. + by + O.'
+            },
+            'q6': {
+                correctAnswers: ['is delivered by someone from the supermarket'],
+                originalText: 'Does Lisa take the shopping home from the supermarket? No, it __________',
+                fixedTextTemplate: 'No, it <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Nó được giao bởi ai đó từ siêu thị. Sử dụng thì hiện tại đơn bị động để diễn tả một hành động thường xuyên.',
+                grammarNote: 'Cấu trúc: S + am/is/are + P.P. + by + O.'
+            },
+            'q7': {
+                correctAnswers: ['is cleaned nearly every day'],
+                originalText: 'How often does someone clean the bathroom? It __________',
+                fixedTextTemplate: 'It <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Nó được lau dọn gần như mỗi ngày. Sử dụng thì hiện tại đơn bị động để diễn tả tần suất của hành động.',
+                grammarNote: 'Cấu trúc: S + am/is/are + P.P. + (adv).'
+            },
+            'q8': {
+                correctAnswers: ['be done later today'],
+                originalText: 'When might someone next clean the bathroom? It might __________',
+                fixedTextTemplate: 'It might <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Nó có thể được thực hiện sau này trong ngày. Sử dụng cấu trúc bị động với động từ khuyết thiếu "might".',
+                grammarNote: 'Cấu trúc: S + modal verb + be + P.P.'
+            },
+            'q9': {
+                correctAnswers: ['are swept by Angelina'],
+                originalText: 'How does Angelina sweep the floors? The floors __________',
+                fixedTextTemplate: 'The floors <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Sàn nhà được quét bởi Angelina. Sử dụng thì hiện tại đơn bị động để diễn tả cách thức hành động được thực hiện.',
+                grammarNote: 'Cấu trúc: S + am/is/are + P.P. + by + O.'
+            },
+            'q10': {
+                correctAnswers: ['should be used'],
+                originalText: 'What does Lisa think Angelina should use? Lisa thinks a vacuum cleaner __________',
+                fixedTextTemplate: 'Lisa thinks a vacuum cleaner <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Lisa nghĩ một máy hút bụi nên được sử dụng. Sử dụng cấu trúc bị động với động từ khuyết thiếu "should".',
+                grammarNote: 'Cấu trúc: S + modal verb + be + P.P.'
+            }
+        };
+
+        /**
+         * Adjusts the width of an input element based on its content.
+         * @param {HTMLInputElement} inputElement - The input element to adjust.
+         */
+        function adjustInputWidth(inputElement) {
+            const tempSpan = document.createElement('span');
+            // Copy relevant styles from the input to the temporary span for accurate measurement
+            const computedStyle = window.getComputedStyle(inputElement);
+            tempSpan.style.fontFamily = computedStyle.fontFamily;
+            tempSpan.style.fontSize = computedStyle.fontSize;
+            tempSpan.style.fontWeight = computedStyle.fontWeight;
+            tempSpan.style.letterSpacing = computedStyle.letterSpacing;
+            tempSpan.style.padding = computedStyle.padding;
+            tempSpan.style.border = computedStyle.border;
+            tempSpan.style.whiteSpace = 'pre'; // Preserve whitespace
+            tempSpan.style.position = 'absolute'; // Don't affect layout
+            tempSpan.style.visibility = 'hidden'; // Hide it
+
+            // Set content to input value, or a placeholder if empty to maintain min-width
+            tempSpan.textContent = inputElement.value || 'MMMMMMMMMMMMMMMMMM'; // Use a longer placeholder for min-width
+
+            document.body.appendChild(tempSpan);
+            const newWidth = tempSpan.offsetWidth + 10; // Add a small buffer for cursor/padding
+            document.body.removeChild(tempSpan);
+
+            inputElement.style.width = `${Math.max(newWidth, 150)}px`; // Ensure minimum width of 150px
+        }
+
+        /**
+         * Submits the user's answers for the Passive Voice exercise,
+         * calculates the score, provides feedback, and displays detailed solutions.
+         * This function uses generic helpers from common.js.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            // Clear previous solutions and show solution section
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = '';
+            document.getElementById('detailedSolution').style.display = 'block';
+
+            // Loop through all questions
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qId = `q${i}`;
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${i}`);
+                const questionData = questionsData[qId];
+
+                if (!inputElement || !questionData) {
+                    console.warn(`Missing element or data for ${qId}`);
+                    continue;
+                }
+
+                const userAnswer = normalizeAnswer(inputElement.value);
+                let isCorrect = false;
+
+                // Check if the user's answer matches any of the correct answers
+                isCorrect = questionData.correctAnswers.some(correctAns => normalizeAnswer(correctAns) === userAnswer);
+
+                // Display feedback on the input field
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (isCorrect) {
+                    inputElement.classList.add('is-valid');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                }
+
+                // Display feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                if (isCorrect) {
+                    score++;
+                }
+
+                // Add detailed solution using the common function
+                addSolutionItem(i, questionData, userAnswer); // Use addSolutionItem from common.js
+            }
+
+            // Display the final score using the common function
+            displayScore(score, totalQuestions); // Use displayScore from common.js
+        }
+
+        /**
+         * Overriding the common.js resetExercise to also adjust input widths.
+         * Resets the state of the exercise by clearing inputs, hiding feedback, score, and solutions.
+         */
+        const originalResetExercise = window.resetExercise; // Store original if common.js is loaded first
+        window.resetExercise = function() {
+            // Call the original reset if it exists and is needed, or just re-implement
+            if (originalResetExercise) {
+                originalResetExercise();
+            } else {
+                // Re-implementation of common.js reset logic if original isn't available
+                const inputElements = document.querySelectorAll('.answer-input');
+                inputElements.forEach(input => {
+                    input.value = '';
+                    input.classList.remove('is-valid', 'is-invalid');
+                });
+
+                const feedbackIcons = document.querySelectorAll('.feedback-icon');
+                feedbackIcons.forEach(icon => {
+                    icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    icon.style.display = 'none';
+                });
+
+                document.getElementById('scoreDisplay').textContent = '';
+                document.getElementById('scoreDisplay').style.display = 'none';
+                const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+                if (solutionListDiv) {
+                    solutionListDiv.innerHTML = '';
+                }
+                document.getElementById('detailedSolution').style.display = 'none';
+            }
+
+            // Adjust width for all inputs after resetting their values
+            document.querySelectorAll('.answer-input').forEach(input => {
+                adjustInputWidth(input);
+            });
+        };
+
+
+        // Initialize input widths on page load and on input
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.answer-input').forEach(input => {
+                adjustInputWidth(input); // Set initial width
+                input.addEventListener('input', () => adjustInputWidth(input)); // Adjust on user input
+            });
+        });
+    </script>
+</body>
+</html>

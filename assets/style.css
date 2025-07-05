@@ -50,12 +50,77 @@ h2 {
     color: #388e3c;
 }
 
-/* Feedback icons - these are general enough */
+/* Styling for each exercise item (question line) */
+.exercise-item {
+    margin-bottom: 25px; /* Increased margin for better separation */
+    display: flex;
+    align-items: baseline; /* Align text baselines */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+.exercise-item .question-number {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+.exercise-item .text-segment {
+    margin-right: 5px;
+    display: inline;
+    white-space: pre-wrap;
+}
+
+/* ***** ĐIỀU CHỈNH CHÍNH CHO INPUT DẠNG ĐƯỜNG KẺ DƯỚI (Đã làm ngắn hơn) ***** */
+.exercise-item .answer-input {
+    flex-grow: 0; /* Không cho phép input tự động mở rộng */
+    min-width: 40px; /* Giảm min-width để input ngắn hơn, khoảng 2 chữ */
+    max-width: 80px; /* GIẢM MAX-WIDTH ĐỂ LÀM NGẮN INPUT HƠN NỮA */
+    width: auto; /* Cho phép width tự động điều chỉnh theo nội dung */
+    padding: 2px 0px; /* Giảm padding trên dưới, loại bỏ padding ngang */
+    border: none; /* Bỏ border */
+    border-bottom: 2px solid #ced4da; /* Chỉ có border dưới */
+    background-color: transparent; /* Nền trong suốt */
+    border-radius: 0; /* Bỏ bo góc */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1.05em; /* Đảm bảo font size đọc được */
+    text-align: left; /* Căn lề trái cho chữ trong input */
+    outline: none; /* Bỏ outline mặc định khi focus */
+    margin-right: 10px; /* Khoảng cách với phần tử tiếp theo */
+}
+.exercise-item .answer-input:focus {
+    border-color: #007bff; /* Màu xanh khi focus */
+    box-shadow: none; /* Không có box-shadow khi focus với dạng này */
+}
+/* Feedback borders for inputs */
+.exercise-item .answer-input.is-valid {
+    border-color: #198754 !important; /* Đường kẻ dưới màu xanh cho đúng */
+    background-color: transparent !important; /* Đảm bảo nền vẫn trong suốt */
+    color: #0f5132; /* Màu chữ xanh đậm */
+}
+.exercise-item .answer-input.is-invalid {
+    border-color: #dc3545 !important; /* Đường kẻ dưới màu đỏ cho sai */
+    background-color: transparent !important; /* Đảm bảo nền vẫn trong suốt */
+    color: #842029; /* Màu chữ đỏ đậm */
+}
+/* ***** KẾT THÚC ĐIỀU CHỈNH CHÍNH ***** */
+
+
+/* Hint word styling */
+.hint-word {
+    font-weight: bold;
+    color: #777;
+    margin-left: 15px;
+    flex-shrink: 0;
+    font-size: 0.95em;
+    text-align: right;
+    min-width: 80px; /* Ensure hint word has enough space */
+}
+
+/* Feedback icons (check/cross) */
 .feedback-icon {
     margin-left: 10px;
     font-size: 1.2em;
     display: none; /* Hidden by default, shown by JS */
-    vertical-align: middle;
+    flex-shrink: 0;
 }
 .feedback-icon.text-success { color: #198754; }
 .feedback-icon.text-danger { color: #dc3545; }
@@ -65,7 +130,7 @@ h2 {
     padding: 12px 30px;
     font-size: 1.1em;
     margin: 0 15px;
-    border-radius: 30px; /* Pill-shaped buttons */
+    border-radius: 30px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -86,19 +151,18 @@ h2 {
     border-radius: 8px;
     background-color: #e6f7ff;
     border: 1px solid #b3e0ff;
-    display: none; /* Hidden by default */
+    display: none;
 }
-/* Score display color coding */
 .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
 .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
 .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
 
-/* Detailed solution section styling - this design is good to keep */
+/* Detailed solution section styling */
 .solution-section {
     margin-top: 40px;
     padding-top: 25px;
     border-top: 1px dashed #ced4da;
-    display: none; /* Hidden by default */
+    display: none;
 }
 .solution-section h2 {
     color: #007bff;
@@ -143,7 +207,7 @@ h2 {
     border-top: 1px dashed #e0e0e0;
 }
 
-/* Responsive adjustments for smaller screens */
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .container-main {
         padding: 25px;
@@ -159,11 +223,33 @@ h2 {
         font-size: 0.95em;
         padding: 15px;
     }
-    /* Only include general question-item padding/margin here.
-       Specific input/radio/checkbox styling will go in the HTML's <style> */
-    .question-item {
-        padding: 15px;
-        margin-bottom: 20px;
+    .exercise-item {
+        flex-direction: column; /* Stack elements vertically */
+        align-items: flex-start;
+    }
+    .exercise-item .question-number {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    .exercise-item .text-segment {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    .exercise-item .answer-input {
+        width: auto; /* Cho phép width tự động điều chỉnh theo nội dung */
+        max-width: 100px; /* Giới hạn max-width trên mobile */
+        min-width: 35px; /* Min-width nhỏ hơn trên mobile */
+        margin-bottom: 10px;
+    }
+    .hint-word {
+        margin-left: 0;
+        text-align: left;
+        width: 100%;
+        margin-top: 5px;
+    }
+    .feedback-icon {
+        margin-left: 0;
+        margin-top: 5px;
     }
     .buttons .btn {
         font-size: 1.1em;

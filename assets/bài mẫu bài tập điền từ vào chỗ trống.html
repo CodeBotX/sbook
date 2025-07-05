@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp: Passive Voice - Phần B</title>
+    <!-- Bootstrap CSS for styling and responsiveness -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for "Open Sans" -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for feedback icons (check/cross) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom stylesheet for additional styling -->
+    <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+    <div class="container container-main">
+        <!-- Main heading of the exercise -->
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp</h1>
+        </div>
+        <!-- Sub-heading for this specific exercise part -->
+        <h2>B. Complete using the correct passive form of the verbs in brackets.</h2>
+        <!-- Instructions for the user -->
+        <p class="instruction">
+            <strong>Hướng dẫn:</strong> Hoàn thành câu bằng cách sử dụng đúng dạng bị động của các động từ trong ngoặc.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <!-- Form containing all the exercise questions -->
+        <form id="grammarForm">
+            <!-- Question 1: Has two input fields -->
+            <div class="exercise-item">
+                <span class="question-number">1.</span>
+                <span class="text-segment">When people </span>
+                <input type="text" class="form-control answer-input" id="q1_part1" name="q1_part1">
+                <span class="text-segment"><strong>(arrest)</strong>, they </span>
+                <input type="text" class="form-control answer-input" id="q1_part2" name="q1_part2">
+                <span class="text-segment"><strong>(take)</strong> to the police station.</span>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="exercise-item">
+                <span class="question-number">2.</span>
+                <span class="text-segment">Milk </span>
+                <input type="text" class="form-control answer-input" id="q2" name="q2">
+                <span class="text-segment"><strong>(usually / keep)</strong> in the fridge.</span>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="exercise-item">
+                <span class="question-number">3.</span>
+                <input type="text" class="form-control answer-input" id="q3" name="q3">
+                <span class="text-segment"><strong>(we / tell)</strong> what's in next week's test?</span>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="exercise-item">
+                <span class="question-number">4.</span>
+                <span class="text-segment">How did people communicate over long distances before the phone </span>
+                <input type="text" class="form-control answer-input" id="q4" name="q4">
+                <span class="text-segment"><strong>(invent)</strong>?</span>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="exercise-item">
+                <span class="question-number">5.</span>
+                <input type="text" class="form-control answer-input" id="q5" name="q5">
+                <span class="text-segment"><strong>(you / allow)</strong> to come to the party next Saturday?</span>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="exercise-item">
+                <span class="question-number">6.</span>
+                <span class="text-segment">You </span>
+                <input type="text" class="form-control answer-input" id="q6" name="q6">
+                <span class="text-segment"><strong>(give)</strong> your exam results next Monday.</span>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="exercise-item">
+                <span class="question-number">7.</span>
+                <input type="text" class="form-control answer-input" id="q7" name="q7">
+                <span class="text-segment"><strong>(Aidan's bike / find)</strong> yesterday?</span>
+                <i class="feedback-icon fa-solid" id="icon7"></i>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <!-- Score display area -->
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <!-- Detailed solution section, hidden by default -->
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                <!-- Solutions will be dynamically added here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Link to common JavaScript functions -->
+    <script src="../../assets/common.js"></script>
+
+    <script>
+        // Data containing correct answers, original text, fixed text templates, explanations, and grammar notes for each question.
+        const questionsData = {
+            'q1_part1': {
+                correctAnswers: ['are arrested'],
+                originalText: 'When people __________ <strong>(arrest)</strong>, they __________ <strong>(take)</strong> to the police station.',
+                fixedTextTemplate: 'When people <span class="correct-answer-text">{answer}</span> (arrest), they <span class="correct-answer-text">{answer2}</span> (take) to the police station.',
+                explanation: 'Cả hai vế đều ở thì hiện tại đơn bị động vì diễn tả một sự thật hoặc hành động lặp đi lặp lại. "People" là số nhiều, nên dùng "are arrested".',
+                grammarNote: 'Cấu trúc: S + am/is/are + P.P.'
+            },
+            'q1_part2': {
+                correctAnswers: ['are taken'],
+                originalText: 'When people __________ <strong>(arrest)</strong>, they __________ <strong>(take)</strong> to the police station.',
+                fixedTextTemplate: 'When people <span class="correct-answer-text">{answer1}</span> (arrest), they <span class="correct-answer-text">{answer}</span> (take) to the police station.',
+                explanation: 'Cả hai vế đều ở thì hiện tại đơn bị động vì diễn tả một sự thật hoặc hành động lặp đi lặp lại. "They" (thay thế cho people) là số nhiều, nên dùng "are taken".',
+                grammarNote: 'Cấu trúc: S + am/is/are + P.P.'
+            },
+            'q2': {
+                correctAnswers: ['is usually kept', 'is kept usually'], // Both forms are generally acceptable
+                originalText: 'Milk __________ <strong>(usually / keep)</strong> in the fridge.',
+                fixedTextTemplate: 'Milk <span class="correct-answer-text">{answer}</span> (usually / keep) in the fridge.',
+                explanation: 'Thì hiện tại đơn bị động, diễn tả một sự thật chung. Trạng từ "usually" thường đứng giữa "be" và quá khứ phân từ. "Milk" là danh từ không đếm được nên dùng "is".',
+                grammarNote: 'Cấu trúc: S + am/is/are (+ adv) + P.P.'
+            },
+            'q3': {
+                correctAnswers: ['Are we told', 'Are we being told'], // Simple present passive is more common for general information/schedules, but continuous is plausible.
+                originalText: '__________ <strong>(we / tell)</strong> what\'s in next week\'s test?',
+                fixedTextTemplate: '<span class="correct-answer-text">{answer}</span> (we / tell) what\'s in next week\'s test?',
+                explanation: 'Đây là câu hỏi ở thì hiện tại đơn bị động (thường dùng để hỏi về lịch trình, thông tin chung). Hoặc cũng có thể là hiện tại tiếp diễn bị động nếu nhấn mạnh hành động đang được tiến hành để thông báo. Vì "we" là số nhiều nên dùng "Are".',
+                grammarNote: 'Cấu trúc câu hỏi: Am/Is/Are + S + P.P.?'
+            },
+            'q4': {
+                correctAnswers: ['was invented'],
+                originalText: 'How did people communicate over long distances before the phone __________ <strong>(invent)</strong>?',
+                fixedTextTemplate: 'How did people communicate over long distances before the phone <span class="correct-answer-text">{answer}</span> (invent)?',
+                explanation: 'Hành động "invent" (phát minh) diễn ra trong quá khứ và đã hoàn thành, nên dùng thì quá khứ đơn bị động. "The phone" là số ít, nên dùng "was invented".',
+                grammarNote: 'Cấu trúc: S + was/were + P.P.'
+            },
+            'q5': {
+                correctAnswers: ['Are you allowed'],
+                originalText: '__________ <strong>(you / allow)</strong> to come to the party next Saturday?',
+                fixedTextTemplate: '<span class="correct-answer-text">{answer}</span> (you / allow) to come to the party next Saturday?',
+                explanation: 'Đây là câu hỏi ở thì hiện tại đơn bị động, hỏi về sự cho phép. Mặc dù có "next Saturday", nhưng đây là hỏi về quy định hoặc khả năng được phép trong tương lai gần. "You" đi với "Are".',
+                grammarNote: 'Cấu trúc câu hỏi: Am/Is/Are + S + P.P.?'
+            },
+            'q6': {
+                correctAnswers: ['will be given'],
+                originalText: 'You __________ <strong>(give)</strong> your exam results next Monday.',
+                fixedTextTemplate: 'You <span class="correct-answer-text">{answer}</span> (give) your exam results next Monday.',
+                explanation: 'Hành động "give" (trao/công bố) diễn ra trong tương lai ("next Monday") và "you" là người nhận kết quả, nên dùng thì tương lai đơn bị động.',
+                grammarNote: 'Cấu trúc: S + will + be + P.P.'
+            },
+            'q7': {
+                correctAnswers: ['Was Aidan\'s bike found'],
+                originalText: '__________ <strong>(Aidan\'s bike / find)</strong> yesterday?',
+                fixedTextTemplate: '<span class="correct-answer-text">{answer}</span> (Aidan\'s bike / find) yesterday?',
+                explanation: 'Hành động "find" (tìm thấy) diễn ra trong quá khứ ("yesterday") và "Aidan\'s bike" là vật được tìm thấy, nên dùng thì quá khứ đơn bị động. "Aidan\'s bike" là số ít, nên dùng "Was".',
+                grammarNote: 'Cấu trúc câu hỏi: Was/Were + S + P.P.?'
+            }
+        };
+
+        /**
+         * Submits the user's answers for the Passive Voice exercise,
+         * calculates the score, provides feedback, and displays detailed solutions.
+         * This function uses generic helpers from common.js.
+         */
+        function submitAnswers() {
+            let score = 0;
+            // Calculate total questions, accounting for multi-part questions like Q1
+            const totalQuestions = Object.keys(questionsData).filter(key => !key.includes('_part')).length +
+                                   Object.keys(questionsData).filter(key => key.includes('_part1')).length;
+
+            // Clear previous solutions and show solution section
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = '';
+            document.getElementById('detailedSolution').style.display = 'block';
+
+            // Special handling for question 1 (two input fields)
+            const q1_part1_input = document.getElementById('q1_part1');
+            const q1_part2_input = document.getElementById('q1_part2');
+            const feedbackIcon1 = document.getElementById('icon1');
+
+            if (q1_part1_input && q1_part2_input && questionsData['q1_part1'] && questionsData['q1_part2']) {
+                const userAnswer1 = normalizeAnswer(q1_part1_input.value);
+                const userAnswer2 = normalizeAnswer(q1_part2_input.value);
+
+                const isCorrect1 = questionsData['q1_part1'].correctAnswers.some(correctAns => normalizeAnswer(correctAns) === userAnswer1);
+                const isCorrect2 = questionsData['q1_part2'].correctAnswers.some(correctAns => normalizeAnswer(correctAns) === userAnswer2);
+
+                // Apply feedback styling to individual inputs
+                if (isCorrect1) {
+                    q1_part1_input.classList.add('is-valid');
+                    q1_part1_input.classList.remove('is-invalid');
+                } else {
+                    q1_part1_input.classList.add('is-invalid');
+                    q1_part1_input.classList.remove('is-valid');
+                }
+
+                if (isCorrect2) {
+                    q1_part2_input.classList.add('is-valid');
+                    q1_part2_input.classList.remove('is-invalid');
+                } else {
+                    q1_part2_input.classList.add('is-invalid');
+                    q1_part2_input.classList.remove('is-valid');
+                }
+
+                // Apply feedback icon for the whole question
+                if (feedbackIcon1) {
+                    feedbackIcon1.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect1 && isCorrect2) {
+                        feedbackIcon1.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon1.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon1.style.display = 'inline-block';
+                }
+
+                if (isCorrect1 && isCorrect2) {
+                    score++;
+                }
+                // Add solution item for question 1, combining both parts for display.
+                addSolutionItemForQ1(1, questionsData['q1_part1'], questionsData['q1_part2'], userAnswer1, userAnswer2);
+            }
+
+            // Loop through other questions (from q2 to q7)
+            for (let i = 2; i <= 7; i++) { // Loop explicitly for q2 to q7 as Q1 is handled separately
+                const qId = `q${i}`;
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${i}`);
+                const questionData = questionsData[qId];
+
+                if (!inputElement || !questionData) {
+                    console.warn(`Missing element or data for ${qId}`);
+                    continue;
+                }
+
+                const userAnswer = normalizeAnswer(inputElement.value); // Use normalizeAnswer from common.js
+                let isCorrect = false;
+
+                // Check if the user's answer matches any of the correct answers
+                isCorrect = questionData.correctAnswers.some(correctAns => normalizeAnswer(correctAns) === userAnswer);
+
+                // Display feedback on the input field
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (isCorrect) {
+                    inputElement.classList.add('is-valid');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                }
+
+                // Display feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                if (isCorrect) {
+                    score++;
+                }
+
+                // Add detailed solution using the common function
+                addSolutionItem(i, questionData, userAnswer); // Use addSolutionItem from common.js
+            }
+
+            // Display the final score using the common function
+            displayScore(score, totalQuestions); // Use displayScore from common.js
+        }
+
+        /**
+         * Custom function to add a detailed solution item for question 1,
+         * which has two parts. It combines information from both parts for a unified display.
+         * @param {number} questionNumber - The sequential number of the question (e.g., 1).
+         * @param {object} questionDataPart1 - The data object for the first part of the question.
+         * @param {object} questionDataPart2 - The data object for the second part of the question.
+         * @param {string} userAnswer1 - The user's submitted answer for the first part.
+         * @param {string} userAnswer2 - The user's submitted answer for the second part.
+         */
+        function addSolutionItemForQ1(questionNumber, questionDataPart1, questionDataPart2, userAnswer1, userAnswer2) {
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            if (!solutionListDiv) {
+                console.error("Solution list div not found.");
+                return;
+            }
+
+            const solutionItem = document.createElement('div');
+            solutionItem.classList.add('solution-item');
+
+            // Original question text
+            const originalQuestionDiv = document.createElement('div');
+            originalQuestionDiv.classList.add('original-question');
+            originalQuestionDiv.innerHTML = `<strong>${questionNumber}. Câu gốc:</strong> ${questionDataPart1.originalText}`;
+            solutionItem.appendChild(originalQuestionDiv);
+
+            // Correct sentence with highlighted answers for both parts
+            const correctSentenceDiv = document.createElement('div');
+            correctSentenceDiv.classList.add('correct-sentence');
+            // Replace placeholders in the fixed text template with correct answers
+            const combinedFixedText = questionDataPart1.fixedTextTemplate
+                .replace('{answer}', questionDataPart1.correctAnswers[0])
+                .replace('{answer2}', questionDataPart2.correctAnswers[0]);
+            correctSentenceDiv.innerHTML = `<strong>Câu đúng:</strong> ${combinedFixedText}`;
+            solutionItem.appendChild(correctSentenceDiv);
+
+            // Explanation and grammar note (combining explanations from both parts)
+            const explanationDiv = document.createElement('div');
+            explanationDiv.classList.add('explanation');
+            explanationDiv.innerHTML = `<strong>Giải thích:</strong> ${questionDataPart1.explanation} <br> ${questionDataPart2.explanation}<br><em>${questionDataPart1.grammarNote}</em>`;
+            solutionItem.appendChild(explanationDiv);
+
+            solutionListDiv.appendChild(solutionItem);
+        }
+
+        // The resetExercise function is imported from common.js and works universally
+        // because it targets elements by class 'answer-input' and 'feedback-icon'.
+    </script>
+</body>
+</html>

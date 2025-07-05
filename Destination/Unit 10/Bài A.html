@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp: Passive Voice</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp</h1>
+        </div>
+        <h2>A. The words and phrases in bold in each sentence are wrong. Write the correct word or phrase.</h2>
+        <p class="instruction">
+            <strong>Hướng dẫn:</strong> Các từ hoặc cụm từ in đậm trong mỗi câu là sai. Hãy viết từ hoặc cụm từ đúng vào ô trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="grammarForm">
+            <div class="exercise-item">
+                <span class="question-number">1.</span>
+                <span class="text-segment">Every year, several prizes </span>
+                <strong class="text-danger">are giving</strong>
+                <span class="text-segment"> to the best students.</span>
+                <input type="text" class="form-control answer-input" id="q1" name="q1" placeholder="Nhập đáp án...">
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">2.</span>
+                <span class="text-segment">When the pizza </span>
+                <strong class="text-danger">was delivering</strong>
+                <span class="text-segment">, it was cold.</span>
+                <input type="text" class="form-control answer-input" id="q2" name="q2" placeholder="Nhập đáp án...">
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">3.</span>
+                <span class="text-segment">You </span>
+                <strong class="text-danger">will be telling</strong>
+                <span class="text-segment"> when you can come in.</span>
+                <input type="text" class="form-control answer-input" id="q3" name="q3" placeholder="Nhập đáp án...">
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">4.</span>
+                <span class="text-segment">That song </span>
+                <strong class="text-danger">doesn't played</strong>
+                <span class="text-segment"> on the radio very often, is it?</span>
+                <input type="text" class="form-control answer-input" id="q4" name="q4" placeholder="Nhập đáp án...">
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">5.</span>
+                <span class="text-segment">Your money </span>
+                <strong class="text-danger">was stealing</strong>
+                <span class="text-segment"> out of your bag?</span>
+                <input type="text" class="form-control answer-input" id="q5" name="q5" placeholder="Nhập đáp án...">
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">6.</span>
+                <span class="text-segment">We </span>
+                <strong class="text-danger">haven't allowed</strong>
+                <span class="text-segment"> to use a dictionary in the exam yesterday.</span>
+                <input type="text" class="form-control answer-input" id="q6" name="q6" placeholder="Nhập đáp án...">
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">7.</span>
+                <span class="text-segment">That film won't </span>
+                <strong class="text-danger">have shown</strong>
+                <span class="text-segment"> in our local cinema for a long time.</span>
+                <input type="text" class="form-control answer-input" id="q7" name="q7" placeholder="Nhập đáp án...">
+                <i class="feedback-icon fa-solid" id="icon7"></i>
+            </div>
+
+            <div class="exercise-item">
+                <span class="question-number">8.</span>
+                <strong class="text-danger">I will be picked up</strong>
+                <span class="text-segment"> from the station on Saturday?</span>
+                <input type="text" class="form-control answer-input" id="q8" name="q8" placeholder="Nhập đáp án...">
+                <i class="feedback-icon fa-solid" id="icon8"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="../../assets/common.js"></script>
+
+    <script>
+        // Dữ liệu đáp án, câu gốc, dịch nghĩa và giải thích cho từng câu hỏi của bài tập này.
+        const questionsData = {
+            'q1': {
+                correctAnswers: ['are given'], // Corrected from 'are giving'
+                originalText: 'Every year, several prizes <strong>are giving</strong> to the best students.',
+                fixedTextTemplate: 'Every year, several prizes <span class="correct-answer-text">{answer}</span> to the best students.',
+                explanation: 'Thì hiện tại đơn bị động được sử dụng để diễn tả một hành động lặp đi lặp lại hoặc một sự thật chung. Cấu trúc: "be + P.P.". "Prizes" là số nhiều, nên dùng "are given".',
+                grammarNote: 'Cấu trúc: S + am/is/are + P.P. (quá khứ phân từ).'
+            },
+            'q2': {
+                correctAnswers: ['was being delivered'], // Corrected from 'was delivering'
+                originalText: 'When the pizza <strong>was delivering</strong>, it was cold.',
+                fixedTextTemplate: 'When the pizza <span class="correct-answer-text">{answer}</span>, it was cold.',
+                explanation: 'Thì quá khứ tiếp diễn bị động được sử dụng để diễn tả một hành động đang diễn ra trong quá khứ và bị gián đoạn hoặc xảy ra đồng thời với hành động khác. Cấu trúc: "was/were + being + P.P.". Pizza không tự "delivering" mà "was being delivered".',
+                grammarNote: 'Cấu trúc: S + was/were + being + P.P.'
+            },
+            'q3': {
+                correctAnswers: ['will be told'], // Corrected from 'will be telling'
+                originalText: 'You <strong>will be telling</strong> when you can come in.',
+                fixedTextTemplate: 'You <span class="correct-answer-text">{answer}</span> when you can come in.',
+                explanation: 'Thì tương lai đơn bị động. "You" ở đây là người nhận thông tin, không phải người đưa thông tin. Cấu trúc: "will be + P.P.". "Tell" trở thành "told".',
+                grammarNote: 'Cấu trúc: S + will + be + P.P.'
+            },
+            'q4': {
+                correctAnswers: ['isn\'t played', 'is not played'], // Corrected from 'doesn't played'
+                originalText: 'That song <strong>doesn\'t played</strong> on the radio very often, is it?',
+                fixedTextTemplate: 'That song <span class="correct-answer-text">{answer}</span> on the radio very often, is it?',
+                explanation: 'Câu này ở thì hiện tại đơn bị động. Để tạo câu phủ định, ta dùng "isn\'t" hoặc "is not" + P.P., không dùng "doesn\'t".',
+                grammarNote: 'Cấu trúc phủ định: S + am/is/are + not + P.P.'
+            },
+            'q5': {
+                correctAnswers: ['was stolen'], // Corrected from 'was stealing'
+                originalText: 'Your money <strong>was stealing</strong> out of your bag?',
+                fixedTextTemplate: 'Your money <span class="correct-answer-text">{answer}</span> out of your bag?',
+                explanation: 'Thì quá khứ đơn bị động. Tiền không tự "stealing" (đang ăn cắp) mà bị "stolen" (bị ăn cắp). Cấu trúc: "was/were + P.P.". "Steal" là động từ bất quy tắc, P.P. là "stolen".',
+                grammarNote: 'Cấu trúc: S + was/were + P.P.'
+            },
+            'q6': {
+                correctAnswers: ['weren\'t allowed', 'were not allowed'], // Corrected from 'haven't allowed'
+                originalText: 'We <strong>haven\'t allowed</strong> to use a dictionary in the exam yesterday.',
+                fixedTextTemplate: 'We <span class="correct-answer-text">{answer}</span> to use a dictionary in the exam yesterday.',
+                explanation: 'Sự việc "không được phép" xảy ra vào "yesterday" (hôm qua), nên phải sử dụng thì quá khứ đơn bị động. "We" đi với "were not allowed" hoặc "weren\'t allowed".',
+                grammarNote: 'Cấu trúc: S + was/were + P.P. Với "yesterday", cần dùng quá khứ đơn.'
+            },
+            'q7': {
+                correctAnswers: ['have been shown'], // Corrected from 'won't have shown'
+                originalText: 'That film won\'t <strong>have shown</strong> in our local cinema for a long time.',
+                fixedTextTemplate: 'That film won\'t <span class="correct-answer-text">{answer}</span> in our local cinema for a long time.',
+                explanation: 'Câu này cần thì hiện tại hoàn thành bị động, kết hợp với "for a long time" (chỉ một khoảng thời gian kéo dài đến hiện tại). "Won\'t have shown" là thì tương lai hoàn thành, không phù hợp ở đây. "Film" không tự chiếu mà được chiếu.',
+                grammarNote: 'Cấu trúc: S + have/has + been + P.P.'
+            },
+            'q8': {
+                correctAnswers: ['will I be picked up'], // Corrected from 'I will be picked up'
+                originalText: '<strong>I will be picked up</strong> from the station on Saturday?',
+                fixedTextTemplate: '<span class="correct-answer-text">{answer}</span> from the station on Saturday?',
+                explanation: 'Đây là câu hỏi ở thì tương lai đơn bị động. Trong câu hỏi, trợ động từ "will" phải đảo lên trước chủ ngữ "I".',
+                grammarNote: 'Cấu trúc câu hỏi: Will + S + be + P.P.?'
+            }
+        };
+
+        /**
+         * Submits the user's answers for the Passive Voice exercise,
+         * calculates the score, provides feedback, and displays detailed solutions.
+         * This function uses generic helpers from common.js.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            // Clear previous solutions and show solution section
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = '';
+            document.getElementById('detailedSolution').style.display = 'block';
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qId = `q${i}`;
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${i}`);
+                const questionData = questionsData[qId];
+
+                if (!inputElement || !questionData) {
+                    console.warn(`Missing element or data for ${qId}`);
+                    continue;
+                }
+
+                const userAnswer = normalizeAnswer(inputElement.value); // Use normalizeAnswer from common.js
+                let isCorrect = false;
+
+                // Logic kiểm tra đáp án CỤ THỂ cho bài tập này (mỗi bài có thể khác)
+                isCorrect = questionData.correctAnswers.some(correctAns => normalizeAnswer(correctAns) === userAnswer);
+
+                // HIỂN THỊ PHẢN HỒI (LOGIC CỤ THỂ CHO BÀI NÀY)
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (isCorrect) {
+                    inputElement.classList.add('is-valid');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                }
+
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+                // KẾT THÚC LOGIC HIỂN THỊ PHẢN HỒI
+
+                if (isCorrect) {
+                    score++;
+                }
+
+                // Thêm lời giải chi tiết sử dụng hàm chung
+                addSolutionItem(i, questionData, userAnswer); // Use addSolutionItem from common.js
+            }
+
+            // Hiển thị điểm số sử dụng hàm chung
+            displayScore(score, totalQuestions); // Use displayScore from common.js
+        }
+
+        // Hàm resetExercise đã được chuyển sang common.js và được gọi trực tiếp từ HTML.
+    </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp: Passive Voice - Phần C</title>
+    <!-- Bootstrap CSS for styling and responsiveness -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for "Open Sans" -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for feedback icons (check/cross) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom stylesheet for additional styling -->
+    <link rel="stylesheet" href="../../assets/style.css">
+    <style>
+        /* Custom styling for the image in Exercise C */
+        .exercise-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Adjust input width for longer answers if needed */
+        .exercise-item .answer-input.long-answer {
+            min-width: 200px; /* Adjust as necessary */
+            max-width: 300px;
+        }
+
+        /* Styling for the verb box */
+        .verb-box {
+            background-color: #e3f2fd; /* Light blue background */
+            border: 1px solid #90caf9; /* Blue border */
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.1em;
+            color: #1a237e; /* Dark blue text */
+            font-weight: 600;
+        }
+        .verb-box span {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 5px 10px;
+            background-color: #bbdefb; /* Lighter blue for individual verbs */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <!-- Main heading of the exercise -->
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp</h1>
+        </div>
+        <!-- Sub-heading for this specific exercise part -->
+        <h2>C. Look at the pictures and complete the sentences. Use the correct passive form of the verbs in the box. Add any other words you need.</h2>
+        <!-- Instructions for the user -->
+        <p class="instruction">
+            <strong>Hướng dẫn:</strong> Nhìn vào các bức tranh và hoàn thành câu. Sử dụng dạng bị động đúng của các động từ trong hộp. Thêm bất kỳ từ nào bạn cần.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <!-- Image for the exercise -->
+        <img src="image_C.png" alt="Exercise C Images" class="exercise-image">
+
+        <!-- Verb box -->
+        <div class="verb-box">
+            Các động từ cần dùng:
+            <span>call</span>
+            <span>catch</span>
+            <span>find</span>
+            <span>investigate</span>
+            <span>rob</span>
+            <span>send</span>
+        </div>
+
+        <!-- Form containing all the exercise questions -->
+        <form id="grammarForm">
+            <!-- Question 1 -->
+            <div class="exercise-item">
+                <span class="question-number">1.</span>
+                <span class="text-segment">At ten o'clock yesterday morning, the local bank in the high street </span>
+                <input type="text" class="form-control answer-input long-answer" id="q1" name="q1">
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="exercise-item">
+                <span class="question-number">2.</span>
+                <span class="text-segment">At one minute past ten, the police </span>
+                <input type="text" class="form-control answer-input long-answer" id="q2" name="q2">
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="exercise-item">
+                <span class="question-number">3.</span>
+                <span class="text-segment">A few minutes later, the police arrived at the bank. The crime scene </span>
+                <input type="text" class="form-control answer-input long-answer" id="q3" name="q3">
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="exercise-item">
+                <span class="question-number">4.</span>
+                <span class="text-segment">At twenty past ten, the robbers' fingerprints </span>
+                <input type="text" class="form-control answer-input long-answer" id="q4" name="q4">
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="exercise-item">
+                <span class="question-number">5.</span>
+                <span class="text-segment">At half past eleven, the robbers </span>
+                <input type="text" class="form-control answer-input long-answer" id="q5" name="q5">
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="exercise-item">
+                <span class="question-number">6.</span>
+                <span class="text-segment">Next week, they </span>
+                <input type="text" class="form-control answer-input long-answer" id="q6" name="q6">
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <!-- Score display area -->
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <!-- Detailed solution section, hidden by default -->
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                <!-- Solutions will be dynamically added here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Link to common JavaScript functions -->
+    <script src="../../assets/common.js"></script>
+
+    <script>
+        // Data containing correct answers, original text, fixed text templates, explanations, and grammar notes for each question.
+        const questionsData = {
+            'q1': {
+                correctAnswers: ['was robbed'],
+                originalText: 'At ten o\'clock yesterday morning, the local bank in the high street __________.',
+                fixedTextTemplate: 'At ten o\'clock yesterday morning, the local bank in the high street <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Sự việc "rob" (cướp) xảy ra vào "yesterday morning" và ngân hàng là đối tượng bị cướp, nên dùng thì quá khứ đơn bị động. "The local bank" là số ít, nên dùng "was robbed".',
+                grammarNote: 'Cấu trúc: S + was/were + P.P.'
+            },
+            'q2': {
+                correctAnswers: ['were called'],
+                originalText: 'At one minute past ten, the police __________.',
+                fixedTextTemplate: 'At one minute past ten, the police <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Sự việc "call" (gọi) xảy ra vào "one minute past ten" và cảnh sát là đối tượng được gọi đến, nên dùng thì quá khứ đơn bị động. "The police" thường được coi là danh từ số nhiều khi nói về các sĩ quan cảnh sát, nên dùng "were called".',
+                grammarNote: 'Cấu trúc: S + was/were + P.P.'
+            },
+            'q3': {
+                correctAnswers: ['was investigated'],
+                originalText: 'A few minutes later, the police arrived at the bank. The crime scene __________.',
+                fixedTextTemplate: 'A few minutes later, the police arrived at the bank. The crime scene <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Sự việc "investigate" (điều tra) xảy ra sau khi cảnh sát đến và "crime scene" là đối tượng được điều tra, nên dùng thì quá khứ đơn bị động. "The crime scene" là số ít, nên dùng "was investigated".',
+                grammarNote: 'Cấu trúc: S + was/were + P.P.'
+            },
+            'q4': {
+                correctAnswers: ['were found'],
+                originalText: 'At twenty past ten, the robbers\' fingerprints __________.',
+                fixedTextTemplate: 'At twenty past ten, the robbers\' fingerprints <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Sự việc "find" (tìm thấy) xảy ra vào "twenty past ten" và "fingerprints" là đối tượng được tìm thấy, nên dùng thì quá khứ đơn bị động. "Fingerprints" là số nhiều, nên dùng "were found".',
+                grammarNote: 'Cấu trúc: S + was/were + P.P.'
+            },
+            'q5': {
+                correctAnswers: ['were caught'],
+                originalText: 'At half past eleven, the robbers __________.',
+                fixedTextTemplate: 'At half past eleven, the robbers <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Sự việc "catch" (bắt) xảy ra vào "half past eleven" và "robbers" là đối tượng bị bắt, nên dùng thì quá khứ đơn bị động. "The robbers" là số nhiều, nên dùng "were caught".',
+                grammarNote: 'Cấu trúc: S + was/were + P.P.'
+            },
+            'q6': {
+                correctAnswers: ['will be sent to prison'],
+                originalText: 'Next week, they __________.',
+                fixedTextTemplate: 'Next week, they <span class="correct-answer-text">{answer}</span>.',
+                explanation: 'Sự việc "send" (gửi đi) xảy ra vào "next week" và "they" (ám chỉ bọn cướp) là đối tượng bị gửi đi (đến nhà tù), nên dùng thì tương lai đơn bị động. "They" là số nhiều, nên dùng "will be sent". Cần thêm "to prison" để hoàn chỉnh nghĩa.',
+                grammarNote: 'Cấu trúc: S + will + be + P.P.'
+            }
+        };
+
+        /**
+         * Submits the user's answers for the Passive Voice exercise,
+         * calculates the score, provides feedback, and displays detailed solutions.
+         * This function uses generic helpers from common.js.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            // Clear previous solutions and show solution section
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = '';
+            document.getElementById('detailedSolution').style.display = 'block';
+
+            // Loop through all questions
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qId = `q${i}`;
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${i}`);
+                const questionData = questionsData[qId];
+
+                if (!inputElement || !questionData) {
+                    console.warn(`Missing element or data for ${qId}`);
+                    continue;
+                }
+
+                const userAnswer = normalizeAnswer(inputElement.value); // Use normalizeAnswer from common.js
+                let isCorrect = false;
+
+                // Check if the user's answer matches any of the correct answers
+                isCorrect = questionData.correctAnswers.some(correctAns => normalizeAnswer(correctAns) === userAnswer);
+
+                // Display feedback on the input field
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (isCorrect) {
+                    inputElement.classList.add('is-valid');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                }
+
+                // Display feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                if (isCorrect) {
+                    score++;
+                }
+
+                // Add detailed solution using the common function
+                addSolutionItem(i, questionData, userAnswer); // Use addSolutionItem from common.js
+            }
+
+            // Display the final score using the common function
+            displayScore(score, totalQuestions); // Use displayScore from common.js
+        }
+
+        // The resetExercise function is imported from common.js and works universally
+        // because it targets elements by class 'answer-input' and 'feedback-icon'.
+    </script>
+</body>
+</html>

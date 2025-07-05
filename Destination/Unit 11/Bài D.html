@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp: Passive Voice - Phần D (Viết lại câu)</title>
+    <!-- Bootstrap CSS for styling and responsiveness -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for "Open Sans" -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for feedback icons (check/cross) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom stylesheet for additional styling -->
+    <link rel="stylesheet" href="../../assets/style.css">
+    <style>
+        /* Adjust input width for longer answers if needed */
+        .exercise-item .answer-input.long-answer {
+            min-width: 250px; /* Adjust as necessary */
+            max-width: 400px;
+        }
+        .exercise-item .original-sentence {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 5px;
+            display: block; /* Ensure it takes its own line */
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <!-- Main heading of the exercise -->
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp</h1>
+        </div>
+        <!-- Sub-heading for this specific exercise part -->
+        <h2>D. Complete each second sentence so that it has a similar meaning to the first sentence. Write no more than four words.</h2>
+        <!-- Instructions for the user -->
+        <p class="instruction">
+            <strong>Hướng dẫn:</strong> Hoàn thành câu thứ hai sao cho nó có ý nghĩa tương tự với câu đầu tiên. Viết không quá bốn từ.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <!-- Form containing all the exercise questions -->
+        <form id="grammarForm">
+            <!-- Question 1 -->
+            <div class="exercise-item">
+                <span class="question-number">1.</span>
+                <span class="original-sentence">I think John has taken my jacket.</span>
+                <span class="text-segment">I think my jacket </span>
+                <input type="text" class="form-control answer-input long-answer" id="q1" name="q1">
+                <span class="text-segment"> John.</span>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="exercise-item">
+                <span class="question-number">2.</span>
+                <span class="original-sentence">You should cook the chicken for at least an hour.</span>
+                <span class="text-segment">The chicken </span>
+                <input type="text" class="form-control answer-input long-answer" id="q2" name="q2">
+                <span class="text-segment"> for at least an hour.</span>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="exercise-item">
+                <span class="question-number">3.</span>
+                <span class="original-sentence">They're showing that film at the cinema in town.</span>
+                <span class="text-segment">That film </span>
+                <input type="text" class="form-control answer-input long-answer" id="q3" name="q3">
+                <span class="text-segment"> at the cinema in town.</span>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="exercise-item">
+                <span class="question-number">4.</span>
+                <span class="original-sentence">They hadn't invented digital cameras when we took that photo.</span>
+                <span class="text-segment">Digital cameras </span>
+                <input type="text" class="form-control answer-input long-answer" id="q4" name="q4">
+                <span class="text-segment"> when that photo was taken.</span>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="exercise-item">
+                <span class="question-number">5.</span>
+                <span class="original-sentence">When I got there, Carly was doing the ironing, so I didn't have to do it!</span>
+                <span class="text-segment">When I got there, the ironing </span>
+                <input type="text" class="form-control answer-input long-answer" id="q5" name="q5">
+                <span class="text-segment"> Carly, so I didn't have to do it!</span>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="exercise-item">
+                <span class="question-number">6.</span>
+                <span class="original-sentence">They were using hot soapy water to wash all the cars.</span>
+                <span class="text-segment">All the cars </span>
+                <input type="text" class="form-control answer-input long-answer" id="q6" name="q6">
+                <span class="text-segment"> hot soapy water.</span>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Link to common JavaScript functions -->
+    <script src="../../assets/common.js"></script>
+
+    <script>
+        // Data containing correct answers, original text, fixed text templates, explanations, and grammar notes for each question.
+        const questionsData = {
+            'q1': {
+                correctAnswers: ['has been taken by'],
+                originalText: 'I think John has taken my jacket. <br> I think my jacket __________ John.',
+                fixedTextTemplate: 'I think my jacket <span class="correct-answer-text">{answer}</span> John.',
+                explanation: 'Chuyển sang thì hiện tại hoàn thành bị động. "My jacket" là chủ ngữ bị động, "taken" là quá khứ phân từ của "take".',
+                grammarNote: 'Cấu trúc: S + has/have + been + P.P. + by + O.'
+            },
+            'q2': {
+                correctAnswers: ['should be cooked'],
+                originalText: 'You should cook the chicken for at least an hour. <br> The chicken __________ for at least an hour.',
+                fixedTextTemplate: 'The chicken <span class="correct-answer-text">{answer}</span> for at least an hour.',
+                explanation: 'Chuyển sang cấu trúc bị động với động từ khuyết thiếu "should". "The chicken" là chủ ngữ bị động, "cooked" là quá khứ phân từ của "cook".',
+                grammarNote: 'Cấu trúc: S + modal verb + be + P.P.'
+            },
+            'q3': {
+                correctAnswers: ['is being shown'],
+                originalText: 'They\'re showing that film at the cinema in town. <br> That film __________ at the cinema in town.',
+                fixedTextTemplate: 'That film <span class="correct-answer-text">{answer}</span> at the cinema in town.',
+                explanation: 'Chuyển sang thì hiện tại tiếp diễn bị động. "That film" là chủ ngữ bị động, "shown" là quá khứ phân từ của "show".',
+                grammarNote: 'Cấu trúc: S + am/is/are + being + P.P.'
+            },
+            'q4': {
+                correctAnswers: ['hadn\'t been invented'],
+                originalText: 'They hadn\'t invented digital cameras when we took that photo. <br> Digital cameras __________ when that photo was taken.',
+                fixedTextTemplate: 'Digital cameras <span class="correct-answer-text">{answer}</span> when that photo was taken.',
+                explanation: 'Chuyển sang thì quá khứ hoàn thành bị động. "Digital cameras" là chủ ngữ bị động, "invented" là quá khứ phân từ của "invent".',
+                grammarNote: 'Cấu trúc: S + had + not + been + P.P.'
+            },
+            'q5': {
+                correctAnswers: ['was being ironed by'],
+                originalText: 'When I got there, Carly was doing the ironing, so I didn\'t have to do it! <br> When I got there, the ironing __________ Carly, so I didn\'t have to do it!',
+                fixedTextTemplate: 'When I got there, the ironing <span class="correct-answer-text">{answer}</span> Carly, so I didn\'t have to do it!',
+                explanation: 'Chuyển sang thì quá khứ tiếp diễn bị động. "The ironing" là chủ ngữ bị động, "ironed" là quá khứ phân từ của "iron".',
+                grammarNote: 'Cấu trúc: S + was/were + being + P.P. + by + O.'
+            },
+            'q6': {
+                correctAnswers: ['were being washed with'],
+                originalText: 'They were using hot soapy water to wash all the cars. <br> All the cars __________ hot soapy water.',
+                fixedTextTemplate: 'All the cars <span class="correct-answer-text">{answer}</span> hot soapy water.',
+                explanation: 'Chuyển sang thì quá khứ tiếp diễn bị động. "All the cars" là chủ ngữ bị động, "washed" là quá khứ phân từ của "wash". "With" được dùng để chỉ công cụ.',
+                grammarNote: 'Cấu trúc: S + was/were + being + P.P. + with + O.'
+            }
+        };
+
+        /**
+         * Submits the user's answers for the Passive Voice exercise,
+         * calculates the score, provides feedback, and displays detailed solutions.
+         * This function uses generic helpers from common.js.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            // Clear previous solutions and show solution section
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = '';
+            document.getElementById('detailedSolution').style.display = 'block';
+
+            // Loop through all questions
+            for (let i = 1; i <= totalQuestions; i++) {
+                const qId = `q${i}`;
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${i}`);
+                const questionData = questionsData[qId];
+
+                if (!inputElement || !questionData) {
+                    console.warn(`Missing element or data for ${qId}`);
+                    continue;
+                }
+
+                const userAnswer = normalizeAnswer(inputElement.value);
+                let isCorrect = false;
+
+                // Check if the user's answer matches any of the correct answers
+                isCorrect = questionData.correctAnswers.some(correctAns => normalizeAnswer(correctAns) === userAnswer);
+
+                // Display feedback on the input field
+                inputElement.classList.remove('is-valid', 'is-invalid');
+                if (isCorrect) {
+                    inputElement.classList.add('is-valid');
+                } else {
+                    inputElement.classList.add('is-invalid');
+                }
+
+                // Display feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                if (isCorrect) {
+                    score++;
+                }
+
+                // Add detailed solution using the common function
+                addSolutionItem(i, questionData, userAnswer); // Use addSolutionItem from common.js
+            }
+
+            // Display the final score using the common function
+            displayScore(score, totalQuestions); // Use displayScore from common.js
+        }
+
+        // The resetExercise function is imported from common.js and works universally
+    </script>
+</body>
+</html>
+
+
+
+

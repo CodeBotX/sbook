@@ -1,0 +1,159 @@
+Bản Hướng Dẫn Chi Tiết: Tạo Bài Tập Ngữ Pháp Từ Ảnh (Output: 1 File HTML)
+
+Chào bạn AI,
+
+Tôi muốn bạn tạo một bài tập ngữ pháp hoàn chỉnh dựa trên hình ảnh tôi gửi kèm. Hãy tạo một file HTML duy nhất chứa toàn bộ cấu trúc bài tập, dữ liệu câu hỏi và logic JavaScript, tuân thủ các quy ước của hệ thống CSS và JS chung hiện có của tôi.
+
+Phần 1: Thông tin bạn (người dùng) cần cung cấp:
+
+Hình ảnh bài tập: Luôn gửi kèm ảnh chất lượng cao của bài tập. Đây là nguồn chính để trích xuất nội dung câu hỏi, đáp án, và các phần văn bản.
+
+Dạng bài tập: Mô tả rõ ràng dạng bài tập (ví dụ: "Tìm lỗi sai và sửa", "Điền từ vào chỗ trống", "Trắc nghiệm", "Viết lại câu", "Ghép cặp"). Thông tin này cực kỳ quan trọng để tôi hiểu cấu trúc câu hỏi, cách kiểm tra đáp án, và cách hiển thị lời giải phù hợp.
+
+Phần 2: Cấu trúc File HTML được tạo (Blueprint cho AI):
+File HTML sẽ là một trang độc lập, có cấu trúc cơ bản như sau:
+
+HTML
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+    <div class="container container-main">
+        <h1>Bài Tập Ngữ Pháp</h1>
+        <h2>[Tiêu đề phụ hoặc chủ đề bài tập, trích xuất từ ảnh]</h2>
+        <p class="instruction">[Nội dung hướng dẫn làm bài, trích xuất từ ảnh]</p>
+        <form id="grammarForm">
+            <div class="question-item">
+                <span class="question-number">1.</span> <span class="question-text">Phần văn bản không đổi của câu </span>
+                <strong class="text-danger">lỗi sai hoặc chỗ trống cần điền</strong> <span class="question-text"> phần còn lại của câu.</span>
+                <input type="text" class="form-control-custom" id="q1" name="q1" placeholder="Nhập đáp án...">
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+            <div class="buttons text-center">
+                <button type="button" class="btn btn-primary" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+        <div id="scoreDisplay" class="score-display"></div>
+        <div id="detailedSolution" class="solution-section">
+            <h2>Lời giải chi tiết</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../../assets/common.js"></script>
+    <script>
+        // Toàn bộ mã JavaScript của bài tập (questionsData và submitAnswers()) sẽ được đặt ở đây.
+    </script>
+</body>
+</html>
+Phần 3: Quy ước CSS và JavaScript (Để AI hiểu cách tạo HTML/JS):
+
+A. Quy ước từ style.css (đã được bạn cung cấp):
+
+.container-main: Là vùng chứa chính của toàn bộ bài tập, đảm bảo căn giữa, có khoảng đệm, bo góc và đổ bóng nhẹ.
+
+h1, h2: Định dạng tiêu đề chính và tiêu đề phụ, căn giữa.
+
+.instruction: Đoạn văn bản hướng dẫn làm bài, được định dạng nổi bật với nền xanh lá nhạt và đường biên trái.
+
+.question-item: Mỗi dòng câu hỏi, được thiết lập display: flex và align-items: baseline để các thành phần nằm trên cùng một dòng và căn chỉnh theo đường chân chữ. Nó cũng flex-wrap để tự xuống dòng trên màn hình nhỏ.
+
+.question-number / .question-text: Định dạng cho số thứ tự và các phần văn bản cố định trong câu hỏi.
+
+strong.text-danger: Được dùng để highlight (làm nổi bật màu đỏ) phần từ/cụm từ bị sai hoặc cần điền trong câu gốc của dạng bài "Tìm lỗi sai và sửa".
+
+.form-control-custom (thay thế cho .answer-input): Đây là input tùy chỉnh, chỉ có border-bottom (dạng gạch chân), background-color: transparent, min-width: 80px và max-width: 180px. Khi người dùng nhập đúng, JavaScript sẽ thêm class is-valid làm đường kẻ dưới chuyển màu xanh (#198754). Khi sai, thêm is-invalid làm đường kẻ dưới chuyển màu đỏ (#dc3545).
+
+.feedback-icon: Icon (Font Awesome) đặt cạnh input, ban đầu có display: none. JavaScript sẽ thay đổi icon thành fa-check-circle (màu xanh lá từ text-success) khi đúng, hoặc fa-times-circle (màu đỏ từ text-danger) khi sai, và đặt display: inline-block để hiển thị.
+
+.buttons: Vùng chứa các nút "Kiểm tra" và "Làm lại", căn giữa.
+
+#scoreDisplay.score-display: Vùng hiển thị điểm số cuối cùng. Ban đầu display: none, JavaScript sẽ hiển thị nó. Có các class text-success, text-warning, text-danger để hiển thị màu sắc theo kết quả.
+
+#detailedSolution.solution-section: Vùng chứa lời giải chi tiết. Ban đầu display: none, JavaScript sẽ hiển thị nó sau khi kiểm tra.
+
+.solution-list .solution-item: Mỗi mục lời giải trong danh sách.
+
+.correct-answer-text: Phần đáp án đúng trong lời giải chi tiết sẽ được định dạng font-weight: 700 (in đậm), color: #198754 (xanh lá), và text-decoration: underline (gạch chân).
+
+B. Các hàm JavaScript từ common.js (AI cần gọi và sử dụng):
+Các hàm này là global và có sẵn để sử dụng trong <script> của bài tập:
+
+normalizeAnswer(inputString): Chức năng: Chuyển đổi chuỗi thành chữ thường, xóa khoảng trắng thừa, thay thế nhiều khoảng trắng bằng một khoảng trắng duy nhất. Bạn phải sử dụng hàm này để chuẩn hóa cả đáp án đúng trong questionsData và câu trả lời của người dùng.
+
+addSolutionItem(questionNumber, questionData, userAnswer): Chức năng: Thêm một mục lời giải chi tiết vào vùng #detailedSolution .solution-list. Hàm này tự động tạo cấu trúc HTML cho lời giải dựa trên dữ liệu questionData.
+
+displayScore(score, totalQuestions): Chức năng: Tính toán và hiển thị điểm số cuối cùng trong vùng #scoreDisplay, đồng thời áp dụng màu sắc phù hợp (xanh, vàng, đỏ).
+
+resetExercise(): Chức năng: Đặt lại toàn bộ trạng thái bài tập (xóa input, ẩn feedback, ẩn điểm, ẩn lời giải). Nút "Làm lại" trong HTML sẽ gọi trực tiếp hàm này.
+
+Phần 4: Nội dung <script> JavaScript cụ thể cho bài tập (do AI tạo):
+Toàn bộ logic bài tập sẽ nằm trong một thẻ <script> duy nhất ở cuối file HTML.
+
+const questionsData = { ... };:
+
+Đây là đối tượng JavaScript chứa tất cả dữ liệu cần thiết cho mỗi câu hỏi, được trích xuất từ hình ảnh bài tập.
+
+Mỗi khóa của đối tượng này sẽ là qX (ví dụ: 'q1', 'q2') tương ứng với id của input.
+
+Mỗi giá trị qX là một đối tượng chứa các thuộc tính sau:
+
+correctAnswers: Mảng các chuỗi đáp án đúng đã được chuẩn hóa (sử dụng normalizeAnswer()). Đây có thể là nhiều đáp án nếu một câu hỏi có nhiều cách trả lời chấp nhận được.
+
+originalText: Chuỗi HTML của câu gốc từ bài tập. Đối với dạng "Tìm lỗi sai và sửa", phần lỗi sai cần được bẻ khóa trong thẻ <strong class="text-danger"> (ví dụ: Every year, several prizes <strong>are giving</strong>...).
+
+fixedTextTemplate: Chuỗi HTML của câu đã sửa đúng. Sử dụng placeholder <span class="correct-answer-text">{answer}</span> tại vị trí đáp án để hàm addSolutionItem có thể điền vào.
+
+explanation: Chuỗi HTML giải thích chi tiết về ngữ pháp hoặc lý do của đáp án đúng.
+
+grammarNote: Chuỗi ghi chú ngữ pháp ngắn gọn liên quan đến câu hỏi.
+
+function submitAnswers() { ... }:
+
+Đây là hàm chính được gọi khi người dùng nhấn nút "Kiểm tra".
+
+Logic chính:
+
+Khởi tạo biến score = 0;.
+
+Lấy tổng số câu hỏi (totalQuestions).
+
+Đảm bảo vùng lời giải (#detailedSolution) được hiển thị (style.display = 'block';).
+
+Vòng lặp qua từng câu hỏi (ví dụ: for (let i = 1; i <= totalQuestions; i++)).
+
+Trong mỗi vòng lặp:
+
+Lấy inputElement và feedbackIcon bằng id (qX, iconX).
+
+Lấy giá trị của inputElement (.value).
+
+Chuẩn hóa câu trả lời của người dùng bằng cách gọi normalizeAnswer(userAnswer).
+
+Lấy dữ liệu questionData tương ứng từ đối tượng questionsData.
+
+Kiểm tra xem userAnswer đã chuẩn hóa có nằm trong mảng questionData.correctAnswers hay không.
+
+Logic hiển thị phản hồi TRỰC TIẾP (QUAN TRỌNG):
+
+Xóa các class is-valid, is-invalid hiện có khỏi inputElement.classList.
+
+Nếu isCorrect (đáp án đúng): Thêm is-valid vào inputElement.classList. Tăng score lên 1. Thêm fa-check-circle, text-success vào feedbackIcon.classList.
+
+Nếu !isCorrect (đáp án sai): Thêm is-invalid vào inputElement.classList. Thêm fa-times-circle, text-danger vào feedbackIcon.classList.
+
+Đảm bảo feedbackIcon.style.display = 'inline-block'; để icon hiển thị.
+
+Gọi addSolutionItem(i, questionData, userAnswer) để thêm mục lời giải chi tiết cho câu hỏi hiện tại.
+
+Sau khi vòng lặp kết thúc, gọi displayScore(score, totalQuestions) để hiển thị điểm tổng.
