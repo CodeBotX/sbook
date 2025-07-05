@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Trắc Nghiệm Ngữ Pháp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+        .question-item .form-check {
+            margin-bottom: 10px;
+            padding-left: 2.5em; /* Space for custom radio button */
+        }
+        .question-item .form-check-input {
+            margin-top: 0.3em;
+            margin-left: -1.5em;
+        }
+        .question-item .form-check-label {
+            font-size: 1em;
+            color: #555;
+            cursor: pointer;
+        }
+        .question-item .form-check-label:hover {
+            color: #007bff;
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .question-item .form-check-label {
+                font-size: 0.95em;
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Trắc Nghiệm Ngữ Pháp</h1>
+        </div>
+        <h2>Chọn đáp án đúng nhất</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Choose the correct answer.
+            <br>
+            <strong>Hướng dẫn:</strong> Chọn đáp án đúng nhất.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="multipleChoiceForm">
+            <div class="question-item">
+                <p class="question-text">1. .................... never played this game before.</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q1" id="q1_a" value="A">
+                    <label class="form-check-label" for="q1_a">A I've</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q1" id="q1_b" value="B">
+                    <label class="form-check-label" for="q1_b">B I</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon1"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">2. Adam .................... his room last night.</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q2" id="q2_a" value="A">
+                    <label class="form-check-label" for="q2_a">A has tidied</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q2" id="q2_b" value="B">
+                    <label class="form-check-label" for="q2_b">B tidied</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon2"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">3. .................... here since 2005?</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q3" id="q3_a" value="A">
+                    <label class="form-check-label" for="q3_a">A Have you lived</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q3" id="q3_b" value="B">
+                    <label class="form-check-label" for="q3_b">B Did you live</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon3"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">4. Carol and I .................... to the cinema three nights ago.</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q4" id="q4_a" value="A">
+                    <label class="form-check-label" for="q4_a">A have been</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q4" id="q4_b" value="B">
+                    <label class="form-check-label" for="q4_b">B went</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon4"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">5. It's the first time .................... our flat, isn't it?</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q5" id="q5_a" value="A">
+                    <label class="form-check-label" for="q5_a">A you've visited</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q5" id="q5_b" value="B">
+                    <label class="form-check-label" for="q5_b">B you visited</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon5"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">6. They .................... the baby a name yet.</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q6" id="q6_a" value="A">
+                    <label class="form-check-label" for="q6_a">A haven't given</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q6" id="q6_b" value="B">
+                    <label class="form-check-label" for="q6_b">B didn't give</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon6"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">7. .................... to New York when you went to the States last summer?</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q7" id="q7_a" value="A">
+                    <label class="form-check-label" for="q7_a">A Have you been</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q7" id="q7_b" value="B">
+                    <label class="form-check-label" for="q7_b">B Did you go</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon7"></i>
+            </div>
+
+            <div class="question-item">
+                <p class="question-text">8. .................... an e-mail before?</p>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q8" id="q8_a" value="A">
+                    <label class="form-check-label" for="q8_a">A Have you ever sent</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q8" id="q8_b" value="B">
+                    <label class="form-check-label" for="q8_b">B Did you ever send</label>
+                </div>
+                <i class="feedback-icon fa-solid" id="icon8"></i>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, original text, options, explanations, and translations
+        const questionsData = {
+            'q1': {
+                text: '.................... never played this game before.',
+                options: {
+                    'A': 'I\'ve',
+                    'B': 'I'
+                },
+                correct: 'A',
+                fullSentence: 'I\'ve never played this game before.',
+                translation: 'Tôi chưa bao giờ chơi trò này trước đây.',
+                explanation: 'Sử dụng thì Hiện tại Hoàn thành Đơn với "never" để diễn tả kinh nghiệm hoặc trải nghiệm chưa từng xảy ra tính đến thời điểm hiện tại. "I\'ve" là viết tắt của "I have".',
+                grammar_note: 'Cấu trúc: S + have/has + never + P.P.'
+            },
+            'q2': {
+                text: 'Adam .................... his room last night.',
+                options: {
+                    'A': 'has tidied',
+                    'B': 'tidied'
+                },
+                correct: 'B',
+                fullSentence: 'Adam tidied his room last night.',
+                translation: 'Adam đã dọn phòng của mình tối qua.',
+                explanation: '"Last night" là một dấu hiệu thời gian cụ thể trong quá khứ, vì vậy thì Quá khứ Đơn là phù hợp.',
+                grammar_note: 'Sử dụng thì Quá khứ Đơn cho hành động đã hoàn thành tại một thời điểm cụ thể trong quá khứ.'
+            },
+            'q3': {
+                text: '.................... here since 2005?',
+                options: {
+                    'A': 'Have you lived',
+                    'B': 'Did you live'
+                },
+                correct: 'A',
+                fullSentence: 'Have you lived here since 2005?',
+                translation: 'Bạn đã sống ở đây từ năm 2005 phải không?',
+                explanation: '"Since 2005" chỉ một hành động bắt đầu trong quá khứ và vẫn tiếp diễn đến hiện tại, vì vậy thì Hiện tại Hoàn thành Đơn là phù hợp.',
+                grammar_note: 'Cấu trúc: Have/Has + S + P.P. + since + mốc thời gian.'
+            },
+            'q4': {
+                text: 'Carol and I .................... to the cinema three nights ago.',
+                options: {
+                    'A': 'have been',
+                    'B': 'went'
+                },
+                correct: 'B',
+                fullSentence: 'Carol and I went to the cinema three nights ago.',
+                translation: 'Carol và tôi đã đi xem phim ba đêm trước.',
+                explanation: '"Three nights ago" là một dấu hiệu thời gian cụ thể trong quá khứ, vì vậy thì Quá khứ Đơn là phù hợp.',
+                grammar_note: 'Sử dụng thì Quá khứ Đơn cho hành động đã hoàn thành tại một thời điểm cụ thể trong quá khứ.'
+            },
+            'q5': {
+                text: 'It\'s the first time .................... our flat, isn\'t it?',
+                options: {
+                    'A': 'you\'ve visited',
+                    'B': 'you visited'
+                },
+                correct: 'A',
+                fullSentence: 'It\'s the first time you\'ve visited our flat, isn\'t it?',
+                translation: 'Đây là lần đầu tiên bạn đến thăm căn hộ của chúng tôi, phải không?',
+                explanation: 'Cấu trúc "It\'s the first time" thường đi với thì Hiện tại Hoàn thành Đơn để diễn tả một trải nghiệm lần đầu tiên xảy ra.',
+                grammar_note: 'Cấu trúc: It\'s the first time + S + have/has + P.P.'
+            },
+            'q6': {
+                text: 'They .................... the baby a name yet.',
+                options: {
+                    'A': 'haven\'t given',
+                    'B': 'didn\'t give'
+                },
+                correct: 'A',
+                fullSentence: 'They haven\'t given the baby a name yet.',
+                translation: 'Họ vẫn chưa đặt tên cho em bé.',
+                explanation: '"Yet" thường được sử dụng trong câu phủ định và nghi vấn của thì Hiện tại Hoàn thành Đơn để chỉ một hành động chưa xảy ra tính đến thời điểm hiện tại.',
+                grammar_note: 'Cấu trúc phủ định: S + haven\'t/hasn\'t + P.P. "Yet" thường đứng ở cuối câu.'
+            },
+            'q7': {
+                text: '.................... to New York when you went to the States last summer?',
+                options: {
+                    'A': 'Have you been',
+                    'B': 'Did you go'
+                },
+                correct: 'B',
+                fullSentence: 'Did you go to New York when you went to the States last summer?',
+                translation: 'Bạn đã đi New York khi bạn đến Mỹ vào mùa hè năm ngoái phải không?',
+                explanation: '"Last summer" và "when you went to the States" là các dấu hiệu thời gian cụ thể trong quá khứ, vì vậy thì Quá khứ Đơn là phù hợp cho câu hỏi về hành động đã xảy ra.',
+                grammar_note: 'Sử dụng thì Quá khứ Đơn cho câu hỏi về hành động đã hoàn thành tại một thời điểm cụ thể trong quá khứ.'
+            },
+            'q8': {
+                text: '.................... an e-mail before?',
+                options: {
+                    'A': 'Have you ever sent',
+                    'B': 'Did you ever send'
+                },
+                correct: 'A',
+                fullSentence: 'Have you ever sent an e-mail before?',
+                translation: 'Bạn đã từng gửi email bao giờ chưa?',
+                explanation: '"Before" và "ever" thường được sử dụng với thì Hiện tại Hoàn thành Đơn để hỏi về kinh nghiệm hoặc trải nghiệm đã từng xảy ra trong cuộc đời.',
+                grammar_note: 'Cấu trúc câu hỏi: Have/Has + S + ever + P.P. + before?'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const selectedOption = document.querySelector(`input[name="${qId}"]:checked`);
+                const questionInfo = questionsData[qId];
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`); // e.g., icon1 for q1
+
+                // Reset feedback for all options of the current question
+                document.querySelectorAll(`input[name="${qId}"]`).forEach(input => {
+                    const label = input.nextElementSibling;
+                    label.style.color = '#555'; // Reset label color
+                    label.style.fontWeight = 'normal'; // Reset font weight
+                });
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    feedbackIcon.style.display = 'none';
+                }
+
+                let isCorrect = false;
+                if (selectedOption) {
+                    if (selectedOption.value === questionInfo.correct) {
+                        isCorrect = true;
+                        score++;
+                        selectedOption.nextElementSibling.style.color = '#198754'; // Green for correct label
+                    } else {
+                        selectedOption.nextElementSibling.style.color = '#dc3545'; // Red for incorrect label
+                    }
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Highlight correct answer in options
+                const correctOptionInput = document.getElementById(`${qId}_${questionInfo.correct.toLowerCase()}`);
+                if (correctOptionInput) {
+                    correctOptionInput.nextElementSibling.style.fontWeight = 'bold';
+                    correctOptionInput.nextElementSibling.style.color = '#007bff'; // Blue for correct answer in options
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+                questionTextSolutionDiv.innerHTML = `${questionNumber}. ${questionInfo.text.replace('.........', `<span class="correct-answer-text">${questionInfo.options[questionInfo.correct]}</span>`)}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br>${questionInfo.grammar_note}`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing selections, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => {
+                radio.checked = false; // Uncheck all radio buttons
+                const label = radio.nextElementSibling;
+                label.style.color = '#555'; // Reset label color
+                label.style.fontWeight = 'normal'; // Reset font weight
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

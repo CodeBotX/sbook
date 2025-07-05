@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện Tập Từ Vựng Unit 6</title>
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: 'Inter', Arial, sans-serif; /* Using Inter font as per instructions */
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Main container for the content */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for headings */
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #3498db;
+            font-size: 1.8em;
+        }
+        h3 {
+            font-size: 1.5em;
+        }
+
+        /* Section spacing */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        /* Vocabulary tables styling */
+        .vocabulary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            border-radius: 8px; /* Rounded corners for table */
+            overflow: hidden; /* Ensures rounded corners are visible */
+        }
+        .vocabulary-table th, .vocabulary-table td {
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .vocabulary-table th {
+            background-color: #f0f8ff; /* Light blue background for headers */
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        .vocabulary-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .vocabulary-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Exercise box styling */
+        .exercise {
+            background-color: #e8f4f8;
+            border: 1px solid #b3e0ff;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .exercise h4 {
+            color: #2980b9;
+            margin-top: 0;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        /* Input fields and select boxes */
+        .exercise input[type="text"],
+        .exercise select,
+        .exercise textarea {
+            width: calc(100% - 24px); /* Account for padding */
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px; /* Rounded corners */
+            box-sizing: border-box; /* Include padding in width */
+            font-size: 1em;
+        }
+
+        /* Buttons styling */
+        .exercise button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px; /* Rounded corners */
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .exercise button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+        .exercise button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Feedback messages */
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Form group spacing */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        /* Drag and Drop specific styles */
+        .drag-drop-area {
+            border: 2px dashed #3498db;
+            padding: 20px;
+            min-height: 120px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #fdfefe;
+        }
+        .drag-item {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            padding: 10px 15px;
+            cursor: grab;
+            border-radius: 6px;
+            font-weight: bold;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        .drag-item:hover {
+            transform: translateY(-2px);
+        }
+        .drop-target-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .drop-target {
+            border: 1px solid #ccc;
+            padding: 12px;
+            min-width: 150px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px; /* Ensure consistent height */
+            flex-grow: 1; /* Allow targets to grow */
+            flex-basis: calc(33% - 12px); /* Approx 3 items per row on wider screens */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            .vocabulary-table th, .vocabulary-table td {
+                padding: 10px;
+            }
+            .exercise input[type="text"],
+            .exercise select,
+            .exercise textarea {
+                width: calc(100% - 20px);
+            }
+            .drop-target {
+                flex-basis: calc(50% - 12px); /* 2 items per row on tablets */
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                margin: 10px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .drop-target {
+                flex-basis: 100%; /* 1 item per row on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Unit 6: Vocabulary - Learning and Doing</h1>
+
+        <div class="section">
+            <h2>1. Topic Vocabulary</h2>
+            <table class="vocabulary-table">
+                <thead>
+                    <tr>
+                        <th>Từ vựng</th>
+                        <th>Nghĩa/Giải thích</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>achieve (v)</td><td>đạt được</td></tr>
+                    <tr><td>brain (n)</td><td>não bộ</td></tr>
+                    <tr><td>clever (adj)</td><td>thông minh</td></tr>
+                    <tr><td>concentrate (v)</td><td>tập trung</td></tr>
+                    <tr><td>consider (v)</td><td>xem xét, cân nhắc</td></tr>
+                    <tr><td>course (n)</td><td>khóa học</td></tr>
+                    <tr><td>degree (n)</td><td>bằng cấp</td></tr>
+                    <tr><td>experience (v, n)</td><td>trải nghiệm (v), kinh nghiệm (n)</td></tr>
+                    <tr><td>expert (n, adj)</td><td>chuyên gia (n), thành thạo (adj)</td></tr>
+                    <tr><td>fail (v)</td><td>thất bại</td></tr>
+                    <tr><td>guess (v, n)</td><td>đoán (v), phỏng đoán (n)</td></tr>
+                    <tr><td>hesitate (v)</td><td>do dự, ngập ngừng</td></tr>
+                    <tr><td>instruction (n)</td><td>chỉ dẫn, hướng dẫn</td></tr>
+                    <tr><td>make progress (v phr)</td><td>tiến bộ</td></tr>
+                    <tr><td>make sure (v phr)</td><td>đảm bảo</td></tr>
+                    <tr><td>mark (v, n)</td><td>đánh dấu (v), điểm số (n)</td></tr>
+                    <tr><td>mental (adj)</td><td>thuộc về tinh thần/tâm thần</td></tr>
+                    <tr><td>pass (v)</td><td>đậu, vượt qua (kỳ thi)</td></tr>
+                    <tr><td>qualification (n)</td><td>bằng cấp, phẩm chất</td></tr>
+                    <tr><td>remind (v)</td><td>nhắc nhở</td></tr>
+                    <tr><td>report (n)</td><td>báo cáo</td></tr>
+                    <tr><td>revise (v)</td><td>ôn tập</td></tr>
+                    <tr><td>search (v, n)</td><td>tìm kiếm (v), sự tìm kiếm (n)</td></tr>
+                    <tr><td>skill (n)</td><td>kỹ năng</td></tr>
+                    <tr><td>smart (adj)</td><td>thông minh, lanh lợi</td></tr>
+                    <tr><td>subject (n)</td><td>môn học, chủ đề</td></tr>
+                    <tr><td>take an exam (v phr)</td><td>tham gia kỳ thi</td></tr>
+                    <tr><td>talented (adj)</td><td>có tài năng</td></tr>
+                    <tr><td>term (n)</td><td>học kỳ, thuật ngữ</td></tr>
+                    <tr><td>wonder (v)</td><td>tự hỏi, ngạc nhiên</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>2. Phrasal Verbs</h2>
+            <table class="vocabulary-table">
+                <thead>
+                    <tr>
+                        <th>Phrasal Verb</th>
+                        <th>Nghĩa/Giải thích</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>cross out</td><td>gạch bỏ</td></tr>
+                    <tr><td>look up</td><td>tra cứu (trong sách, từ điển,...)</td></tr>
+                    <tr><td>point out</td><td>chỉ ra, lưu ý</td></tr>
+                    <tr><td>read out</td><td>đọc to</td></tr>
+                    <tr><td>rip up</td><td>xé nát</td></tr>
+                    <tr><td>rub out</td><td>tẩy, xóa</td></tr>
+                    <tr><td>turn over</td><td>lật (cái gì) sang mặt kia</td></tr>
+                    <tr><td>write down</td><td>viết xuống, ghi chép</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>3. Prepositional Phrases</h2>
+            <table class="vocabulary-table">
+                <thead>
+                    <tr>
+                        <th>Cụm giới từ</th>
+                        <th>Nghĩa/Giải thích</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>by heart</td><td>thuộc lòng</td></tr>
+                    <tr><td>for instance</td><td>ví dụ</td></tr>
+                    <tr><td>in conclusion</td><td>tóm lại, kết luận</td></tr>
+                    <tr><td>in fact</td><td>thực tế là</td></tr>
+                    <tr><td>in favour (of)</td><td>ủng hộ (cái gì/ai)</td></tr>
+                    <tr><td>in general</td><td>nói chung</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>4. Word Formation</h2>
+            <table class="vocabulary-table">
+                <thead>
+                    <tr>
+                        <th>Gốc từ</th>
+                        <th>Các dạng từ liên quan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>begin</td><td>began, begun, beginner, beginning</td></tr>
+                    <tr><td>brave</td><td>bravery</td></tr>
+                    <tr><td>correct</td><td>correction, incorrect</td></tr>
+                    <tr><td>divide</td><td>division</td></tr>
+                    <tr><td>educate</td><td>education</td></tr>
+                    <tr><td>instruct</td><td>instruction, instructor</td></tr>
+                    <tr><td>memory</td><td>memorise, memorial</td></tr>
+                    <tr><td>refer</td><td>reference</td></tr>
+                    <tr><td>silent</td><td>silence, silently</td></tr>
+                    <tr><td>simple</td><td>simplify, simplicity</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>5. Word Patterns</h2>
+            <table class="vocabulary-table">
+                <thead>
+                    <tr>
+                        <th>Dạng từ</th>
+                        <th>Cấu trúc/Ví dụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>adjectives</td><td>capable of</td></tr>
+                    <tr><td></td><td>talented at</td></tr>
+                    <tr><td>verbs</td><td>cheat at/in</td></tr>
+                    <tr><td></td><td>confuse sth with</td></tr>
+                    <tr><td></td><td>continue with</td></tr>
+                    <tr><td></td><td>cope with</td></tr>
+                    <tr><td></td><td>help (sb) with</td></tr>
+                    <tr><td></td><td>know about</td></tr>
+                    <tr><td></td><td>learn about</td></tr>
+                    <tr><td></td><td>succeed in</td></tr>
+                    <tr><td>nouns</td><td>an opinion about/of</td></tr>
+                    <tr><td></td><td>a question about</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <hr style="margin: 40px 0; border: 0; border-top: 1px dashed #ccc;">
+
+        <h1>Bài Tập Luyện Tập Mini</h1>
+
+        <div class="exercise">
+            <h4>Bài tập 1: Điền từ (Topic Vocabulary)</h4>
+            <p>Hoàn thành các câu sau với một từ phù hợp từ phần Topic Vocabulary.</p>
+            <div class="form-group">
+                <label>1. She wants to ________ a degree in engineering.</label>
+                <input type="text" id="ex1_q1" data-answer="achieve">
+            </div>
+            <div class="form-group">
+                <label>2. It's difficult to ________ when there's so much noise.</label>
+                <input type="text" id="ex1_q2" data-answer="concentrate">
+            </div>
+            <div class="form-group">
+                <label>3. He has a lot of ________ working with computers.</label>
+                <input type="text" id="ex1_q3" data-answer="experience">
+            </div>
+            <div class="form-group">
+                <label>4. Don't ________ to ask for help if you need it.</label>
+                <input type="text" id="ex1_q4" data-answer="hesitate">
+            </div>
+            <div class="form-group">
+                <label>5. My favourite ________ at school was History.</label>
+                <input type="text" id="ex1_q5" data-answer="subject">
+            </div>
+            <button onclick="checkExercise1()">Kiểm tra</button>
+            <div id="feedback1" class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+            <h4>Bài tập 2: Nối Phrasal Verbs với nghĩa</h4>
+            <p>Kéo và thả các phrasal verb vào đúng nghĩa của chúng.</p>
+            <div class="drag-drop-area" id="dragArea2">
+                <div class="drag-item" draggable="true" data-word="cross out">cross out</div>
+                <div class="drag-item" draggable="true" data-word="look up">look up</div>
+                <div class="drag-item" draggable="true" data-word="point out">point out</div>
+                <div class="drag-item" draggable="true" data-word="read out">read out</div>
+                <div class="drag-item" draggable="true" data-word="write down">write down</div>
+                <div class="drag-item" draggable="true" data-word="rip up">rip up</div>
+                <div class="drag-item" draggable="true" data-word="rub out">rub out</div>
+                <div class="drag-item" draggable="true" data-word="turn over">turn over</div>
+            </div>
+            <div class="drop-target-container">
+                <div class="drop-target" id="drop_write_down" data-correct-answer="write down">ghi chép</div>
+                <div class="drop-target" id="drop_look_up" data-correct-answer="look up">tra cứu</div>
+                <div class="drop-target" id="drop_cross_out" data-correct-answer="cross out">gạch bỏ</div>
+                <div class="drop-target" id="drop_read_out" data-correct-answer="read out">đọc to</div>
+                <div class="drop-target" id="drop_point_out" data-correct-answer="point out">chỉ ra, lưu ý</div>
+                <div class="drop-target" id="drop_rip_up" data-correct-answer="rip up">xé nát</div>
+                <div class="drop-target" id="drop_rub_out" data-correct-answer="rub out">tẩy, xóa</div>
+                <div class="drop-target" id="drop_turn_over" data-correct-answer="turn over">lật (cái gì) sang mặt kia</div>
+            </div>
+            <button onclick="checkExercise2()">Kiểm tra</button>
+            <div id="feedback2" class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+            <h4>Bài tập 3: Chọn cụm giới từ đúng</h4>
+            <p>Chọn cụm giới từ phù hợp nhất để hoàn thành câu.</p>
+            <div class="form-group">
+                <label>1. Can you remember this poem ________?</label>
+                <select id="ex3_q1">
+                    <option value="">--Chọn--</option>
+                    <option value="in general">in general</option>
+                    <option value="by heart">by heart</option>
+                    <option value="for instance">for instance</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>2. ________, I prefer listening to music than watching TV.</label>
+                <select id="ex3_q2">
+                    <option value="">--Chọn--</option>
+                    <option value="in conclusion">in conclusion</option>
+                    <option value="in fact">in fact</option>
+                    <option value="in general">in general</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>3. He is ________ bringing the meeting forward.</label>
+                <select id="ex3_q3">
+                    <option value="">--Chọn--</option>
+                    <option value="in favour of">in favour of</option>
+                    <option value="by heart">by heart</option>
+                    <option value="in fact">in fact</option>
+                </select>
+            </div>
+            <button onclick="checkExercise3()">Kiểm tra</button>
+            <div id="feedback3" class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+            <h4>Bài tập 4: Tạo dạng từ (Word Formation)</h4>
+            <p>Điền dạng từ đúng của từ trong ngoặc.</p>
+            <div class="form-group">
+                <label>1. Her (brave) ________ in the face of danger was admirable.</label>
+                <input type="text" id="ex4_q1" data-answer="bravery">
+            </div>
+            <div class="form-group">
+                <label>2. There was a clear (divide) ________ between the two groups.</label>
+                <input type="text" id="ex4_q2" data-answer="division">
+            </div>
+            <div class="form-group">
+                <label>3. Good (instruct) ________ is key to learning a new skill.</label>
+                <input type="text" id="ex4_q3" data-answer="instruction">
+            </div>
+            <div class="form-group">
+                <label>4. Please (simple) ________ your explanation for me.</label>
+                <input type="text" id="ex4_q4" data-answer="simplify">
+            </div>
+            <div class="form-group">
+                <label>5. She has a good (memory) ________ for faces.</label>
+                <input type="text" id="ex4_q5" data-answer="memory">
+            </div>
+            <button onclick="checkExercise4()">Kiểm tra</button>
+            <div id="feedback4" class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+            <h4>Bài tập 5: Hoàn thành câu với Word Patterns</h4>
+            <p>Hoàn thành câu bằng cách điền giới từ hoặc từ còn thiếu.</p>
+            <div class="form-group">
+                <label>1. Are you capable ________ solving this problem?</label>
+                <input type="text" id="ex5_q1" data-answer="of">
+            </div>
+            <div class="form-group">
+                <label>2. She is talented ________ playing the piano.</label>
+                <input type="text" id="ex5_q2" data-answer="at">
+            </div>
+            <div class="form-group">
+                <label>3. Don't confuse "affect" ________ "effect".</label>
+                <input type="text" id="ex5_q3" data-answer="with">
+            </div>
+            <div class="form-group">
+                <label>4. I want to know ________ his new project.</label>
+                <input type="text" id="ex5_q4" data-answer="about">
+            </div>
+            <div class="form-group">
+                <label>5. He managed to succeed ________ his goals.</label>
+                <input type="text" id="ex5_q5" data-answer="in">
+            </div>
+            <div class="form-group">
+                <label>6. What's your opinion ________ the new policy?</label>
+                <input type="text" id="ex5_q6" data-answer="about/of">
+            </div>
+            <button onclick="checkExercise5()">Kiểm tra</button>
+            <div id="feedback5" class="feedback"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // Initialize drag and drop functionality
+        let draggedItem = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add dragstart event listener to all draggable items
+            document.querySelectorAll('.drag-item').forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    draggedItem = e.target;
+                    // Set the data to be transferred (the word itself)
+                    e.dataTransfer.setData('text/plain', e.target.dataset.word);
+                    // Add a class for visual feedback during drag
+                    e.target.classList.add('dragging');
+                });
+
+                // Remove dragging class when drag ends
+                item.addEventListener('dragend', (e) => {
+                    e.target.classList.remove('dragging');
+                });
+            });
+
+            // Add dragover and drop event listeners to all drop targets
+            document.querySelectorAll('.drop-target').forEach(target => {
+                target.addEventListener('dragover', (e) => {
+                    e.preventDefault(); // Allow drop operation
+                    // Add a class for visual feedback when an item is dragged over
+                    target.classList.add('drag-over');
+                });
+
+                target.addEventListener('dragleave', (e) => {
+                    // Remove drag-over class when item leaves the target
+                    e.target.classList.remove('drag-over');
+                });
+
+                target.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    e.target.classList.remove('drag-over'); // Remove drag-over class on drop
+
+                    const data = e.dataTransfer.getData('text/plain'); // Get the data (word)
+                    const targetElement = e.target;
+
+                    // Only allow dropping if the target is empty
+                    if (!targetElement.dataset.droppedWord) {
+                        targetElement.textContent = data; // Display the word in the target
+                        targetElement.dataset.droppedWord = data; // Store the dropped word in a data attribute
+
+                        // Hide the original dragged item
+                        if (draggedItem) {
+                            draggedItem.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        /**
+         * Checks the answers for Exercise 1 (Topic Vocabulary - Fill in the blank).
+         * Iterates through input fields, compares user input with correct answers,
+         * and provides visual feedback (green for correct, red for incorrect).
+         */
+        function checkExercise1() {
+            let allCorrect = true;
+            const questions = ['ex1_q1', 'ex1_q2', 'ex1_q3', 'ex1_q4', 'ex1_q5'];
+            questions.forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().toLowerCase(); // Get user input, trim whitespace, convert to lowercase
+                const correctAnswer = input.dataset.answer.toLowerCase(); // Get correct answer from data attribute
+
+                if (userAnswer === correctAnswer) {
+                    input.style.backgroundColor = '#d4edda'; // Light green for correct
+                } else {
+                    input.style.backgroundColor = '#f8d7da'; // Light red for incorrect
+                    allCorrect = false;
+                }
+            });
+            const feedbackDiv = document.getElementById('feedback1');
+            if (allCorrect) {
+                feedbackDiv.textContent = 'Chúc mừng! Tất cả các câu đều đúng.';
+                feedbackDiv.className = 'feedback correct';
+            } else {
+                feedbackDiv.textContent = 'Có lỗi. Hãy xem lại các câu trả lời sai.';
+                feedbackDiv.className = 'feedback incorrect';
+            }
+        }
+
+        /**
+         * Checks the answers for Exercise 2 (Phrasal Verbs - Matching).
+         * Compares the word dropped into each target with its predefined correct answer.
+         * Provides visual feedback.
+         */
+        function checkExercise2() {
+            let allCorrect = true;
+            const dropTargets = document.querySelectorAll('.drop-target');
+            dropTargets.forEach(target => {
+                const droppedWord = target.dataset.droppedWord; // Word dropped by user
+                const correctAnswer = target.dataset.correctAnswer; // Predefined correct word for this target
+
+                if (droppedWord && droppedWord.toLowerCase() === correctAnswer.toLowerCase()) {
+                    target.style.backgroundColor = '#d4edda'; // Light green for correct
+                } else {
+                    target.style.backgroundColor = '#f8d7da'; // Light red for incorrect
+                    allCorrect = false;
+                }
+            });
+
+            const feedbackDiv = document.getElementById('feedback2');
+            if (allCorrect) {
+                feedbackDiv.textContent = 'Chúc mừng! Tất cả các câu đều đúng.';
+                feedbackDiv.className = 'feedback correct';
+            } else {
+                feedbackDiv.textContent = 'Có lỗi. Hãy xem lại các câu trả lời sai.';
+                feedbackDiv.className = 'feedback incorrect';
+            }
+        }
+
+        /**
+         * Checks the answers for Exercise 3 (Prepositional Phrases - Multiple Choice).
+         * Compares selected option with correct answer for each dropdown.
+         */
+        function checkExercise3() {
+            let allCorrect = true;
+            const answers = {
+                'ex3_q1': 'by heart',
+                'ex3_q2': 'in general',
+                'ex3_q3': 'in favour of'
+            };
+
+            for (const id in answers) {
+                const select = document.getElementById(id);
+                if (select.value === answers[id]) {
+                    select.style.backgroundColor = '#d4edda';
+                } else {
+                    select.style.backgroundColor = '#f8d7da';
+                    allCorrect = false;
+                }
+            }
+
+            const feedbackDiv = document.getElementById('feedback3');
+            if (allCorrect) {
+                feedbackDiv.textContent = 'Chúc mừng! Tất cả các câu đều đúng.';
+                feedbackDiv.className = 'feedback correct';
+            } else {
+                feedbackDiv.textContent = 'Có lỗi. Hãy xem lại các câu trả lời sai.';
+                feedbackDiv.className = 'feedback incorrect';
+            }
+        }
+
+        /**
+         * Checks the answers for Exercise 4 (Word Formation).
+         * Compares user input with the correct word form.
+         */
+        function checkExercise4() {
+            let allCorrect = true;
+            const questions = ['ex4_q1', 'ex4_q2', 'ex4_q3', 'ex4_q4', 'ex4_q5'];
+            questions.forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswer = input.dataset.answer.toLowerCase();
+                if (userAnswer === correctAnswer) {
+                    input.style.backgroundColor = '#d4edda';
+                } else {
+                    input.style.backgroundColor = '#f8d7da';
+                    allCorrect = false;
+                }
+            });
+            const feedbackDiv = document.getElementById('feedback4');
+            if (allCorrect) {
+                feedbackDiv.textContent = 'Chúc mừng! Tất cả các câu đều đúng.';
+                feedbackDiv.className = 'feedback correct';
+            } else {
+                feedbackDiv.textContent = 'Có lỗi. Hãy xem lại các câu trả lời sai.';
+                feedbackDiv.className = 'feedback incorrect';
+            }
+        }
+
+        /**
+         * Checks the answers for Exercise 5 (Word Patterns).
+         * Handles cases with multiple correct answers (e.g., "about/of").
+         */
+        function checkExercise5() {
+            let allCorrect = true;
+            const questions = ['ex5_q1', 'ex5_q2', 'ex5_q3', 'ex5_q4', 'ex5_q5', 'ex5_q6'];
+            questions.forEach(id => {
+                const input = document.getElementById(id);
+                const userAnswer = input.value.trim().toLowerCase();
+                const correctAnswers = input.dataset.answer.toLowerCase().split('/'); // Split if multiple answers are possible
+
+                if (correctAnswers.includes(userAnswer)) { // Check if user answer is in the list of correct answers
+                    input.style.backgroundColor = '#d4edda';
+                } else {
+                    input.style.backgroundColor = '#f8d7da';
+                    allCorrect = false;
+                }
+            });
+            const feedbackDiv = document.getElementById('feedback5');
+            if (allCorrect) {
+                feedbackDiv.textContent = 'Chúc mừng! Tất cả các câu đều đúng.';
+                feedbackDiv.className = 'feedback correct';
+            } else {
+                feedbackDiv.textContent = 'Có lỗi. Hãy xem lại các câu trả lời sai.';
+                feedbackDiv.className = 'feedback incorrect';
+            }
+        }
+    </script>
+</body>
+</html>
