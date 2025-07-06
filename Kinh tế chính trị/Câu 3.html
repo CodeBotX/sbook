@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm hiểu về Tiền tệ</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts for better readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 900px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode {
+            background-color: #333;
+            color: #f0f0f0;
+        }
+        .dark-mode .container {
+            background-color: #444;
+            color: #f0f0f0;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #0056b3; /* Bootstrap primary blue */
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6 {
+            color: #87CEEB; /* Lighter blue for dark mode */
+        }
+        .card {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .dark-mode .card {
+            background-color: #555;
+            border-color: #666;
+            color: #f0f0f0;
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+            border-radius: 8px 8px 0 0;
+        }
+        .dark-mode .card-header {
+            background-color: #666;
+            border-bottom: 1px solid #777;
+        }
+        .list-group-item {
+            border: none;
+            padding-left: 0;
+        }
+        .dark-mode .list-group-item {
+            background-color: #555;
+            color: #f0f0f0;
+        }
+        .toggle-button-container {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+        .accordion-button {
+            font-weight: bold;
+        }
+        .dark-mode .accordion-button {
+            background-color: #666;
+            color: #f0f0f0;
+        }
+        .dark-mode .accordion-button:not(.collapsed) {
+            background-color: #777;
+            color: #f0f0f0;
+        }
+        .dark-mode .accordion-collapse {
+            background-color: #555;
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="toggle-button-container">
+            <button class="btn btn-secondary" id="darkModeToggle">Chế độ tối / sáng</button>
+        </div>
+
+        <h1 class="text-center mb-4">Tìm hiểu về Tiền tệ</h1>
+
+        <section id="cau-3">
+            <h2 class="mb-3">Nguồn gốc, bản chất và chức năng của tiền</h2>
+
+            <h3>Chỉ ra nguồn gốc của tiền là do sự trao đổi hàng hóa, nên cần một hình thái đo lường giá trị</h3>
+            <p>Trong lịch sử con người phát minh ra một thứ gọi là tiền vì cần phải có một hình thái làm đơn vị đo lường giá trị của các hàng hóa khi trao đổi trên thị trường. Trong lịch sử, nhân loại phát kiến ra các hình thái đo lường giá trị khác nhau, đi từ hình thái giản đơn của giá trị đến hình thái tiến bộ nhất là hình thái tiền tệ.</p>
+
+            <h3>Tóm lược 4 hình thái đo lường giá trị đã có trong lịch sử, từ hình thái giản đơn đến hình thái tiền tệ</h3>
+            <ul>
+                <li>
+                    <h4>Hình thái giản đơn (ngẫu nhiên) của giá trị</h4>
+                    <p>Hình thái giản đơn của giá trị là hình thái đo lường giá trị dựa trên sự trao đổi đơn nhất của 1 hàng hóa này lấy 1 hàng hóa khác. Như vậy, tự thân mỗi hàng hóa không thể nói lên giá trị của mình. Do đó, cần phải có 1 hàng hóa khác đóng vai trò làm vật ngang giá. Ví dụ, 1 cái rìu đổi được 10 cân gạo. Ở đây, thóc là vật ngang giá, đo lường giá trị của cái rìu.</p>
+                    <p>Hình thái giản đơn của giá trị có đặc điểm là dựa trên trao đổi trực tiếp Hàng lấy Hàng (1 cái rìu đổi 10 cân gạo). Bên cạnh đó, tỷ lệ trao đổi và hành vi trao đổi diễn ra ngẫu nhiên.</p>
+                </li>
+                <li>
+                    <h4>Hình thái toàn bộ (mở rộng) của giá trị</h4>
+                    <p>Hình thái mở rộng của giá trị là hình thái đo lường giá trị dựa trên sự trao đổi thường xuyên 1 loại hàng hóa này lấy nhiều loại hàng hóa khác. Ví dụ, ta có thể đổi 1 cái rìu lấy 10kg thóc hoặc 5 con gà hoặc 3 mét vải hoặc 1 chỉ vàng. Ở đây, vật ngang giá của rìu được mở rộng ra nhiều thứ khác nhau.</p>
+                    <p>Hình thái mở rộng của giá trị có đặc điểm là dựa trên trao đổi trực tiếp hàng đổi hàng (H – H’). Cùng với đó, mỗi hàng hóa lại có nhiều vật ngang giá khác nhau.</p>
+                </li>
+                <li>
+                    <h4>Hình thái chung của giá trị</h4>
+                    <p>Hình thái chung của giá trị là hình thái đo lường giá trị dựa trên việc cộng đồng đã chọn 1 hàng hóa làm vật ngang giá chung cho mọi loại hàng hóa khác. Ví dụ 1 chỉ vàng bằng 10 cái rìu, bằng 10 kg thóc, bằng 2 con gà, bằng 3m vải (ở đây vàng là vật ngang giá chung). Hình thái chung của giá trị dựa trên trao đổi qua trung gian là vật ngang giá chung (H – VNG chung – H’). Mỗi đồng loại còn là vật ngang giá chung khác nhau.</p>
+                </li>
+                <li>
+                    <h4>Hình thái tiền tệ</h4>
+                    <p>Hình thái tiền tệ là hình thái đo lường giá trị dựa trên việc toàn xã hội thống nhất chọn 1 hàng hóa đặc biệt làm vật ngang giá duy nhất cho mọi hàng hóa.</p>
+                </li>
+            </ul>
+
+            <h3>Nêu bản chất tiền tệ là hàng hóa đặc biệt được chọn làm vật ngang giá duy nhất, nhấn mạnh phải gắn với vàng</h3>
+            <p>Tiền tệ có bản chất là một loại hàng hóa đặc biệt, được xã hội chọn làm vật ngang giá duy nhất, được sử dụng để đo lường giá trị của mọi loại hàng hóa khác và làm phương tiện trao đổi.</p>
+            <p>Lịch sử nhân loại cho thấy, con người lựa chọn vàng làm vật ngang giá bởi tiền tệ là <strong>VÀNG</strong>. Chúng có giá trị kinh tế cao, giá trị sử dụng đa dụng, hữu ích, giá trị không đổi theo thời gian và có thể lưu trữ trong một thời gian dài mà không bị hỏng hóc. Chúng cũng dễ dàng nhận biết và khi làm giả được dựa vào màu sắc, độ dẻo, âm thanh khi va chạm và khối lượng riêng của nó. Mặc dù vàng không phải là kim loại hiếm nhưng giá trị thẩm mỹ cao, được nhiều người yêu thích, ưa chuộng nên chúng trở thành giá trị và có giá trị để trao đổi.</p>
+
+            <h3>Trình bày 5 chức năng của tiền, chú ý nhấn mạnh một số chức năng phải gắn liền với vàng, bạc</h3>
+            <ul>
+                <li>
+                    <h4>Chức năng thước đo giá trị</h4>
+                    <p>Chức năng này thuộc về giá trị là chức năng gốc, gắn liền với sự ra đời của tiền tệ. Chức năng này thể hiện ở việc xã hội dùng tiền tệ để làm đơn vị đo lường giá trị của mọi loại hàng hóa khác. Vì mọi loại tiền của Nhà nước phát hành (USD, VND,...) đều bị mất giá do lạm phát nên không phải là đơn vị đo lường ổn định. Do đó, khi đo lường giá trị tài sản của các thời kỳ dài hơn, cần quy đổi đơn vị là <strong>VÀNG, BẠC</strong>.</p>
+                </li>
+                <li>
+                    <h4>Chức năng phương tiện lưu thông</h4>
+                    <p>Chức năng này thể hiện ở việc tiền dùng để thanh toán trực tiếp cho các nghĩa vụ kinh tế của mình, thay cho việc trao đổi hiện vật. Tuy nhiên, việc sử dụng tiền thay cho trao đổi có thể dẫn tới khả năng thanh toán chậm, mua bán chịu.</p>
+                </li>
+                <li>
+                    <h4>Chức năng phương tiện cất trữ</h4>
+                    <p>Chức năng này thể hiện ở việc tiền được rút ra khỏi lưu thông, và cho vào dự trữ, nhằm duy trì giá trị tài sản. Vì mọi loại tiền của Nhà nước phát hành đều bị mất giá do lạm phát nên tiền dùng để cất trữ phải là <strong>VÀNG, BẠC</strong>.</p>
+                </li>
+                <li>
+                    <h4>Chức năng phương tiện thanh toán</h4>
+                    <p>Chức năng này thể hiện ở việc con người sử dụng tiền để chi trả trực tiếp cho các nghĩa vụ kinh tế của mình, thay cho việc trao đổi hiện vật. Tuy nhiên, việc sử dụng tiền thay cho trao đổi có thể dẫn tới khả năng thanh toán chậm, mua bán chịu.</p>
+                </li>
+                <li>
+                    <h4>Chức năng tiền tệ thế giới</h4>
+                    <p>Chức năng này thể hiện ở việc dùng tiền để thanh toán quốc tế. Đến thế kỷ 19, tiền để thanh toán quốc tế vẫn phải là vàng, bạc. Hiện nay, trao đổi bằng tiền tệ thông qua hệ thống tỷ giá hối đoái.</p>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="my-5">
+
+        <section id="bai-tap-luyen-tap">
+            <h2 class="text-center mb-4">Bài tập luyện tập</h2>
+
+            <div class="accordion" id="practiceAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Câu hỏi trắc nghiệm
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#practiceAccordion">
+                        <p><strong>1. Nguồn gốc của tiền tệ là do đâu?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question1" id="q1a" value="a">
+                            <label class="form-check-label" for="q1a">
+                                a) Quyết định của chính phủ.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question1" id="q1b" value="b">
+                            <label class="form-check-label" for="q1b">
+                                b) Sự trao đổi hàng hóa và nhu cầu có đơn vị đo lường giá trị.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question1" id="q1c" value="c">
+                            <label class="form-check-label" for="q1c">
+                                c) Sự phát triển của công nghệ.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question1" id="q1d" value="d">
+                            <label class="form-check-label" for="q1d">
+                                d) Nhu cầu cất trữ tài sản.
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="checkAnswer(1, 'b')">Kiểm tra</button>
+                        <p id="feedback1" class="mt-2"></p>
+
+                        <hr>
+
+                        <p><strong>2. Hình thái đo lường giá trị nào dựa trên sự trao đổi đơn nhất của 1 hàng hóa lấy 1 hàng hóa khác?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question2" id="q2a" value="a">
+                            <label class="form-check-label" for="q2a">
+                                a) Hình thái chung của giá trị.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question2" id="q2b" value="b">
+                            <label class="form-check-label" for="q2b">
+                                b) Hình thái giản đơn (ngẫu nhiên) của giá trị.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question2" id="q2c" value="c">
+                            <label class="form-check-label" for="q2c">
+                                c) Hình thái tiền tệ.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question2" id="q2d" value="d">
+                            <label class="form-check-label" for="q2d">
+                                d) Hình thái toàn bộ (mở rộng) của giá trị.
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="checkAnswer(2, 'b')">Kiểm tra</button>
+                        <p id="feedback2" class="mt-2"></p>
+
+                        <hr>
+
+                        <p><strong>3. Bản chất tiền tệ là gì?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question3" id="q3a" value="a">
+                            <label class="form-check-label" for="q3a">
+                                a) Bất kỳ vật phẩm nào có giá trị cao.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question3" id="q3b" value="b">
+                            <label class="form-check-label" for="q3b">
+                                b) Một loại hàng hóa đặc biệt được xã hội chọn làm vật ngang giá duy nhất.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question3" id="q3c" value="c">
+                            <label class="form-check-label" for="q3c">
+                                c) Công cụ để chính phủ kiểm soát nền kinh tế.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question3" id="q3d" value="d">
+                            <label class="form-check-label" for="q3d">
+                                d) Một hình thức thanh toán chỉ có giá trị trong nước.
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="checkAnswer(3, 'b')">Kiểm tra</button>
+                        <p id="feedback3" class="mt-2"></p>
+
+                        <hr>
+
+                        <p><strong>4. Chức năng nào của tiền thể hiện ở việc tiền được rút ra khỏi lưu thông và cho vào dự trữ?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question4" id="q4a" value="a">
+                            <label class="form-check-label" for="q4a">
+                                a) Thước đo giá trị.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question4" id="q4b" value="b">
+                            <label class="form-check-label" for="q4b">
+                                b) Phương tiện lưu thông.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question4" id="q4c" value="c">
+                            <label class="form-check-label" for="q4c">
+                                c) Phương tiện cất trữ.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question4" id="q4d" value="d">
+                            <label class="form-check-label" for="q4d">
+                                d) Phương tiện thanh toán.
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="checkAnswer(4, 'c')">Kiểm tra</button>
+                        <p id="feedback4" class="mt-2"></p>
+
+                        <hr>
+
+                        <p><strong>5. Tại sao vàng được lựa chọn làm vật ngang giá trong lịch sử?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question5" id="q5a" value="a">
+                            <label class="form-check-label" for="q5a">
+                                a) Vì nó là kim loại hiếm nhất.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question5" id="q5b" value="b">
+                            <label class="form-check-label" for="q5b">
+                                b) Vì nó có giá trị kinh tế cao, giá trị sử dụng đa dụng, không đổi theo thời gian, dễ nhận biết.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question5" id="q5c" value="c">
+                            <label class="form-check-label" for="q5c">
+                                c) Vì chính phủ quy định nó là tiền tệ.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question5" id="q5d" value="d">
+                            <label class="form-check-label" for="q5d">
+                                d) Vì nó là vật phẩm duy nhất có thể trao đổi.
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="checkAnswer(5, 'b')">Kiểm tra</button>
+                        <p id="feedback5" class="mt-2"></p>
+
+                        <hr>
+
+                        <p><strong>6. Hình thái đo lường giá trị nào dựa trên việc toàn xã hội thống nhất chọn 1 hàng hóa đặc biệt làm vật ngang giá duy nhất?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question6" id="q6a" value="a">
+                            <label class="form-check-label" for="q6a">
+                                a) Hình thái giản đơn của giá trị.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question6" id="q6b" value="b">
+                            <label class="form-check-label" for="q6b">
+                                b) Hình thái toàn bộ của giá trị.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question6" id="q6c" value="c">
+                            <label class="form-check-label" for="q6c">
+                                c) Hình thái chung của giá trị.
+                                </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question6" id="q6d" value="d">
+                            <label class="form-check-label" for="q6d">
+                                d) Hình thái tiền tệ.
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="checkAnswer(6, 'd')">Kiểm tra</button>
+                        <p id="feedback6" class="mt-2"></p>
+
+                        <hr>
+
+                        <p><strong>7. Chức năng gốc của tiền tệ là gì?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question7" id="q7a" value="a">
+                            <label class="form-check-label" for="q7a">
+                                a) Phương tiện lưu thông.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question7" id="q7b" value="b">
+                            <label class="form-check-label" for="q7b">
+                                b) Thước đo giá trị.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question7" id="q7c" value="c">
+                            <label class="form-check-label" for="q7c">
+                                c) Phương tiện cất trữ.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question7" id="q7d" value="d">
+                            <label class="form-check-label" for="q7d">
+                                d) Phương tiện thanh toán.
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="checkAnswer(7, 'b')">Kiểm tra</button>
+                        <p id="feedback7" class="mt-2"></p>
+
+                        <hr>
+
+                        <p><strong>8. Tại sao khi đo lường giá trị tài sản trong thời kỳ dài hơn, cần quy đổi đơn vị là vàng, bạc?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question8" id="q8a" value="a">
+                            <label class="form-check-label" for="q8a">
+                                a) Vì vàng, bạc dễ dàng vận chuyển.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question8" id="q8b" value="b">
+                            <label class="form-check-label" for="q8b">
+                                b) Vì tiền của Nhà nước phát hành dễ bị mất giá do lạm phát.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question8" id="q8c" value="c">
+                                c) Vì vàng, bạc có giá trị thẩm mỹ cao.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question8" id="q8d" value="d">
+                            <label class="form-check-label" for="q8d">
+                                d) Vì vàng, bạc là kim loại hiếm.
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="checkAnswer(8, 'b')">Kiểm tra</button>
+                        <p id="feedback8" class="mt-2"></p>
+
+                        <hr>
+
+                        <p><strong>9. Chức năng nào của tiền có thể dẫn đến khả năng thanh toán chậm, mua bán chịu?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question9" id="q9a" value="a">
+                                a) Thước đo giá trị.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question9" id="q9b" value="b">
+                                b) Phương tiện lưu thông.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question9" id="q9c" value="c">
+                                c) Phương tiện cất trữ.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question9" id="q9d" value="d">
+                                d) Phương tiện thanh toán.
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="checkAnswer(9, 'd')">Kiểm tra</button>
+                        <p id="feedback9" class="mt-2"></p>
+
+                        <hr>
+
+                        <p><strong>10. Đến thế kỷ 19, tiền để thanh toán quốc tế vẫn phải là gì?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question10" id="q10a" value="a">
+                                a) Tiền giấy.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question10" id="q10b" value="b">
+                                b) Ngoại tệ.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question10" id="q10c" value="c">
+                                c) Vàng, bạc.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="question10" id="q10d" value="d">
+                                d) Tỷ giá hối đoái.
+                            </label>
+                        </div>
+                        <button class="btn btn-primary mt-2" onclick="checkAnswer(10, 'c')">Kiểm tra</button>
+                        <p id="feedback10" class="mt-2"></p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Câu hỏi tự luận
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#practiceAccordion">
+                        <div class="accordion-body">
+                            <p><strong>1. Phân tích các hình thái đo lường giá trị của tiền tệ từ giản đơn đến tiền tệ.</strong></p>
+                            <textarea class="form-control" rows="5" id="essay1"></textarea>
+                            <button class="btn btn-primary mt-2" onclick="showModelAnswer(1)">Xem gợi ý trả lời</button>
+                            <div id="modelAnswer1" class="alert alert-info mt-2" style="display: none;">
+                                Gợi ý: Trình bày 4 hình thái: giản đơn (H-H'), toàn bộ (H-Nhiều H'), chung (Nhiều H - VNG chung - H), tiền tệ (H - Tiền - H). Nêu đặc điểm và ví dụ của từng hình thái.
+                            </div>
+
+                            <hr>
+
+                            <p><strong>2. Giải thích bản chất của tiền tệ và tại sao vàng lại được chọn làm vật ngang giá duy nhất trong lịch sử.</strong></p>
+                            <textarea class="form-control" rows="5" id="essay2"></textarea>
+                            <button class="btn btn-primary mt-2" onclick="showModelAnswer(2)">Xem gợi ý trả lời</button>
+                            <div id="modelAnswer2" class="alert alert-info mt-2" style="display: none;">
+                                Gợi ý: Bản chất tiền tệ là hàng hóa đặc biệt được xã hội chọn làm vật ngang giá duy nhất. Vàng được chọn vì giá trị kinh tế cao, đa dụng, ổn định, dễ nhận biết và khó làm giả.
+                            </div>
+
+                            <hr>
+
+                            <p><strong>3. Phân tích chức năng "thước đo giá trị" của tiền, nhấn mạnh vai trò của vàng/bạc.</strong></p>
+                            <textarea class="form-control" rows="5" id="essay3"></textarea>
+                            <button class="btn btn-primary mt-2" onclick="showModelAnswer(3)">Xem gợi ý trả lời</button>
+                            <div id="modelAnswer3" class="alert alert-info mt-2" style="display: none;">
+                                Gợi ý: Thước đo giá trị là chức năng gốc, dùng tiền làm đơn vị đo lường giá trị hàng hóa. Tiền giấy dễ mất giá do lạm phát, nên vàng/bạc được dùng để đo lường tài sản dài hạn.
+                            </div>
+
+                            <hr>
+
+                            <p><strong>4. Nêu và phân tích chức năng "phương tiện lưu thông" và "phương tiện thanh toán" của tiền.</strong></p>
+                            <textarea class="form-control" rows="5" id="essay4"></textarea>
+                            <button class="btn btn-primary mt-2" onclick="showModelAnswer(4)">Xem gợi ý trả lời</button>
+                            <div id="modelAnswer4" class="alert alert-info mt-2" style="display: none;">
+                                Gợi ý: Phương tiện lưu thông là tiền làm môi giới trao đổi (H-T-H). Phương tiện thanh toán là tiền dùng để trả nợ, nghĩa vụ (mua bán chịu).
+                            </div>
+
+                            <hr>
+
+                            <p><strong>5. Chức năng "tiền tệ thế giới" của tiền có sự thay đổi như thế nào từ thế kỷ 19 đến nay?</strong></p>
+                            <textarea class="form-control" rows="5" id="essay5"></textarea>
+                            <button class="btn btn-primary mt-2" onclick="showModelAnswer(5)">Xem gợi ý trả lời</button>
+                            <div id="modelAnswer5" class="alert alert-info mt-2" style="display: none;">
+                                Gợi ý: Trước thế kỷ 19, vàng/bạc là tiền tệ thế giới. Hiện nay, là tiền tệ thông qua tỷ giá hối đoái, không còn trực tiếp là vàng/bạc.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="my-5">
+
+        <section id="tips-to-remember">
+            <h2 class="text-center mb-4">Tips để ghi nhớ</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Nguồn gốc và bản chất tiền tệ
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Nguồn gốc:</strong> Do sự trao đổi hàng hóa -> cần đơn vị đo lường giá trị.</li>
+                            <li class="list-group-item"><strong>Bản chất:</strong> Hàng hóa đặc biệt được chọn làm vật ngang giá duy nhất (gắn với vàng).</li>
+                            <li class="list-group-item"><strong>Mẹo:</strong> "Trao đổi -> Đo lường -> Vàng".</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            5 chức năng của tiền
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>1. Thước đo giá trị:</strong> Đo lường giá trị hàng hóa (gắn với vàng/bạc).</li>
+                            <li class="list-group-item"><strong>2. Phương tiện lưu thông:</strong> Môi giới trao đổi (H-T-H).</li>
+                            <li class="list-group-item"><strong>3. Phương tiện cất trữ:</strong> Rút khỏi lưu thông, dự trữ (gắn với vàng/bạc).</li>
+                            <li class="list-group-item"><strong>4. Phương tiện thanh toán:</strong> Trả nợ, nghĩa vụ.</li>
+                            <li class="list-group-item"><strong>5. Tiền tệ thế giới:</strong> Thanh toán quốc tế (trước là vàng/bạc, nay là tỷ giá).</li>
+                            <li class="list-group-item"><strong>Mẹo:</strong> "Đo - Lưu - Trữ - Thanh toán - Thế giới".</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+            }
+
+            darkModeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                // Save preference to localStorage
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+        });
+
+        function checkAnswer(questionNum, correctAnswer) {
+            const radios = document.getElementsByName('question' + questionNum);
+            let selectedValue = null;
+            for (const radio of radios) {
+                if (radio.checked) {
+                    selectedValue = radio.value;
+                    break;
+                }
+            }
+
+            const feedbackElement = document.getElementById('feedback' + questionNum);
+            if (selectedValue === correctAnswer) {
+                feedbackElement.innerHTML = '<span class="text-success">Chính xác!</span>';
+            } else if (selectedValue === null) {
+                feedbackElement.innerHTML = '<span class="text-warning">Vui lòng chọn một đáp án.</span>';
+            } else {
+                feedbackElement.innerHTML = '<span class="text-danger">Chưa chính xác. Đáp án đúng là ' + correctAnswer.toUpperCase() + '.</span>';
+            }
+        }
+
+        function showModelAnswer(essayNum) {
+            const modelAnswerElement = document.getElementById('modelAnswer' + essayNum);
+            if (modelAnswerElement.style.display === 'none') {
+                modelAnswerElement.style.display = 'block';
+            } else {
+                modelAnswerElement.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
