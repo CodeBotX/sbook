@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Giảng Ngữ Pháp: Hiện Tại Đơn, Hiện Tại Tiếp Diễn và Động Từ Trạng Thái</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter for modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+            color: #333;
+            line-height: 1.6;
+            padding: 1rem; /* Overall padding for mobile */
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto; /* Center the container on larger screens */
+            background-color: #ffffff;
+            border-radius: 1rem; /* Rounded corners for the main card */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            padding: 1.5rem; /* Padding inside the container */
+        }
+
+        /* Responsive adjustments for larger screens */
+        @media (min-width: 768px) {
+            .container {
+                padding: 2.5rem;
+            }
+        }
+
+        h1 {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            color: #1a202c; /* Dark gray for headings */
+            text-align: center;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        h2 {
+            font-size: 1.75rem; /* text-3xl */
+            font-weight: 600; /* font-semibold */
+            color: #2d3748; /* Slightly lighter dark gray */
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #edf2f7; /* Subtle separator */
+        }
+        h3 {
+            font-size: 1.375rem; /* text-2xl */
+            font-weight: 600;
+            color: #4a5568; /* Medium gray */
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #4a5568;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        ul li {
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+        strong {
+            color: #2d3748; /* Make strong text stand out */
+        }
+        em {
+            color: #5a67d8; /* Blue for examples */
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            overflow-x: auto; /* Enable horizontal scroll on small screens */
+            display: block; /* Make table a block to allow overflow-x */
+            white-space: nowrap; /* Prevent wrapping inside cells */
+        }
+        th, td {
+            border: 1px solid #e2e8f0; /* Light border for cells */
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-size: 0.95rem;
+            color: #4a5568;
+        }
+        th {
+            background-color: #f7fafc; /* Light header background */
+            font-weight: 600;
+            color: #2d3748;
+        }
+        tr:nth-child(even) {
+            background-color: #fcfcfc; /* Zebra striping for rows */
+        }
+
+        /* Specific styling for notes/hints */
+        .note {
+            background-color: #e0f2fe; /* Light blue background */
+            border-left: 4px solid #3b82f6; /* Blue left border */
+            padding: 1rem 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            color: #2c5282;
+        }
+        .note strong {
+            color: #2c5282;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bài Giảng Ngữ Pháp: Hiện Tại Đơn, Hiện Tại Tiếp Diễn và Động Từ Trạng Thái</h1>
+        <p class="text-center text-gray-600 mb-8">Chào mừng các bạn đến với bài giảng ngữ pháp hôm nay! Chúng ta sẽ cùng nhau tìm hiểu sâu về ba khía cạnh quan trọng trong tiếng Anh: Thì Hiện tại Đơn, Thì Hiện tại Tiếp diễn, và nhóm Động từ Trạng thái (Stative Verbs). Việc nắm vững các kiến thức này sẽ giúp bạn sử dụng tiếng Anh một cách chính xác và tự tin hơn.</p>
+
+        <h2>I. Thì Hiện Tại Đơn (Present Simple)</h2>
+        <p>Thì Hiện tại Đơn là một trong những thì cơ bản và được sử dụng rất phổ biến trong tiếng Anh. Chúng ta hãy cùng xem xét cấu trúc và cách dùng của nó.</p>
+
+        <h3>1. Cấu trúc</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Dạng</th>
+                    <th>Chủ ngữ (I/You/We/They)</th>
+                    <th>Chủ ngữ (He/She/It)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Khẳng định</strong></td>
+                    <td>V (nguyên mẫu)</td>
+                    <td>V-s/es</td>
+                </tr>
+                <tr>
+                    <td><strong>Phủ định</strong></td>
+                    <td>do not (don't) + V</td>
+                    <td>does not (doesn't) + V</td>
+                </tr>
+                <tr>
+                    <td><strong>Nghi vấn</strong></td>
+                    <td>Do + S + V?</td>
+                    <td>Does + S + V?</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Ví dụ:</strong></p>
+        <ul>
+            <li><strong>Khẳng định:</strong> I <em><strong>play</strong></em> football. / He <em><strong>plays</strong></em> chess.</li>
+            <li><strong>Phủ định:</strong> You <em><strong>don't play</strong></em> the piano. / She <em><strong>doesn't play</strong></em> the guitar.</li>
+            <li><strong>Nghi vấn:</strong> <em><strong>Do</strong></em> we <em><strong>play</strong></em> tennis? / <em><strong>Does</strong></em> he <em><strong>play</strong></em> basketball?</li>
+        </ul>
+
+        <h3>2. Cách dùng</h3>
+        <p>Thì Hiện tại Đơn được dùng để diễn tả:</p>
+        <ul>
+            <li><strong>Thói quen, hành động lặp đi lặp lại (Present habits):</strong>
+                <ul>
+                    <li><em>Ví dụ:</em> Marcy <em><strong>goes</strong></em> to dance lessons every Saturday. (Marcy đi học nhảy vào mỗi thứ Bảy.)</li>
+                    <li><em>Giải thích:</em> Đây là một hành động diễn ra định kỳ, một thói quen của Marcy.</li>
+                </ul>
+            </li>
+            <li><strong>Tình huống cố định, lâu dài (Permanent situations):</strong>
+                <ul>
+                    <li><em>Ví dụ:</em> Does Dan <em><strong>work</strong></em> at the cinema? (Dan có làm việc ở rạp chiếu phim không?)</li>
+                    <li><em>Giải thích:</em> Câu hỏi này muốn biết về công việc cố định của Dan.</li>
+                </ul>
+            </li>
+            <li><strong>Trạng thái (States):</strong>
+                <ul>
+                    <li><em>Ví dụ:</em> I <em><strong>like</strong></em> the new James Bond film. (Tôi thích bộ phim James Bond mới.)</li>
+                    <li><em>Giải thích:</em> "Like" là một động từ chỉ trạng thái cảm xúc, không phải hành động.</li>
+                </ul>
+            </li>
+            <li><strong>Sự thật hiển nhiên, chân lý (General truths):</strong>
+                <ul>
+                    <li><em>Ví dụ:</em> You <em><strong>play</strong></em> chess with 32 pieces. (Bạn chơi cờ vua với 32 quân cờ.)</li>
+                    <li><em>Giải thích:</em> Đây là một sự thật không thể thay đổi về trò chơi cờ vua.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>3. Gợi ý hữu ích (Helpful hints)</h3>
+        <div class="note">
+            <p>Thì Hiện tại Đơn thường được dùng với các <strong>trạng từ chỉ tần suất (adverbs of frequency)</strong> như:</p>
+            <ul>
+                <li><strong>always</strong> (luôn luôn)</li>
+                <li><strong>usually</strong> (thường xuyên)</li>
+                <li><strong>often</strong> (thường)</li>
+                <li><strong>sometimes</strong> (thỉnh thoảng)</li>
+                <li><strong>rarely</strong> (hiếm khi)</li>
+                <li><strong>never</strong> (không bao giờ)</li>
+            </ul>
+            <p><em>Lưu ý:</em> Các trạng từ này thường đứng trước động từ thường, nhưng sau động từ "to be".</p>
+            <p>Các <strong>cụm từ chỉ thời gian</strong> cũng thường đi kèm thì Hiện tại Đơn:</p>
+            <ul>
+                <li><strong>every Monday/week/etc.</strong> (mỗi thứ Hai/tuần/v.v.)</li>
+                <li><strong>once/twice a week/month/etc.</strong> (một/hai lần một tuần/tháng/v.v.)</li>
+                <li><strong>three times a week/month/etc.</strong> (ba lần một tuần/tháng/v.v.)</li>
+            </ul>
+            <p><strong>Đặc biệt lưu ý:</strong></p>
+            <ul>
+                <li>Động từ <strong>"be"</strong> và <strong>"have"</strong> có các dạng đặc biệt trong thì Hiện tại Đơn:
+                    <ul>
+                        <li><strong>Be:</strong> I <strong>am</strong>, You/We/They <strong>are</strong>, He/She/It <strong>is</strong>.</li>
+                        <li><strong>Have:</strong> I/You/We/They <strong>have</strong>, He/She/It <strong>has</strong>.</li>
+                    </ul>
+                </li>
+                <li><em>Ví dụ:</em> I <em><strong>often play</strong></em> football with my friends. (Tôi thường chơi bóng đá với bạn bè.)</li>
+                <li><em>Ví dụ:</em> I <em><strong>am often late</strong></em> for my piano lessons. (Tôi thường đến muộn các buổi học piano.)
+                    <ul>
+                        <li><em>Giải thích:</em> Trong ví dụ thứ hai, "often" đứng sau "am" (dạng của động từ "be").</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <h2>II. Thì Hiện Tại Tiếp Diễn (Present Continuous)</h2>
+        <p>Thì Hiện tại Tiếp diễn được dùng để diễn tả các hành động đang diễn ra tại thời điểm nói hoặc trong một giai đoạn nhất định.</p>
+
+        <h3>1. Cấu trúc</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Dạng</th>
+                    <th>Chủ ngữ (I)</th>
+                    <th>Chủ ngữ (He/She/It)</th>
+                    <th>Chủ ngữ (You/We/They)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Khẳng định</strong></td>
+                    <td>am + V-ing</td>
+                    <td>is + V-ing</td>
+                    <td>are + V-ing</td>
+                </tr>
+                <tr>
+                    <td><strong>Phủ định</strong></td>
+                    <td>am not + V-ing</td>
+                    <td>isn't + V-ing</td>
+                    <td>aren't + V-ing</td>
+                </tr>
+                <tr>
+                    <td><strong>Nghi vấn</strong></td>
+                    <td>Am I + V-ing?</td>
+                    <td>Is he/she/it + V-ing?</td>
+                    <td>Are you/we/they + V-ing?</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Ví dụ:</strong></p>
+        <ul>
+            <li><strong>Khẳng định:</strong> I <em><strong>am playing</strong></em> football. / He <em><strong>is playing</strong></em> chess. / You <em><strong>are playing</strong></em> the piano.</li>
+            <li><strong>Phủ định:</strong> I <em><strong>am not (I'm not) playing</strong></em> the guitar. / She <em><strong>isn't playing</strong></em> the violin. / We <em><strong>aren't playing</strong></em> tennis.</li>
+            <li><strong>Nghi vấn:</strong> <em><strong>Am</strong></em> I <em><strong>playing</strong></em>? / <em><strong>Is</strong></em> he <em><strong>playing</strong></em>? / <em><strong>Are</strong></em> you <em><strong>playing</strong></em>?</li>
+        </ul>
+
+        <h3>2. Cách dùng</h3>
+        <p>Thì Hiện tại Tiếp diễn được dùng để diễn tả:</p>
+        <ul>
+            <li><strong>Hành động đang diễn ra tại thời điểm nói (Actions happening now):</strong>
+                <ul>
+                    <li><em>Ví dụ:</em> Jan <em><strong>is watching</strong></em> a DVD upstairs. (Jan đang xem DVD trên lầu.)</li>
+                    <li><em>Giải thích:</em> Hành động xem DVD đang diễn ra ngay lúc này.</li>
+                </ul>
+            </li>
+            <li><strong>Tình huống tạm thời (Temporary situations):</strong>
+                <ul>
+                    <li><em>Ví dụ:</em> She <em><strong>is working</strong></em> at the museum until the end of the month. (Cô ấy đang làm việc ở bảo tàng cho đến cuối tháng.)</li>
+                    <li><em>Giải thích:</em> Công việc ở bảo tàng chỉ là tạm thời, không phải lâu dài.</li>
+                </ul>
+            </li>
+            <li><strong>Thói quen gây khó chịu (Annoying habits - thường dùng với "always"):</strong>
+                <ul>
+                    <li><em>Ví dụ:</em> My brother <em><strong>is always borrowing</strong></em> my CDs without asking! (Anh trai tôi lúc nào cũng mượn đĩa CD của tôi mà không hỏi!)</li>
+                    <li><em>Giải thích:</em> Việc "always borrowing" thể hiện sự phàn nàn, khó chịu về một thói quen lặp đi lặp lại.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>3. Gợi ý hữu ích (Helpful hints)</h3>
+        <div class="note">
+            <p>Thì Hiện tại Tiếp diễn thường được dùng với các cụm từ chỉ thời gian như:</p>
+            <ul>
+                <li><strong>now</strong> (bây giờ)</li>
+                <li><strong>right now</strong> (ngay bây giờ)</li>
+                <li><strong>at the moment</strong> (lúc này)</li>
+                <li><strong>today</strong> (hôm nay)</li>
+                <li><strong>this week/month/etc.</strong> (tuần/tháng này/v.v.)</li>
+            </ul>
+        </div>
+
+        <h2>III. Động Từ Trạng Thái (Stative Verbs)</h2>
+        <p>Động từ Trạng thái là một nhóm động từ đặc biệt không thường được sử dụng trong các thì tiếp diễn (V-ing), bởi vì chúng không diễn tả hành động mà diễn tả trạng thái, cảm xúc, suy nghĩ, sở hữu, giác quan, v.v.</p>
+
+        <h3>1. Giải thích</h3>
+        <ul>
+            <li><strong>Động từ trạng thái không diễn tả hành động.</strong> Chúng mô tả các trạng thái, cảm xúc, suy nghĩ, ý kiến, giác quan, hoặc sự sở hữu.</li>
+            <li>Chúng <strong>không thường được sử dụng trong các thì tiếp diễn (continuous tenses)</strong> như Hiện tại Tiếp diễn, Quá khứ Tiếp diễn, v.v.
+                <ul>
+                    <li><em>Ví dụ đúng:</em> I <em><strong>like</strong></em> reading books in my free time. (Tôi thích đọc sách vào thời gian rảnh.)</li>
+                    <li><em>Ví dụ sai:</em> I <em><strong>am liking</strong></em> reading books in my free time. (Câu này không đúng ngữ pháp.)</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>2. Một số động từ trạng thái phổ biến</h3>
+        <p>Dưới đây là một số động từ trạng thái thường gặp:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">Ý kiến/Suy nghĩ:</h4>
+                <ul>
+                    <li><strong>agree</strong> (đồng ý)</li>
+                    <li><strong>believe</strong> (tin tưởng)</li>
+                    <li><strong>know</strong> (biết)</li>
+                    <li><strong>mean</strong> (có nghĩa)</li>
+                    <li><strong>suppose</strong> (cho rằng)</li>
+                    <li><strong>think</strong> (nghĩ - khi diễn tả ý kiến)</li>
+                    <li><strong>understand</strong> (hiểu)</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">Cảm xúc/Cảm giác:</h4>
+                <ul>
+                    <li><strong>appear</strong> (dường như)</li>
+                    <li><strong>feel</strong> (cảm thấy - khi diễn tả trạng thái cảm xúc)</li>
+                    <li><strong>hate</strong> (ghét)</li>
+                    <li><strong>hope</strong> (hy vọng)</li>
+                    <li><strong>like</strong> (thích)</li>
+                    <li><strong>love</strong> (yêu)</li>
+                    <li><strong>need</strong> (cần)</li>
+                    <li><strong>prefer</strong> (thích hơn)</li>
+                    <li><strong>seem</strong> (dường như)</li>
+                    <li><strong>want</strong> (muốn)</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">Sở hữu:</h4>
+                <ul>
+                    <li><strong>belong to</strong> (thuộc về)</li>
+                    <li><strong>have</strong> (có - khi diễn tả sở hữu)</li>
+                    <li><strong>own</strong> (sở hữu)</li>
+                </ul>
+                <h4 class="font-semibold text-gray-700 mt-4 mb-2">Giác quan:</h4>
+                <ul>
+                    <li><strong>hear</strong> (nghe)</li>
+                    <li><strong>see</strong> (nhìn)</li>
+                    <li><strong>smell</strong> (ngửi)</li>
+                    <li><strong>taste</strong> (nếm)</li>
+                </ul>
+                <h4 class="font-semibold text-gray-700 mt-4 mb-2">Khác:</h4>
+                <ul>
+                    <li><strong>include</strong> (bao gồm)</li>
+                    <li><strong>consist of</strong> (bao gồm)</li>
+                    <li><strong>contain</strong> (chứa)</li>
+                </ul>
+            </div>
+        </div>
+
+
+        <h3>3. Lưu ý quan trọng: Một số động từ có thể là cả trạng thái và hành động</h3>
+        <div class="note">
+            <p>Một số động từ có thể được sử dụng trong cả thì đơn và thì tiếp diễn, tùy thuộc vào ý nghĩa mà chúng diễn tả:</p>
+            <ul>
+                <li><strong>"think"</strong>
+                    <ul>
+                        <li>Khi diễn tả <strong>ý kiến/quan điểm (trạng thái)</strong>: dùng thì đơn.
+                            <ul>
+                                <li><em>Ví dụ:</em> What do you <em><strong>think</strong></em> about his new song? (Bạn nghĩ gì về bài hát mới của anh ấy?)</li>
+                            </ul>
+                        </li>
+                        <li>Khi diễn tả <strong>quá trình suy nghĩ/cân nhắc (hành động)</strong>: dùng thì tiếp diễn.
+                            <ul>
+                                <li><em>Ví dụ:</em> I'<em><strong>m thinking</strong></em> about last night's match. (Tôi đang nghĩ về trận đấu tối qua.)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>"have"</strong>
+                    <ul>
+                        <li>Khi diễn tả <strong>sở hữu (trạng thái)</strong>: dùng thì đơn.
+                            <ul>
+                                <li><em>Ví dụ:</em> I <em><strong>have</strong></em> a car. (Tôi có một chiếc ô tô.)</li>
+                            </ul>
+                        </li>
+                        <li>Khi diễn tả <strong>hành động/trải nghiệm (trong các cụm từ)</strong>: dùng thì tiếp diễn.
+                            <ul>
+                                <li><em>Ví dụ:</em> I'<em><strong>m having</strong></em> breakfast. (Tôi đang ăn sáng.)</li>
+                                <li><em>Ví dụ:</em> She'<em><strong>s having</strong></em> a good time. (Cô ấy đang có một khoảng thời gian vui vẻ.)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>"see"</strong>
+                    <ul>
+                        <li>Khi diễn tả <strong>hành động nhìn bằng mắt (trạng thái giác quan)</strong>: dùng thì đơn.
+                            <ul>
+                                <li><em>Ví dụ:</em> I <em><strong>see</strong></em> a bird. (Tôi nhìn thấy một con chim.)</li>
+                            </ul>
+                        </li>
+                        <li>Khi diễn tả <strong>gặp gỡ/hẹn hò (hành động)</strong>: dùng thì tiếp diễn.
+                            <ul>
+                                <li><em>Ví dụ:</em> I'<em><strong>m seeing</strong></em> my doctor tomorrow. (Tôi sẽ gặp bác sĩ vào ngày mai.)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <p class="text-center text-gray-600 mt-8">Hy vọng bài giảng chi tiết này sẽ giúp bạn hiểu rõ hơn về các thì và động từ trạng thái. Hãy luyện tập thường xuyên để nắm vững kiến thức nhé! Nếu có bất kỳ câu hỏi nào, đừng ngần ngại hỏi tôi.</p>
+    </div>
+</body>
+</html>
