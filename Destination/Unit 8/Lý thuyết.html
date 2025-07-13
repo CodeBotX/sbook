@@ -3,278 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ngữ pháp thì tương lai trong tiếng Anh</title>
-    <!-- Tải Tailwind CSS từ CDN để dễ dàng tạo kiểu -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Bài Giảng Ngữ Pháp: Giới Từ Chỉ Thời Gian và Nơi Chốn (In, On, At)</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts: Inter for modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Tùy chỉnh font Inter cho toàn bộ trang */
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Light gray background from Bootstrap */
+            color: #343a40; /* Dark text color from Bootstrap */
+            line-height: 1.6;
+            padding-top: 1.5rem; /* Add some top padding */
+            padding-bottom: 1.5rem; /* Add some bottom padding */
         }
-        /* Các kiểu tùy chỉnh nhỏ nếu cần, nhưng ưu tiên Tailwind */
         .container {
-            /* Tailwind classes will be applied directly to the div */
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* Slightly rounded corners */
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); /* Soft shadow */
+            padding: 2rem; /* Consistent padding */
         }
-        /* Đảm bảo các ví dụ và ghi chú có màu sắc đặc trưng */
-        .example {
-            border-left: 6px solid #4285f4; /* Màu xanh Google */
+
+        h1 {
+            color: #212529; /* Darker heading color */
+            margin-bottom: 1.5rem;
         }
-        .note {
-            border-left: 6px solid #fbbc05; /* Màu vàng Google */
+        h2 {
+            color: #343a40;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef; /* Subtle separator */
+        }
+        h3 {
+            color: #495057;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        h4 {
+            color: #0d6efd; /* Bootstrap primary blue */
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        p {
+            margin-bottom: 1rem;
+            color: #495057;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        ul li {
+            margin-bottom: 0.5rem;
+            color: #495057;
+        }
+        strong {
+            color: #212529; /* Make strong text stand out */
+        }
+        em {
+            color: #6610f2; /* Bootstrap purple for examples */
+        }
+
+        /* Custom styles for notes/hints using Bootstrap alerts */
+        .alert-info-custom {
+            background-color: #e0f2fe; /* Light blue */
+            border-color: #3b82f6; /* Blue */
+            color: #2c5282; /* Darker blue text */
+            border-left: 4px solid; /* Custom left border */
+        }
+        .alert-warning-custom {
+            background-color: #fff3cd; /* Light yellow */
+            border-color: #ffc107; /* Yellow */
+            color: #664d03; /* Darker yellow text */
+            border-left: 4px solid; /* Custom left border */
         }
     </style>
 </head>
-<body class="bg-gray-100 flex justify-center items-start min-h-screen p-5 box-border">
-    <div class="container bg-white p-6 md:p-8 lg:p-10 rounded-xl shadow-lg max-w-4xl w-full box-border">
-        <h1 class="text-center text-3xl md:text-4xl font-bold text-blue-700 mb-8 pb-3 border-b-2 border-gray-200">
-            Ngữ pháp thì tương lai trong tiếng Anh
-        </h1>
-        <p class="mb-4 text-lg text-gray-700">
-            Chào các em! Hôm nay chúng ta sẽ cùng tìm hiểu về cách diễn tả các hành động, sự kiện sẽ xảy ra trong tương lai bằng nhiều cách khác nhau trong tiếng Anh nhé. Có 4 cách chính mà chúng ta sẽ học:
-        </p>
-        <ul class="list-disc ml-6 mb-6 text-lg text-gray-700">
-            <li class="mb-1">Thì Hiện tại tiếp diễn (Present Continuous)</li>
-            <li class="mb-1">Will</li>
-            <li class="mb-1">Be going to</li>
-            <li class="mb-1">Thì Hiện tại đơn (Present Simple)</li>
-        </ul>
+<body>
+    <div class="container my-4">
+        <h1 class="text-center mb-4">Bài Giảng Ngữ Pháp: Giới Từ Chỉ Thời Gian và Nơi Chốn (In, On, At)</h1>
+        <p class="text-center text-muted mb-5">Chào mừng các bạn đến với bài giảng về giới từ! Hôm nay, chúng ta sẽ tập trung vào ba giới từ quan trọng: <strong>in, on, at</strong>. Đây là những giới từ rất phổ biến và có nhiều cách dùng khác nhau, đặc biệt là khi nói về thời gian và nơi chốn. Hãy cùng tìm hiểu chi tiết nhé!</p>
 
-        <h2 class="text-2xl md:text-3xl font-bold text-blue-600 border-b-2 border-blue-600 pb-2 mt-10">
-            1. Thì Hiện tại tiếp diễn (Present Continuous) cho tương lai
-        </h2>
-        <p class="mb-4 text-lg text-gray-700">
-            Các em đã biết thì Hiện tại tiếp diễn dùng để diễn tả hành động đang diễn ra. Nhưng ít bạn biết rằng nó cũng có thể dùng để nói về tương lai đấy!
-        </p>
+        <h2 class="border-bottom pb-2">I. Giới Từ 'In'</h2>
+        <p>Giới từ 'in' thường được dùng để chỉ một khoảng thời gian lớn hơn hoặc một không gian bao quanh.</p>
 
-        <h3 class="text-xl md:text-2xl font-semibold text-green-600 mt-6">a. Công thức:</h3>
-        <p class="mb-4 text-lg font-bold text-gray-800">
-            S + am/is/are + V-ing
-        </p>
-        <div class="example bg-blue-50 p-4 pl-6 my-4 rounded-md text-gray-800 italic">
-            Ví dụ: <em>I am meeting him tomorrow.</em> (Tôi sẽ gặp anh ấy vào ngày mai.)
-        </div>
-
-        <h3 class="text-xl md:text-2xl font-semibold text-green-600 mt-6">b. Cách dùng:</h3>
-        <ul class="list-disc ml-6 mb-6 text-lg text-gray-700">
-            <li class="mb-2">
-                <strong class="text-gray-800">Dùng để diễn tả các sắp xếp, kế hoạch đã được "sắp đặt" hoặc "sắp xếp" rõ ràng trong tương lai.</strong> Nghĩa là, các em đã lên lịch, đã hẹn hò, đã mua vé, hoặc đã có sự chuẩn bị cụ thể cho hành động đó.
-                <div class="note bg-yellow-50 p-4 pl-6 my-3 rounded-md text-gray-800 italic">
-                    <strong>Lưu ý:</strong> Chúng ta thường dùng thì này với các trạng từ chỉ thời gian trong tương lai như: <em>tomorrow, next week, on Monday, this evening,...</em>
-                </div>
-                <div class="example bg-blue-50 p-4 pl-6 my-3 rounded-md text-gray-800 italic">
-                    Ví dụ:
-                    <ul class="list-disc ml-6 mt-2">
-                        <li><em>We're driving to Berlin this weekend.</em> (Chúng tôi sẽ lái xe đến Berlin cuối tuần này.) -> Có thể đã lên lịch trình, chuẩn bị xe cộ.</li>
-                        <li><em>I'm meeting my friends for dinner tonight.</em> (Tối nay tôi sẽ gặp bạn bè để ăn tối.) -> Đã có hẹn, sắp xếp cụ thể.</li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-
-        <div class="note bg-yellow-50 p-4 pl-6 my-4 rounded-md text-gray-800 italic">
-            <strong>Hãy chú ý!</strong>
-            <ul class="list-disc ml-6 mt-2">
-                <li class="mb-1">Chúng ta dùng thì hiện tại tiếp diễn cho những điều chúng ta muốn làm trong tương lai nhưng *chưa* được gọi là 'intentions' (ý định) hoặc 'arrangements' (sắp xếp). Điều này hơi khó hiểu một chút, nhưng các em hãy hiểu là nó thiên về một kế hoạch cá nhân hơn.</li>
-                <li>Không dùng thì hiện tại tiếp diễn cho các dự đoán (predictions) về tương lai.
-                    <div class="example bg-blue-50 p-4 pl-6 my-2 rounded-md text-gray-800 italic">
-                        Ví dụ: <em>Do you think you're enjoying your trip to Berlin next week?</em> (Bạn có nghĩ bạn sẽ thích chuyến đi đến Berlin tuần tới không?) -> Đây là câu hỏi về dự đoán, không phải sắp xếp cụ thể.
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <h2 class="text-2xl md:text-3xl font-bold text-blue-600 border-b-2 border-blue-600 pb-2 mt-10">
-            2. Will
-        </h2>
-        <p class="mb-4 text-lg text-gray-700">
-            Will là một trong những trợ động từ phổ biến nhất để nói về tương lai. Nó khá linh hoạt nhưng cũng có những trường hợp dùng riêng biệt.
-        </p>
-
-        <h3 class="text-xl md:text-2xl font-semibold text-green-600 mt-6">a. Công thức:</h3>
-        <p class="mb-4 text-lg font-bold text-gray-800">
-            S + will + V (nguyên thể)
-        </p>
-        <div class="overflow-x-auto mb-6">
-            <table class="min-w-full bg-white rounded-lg shadow-sm">
-                <thead class="bg-gray-100">
+        <h3>1. Chỉ Thời Gian</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
                     <tr>
-                        <th class="py-3 px-4 text-left text-gray-600 font-semibold rounded-tl-lg">Dạng</th>
-                        <th class="py-3 px-4 text-left text-gray-600 font-semibold">Khẳng định (statement)</th>
-                        <th class="py-3 px-4 text-left text-gray-600 font-semibold">Phủ định (negative)</th>
-                        <th class="py-3 px-4 text-left text-gray-600 font-semibold rounded-tr-lg">Nghi vấn (question)</th>
+                        <th>Cách dùng</th>
+                        <th>Ví dụ</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                <tbody>
                     <tr>
-                        <td class="py-3 px-4">Cơ bản</td>
-                        <td class="py-3 px-4">I/you/he/she/it/we/they <strong class="text-blue-700">will ('ll)</strong> go ...</td>
-                        <td class="py-3 px-4">I/you/he/she/it/we/they <strong class="text-blue-700">will not (won't)</strong> go ...</td>
-                        <td class="py-3 px-4"><strong class="text-blue-700">Will</strong> I/you/he/she/it/we/they go ...?</td>
+                        <td><strong>Months (Tháng)</strong></td>
+                        <td>Paris is wonderful <em><strong>in</strong></em> April. (Paris thật tuyệt vời vào tháng Tư.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Years (Năm)</strong></td>
+                        <td>I first went to Russia <em><strong>in</strong></em> 2005. (Lần đầu tiên tôi đến Nga vào năm 2005.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Seasons (Mùa)</strong></td>
+                        <td>We often go skiing <em><strong>in</strong></em> winter. (Chúng tôi thường đi trượt tuyết vào mùa đông.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Parts of the day (Các buổi trong ngày)</strong></td>
+                        <td>My train leaves <em><strong>in</strong></em> the afternoon. (Chuyến tàu của tôi khởi hành vào buổi chiều.)</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
-        <h3 class="text-xl md:text-2xl font-semibold text-green-600 mt-6">b. Cách dùng:</h3>
-        <ul class="list-disc ml-6 mb-6 text-lg text-gray-700">
-            <li class="mb-2">
-                <strong class="text-gray-800">Facts about the future (Sự thật về tương lai):</strong> Dùng để nói về những điều chắc chắn sẽ xảy ra trong tương lai, không thể thay đổi.
-                <div class="example bg-blue-50 p-4 pl-6 my-3 rounded-md text-gray-800 italic">
-                    Ví dụ: <em>The new airport will be the biggest in Europe.</em> (Sân bay mới sẽ là lớn nhất ở châu Âu.) -> Đây là một sự thật, một thông tin khách quan.
-                </div>
-            </li>
-            <li class="mb-2">
-                <strong class="text-gray-800">Predictions (Dự đoán):</strong> Dùng để đưa ra dự đoán về tương lai, thường dựa trên ý kiến cá nhân, cảm giác hoặc kinh nghiệm.
-                <div class="example bg-blue-50 p-4 pl-6 my-3 rounded-md text-gray-800 italic">
-                    Ví dụ: <em>You'll have a great time in the Bahamas.</em> (Bạn sẽ có một khoảng thời gian tuyệt vời ở Bahamas.) -> Đây là một dự đoán, một ý kiến.
-                </div>
-            </li>
-            <li class="mb-2">
-                <strong class="text-gray-800">Offers and requests (Lời đề nghị và yêu cầu):</strong> Dùng để đưa ra lời đề nghị giúp đỡ hoặc yêu cầu ai đó làm gì.
-                <div class="example bg-blue-50 p-4 pl-6 my-3 rounded-md text-gray-800 italic">
-                    Ví dụ:
-                    <ul class="list-disc ml-6 mt-2">
-                        <li><em>We'll help you get ready for your holiday.</em> (Chúng tôi sẽ giúp bạn chuẩn bị cho kỳ nghỉ của bạn.) -> Lời đề nghị.</li>
-                        <li><em>Will you drive to the airport?</em> (Bạn sẽ lái xe đến sân bay chứ?) -> Lời yêu cầu.</li>
-                    </ul>
-                </div>
-            </li>
-            <li class="mb-2">
-                <strong class="text-gray-800">Decisions made now (Quyết định đưa ra ngay tại thời điểm nói):</strong> Khi các em đột nhiên quyết định làm gì đó ngay lúc nói chuyện.
-                <div class="example bg-blue-50 p-4 pl-6 my-3 rounded-md text-gray-800 italic">
-                    Ví dụ: <em>I know I'll go to China this summer.</em> (Tôi biết tôi sẽ đi Trung Quốc mùa hè này.) -> Quyết định vừa được đưa ra.
-                </div>
-            </li>
-        </ul>
-
-        <div class="note bg-yellow-50 p-4 pl-6 my-4 rounded-md text-gray-800 italic">
-            <strong>Hãy chú ý!</strong>
-            <ul class="list-disc ml-6 mt-2">
-                <li class="mb-1">Với lời đề nghị (offers) hoặc câu hỏi (questions), chúng ta dùng 'Shall I/we...' thay vì 'Will I/we...' trong một số trường hợp, đặc biệt trong tiếng Anh Anh, khi muốn hỏi ý kiến hoặc đề nghị một cách lịch sự.
-                    <div class="example bg-blue-50 p-4 pl-6 my-2 rounded-md text-gray-800 italic">
-                        Ví dụ: <em>Shall I drive you to the airport?</em> (Tôi có nên lái xe đưa bạn ra sân bay không?) -> Hỏi ý kiến.
-                    </div>
-                </li>
-                <li>Không dùng 'will' cho các sắp xếp (arrangements) đã định sẵn. Chúng ta sẽ dùng thì hiện tại tiếp diễn hoặc 'be going to'.
-                    <div class="example bg-blue-50 p-4 pl-6 my-2 rounded-md text-gray-800 italic">
-                        Ví dụ: <em>We'll visit my grandma this weekend.</em> (Sai) -> Nên dùng <em>We're visiting my grandma this weekend.</em> hoặc <em>We are going to visit my grandma this weekend.</em>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <h2 class="text-2xl md:text-3xl font-bold text-blue-600 border-b-2 border-blue-600 pb-2 mt-10">
-            3. Be going to
-        </h2>
-        <p class="mb-4 text-lg text-gray-700">
-            'Be going to' là một cách phổ biến khác để nói về tương lai, đặc biệt khi có ý định hoặc bằng chứng rõ ràng.
+        <p><strong>Giải thích:</strong>
+            Chúng ta dùng 'in' với các khoảng thời gian dài và không cụ thể như tháng, năm, mùa, hoặc các buổi trong ngày (sáng, chiều, tối). Hãy tưởng tượng bạn đang ở "bên trong" một một khoảng thời gian đó.
         </p>
 
-        <h3 class="text-xl md:text-2xl font-semibold text-green-600 mt-6">a. Công thức:</h3>
-        <p class="mb-4 text-lg font-bold text-gray-800">
-            S + am/is/are + going to + V (nguyên thể)
-        </p>
-        <div class="overflow-x-auto mb-6">
-            <table class="min-w-full bg-white rounded-lg shadow-sm">
-                <thead class="bg-gray-100">
+        <h3>2. Chỉ Nơi Chốn</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
                     <tr>
-                        <th class="py-3 px-4 text-left text-gray-600 font-semibold rounded-tl-lg">Dạng</th>
-                        <th class="py-3 px-4 text-left text-gray-600 font-semibold">Khẳng định (statement)</th>
-                        <th class="py-3 px-4 text-left text-gray-600 font-semibold">Phủ định (negative)</th>
-                        <th class="py-3 px-4 text-left text-gray-600 font-semibold rounded-tr-lg">Nghi vấn (question)</th>
+                        <th>Cách dùng</th>
+                        <th>Ví dụ</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                <tbody>
                     <tr>
-                        <td class="py-3 px-4">Cơ bản</td>
-                        <td class="py-3 px-4">I <strong class="text-blue-700">(am) going to</strong> travel ...<br>He/she/it <strong class="text-blue-700">is (is)</strong> going to travel ...<br>You/we/they <strong class="text-blue-700">are ('re)</strong> going to travel ...</td>
-                        <td class="py-3 px-4">I <strong class="text-blue-700">am not (am not)</strong> going to travel ...<br>He/she/it <strong class="text-blue-700">is not (isn't / 's not)</strong> going to travel ...<br>You/we/they <strong class="text-blue-700">are not (aren't / 're not)</strong> going to travel ...</td>
-                        <td class="py-3 px-4"><strong class="text-blue-700">Am</strong> I going to travel ...?<br><strong class="text-blue-700">Is</strong> he/she/it going to travel ...?<br><strong class="text-blue-700">Are</strong> you/we/they going to travel ...?</td>
+                        <td><strong>Towns and cities (Thị trấn và thành phố)</strong></td>
+                        <td>There's a famous castle <em><strong>in</strong></em> Edinburgh. (Có một lâu đài nổi tiếng ở Edinburgh.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Countries and continents (Quốc gia và lục địa)</strong></td>
+                        <td>My brother is <em><strong>in</strong></em> Mexico. (Anh trai tôi đang ở Mexico.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Areas and regions (Khu vực và vùng)</strong></td>
+                        <td>What's life like <em><strong>in</strong></em> the desert? (Cuộc sống ở sa mạc như thế nào?)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inside an object (Bên trong một vật)</strong></td>
+                        <td>Your passport is <em><strong>in</strong></em> the drawer. (Hộ chiếu của bạn ở trong ngăn kéo.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inside a room (Bên trong một căn phòng)</strong></td>
+                        <td>I've left the tickets <em><strong>in</strong></em> the living room! (Tôi đã để vé trong phòng khách!)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inside a building (Bên trong một tòa nhà)</strong></td>
+                        <td>Sharon has been <em><strong>in</strong></em> the travel agent's for an hour! (Sharon đã ở trong văn phòng du lịch một tiếng rồi!)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>In the future (Trong tương lai)</strong></td>
+                        <td>We'll meet <em><strong>in</strong></em> the future. (Chúng ta sẽ gặp nhau trong tương lai.)</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
-        <h3 class="text-xl md:text-2xl font-semibold text-green-600 mt-6">b. Cách dùng:</h3>
-        <ul class="list-disc ml-6 mb-6 text-lg text-gray-700">
-            <li class="mb-2">
-                <strong class="text-gray-800">Intentions (Ý định):</strong> Dùng để nói về những ý định, kế hoạch mà người nói đã quyết định trước thời điểm nói, nhưng chưa hẳn đã sắp xếp cụ thể.
-                <div class="example bg-blue-50 p-4 pl-6 my-3 rounded-md text-gray-800 italic">
-                    Ví dụ: <em>I'm going to become an explorer when I grow up.</em> (Tôi dự định sẽ trở thành một nhà thám hiểm khi lớn lên.) -> Đây là một ý định lâu dài.
-                </div>
-            </li>
-            <li class="mb-2">
-                <strong class="text-gray-800">Predictions (Dự đoán - dựa trên bằng chứng):</strong> Dùng để đưa ra dự đoán về tương lai khi có bằng chứng rõ ràng hoặc dấu hiệu cụ thể ở hiện tại.
-                <div class="example bg-blue-50 p-4 pl-6 my-3 rounded-md text-gray-800 italic">
-                    Ví dụ: <em>It's going to rain, so take an umbrella.</em> (Trời sắp mưa đấy, nên hãy mang ô đi.) -> Bằng chứng là mây đen, gió, v.v.
-                </div>
-            </li>
-            <li class="mb-2">
-                <strong class="text-gray-800">Facts about the future (Sự thật về tương lai - đã được lên kế hoạch):</strong> Tương tự như thì hiện tại tiếp diễn, nhưng 'be going to' nhấn mạnh hơn vào việc điều đó đã được dự định hoặc chuẩn bị.
-                <div class="example bg-blue-50 p-4 pl-6 my-3 rounded-md text-gray-800 italic">
-                    Ví dụ: <em>The new airport is going to be the biggest in Europe.</em> (Sân bay mới sẽ là lớn nhất ở châu Âu.) -> Đây là một sự thật đã được lên kế hoạch, xây dựng.
-                </div>
-            </li>
-        </ul>
-
-        <h2 class="text-2xl md:text-3xl font-bold text-blue-600 border-b-2 border-blue-600 pb-2 mt-10">
-            4. Thì Hiện tại đơn (Present Simple) cho tương lai
-        </h2>
-        <p class="mb-4 text-lg text-gray-700">
-            Thì Hiện tại đơn thường dùng để nói về thói quen, sự thật hiển nhiên. Nhưng nó cũng có một công dụng đặc biệt khi nói về tương lai.
+        <p><strong>Giải thích:</strong>
+            Khi nói về nơi chốn, 'in' thường được dùng cho các không gian lớn, bao quanh, hoặc khi bạn đang ở "bên trong" một cái gì đó. Từ thành phố, quốc gia đến một căn phòng hay một chiếc hộp, 'in' đều phù hợp.
         </p>
 
-        <h3 class="text-xl md:text-2xl font-semibold text-green-600 mt-6">a. Công thức:</h3>
-        <p class="mb-4 text-lg font-bold text-gray-800">
-            S + V (nguyên thể/s/es)
+        <div class="alert alert-info-custom" role="alert">
+            <h3 class="alert-heading">Gợi ý hữu ích</h3>
+            <p>Chúng ta cũng dùng 'in' trong các cụm từ sau:</p>
+            <ul>
+                <li><em><strong>in</strong></em> a minute/an hour/a year (trong một phút/một giờ/một năm)</li>
+                <li><em><strong>in</strong></em> front of (ở phía trước)</li>
+                <li><em><strong>in</strong></em> the middle (of) (ở giữa)</li>
+            </ul>
+        </div>
+
+        <div class="alert alert-warning-custom" role="alert">
+            <h3 class="alert-heading">Cẩn thận!</h3>
+            <p>Với các động từ chỉ chuyển động (come, go, move, run, walk, etc.), chúng ta thường dùng 'to' thay vì 'in' hoặc 'at'.</p>
+            <ul>
+                <li>✓ Was it hot when you went <em><strong>to</strong></em> Japan? (Trời có nóng không khi bạn đi Nhật Bản?)</li>
+            </ul>
+        </div>
+
+        <h2 class="border-bottom pb-2">II. Giới Từ 'On'</h2>
+        <p>Giới từ 'on' thường được dùng để chỉ một ngày cụ thể hoặc một bề mặt.</p>
+
+        <h3>1. Chỉ Thời Gian</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Cách dùng</th>
+                        <th>Ví dụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Days (Các ngày trong tuần)</strong></td>
+                        <td>I got a new car <em><strong>on</strong></em> Saturday. (Tôi mua một chiếc xe mới vào thứ Bảy.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dates (Ngày cụ thể)</strong></td>
+                        <td>My birthday is <em><strong>on</strong></em> 19<sup>th</sup> March. (Sinh nhật của tôi là vào ngày 19 tháng 3.)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><strong>Giải thích:</strong>
+            'On' được dùng cho các ngày cụ thể trong tuần, ngày tháng năm cụ thể, hoặc các ngày lễ có "day" ở cuối (ví dụ: Christmas Day, New Year's Day). Hãy nghĩ về nó như một điểm trên lịch.
         </p>
 
-        <h3 class="text-xl md:text-2xl font-semibold text-green-600 mt-6">b. Cách dùng:</h3>
-        <ul class="list-disc ml-6 mb-6 text-lg text-gray-700">
-            <li class="mb-2">
-                <strong class="text-gray-800">Timetables (Lịch trình), schedules (Thời khóa biểu):</strong> Dùng để nói về các sự kiện trong tương lai theo một lịch trình cố định, thời gian biểu đã được định sẵn, không thay đổi được bởi ý muốn của cá nhân. Thường là lịch trình của phương tiện giao thông, chương trình tivi, giờ học, giờ mở cửa,...
-                <div class="example bg-blue-50 p-4 pl-6 my-3 rounded-md text-gray-800 italic">
-                    Ví dụ: <em>My plane leaves at six.</em> (Máy bay của tôi cất cánh lúc 6 giờ.) -> Lịch trình của máy bay.
-                    <ul class="list-disc ml-6 mt-2">
-                        <li><em>The movie starts at 8 PM.</em> (Bộ phim bắt đầu lúc 8 giờ tối.) -> Lịch chiếu phim.</li>
-                        <li><em>The shop opens at 9 AM tomorrow.</em> (Cửa hàng mở cửa lúc 9 giờ sáng mai.) -> Giờ mở cửa.</li>
+        <h3>2. Chỉ Nơi Chốn</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Cách dùng</th>
+                        <th>Ví dụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>On top of an object (Trên bề mặt của một vật)</strong></td>
+                        <td>Did you put your car keys <em><strong>on</strong></em> the kitchen table? (Bạn đã để chìa khóa xe trên bàn bếp phải không?)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>On a surface (Trên một bề mặt)</strong></td>
+                        <td>There's a timetable <em><strong>on</strong></em> the wall. (Có một thời khóa biểu trên tường.)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><strong>Giải thích:</strong>
+            Khi nói về nơi chốn, 'on' thường chỉ sự tiếp xúc với một bề mặt (trên bàn, trên tường, trên sàn nhà).
+        </p>
+
+        <div class="alert alert-info-custom" role="alert">
+            <h3 class="alert-heading">Gợi ý hữu ích</h3>
+            <p>Chúng ta cũng dùng 'on' trong các cụm từ sau:</p>
+            <ul>
+                <li><em><strong>on</strong></em> the beach (trên bãi biển)</li>
+                <li><em><strong>on</strong></em> the left/right (ở bên trái/phải)</li>
+                <li><em><strong>on</strong></em> my birthday (vào ngày sinh nhật của tôi)</li>
+            </ul>
+        </div>
+
+        <div class="alert alert-warning-custom" role="alert">
+            <h3 class="alert-heading">Cẩn thận!</h3>
+            <p>Chúng ta nói <em><strong>in</strong></em> the morning/afternoon/evening, nhưng <em><strong>on</strong></em> Monday morning/Wednesday evening/etc. (Khi có thêm thứ trong tuần, dùng 'on').</p>
+            <ul>
+                <li>✓ We're flying to Washington <em><strong>in</strong></em> the morning / <em><strong>on</strong></em> Tuesday morning. (Chúng tôi bay đến Washington vào buổi sáng / vào sáng thứ Ba.)</li>
+            </ul>
+            <p>Chúng ta không dùng giới từ với "tomorrow", "yesterday", "tomorrow morning", "yesterday evening", v.v.</p>
+            <ul>
+                <li>✓ We're flying to Washington <em><strong>tomorrow afternoon</strong></em>. (Chúng tôi bay đến Washington vào chiều mai.)</li>
+            </ul>
+        </div>
+
+        <h2 class="border-bottom pb-2">III. Giới Từ 'At'</h2>
+        <p>Giới từ 'at' thường được dùng để chỉ một điểm thời gian hoặc một địa điểm cụ thể, chính xác.</p>
+
+        <h3>1. Chỉ Thời Gian</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Cách dùng</th>
+                        <th>Ví dụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Clock times (Giờ cụ thể)</strong></td>
+                        <td>There's a bus <em><strong>at</strong></em> ten past three. (Có một chuyến xe buýt lúc 3 giờ 10 phút.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Holiday periods (Các kỳ nghỉ lễ)</strong></td>
+                        <td>What are you doing <em><strong>at</strong></em> Christmas? (Bạn làm gì vào dịp Giáng sinh?)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><strong>Giải thích:</strong>
+            'At' được dùng cho các thời điểm chính xác trên đồng hồ, hoặc các kỳ nghỉ lễ nói chung (không có "day" ở cuối).
+        </p>
+
+        <h3>2. Chỉ Nơi Chốn</h3>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Cách dùng</th>
+                        <th>Ví dụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Exact places (Địa điểm chính xác)</strong></td>
+                        <td>What's it like <em><strong>at</strong></em> the North Pole? (Bắc Cực như thế nào?)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Addresses (Địa chỉ cụ thể)</strong></td>
+                        <td>My cousin lives <em><strong>at</strong></em> 132 London Road. (Anh họ tôi sống ở số 132 đường London.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Buildings, when we are talking about the activities that happen there (Các tòa nhà, khi chúng ta nói về các hoạt động diễn ra ở đó)</strong></td>
+                        <td>I think John is <em><strong>at</strong></em> the cinema, watching Titanic. (Tôi nghĩ John đang ở rạp chiếu phim, xem Titanic.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Activities (Hoạt động)</strong></td>
+                        <td>Rania isn't here. She's <em><strong>at</strong></em> a party. (Rania không ở đây. Cô ấy đang ở một bữa tiệc.)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><strong>Giải thích:</strong>
+            'At' dùng cho các điểm hoặc địa điểm cụ thể, chính xác (một địa chỉ, một điểm trên bản đồ, hoặc một nơi mà một hoạt động cụ thể đang diễn ra).
+        </p>
+
+        <div class="alert alert-info-custom" role="alert">
+            <h3 class="alert-heading">Gợi ý hữu ích</h3>
+            <p>Chúng ta cũng dùng 'at' trong các cụm từ sau:</p>
+            <ul>
+                <li><em><strong>at</strong></em> the moment (lúc này)</li>
+                <li><em><strong>at</strong></em> night (vào ban đêm)</li>
+                <li><em><strong>at</strong></em> the top/bottom (ở trên cùng/dưới cùng)</li>
+                <li><em><strong>at</strong></em> the door/window (ở cửa/cửa sổ)</li>
+            </ul>
+        </div>
+
+        <div class="alert alert-warning-custom" role="alert">
+            <h3 class="alert-heading">Cẩn thận!</h3>
+            <p>Hãy so sánh cách chúng ta dùng 'in', 'on', và 'at' cho nơi chốn:</p>
+            <ul>
+                <li>Chúng ta dùng <strong>'in'</strong> và <strong>'at'</strong> cho các địa điểm lớn hơn hoặc các nơi chốn nói chung.
+                    <ul>
+                        <li>✓ We're spending our next holiday <em><strong>in</strong></em> the countryside. (Chúng tôi sẽ dành kỳ nghỉ tiếp theo ở vùng nông thôn.)</li>
+                        <li>✓ Let's meet <em><strong>at</strong></em> the train station. (Hãy gặp nhau ở nhà ga.)</li>
                     </ul>
-                </div>
-            </li>
-        </ul>
+                </li>
+                <li>Chúng ta dùng <strong>'on'</strong> khi nói về bề mặt hoặc vị trí trên một đường phố.</li>
+            </ul>
+        </div>
 
-        <h2 class="text-2xl md:text-3xl font-bold text-blue-600 border-b-2 border-blue-600 pb-2 mt-10">
-            Tóm tắt và so sánh (Để dễ nhớ hơn nhé!)
-        </h2>
-        <ul class="list-disc ml-6 mb-6 text-lg text-gray-700">
-            <li class="mb-2">
-                <strong class="text-blue-700">Present Continuous:</strong> Dùng cho các <strong class="text-red-600">kế hoạch, sắp xếp đã được chuẩn bị cụ thể</strong> (Arrangements). Tưởng tượng như bạn đã có lịch hẹn trên điện thoại.
-            </li>
-            <li class="mb-2">
-                <strong class="text-blue-700">Will:</strong>
-                <ul class="list-disc ml-6 mt-1">
-                    <li><strong class="text-red-600">Dự đoán chung chung</strong> (Predictions - không có bằng chứng rõ ràng).</li>
-                    <li><strong class="text-red-600">Quyết định ngay tại thời điểm nói</strong> (On-the-spot decisions).</li>
-                    <li><strong class="text-red-600">Lời đề nghị, yêu cầu, hứa hẹn.</strong></li>
-                    <li><strong class="text-red-600">Sự thật hiển nhiên về tương lai.</strong></li>
-                </ul>
-            </li>
-            <li class="mb-2">
-                <strong class="text-blue-700">Be going to:</strong>
-                <ul class="list-disc ml-6 mt-1">
-                    <li><strong class="text-red-600">Ý định, kế hoạch đã quyết định từ trước</strong> (Intentions).</li>
-                    <li><strong class="text-red-600">Dự đoán dựa trên bằng chứng rõ ràng</strong> ở hiện tại.</li>
-                    <li><strong class="text-red-600">Sự thật về tương lai dựa trên kế hoạch/dự định.</strong></li>
-                </ul>
-            </li>
-            <li class="mb-2">
-                <strong class="text-blue-700">Present Simple:</strong> Dùng cho <strong class="text-red-600">lịch trình, thời khóa biểu cố định</strong> (Timetables, schedules). Như lịch bay, giờ chiếu phim.
-            </li>
-        </ul>
-
-        <p class="mt-8 text-lg text-gray-700">
-            Hi vọng với giải thích chi tiết này, các em đã hiểu rõ hơn về cách dùng các thì tương lai trong tiếng Anh. Hãy luyện tập thật nhiều để nắm vững chúng nhé!
-        </p>
+        <p class="text-center text-muted mt-5">Hy vọng bài giảng này đã cung cấp cho bạn cái nhìn rõ ràng về cách sử dụng các giới từ <strong>in, on, at</strong>. Việc luyện tập thường xuyên sẽ giúp bạn ghi nhớ và sử dụng chúng một cách tự nhiên hơn. Chúc bạn học tốt!</p>
     </div>
+
+    <!-- Bootstrap 5 JS CDN (Popper and Bootstrap JS bundle) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" xintegrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" xintegrity="sha384-0pUGZvbkm6XF6gxjEnlco4sWNYCHzQWCD7Lk5C6jY/UqRsfa18N/A+E/N6jC+hVq" crossorigin="anonymous"></script>
 </body>
 </html>
