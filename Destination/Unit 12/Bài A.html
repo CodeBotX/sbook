@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Điền Từ Ngữ Pháp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for the word box */
+        .word-options {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+        }
+        .word-options .badge {
+            font-size: 1.1em;
+            padding: 8px 15px;
+            cursor: default; /* Not draggable in this version */
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px; /* Increased margin for better separation */
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center; /* Align input with text */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .question-item .question-text input[type="text"] {
+            display: inline-block;
+            width: 150px; /* Adjust width as needed */
+            margin: 0 5px;
+            padding: 0 5px; /* Reduced padding for underline effect */
+            border: none; /* Remove all borders */
+            border-bottom: 1px solid #ced4da; /* Only bottom border */
+            border-radius: 0; /* Remove border-radius for a clean underline */
+            font-size: 1em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: transparent; /* Ensure background is transparent */
+            text-align: center; /* Center text in input */
+        }
+        .question-item .question-text input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: none; /* Remove box-shadow on focus for underline effect */
+            border-bottom-width: 2px; /* Thicker underline on focus */
+        }
+        /* Styles for correct and incorrect input feedback */
+        .question-item .question-text input[type="text"].is-correct {
+            border-color: #198754;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for correct */
+        }
+        .question-item .question-text input[type="text"].is-incorrect {
+            border-color: #dc3545;
+            box-shadow: none; /* Remove box-shadow */
+            border-bottom-width: 2px; /* Thicker underline for incorrect */
+        }
+
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+            .question-item .question-text input[type="text"] {
+                width: 100px; /* Smaller width for inputs on small screens */
+                margin: 0 3px;
+                padding: 0 4px; /* Adjusted padding */
+            }
+            .buttons .btn {
+                font-size: 1.1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.3em;
+                padding: 12px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Điền Từ Ngữ Pháp</h1>
+        </div>
+        <h2>Hoàn thành bằng cách sử dụng đúng dạng của từ và cụm từ trong hộp.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Complete using the correct form of the words and phrases in the boxes.
+            <br>
+            <strong>Hướng dẫn:</strong> Điền từ hoặc cụm từ thích hợp vào chỗ trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="fillInTheBlanksForm">
+            <div class="word-options">
+                <span class="badge bg-info text-dark">close</span>
+                <span class="badge bg-info text-dark">confident</span>
+                <span class="badge bg-info text-dark">cool</span>
+                <span class="badge bg-info text-dark">divorced</span>
+                <span class="badge bg-info text-dark">generous</span>
+                <span class="badge bg-info text-dark">grateful</span>
+                <span class="badge bg-info text-dark">independent</span>
+                <span class="badge bg-info text-dark">loving</span>
+                <span class="badge bg-info text-dark">loyal</span>
+                <span class="badge bg-info text-dark">ordinary</span>
+                <span class="badge bg-info text-dark">patient</span>
+                <span class="badge bg-info text-dark">private</span>
+                <span class="badge bg-info text-dark">single</span>
+            </div>
+
+            <div class="mb-4">
+                <div class="question-item">
+                    <p class="question-text">1. Thanks for looking after my dog for the weekend. I'm really <input type="text" id="q1" name="q1" class="form-control d-inline-block w-auto"></p>
+                    <i class="feedback-icon fa-solid" id="icon1"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">2. Judy is one of the most <input type="text" id="q2" name="q2" class="form-control d-inline-block w-auto"> people I know. She's always giving me presents!</p>
+                    <i class="feedback-icon fa-solid" id="icon2"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">3. I don't want a girlfriend. I like being <input type="text" id="q3" name="q3" class="form-control d-inline-block w-auto">.</p>
+                    <i class="feedback-icon fa-solid" id="icon3"></i>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="question-item">
+                    <p class="question-text">4. It will take a while for Simon to forgive you. You'll just have to be <input type="text" id="q4" name="q4" class="form-control d-inline-block w-auto">.</p>
+                    <i class="feedback-icon fa-solid" id="icon4"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">5. Adam's parents are <input type="text" id="q5" name="q5" class="form-control d-inline-block w-auto">, so he only sees his dad at the weekend.</p>
+                    <i class="feedback-icon fa-solid" id="icon5"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">6. Cats are more <input type="text" id="q6" name="q6" class="form-control d-inline-block w-auto"> than dogs. They live their own lives and don't need human company.</p>
+                    <i class="feedback-icon fa-solid" id="icon6"></i>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="question-item">
+                    <p class="question-text">7. I'm very <input type="text" id="q7" name="q7" class="form-control d-inline-block w-auto"> to my best friend. I'd never talk about her behind her back.</p>
+                    <i class="feedback-icon fa-solid" id="icon7"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">8. Sandy's such a <input type="text" id="q8" name="q8" class="form-control d-inline-block w-auto"> dog. He's always so happy to see us when we come home!</p>
+                    <i class="feedback-icon fa-solid" id="icon8"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">9. I'm not a very <input type="text" id="q9" name="q9" class="form-control d-inline-block w-auto"> person. I get nervous when I have to speak in public.</p>
+                    <i class="feedback-icon fa-solid" id="icon9"></i>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="question-item">
+                    <p class="question-text">10. My diary is <input type="text" id="q10" name="q10" class="form-control d-inline-block w-auto">. No one is allowed to read it apart from me.</p>
+                    <i class="feedback-icon fa-solid" id="icon10"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">11. I tell my sister all my problems and secrets. We have a very <input type="text" id="q11" name="q11" class="form-control d-inline-block w-auto"> relationship.</p>
+                    <i class="feedback-icon fa-solid" id="icon11"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">12. My uncle's really <input type="text" id="q12" name="q12" class="form-control d-inline-block w-auto">! He's in a rock band!</p>
+                    <i class="feedback-icon fa-solid" id="icon12"></i>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">13. I'm just a/an <input type="text" id="q13" name="q13" class="form-control d-inline-block w-auto"> person with a normal life – but I'm quite happy!</p>
+                    <i class="feedback-icon fa-solid" id="icon13"></i>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra ✨</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại 🔄</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        // The 'text_parts' array helps reconstruct the sentence around the input field.
+        const questionsData = {
+            'q1': {
+                text_parts: ["Thanks for looking after my dog for the weekend. I'm really ", "."],
+                correct_answer: 'grateful',
+                fullSentence: "Thanks for looking after my dog for the weekend. I'm really grateful.",
+                translation: 'Cảm ơn đã trông chó giúp tôi cuối tuần này. Tôi thực sự biết ơn.',
+                explanation: 'Tính từ "grateful" (biết ơn) là từ phù hợp nhất trong ngữ cảnh này, diễn tả cảm xúc biết ơn đối với sự giúp đỡ từ người khác.',
+                grammar_note: 'Cấu trúc: be grateful for something/to someone.'
+            },
+            'q2': {
+                text_parts: ["Judy is one of the most ", " people I know. She's always giving me presents!"],
+                correct_answer: 'generous',
+                fullSentence: "Judy is one of the most generous people I know. She's always giving me presents!",
+                translation: 'Judy là một trong những người hào phóng nhất mà tôi biết. Cô ấy luôn tặng quà cho tôi!',
+                explanation: 'Tính từ "generous" (hào phóng) mô tả người thích cho đi, phù hợp với việc "luôn tặng quà".',
+                grammar_note: 'Sử dụng "most + adjective" để tạo cấp so sánh hơn nhất.'
+            },
+            'q3': {
+                text_parts: ["I don't want a girlfriend. I like being ", "."],
+                correct_answer: 'single',
+                fullSentence: "I don't want a girlfriend. I like being single.",
+                translation: 'Tôi không muốn có bạn gái. Tôi thích độc thân.',
+                explanation: 'Tính từ "single" (độc thân) mô tả tình trạng không có mối quan hệ yêu đương.',
+                grammar_note: 'Cấu trúc: like + V-ing.'
+            },
+            'q4': {
+                text_parts: ["It will take a while for Simon to forgive you. You'll just have to be ", "."],
+                correct_answer: 'patient',
+                fullSentence: "It will take a while for Simon to forgive you. You'll just have to be patient.",
+                translation: 'Sẽ mất một thời gian để Simon tha thứ cho bạn. Bạn sẽ phải kiên nhẫn.',
+                explanation: 'Tính từ "patient" (kiên nhẫn) là phù hợp nhất, vì việc tha thứ cần thời gian.',
+                grammar_note: 'Cấu trúc: have to be + adjective.'
+            },
+            'q5': {
+                text_parts: ["Adam's parents are ", ", so he only sees his dad at the weekend."],
+                correct_answer: 'divorced',
+                fullSentence: "Adam's parents are divorced, so he only sees his dad at the weekend.",
+                translation: 'Bố mẹ Adam đã ly hôn, vì vậy anh ấy chỉ gặp bố vào cuối tuần.',
+                explanation: 'Tính từ "divorced" (đã ly hôn) giải thích lý do Adam chỉ gặp bố vào cuối tuần.',
+                grammar_note: 'Sử dụng "be divorced" để chỉ tình trạng đã ly hôn.'
+            },
+            'q6': {
+                text_parts: ["Cats are more ", " than dogs. They live their own lives and don't need human company."],
+                correct_answer: 'independent',
+                fullSentence: "Cats are more independent than dogs. They live their own lives and don't need human company.",
+                translation: 'Mèo độc lập hơn chó. Chúng sống cuộc sống của riêng mình và không cần sự bầu bạn của con người.',
+                explanation: 'Tính từ "independent" (độc lập) mô tả khả năng tự lo cho bản thân, không cần sự giúp đỡ hay bầu bạn từ người khác, phù hợp với việc mèo "live their own lives".',
+                grammar_note: 'Sử dụng "more + adjective + than" cho so sánh hơn với tính từ dài.'
+            },
+            'q7': {
+                text_parts: ["I'm very ", " to my best friend. I'd never talk about her behind her back."],
+                correct_answer: 'loyal',
+                fullSentence: "I'm very loyal to my best friend. I'd never talk about her behind her back.",
+                translation: 'Tôi rất trung thành với người bạn thân nhất của mình. Tôi sẽ không bao giờ nói xấu sau lưng cô ấy.',
+                explanation: 'Tính từ "loyal" (trung thành) mô tả sự ủng hộ và không phản bội bạn bè, được củng cố bởi vế sau của câu.',
+                grammar_note: 'Cấu trúc: be loyal to someone.'
+            },
+            'q8': {
+                text_parts: ["Sandy's such a ", " dog. He's always so happy to see us when we come home!"],
+                correct_answer: 'loving',
+                fullSentence: "Sandy's such a loving dog. He's always so happy to see us when we come home!",
+                translation: 'Sandy là một chú chó rất đáng yêu. Nó luôn rất vui khi thấy chúng tôi về nhà!',
+                explanation: 'Tính từ "loving" (yêu thương, tình cảm) mô tả tính cách của một chú chó rất vui vẻ khi gặp chủ.',
+                grammar_note: 'Cấu trúc: such a/an + adjective + noun.'
+            },
+            'q9': {
+                text_parts: ["I'm not a very ", " person. I get nervous when I have to speak in public."],
+                correct_answer: 'confident',
+                fullSentence: "I'm not a very confident person. I get nervous when I have to speak in public.",
+                translation: 'Tôi không phải là một người rất tự tin. Tôi lo lắng khi phải nói chuyện trước công chúng.',
+                explanation: 'Tính từ "confident" (tự tin) đối lập với việc "get nervous when speaking in public".',
+                grammar_note: 'Cụm từ "get nervous" (trở nên lo lắng).'
+            },
+            'q10': {
+                text_parts: ["My diary is ", ". No one is allowed to read it apart from me."],
+                correct_answer: 'private',
+                fullSentence: "My diary is private. No one is allowed to read it apart from me.",
+                translation: 'Nhật ký của tôi là riêng tư. Không ai được phép đọc nó ngoài tôi.',
+                explanation: 'Tính từ "private" (riêng tư) mô tả điều gì đó chỉ dành cho một người và không được chia sẻ với người khác.',
+                grammar_note: 'Cấu trúc: be allowed to + V (được phép làm gì).'
+            },
+            'q11': {
+                text_parts: ["I tell my sister all my problems and secrets. We have a very ", " relationship."],
+                correct_answer: 'close',
+                fullSentence: "I tell my sister all my problems and secrets. We have a very close relationship.",
+                translation: 'Tôi kể cho chị gái tôi mọi vấn đề và bí mật. Chúng tôi có một mối quan hệ rất thân thiết.',
+                explanation: 'Tính từ "close" (thân thiết) mô tả mối quan hệ gần gũi, nơi mọi người chia sẻ nhiều điều với nhau.',
+                grammar_note: 'Cụm từ "a close relationship" (một mối quan hệ thân thiết).'
+            },
+            'q12': {
+                text_parts: ["My uncle's really ", "! He's in a rock band!"],
+                correct_answer: 'cool',
+                fullSentence: "My uncle's really cool! He's in a rock band!",
+                translation: 'Chú của tôi thực sự rất tuyệt! Ông ấy ở trong một ban nhạc rock!',
+                explanation: 'Tính từ "cool" (tuyệt vời, ngầu) được dùng để diễn tả sự ngưỡng mộ, đặc biệt khi người đó làm điều gì đó thú vị như chơi trong ban nhạc rock.',
+                grammar_note: '"Cool" là một tính từ thông tục để diễn tả sự ấn tượng, tuyệt vời.'
+            },
+            'q13': {
+                text_parts: ["I'm just a/an ", " person with a normal life – but I'm quite happy!"],
+                correct_answer: 'ordinary',
+                fullSentence: "I'm just an ordinary person with a normal life – but I'm quite happy!",
+                translation: 'Tôi chỉ là một người bình thường với một cuộc sống bình thường – nhưng tôi khá hạnh phúc!',
+                explanation: 'Tính từ "ordinary" (bình thường, thông thường) mô tả một người không có gì đặc biệt hoặc khác thường, phù hợp với vế sau "normal life".',
+                grammar_note: 'Lưu ý dùng "an" trước "ordinary" vì "o" là nguyên âm.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                // Reset feedback classes
+                inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                const userAnswer = inputElement.value.trim().toLowerCase();
+                const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                let isCorrect = false;
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-correct');
+                } else {
+                    inputElement.classList.add('is-incorrect');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+
+                // Reconstruct the sentence with the correct answer
+                const fullTextHtml = `${questionNumber}. ${questionInfo.text_parts[0]} <span class="correct-answer-text">${questionInfo.correct_answer}</span> ${questionInfo.text_parts[1] || ''}`;
+                questionTextSolutionDiv.innerHTML = fullTextHtml;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br><em>${questionInfo.grammar_note}</em>`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = ''; // Clear text input
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

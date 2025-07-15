@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Điền Một Từ - Dạng I</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for the passage and questions */
+        .passage {
+            font-size: 1.05em;
+            color: #34495e;
+            line-height: 1.8; /* Increased line height for readability */
+        }
+        .passage .question-gap {
+            display: inline-flex; /* Use flex to align input and number */
+            align-items: baseline;
+            vertical-align: middle; /* Align with text baseline */
+            margin: 0 5px; /* Space around the input */
+        }
+        .passage .question-number {
+            font-weight: 600;
+            color: #007bff;
+            margin-right: 5px;
+            flex-shrink: 0;
+            font-size: 0.9em; /* Smaller font size for numbers within text */
+        }
+        .passage input[type="text"] {
+            width: 80px; /* Adjust width as needed for a single word */
+            padding: 3px 8px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 0.95em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            text-align: center; /* Center text in input */
+        }
+        .passage input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+        }
+        /* Styles for correct and incorrect input feedback */
+        .passage input[type="text"].is-correct {
+            border-color: #198754;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+        }
+        .passage input[type="text"].is-incorrect {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+        /* Feedback icons next to inputs */
+        .passage .feedback-icon {
+            font-size: 1em;
+            margin-left: 5px;
+            display: none; /* Hidden by default */
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+        .passage .feedback-icon.text-success { color: #198754; }
+        .passage .feedback-icon.text-danger { color: #dc3545; }
+
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .passage {
+                font-size: 1em;
+            }
+            .passage input[type="text"] {
+                width: 70px;
+                padding: 2px 5px;
+                font-size: 0.9em;
+            }
+            .buttons .btn {
+                font-size: 1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.2em;
+                padding: 10px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Điền Từ Vào Chỗ Trống</h1>
+        </div>
+        <h2>Viết một từ vào mỗi chỗ trống.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Write one word in each gap.
+            <br>
+            <strong>Hướng dẫn:</strong> Điền một từ thích hợp vào mỗi chỗ trống để hoàn thành đoạn văn.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="fillInTheGapForm">
+            <div class="passage">
+                I'm very fond <span class="question-gap"><span class="question-number">(1)</span><input type="text" id="q1" name="q1" class="form-control"><i class="feedback-icon fa-solid" id="icon1"></i></span> my husband, William. I've been married <span class="question-gap"><span class="question-number">(2)</span><input type="text" id="q2" name="q2" class="form-control"><i class="feedback-icon fa-solid" id="icon2"></i></span> him for over sixty years. I know he cares <span class="question-gap"><span class="question-number">(3)</span><input type="text" id="q3" name="q3" class="form-control"><i class="feedback-icon fa-solid" id="icon3"></i></span> me now just as much as when we first met all those years ago. I'd got lost, and I asked him for directions. He was so kind <span class="question-gap"><span class="question-number">(4)</span><input type="text" id="q4" name="q4" class="form-control"><i class="feedback-icon fa-solid" id="icon4"></i></span> me. He offered to drive me wherever I wanted to go. It was love at first sight and since then my relationship <span class="question-gap"><span class="question-number">(5)</span><input type="text" id="q5" name="q5" class="form-control"><i class="feedback-icon fa-solid" id="icon5"></i></span> him has always been wonderful.
+                <br><br>
+                William is proud <span class="question-gap"><span class="question-number">(6)</span><input type="text" id="q6" name="q6" class="form-control"><i class="feedback-icon fa-solid" id="icon6"></i></span> my success as an artist, and he's never been jealous <span class="question-gap"><span class="question-number">(7)</span><input type="text" id="q7" name="q7" class="form-control"><i class="feedback-icon fa-solid" id="icon7"></i></span> my fame. I really admire him <span class="question-gap"><span class="question-number">(8)</span><input type="text" id="q8" name="q8" class="form-control"><i class="feedback-icon fa-solid" id="icon8"></i></span> supporting me so much over the years. Every evening, we chat <span class="question-gap"><span class="question-number">(9)</span><input type="text" id="q9" name="q9" class="form-control"><i class="feedback-icon fa-solid" id="icon9"></i></span> each other <span class="question-gap"><span class="question-number">(10)</span><input type="text" id="q10" name="q10" class="form-control"><i class="feedback-icon fa-solid" id="icon10"></i></span> the day's events. Of course, we do sometimes argue <span class="question-gap"><span class="question-number">(11)</span><input type="text" id="q11" name="q11" class="form-control"><i class="feedback-icon fa-solid" id="icon11"></i></span> things. All couples do. But whenever I have an argument <span class="question-gap"><span class="question-number">(12)</span><input type="text" id="q12" name="q12" class="form-control"><i class="feedback-icon fa-solid" id="icon12"></i></span> him, we soon start laughing and both apologise <span class="question-gap"><span class="question-number">(13)</span><input type="text" id="q13" name="q13" class="form-control"><i class="feedback-icon fa-solid" id="icon13"></i></span> each other <span class="question-gap"><span class="question-number">(14)</span><input type="text" id="q14" name="q14" class="form-control"><i class="feedback-icon fa-solid" id="icon14"></i></span> getting angry. I can't imagine life without him!
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra ✨</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại 🔄</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                correct_answer: 'of',
+                fullSentence: "I'm very fond **of** my husband, William.",
+                translation: 'Tôi rất yêu quý chồng mình, William.',
+                explanation: 'Cụm "fond of" có nghĩa là yêu thích, quý mến.',
+                grammar_note: 'Giới từ đi kèm với tính từ "fond" là "of".'
+            },
+            'q2': {
+                correct_answer: 'to',
+                fullSentence: "I've been married **to** him for over sixty years.",
+                translation: 'Tôi đã kết hôn với anh ấy hơn sáu mươi năm.',
+                explanation: 'Cụm "married to" có nghĩa là kết hôn với ai đó.',
+                grammar_note: 'Giới từ đi kèm với "married" khi nói về người là "to".'
+            },
+            'q3': {
+                correct_answer: 'for',
+                fullSentence: "I know he cares **for** me now just as much as when we first met all those years ago.",
+                translation: 'Tôi biết anh ấy quan tâm đến tôi bây giờ cũng nhiều như khi chúng tôi mới gặp nhau những năm về trước.',
+                explanation: 'Động từ "care for" có nghĩa là quan tâm, chăm sóc ai đó.',
+                grammar_note: 'Phrasal verb "care for somebody".'
+            },
+            'q4': {
+                correct_answer: 'to',
+                fullSentence: "He was so kind **to** me.",
+                translation: 'Anh ấy rất tốt với tôi.',
+                explanation: 'Cụm "kind to someone" có nghĩa là tốt bụng với ai đó.',
+                grammar_note: 'Giới từ đi kèm với tính từ "kind" khi nói về người là "to".'
+            },
+            'q5': {
+                correct_answer: 'with',
+                fullSentence: "and since then my relationship **with** him has always been wonderful.",
+                translation: 'và kể từ đó mối quan hệ của tôi với anh ấy luôn tuyệt vời.',
+                explanation: 'Cụm "relationship with someone" có nghĩa là mối quan hệ với ai đó.',
+                grammar_note: 'Giới từ đi kèm với danh từ "relationship" khi nói về người là "with".'
+            },
+            'q6': {
+                correct_answer: 'of',
+                fullSentence: "William is proud **of** my success as an artist",
+                translation: 'William tự hào về thành công của tôi với tư cách một nghệ sĩ.',
+                explanation: 'Cụm "proud of" có nghĩa là tự hào về điều gì đó.',
+                grammar_note: 'Giới từ đi kèm với tính từ "proud" là "of".'
+            },
+            'q7': {
+                correct_answer: 'of',
+                fullSentence: "and he's never been jealous **of** my fame.",
+                translation: 'và anh ấy chưa bao giờ ghen tị với danh tiếng của tôi.',
+                explanation: 'Cụm "jealous of" có nghĩa là ghen tị với điều gì đó/ai đó.',
+                grammar_note: 'Giới từ đi kèm với tính từ "jealous" là "of".'
+            },
+            'q8': {
+                correct_answer: 'for',
+                fullSentence: "I really admire him **for** supporting me so much over the years.",
+                translation: 'Tôi thực sự ngưỡng mộ anh ấy vì đã ủng hộ tôi rất nhiều trong những năm qua.',
+                explanation: 'Cụm "admire someone for something" có nghĩa là ngưỡng mộ ai đó vì điều gì.',
+                grammar_note: 'Giới từ đi kèm với động từ "admire" khi nói về lý do là "for".'
+            },
+            'q9': {
+                correct_answer: 'with',
+                fullSentence: "Every evening, we chat **with** each other",
+                translation: 'Mỗi tối, chúng tôi trò chuyện với nhau.',
+                explanation: 'Cụm "chat with someone" có nghĩa là trò chuyện với ai đó.',
+                grammar_note: 'Giới từ đi kèm với động từ "chat" khi nói về người là "with".'
+            },
+            'q10': {
+                correct_answer: 'about',
+                fullSentence: "each other **about** the day's events.",
+                translation: 'với nhau về các sự kiện trong ngày.',
+                explanation: 'Cụm "chat about something" có nghĩa là trò chuyện về điều gì đó.',
+                grammar_note: 'Giới từ đi kèm với động từ "chat" khi nói về chủ đề là "about".'
+            },
+            'q11': {
+                correct_answer: 'about',
+                fullSentence: "we do sometimes argue **about** things.",
+                translation: 'chúng tôi đôi khi cãi nhau về mọi chuyện.',
+                explanation: 'Cụm "argue about something" có nghĩa là tranh cãi về điều gì đó.',
+                grammar_note: 'Giới từ đi kèm với động từ "argue" khi nói về chủ đề là "about".'
+            },
+            'q12': {
+                correct_answer: 'with',
+                fullSentence: "whenever I have an argument **with** him",
+                translation: 'bất cứ khi nào tôi cãi nhau với anh ấy,',
+                explanation: 'Cụm "have an argument with someone" có nghĩa là cãi nhau với ai đó.',
+                grammar_note: 'Giới từ đi kèm với danh từ "argument" khi nói về người là "with".'
+            },
+            'q13': {
+                correct_answer: 'to',
+                fullSentence: "both apologise **to** each other",
+                translation: 'cả hai đều xin lỗi lẫn nhau.',
+                explanation: 'Cụm "apologise to someone" có nghĩa là xin lỗi ai đó.',
+                grammar_note: 'Giới từ đi kèm với động từ "apologise" khi nói về người là "to".'
+            },
+            'q14': {
+                correct_answer: 'for',
+                fullSentence: "each other **for** getting angry.",
+                translation: 'lẫn nhau vì đã tức giận.',
+                explanation: 'Cụm "apologise for something/doing something" có nghĩa là xin lỗi vì điều gì/vì đã làm gì.',
+                grammar_note: 'Giới từ đi kèm với động từ "apologise" khi nói về lý do là "for".'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                // Reset feedback classes
+                inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                const userAnswer = inputElement.value.trim().toLowerCase();
+                const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                let isCorrect = false;
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-correct');
+                } else {
+                    inputElement.classList.add('is-incorrect');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+
+                // Reconstruct the sentence with the correct answer, bolding and underlining it
+                const fullTextHtml = `${questionNumber}. ${questionInfo.fullSentence.replace(`**${questionInfo.correct_answer}**`, `<span class="correct-answer-text">${questionInfo.correct_answer}</span>`)}`;
+                questionTextSolutionDiv.innerHTML = fullTextHtml;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br><em>${questionInfo.grammar_note}</em>`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = ''; // Clear text input
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

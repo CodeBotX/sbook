@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Destination\Unit 1</title>
-  
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+import os
+import json
 
-  
+TAILWIND_CDN = '''
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+'''
+
+JS_SCRIPT = '''
 <script>
 let currentSlide = 0;
 let listItems = [];
@@ -123,12 +121,47 @@ function initList(data) {
   sortItems("asc");
 }
 </script>
+'''
 
+# phần back giữ cố định và chỉ định nghĩa 1 lần, không chịu sắp xếp
+
+def generate_index_html(directory):
+    items = os.listdir(directory)
+    items.sort()
+    rel_path = os.path.relpath(directory, start='.')
+    title = rel_path if rel_path != '.' else 'Trang chính'
+    list_data = []
+
+    if rel_path != '.':
+        list_data.append({"name": "Back", "link": "../index.html", "icon": "⬅️"})
+
+    for item in items:
+        if item == "index.html" or item in [".git", "assets"]:
+            continue
+        path = os.path.join(directory, item)
+        if os.path.isdir(path):
+            icon = "📁"
+            link = f"{item}/index.html"
+        elif item.endswith(".html"):
+            icon = "📄"
+            link = item
+        else:
+            continue
+        list_data.append({"name": item, "link": link, "icon": icon})
+
+    html = f'''<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  {TAILWIND_CDN}
+  {JS_SCRIPT}
 </head>
 <body class="bg-gray-50 text-gray-900 p-4 sm:p-6">
   <div class="max-w-7xl mx-auto">
     <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
-      <h1 class="text-xl sm:text-2xl font-bold">Destination\Unit 1</h1>
+      <h1 class="text-xl sm:text-2xl font-bold">{title}</h1>
       <div class="flex flex-wrap gap-2">
         <button onclick="setView('grid')" class="px-3 py-1 border rounded bg-white hover:bg-gray-100">🧱 Grid</button>
         <button onclick="setView('list')" class="px-3 py-1 border rounded bg-white hover:bg-gray-100">📋 List</button>
@@ -150,9 +183,22 @@ function initList(data) {
   </div>
 
   <script>
-    const listItemsData = [{"name": "Back", "link": "../index.html", "icon": "\u2b05\ufe0f"}, {"name": "B\u00e0i E.html", "link": "B\u00e0i E.html", "icon": "\ud83d\udcc4"}, {"name": "B\u00e0i F.html", "link": "B\u00e0i F.html", "icon": "\ud83d\udcc4"}, {"name": "L\u00fd thuy\u1ebft.html", "link": "L\u00fd thuy\u1ebft.html", "icon": "\ud83d\udcc4"}];
+    const listItemsData = {json.dumps(list_data)};
     initList(listItemsData);
     setView("grid");
   </script>
 </body>
-</html>
+</html>'''
+
+    with open(os.path.join(directory, "index.html"), "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"✅ Tạo index.html tại: {directory}")
+
+def walk_and_generate(root="."):
+    for dirpath, _, _ in os.walk(root):
+        if any(exclude in dirpath.split(os.sep) for exclude in ["assets", ".git"]):
+            continue
+        generate_index_html(dirpath)
+
+if __name__ == "__main__":
+    walk_and_generate()

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Sửa Lỗi Từ - Dạng C</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Styling for each exercise question */
+        .question-item {
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .question-item .question-text {
+            font-size: 1.1em;
+            color: #34495e;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .question-item .bold-wrong-word {
+            font-weight: 700;
+            color: #dc3545; /* Red for wrong word */
+            margin: 0 5px; /* Space around the bold word */
+            text-decoration: underline dotted;
+        }
+        .question-item .input-container {
+            display: flex;
+            align-items: center;
+            margin-left: 15px; /* Space between question and input */
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+        .question-item input[type="text"] {
+            width: 150px; /* Adjust width for the answer input */
+            padding: 0 8px; /* Reduced padding for underline effect */
+            border: none;
+            border-bottom: 1px solid #ced4da;
+            border-radius: 0;
+            font-size: 1em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: transparent;
+            text-align: center;
+        }
+        .question-item input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: none;
+            border-bottom-width: 2px;
+        }
+        /* Styles for correct and incorrect input feedback */
+        .question-item input[type="text"].is-correct {
+            border-color: #198754;
+            box-shadow: none;
+            border-bottom-width: 2px;
+        }
+        .question-item input[type="text"].is-incorrect {
+            border-color: #dc3545;
+            box-shadow: none;
+            border-bottom-width: 2px;
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none;
+            vertical-align: middle;
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none;
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none;
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .original-sentence {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-word-display {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .question-item .question-text {
+                font-size: 1em;
+                margin-bottom: 10px;
+                width: 100%;
+            }
+            .question-item .bold-wrong-word {
+                margin: 0 2px;
+            }
+            .question-item .input-container {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 100%;
+                justify-content: flex-start; /* Align input to left */
+            }
+            .question-item input[type="text"] {
+                width: 100%;
+                padding: 0 4px;
+            }
+            .buttons .btn {
+                font-size: 1em;
+                padding: 10px 20px;
+                margin: 0 5px;
+            }
+            .score-display {
+                font-size: 1.2em;
+                padding: 10px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Sửa Lỗi Từ</h1>
+        </div>
+        <h2>Mỗi từ in đậm trong câu là sai. Viết lại từ đúng.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Each of the words in bold is in the wrong sentence. Write the correct word.
+            <br>
+            <strong>Hướng dẫn:</strong> Mỗi từ in đậm trong câu đều được sử dụng sai ngữ cảnh. Hãy viết từ đúng vào ô trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="correctWordForm">
+            <div class="mb-4">
+                <div class="question-item">
+                    <p class="question-text">1. I was first <span class="bold-wrong-word">respected</span> to Jake at a party.</p>
+                    <div class="input-container">
+                        <input type="text" id="q1" name="q1" class="form-control">
+                        <i class="feedback-icon fa-solid" id="icon1"></i>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">2. I shouldn't have <span class="bold-wrong-word">rented</span> you. Now I know you can't keep a secret!</p>
+                    <div class="input-container">
+                        <input type="text" id="q2" name="q2" class="form-control">
+                        <i class="feedback-icon fa-solid" id="icon2"></i>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">3. Our house is being <span class="bold-wrong-word">recognised</span> so we're staying with my grandparents at the moment.</p>
+                    <div class="input-container">
+                        <input type="text" id="q3" name="q3" class="form-control">
+                        <i class="feedback-icon fa-solid" id="icon3"></i>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">4. Everyone <span class="bold-wrong-word">apologised</span> Mr Turner because he was strict but fair.</p>
+                    <div class="input-container">
+                        <input type="text" id="q4" name="q4" class="form-control">
+                        <i class="feedback-icon fa-solid" id="icon4"></i>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">5. Have you <span class="bold-wrong-word">introduced</span> to Kelly for losing her CD?</p>
+                    <div class="input-container">
+                        <input type="text" id="q5" name="q5" class="form-control">
+                        <i class="feedback-icon fa-solid" id="icon5"></i>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">6. Sarah said I was a liar but Carol <span class="bold-wrong-word">trusted</span> me and said I wasn't.</p>
+                    <div class="input-container">
+                        <input type="text" id="q6" name="q6" class="form-control">
+                        <i class="feedback-icon fa-solid" id="icon6"></i>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">7. We <span class="bold-wrong-word">decorated</span> a small house in the countryside for the summer.</p>
+                    <div class="input-container">
+                        <input type="text" id="q7" name="q7" class="form-control">
+                        <i class="feedback-icon fa-solid" id="icon7"></i>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <p class="question-text">8. No one <span class="bold-wrong-word">defended</span> Phil when he came to the party dressed as an old man.</p>
+                    <div class="input-container">
+                        <input type="text" id="q8" name="q8" class="form-control">
+                        <i class="feedback-icon fa-solid" id="icon8"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra ✨</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại 🔄</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                original_sentence: "I was first **respected** to Jake at a party.",
+                correct_word: 'introduced',
+                full_corrected_sentence: "I was first introduced to Jake at a party.",
+                translation: 'Tôi lần đầu tiên được giới thiệu với Jake tại một bữa tiệc.',
+                explanation: 'Từ "respected" (tôn trọng) không phù hợp với giới từ "to" trong ngữ cảnh giới thiệu người. "Introduced" (giới thiệu) là động từ đúng để nói về việc gặp gỡ ai đó lần đầu.',
+                grammar_note: 'Cụm từ cố định: "be introduced to someone" (được giới thiệu với ai đó).'
+            },
+            'q2': {
+                original_sentence: "I shouldn't have **rented** you. Now I know you can't keep a secret!",
+                correct_word: 'trusted',
+                full_corrected_sentence: "I shouldn't have trusted you. Now I know you can't keep a secret!",
+                translation: 'Tôi lẽ ra không nên tin tưởng bạn. Bây giờ tôi biết bạn không thể giữ bí mật!',
+                explanation: 'Việc không giữ được bí mật cho thấy sự thiếu tin tưởng. "Rented" (thuê) không có nghĩa trong ngữ cảnh này. "Trusted" (tin tưởng) là từ đúng.',
+                grammar_note: 'Cấu trúc "shouldn\'t have + V3/ed" diễn tả sự hối tiếc về một hành động trong quá khứ.'
+            },
+            'q3': {
+                original_sentence: "Our house is being **recognised** so we're staying with my grandparents at the moment.",
+                correct_word: 'decorated',
+                full_corrected_sentence: "Our house is being decorated so we're staying with my grandparents at the moment.",
+                translation: 'Nhà của chúng tôi đang được trang trí nên chúng tôi đang ở với ông bà tôi lúc này.',
+                explanation: 'Việc ở nhà ông bà cho thấy ngôi nhà của mình đang được sửa sang, làm đẹp. "Recognised" (được công nhận) không phù hợp. "Decorated" (trang trí) là hợp lý.',
+                grammar_note: 'Thì hiện tại tiếp diễn dạng bị động "is being decorated" để chỉ hành động đang diễn ra.'
+            },
+            'q4': {
+                original_sentence: "Everyone **apologised** Mr Turner because he was strict but fair.",
+                correct_word: 'respected',
+                full_corrected_sentence: "Everyone respected Mr Turner because he was strict but fair.",
+                translation: 'Mọi người tôn trọng ông Turner vì ông nghiêm khắc nhưng công bằng.',
+                explanation: 'Tính cách "strict but fair" (nghiêm khắc nhưng công bằng) thường dẫn đến sự tôn trọng, không phải lời xin lỗi. "Respected" (tôn trọng) là từ đúng.',
+                grammar_note: 'Động từ "respect" (tôn trọng) đi với tân ngữ trực tiếp, không cần giới từ "to" khi nói "respect someone".'
+            },
+            'q5': {
+                original_sentence: "Have you **introduced** to Kelly for losing her CD?",
+                correct_word: 'apologised',
+                full_corrected_sentence: "Have you apologised to Kelly for losing her CD?",
+                translation: 'Bạn đã xin lỗi Kelly vì làm mất đĩa CD của cô ấy chưa?',
+                explanation: 'Làm mất đồ của ai đó đòi hỏi lời xin lỗi. "Introduced" (giới thiệu) không phù hợp. "Apologised" (xin lỗi) là từ cần thiết.',
+                grammar_note: 'Cấu trúc: "apologise to someone for something" (xin lỗi ai đó vì điều gì đó).'
+            },
+            'q6': {
+                original_sentence: "Sarah said I was a liar but Carol **trusted** me and said I wasn't.",
+                correct_word: 'defended',
+                full_corrected_sentence: "Sarah said I was a liar but Carol defended me and said I wasn't.",
+                translation: 'Sarah nói tôi là kẻ nói dối nhưng Carol đã bảo vệ tôi và nói tôi không phải.',
+                explanation: 'Khi ai đó bị gọi là kẻ nói dối, việc người khác nói "I wasn\'t" (tôi không phải) là hành động bảo vệ. "Trusted" (tin tưởng) không thể hiện hành động này. "Defended" (bảo vệ) là từ đúng.',
+                grammar_note: 'Động từ "defend" (bảo vệ) mang ý nghĩa đứng về phía ai đó khi họ bị buộc tội.'
+            },
+            'q7': {
+                original_sentence: "We **decorated** a small house in the countryside for the summer.",
+                correct_word: 'rented',
+                full_corrected_sentence: "We rented a small house in the countryside for the summer.",
+                translation: 'Chúng tôi đã thuê một ngôi nhà nhỏ ở nông thôn vào mùa hè.',
+                explanation: 'Việc ở một ngôi nhà "for the summer" (trong mùa hè) thường ám chỉ việc thuê. "Decorated" (trang trí) là hành động làm đẹp, không phải hành động sở hữu/sử dụng tạm thời. "Rented" (thuê) là từ đúng.',
+                grammar_note: 'Động từ "rent" (thuê) đi với tân ngữ trực tiếp là vật được thuê.'
+            },
+            'q8': {
+                original_sentence: "No one **defended** Phil when he came to the party dressed as an old man.",
+                correct_word: 'recognised',
+                full_corrected_sentence: "No one recognised Phil when he came to the party dressed as an old man.",
+                translation: 'Không ai nhận ra Phil khi anh ấy đến bữa tiệc hóa trang thành một ông già.',
+                explanation: 'Việc "dressed as an old man" (hóa trang thành ông già) thường khiến người ta khó nhận ra. "Defended" (bảo vệ) không phù hợp. "Recognised" (nhận ra) là từ đúng.',
+                grammar_note: 'Động từ "recognise" (nhận ra) có nghĩa là biết ai đó hoặc cái gì đó từ trước.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                // Reset feedback classes
+                inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                const userAnswer = inputElement.value.trim().toLowerCase();
+                const correctWord = questionInfo.correct_word.toLowerCase();
+
+                let isCorrect = false;
+                if (userAnswer === correctWord) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-correct');
+                } else {
+                    inputElement.classList.add('is-incorrect');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const originalSentenceDiv = document.createElement('div');
+                originalSentenceDiv.classList.add('original-sentence');
+                originalSentenceDiv.innerHTML = `${questionNumber}. Câu gốc: ${questionInfo.original_sentence.replace('**', '<strong>').replace('**', '</strong>')}`;
+                solutionItem.appendChild(originalSentenceDiv);
+
+                const correctedSentenceDiv = document.createElement('div');
+                correctedSentenceDiv.classList.add('question-text-solution');
+                correctedSentenceDiv.innerHTML = `Câu đúng: ${questionInfo.full_corrected_sentence.replace(questionInfo.correct_word, `<span class="correct-word-display">${questionInfo.correct_word}</span>`)}`;
+                solutionItem.appendChild(correctedSentenceDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br><em>${questionInfo.grammar_note}</em>`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block';
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('is-correct', 'is-incorrect');
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none';
+            });
+
+            document.getElementById('scoreDisplay').textContent = '';
+            document.getElementById('scoreDisplay').style.display = 'none';
+            document.getElementById('detailedSolution').style.display = 'none';
+            document.querySelector('#detailedSolution .solution-list').innerHTML = '';
+        }
+    </script>
+</body>
+</html>

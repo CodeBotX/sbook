@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Viết Lại Câu - Dạng D</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 950px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Question layout */
+        .question-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .question-block {
+            width: 48%; /* Two columns */
+            margin-bottom: 30px;
+            background-color: #fcfcfc;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        @media (max-width: 992px) {
+            .question-block {
+                width: 100%; /* Single column on smaller screens */
+            }
+        }
+
+        .question-item {
+            margin-bottom: 20px; /* Space between sub-questions */
+        }
+        .question-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .question-item .question-number {
+            font-weight: 700;
+            color: #007bff;
+            font-size: 1.1em;
+            margin-right: 8px;
+            display: inline-block;
+        }
+        .question-item p {
+            margin-bottom: 5px;
+            font-size: 1.05em;
+            color: #34495e;
+        }
+        .question-item p.given-word {
+            font-weight: 600;
+            color: #d63384; /* Highlight given word */
+            margin-top: 5px;
+            font-size: 0.95em;
+        }
+        .question-item input[type="text"] {
+            display: block; /* Make input take full width */
+            width: 100%;
+            margin-top: 8px;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .question-item input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+        }
+        /* Styles for correct and incorrect input feedback */
+        .question-item input[type="text"].is-correct {
+            border-color: #198754;
+            box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+        }
+        .question-item input[type="text"].is-incorrect {
+            border-color: #dc3545;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+        }
+
+        /* Feedback icons */
+        .feedback-icon {
+            margin-top: 5px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+            text-align: right; /* Align icon to the right of the input */
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item input[type="text"] {
+                width: 100%;
+                margin: 5px 0;
+            }
+            .feedback-icon {
+                margin-left: 0;
+                margin-top: 5px;
+                width: 100%;
+                text-align: right;
+            }
+            .buttons .btn {
+                font-size: 1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.2em;
+                padding: 10px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Viết Lại Câu</h1>
+        </div>
+        <h2>Hoàn thành câu thứ hai bằng cách sử dụng từ gợi ý, sao cho nó có nghĩa tương tự với câu đầu tiên. Viết từ hai đến năm từ.</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Complete each second sentence using the word given, so that it has a similar meaning to the first sentence. Write between two and five words.
+            <br>
+            <strong>Hướng dẫn:</strong> Viết lại câu thứ hai sử dụng từ gợi ý (in đậm) sao cho nghĩa không đổi so với câu đầu tiên. Bạn chỉ được điền từ hai đến năm từ vào chỗ trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="rewriteSentenceForm">
+            <div class="question-row">
+                <div class="question-block">
+                    <div class="question-item">
+                        <span class="question-number">21.</span>
+                        <p>We gave my dad a surprise party on his fortieth birthday.</p>
+                        <p class="given-word">WAS</p>
+                        <p>My dad
+                            <input type="text" id="q21" name="q21" class="form-control" placeholder="Viết 2-5 từ">
+                            a surprise party on his fortieth birthday.
+                        </p>
+                        <i class="feedback-icon fa-solid" id="icon21"></i>
+                    </div>
+
+                    <div class="question-item">
+                        <span class="question-number">22.</span>
+                        <p>After the play, they introduced us to all the actors.</p>
+                        <p class="given-word">WE</p>
+                        <p>After the play,
+                            <input type="text" id="q22" name="q22" class="form-control" placeholder="Viết 2-5 từ">
+                            to all the actors.
+                        </p>
+                        <i class="feedback-icon fa-solid" id="icon22"></i>
+                    </div>
+
+                    <div class="question-item">
+                        <span class="question-number">23.</span>
+                        <p>They've caught the person who stole your bike!</p>
+                        <p class="given-word">HAS</p>
+                        <p>The person who stole your bike
+                            <input type="text" id="q23" name="q23" class="form-control" placeholder="Viết 2-5 từ">
+                            caught!
+                        </p>
+                        <i class="feedback-icon fa-solid" id="icon23"></i>
+                    </div>
+
+                    <div class="question-item">
+                        <span class="question-number">24.</span>
+                        <p>No one had told me that Jill was coming!</p>
+                        <p class="given-word">BEEN</p>
+                        <p>I
+                            <input type="text" id="q24" name="q24" class="form-control" placeholder="Viết 2-5 từ">
+                            that Jill was coming!
+                        </p>
+                        <i class="feedback-icon fa-solid" id="icon24"></i>
+                    </div>
+
+                    <div class="question-item">
+                        <span class="question-number">25.</span>
+                        <p>Our English teacher and our German teacher are husband and wife.</p>
+                        <p class="given-word">MARRIED</p>
+                        <p>Our English teacher
+                            <input type="text" id="q25" name="q25" class="form-control" placeholder="Viết 2-5 từ">
+                            our German teacher.
+                        </p>
+                        <i class="feedback-icon fa-solid" id="icon25"></i>
+                    </div>
+                </div>
+
+                <div class="question-block">
+                    <div class="question-item">
+                        <span class="question-number">26.</span>
+                        <p>A neighbour is feeding our dog while we're away.</p>
+                        <p class="given-word">BEING</p>
+                        <p>Our dog
+                            <input type="text" id="q26" name="q26" class="form-control" placeholder="Viết 2-5 từ">
+                            a neighbour while we're away.
+                        </p>
+                        <i class="feedback-icon fa-solid" id="icon26"></i>
+                    </div>
+
+                    <div class="question-item">
+                        <span class="question-number">27.</span>
+                        <p>Use a sharp knife to cut the cake.</p>
+                        <p class="given-word">SHOULD</p>
+                        <p>The cake
+                            <input type="text" id="q27" name="q27" class="form-control" placeholder="Viết 2-5 từ">
+                            a sharp knife.
+                        </p>
+                        <i class="feedback-icon fa-solid" id="icon27"></i>
+                    </div>
+
+                    <div class="question-item">
+                        <span class="question-number">28.</span>
+                        <p>I'm not interested in what you think!</p>
+                        <p class="given-word">CARE</p>
+                        <p>I
+                            <input type="text" id="q28" name="q28" class="form-control" placeholder="Viết 2-5 từ">
+                            what you think!
+                        </p>
+                        <i class="feedback-icon fa-solid" id="icon28"></i>
+                    </div>
+
+                    <div class="question-item">
+                        <span class="question-number">29.</span>
+                        <p>My parents don't let me watch much TV at home.</p>
+                        <p class="given-word">ALLOWED</p>
+                        <p>I
+                            <input type="text" id="q29" name="q29" class="form-control" placeholder="Viết 2-5 từ">
+                            to watch much TV at home.
+                        </p>
+                        <i class="feedback-icon fa-solid" id="icon29"></i>
+                    </div>
+
+                    <div class="question-item">
+                        <span class="question-number">30.</span>
+                        <p>They're going to invite over a hundred people to the wedding reception.</p>
+                        <p class="given-word">GOING</p>
+                        <p>Over a hundred people
+                            <input type="text" id="q30" name="q30" class="form-control" placeholder="Viết 2-5 từ">
+                            to the wedding reception.
+                        </p>
+                        <i class="feedback-icon fa-solid" id="icon30"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra ✨</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại 🔄</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        // The 'correct_answer' should contain the exact phrase (2-5 words) that goes into the input.
+        const questionsData = {
+            'q21': {
+                original_sentence: "We gave my dad a surprise party on his fortieth birthday.",
+                given_word: "WAS",
+                correct_answer: "was given", // 2 words
+                fullSentence: "My dad **was given** a surprise party on his fortieth birthday.",
+                translation: 'Bố tôi được tổ chức một bữa tiệc bất ngờ vào sinh nhật lần thứ bốn mươi của ông.',
+                explanation: 'Câu gốc dùng thì quá khứ đơn chủ động. Câu viết lại dùng thì quá khứ đơn bị động để nhấn mạnh hành động được thực hiện lên người bố.',
+                grammar_note: 'Cấu trúc bị động: Subject + was/were + V3/ed.'
+            },
+            'q22': {
+                original_sentence: "After the play, they introduced us to all the actors.",
+                given_word: "WE",
+                correct_answer: "were introduced", // 2 words
+                fullSentence: "After the play, **we were introduced** to all the actors.",
+                translation: 'Sau vở kịch, chúng tôi được giới thiệu với tất cả các diễn viên.',
+                explanation: 'Câu gốc dùng chủ động. Câu viết lại dùng bị động với "we" là chủ ngữ, nghĩa là chúng tôi được giới thiệu.',
+                grammar_note: 'Cấu trúc bị động: Subject + was/were + V3/ed.'
+            },
+            'q23': {
+                original_sentence: "They've caught the person who stole your bike!",
+                given_word: "HAS",
+                correct_answer: "has been", // 2 words
+                fullSentence: "The person who stole your bike **has been** caught!",
+                translation: 'Người đã trộm xe đạp của bạn đã bị bắt rồi!',
+                explanation: 'Câu gốc dùng hiện tại hoàn thành chủ động. Câu viết lại dùng hiện tại hoàn thành bị động để nhấn mạnh kết quả của hành động.',
+                grammar_note: 'Cấu trúc bị động thì hiện tại hoàn thành: Subject + has/have been + V3/ed.'
+            },
+            'q24': {
+                original_sentence: "No one had told me that Jill was coming!",
+                given_word: "BEEN",
+                correct_answer: "had not been told", // 4 words
+                fullSentence: "I **had not been told** that Jill was coming!",
+                translation: 'Không ai nói với tôi rằng Jill sẽ đến!',
+                explanation: 'Câu gốc dùng quá khứ hoàn thành chủ động mang nghĩa phủ định. Câu viết lại dùng quá khứ hoàn thành bị động để diễn tả việc tôi chưa từng được nói.',
+                grammar_note: 'Cấu trúc bị động thì quá khứ hoàn thành: Subject + had been + V3/ed. Dạng phủ định: had not been + V3/ed.'
+            },
+            'q25': {
+                original_sentence: "Our English teacher and our German teacher are husband and wife.",
+                given_word: "MARRIED",
+                correct_answer: "is married to", // 3 words
+                fullSentence: "Our English teacher **is married to** our German teacher.",
+                translation: 'Giáo viên tiếng Anh của chúng tôi đã kết hôn với giáo viên tiếng Đức của chúng tôi.',
+                explanation: 'Để diễn tả mối quan hệ hôn nhân giữa hai người, sử dụng cấu trúc "be married to someone".',
+                grammar_note: 'Cấu trúc: be married to (kết hôn với ai đó).'
+            },
+            'q26': {
+                original_sentence: "A neighbour is feeding our dog while we're away.",
+                given_word: "BEING",
+                correct_answer: "is being fed by", // 4 words
+                fullSentence: "Our dog **is being fed by** a neighbour while we're away.",
+                translation: 'Con chó của chúng tôi đang được một người hàng xóm cho ăn khi chúng tôi đi vắng.',
+                explanation: 'Câu gốc dùng thì hiện tại tiếp diễn chủ động. Câu viết lại dùng thì hiện tại tiếp diễn bị động để nhấn mạnh hành động đang được thực hiện lên con chó.',
+                grammar_note: 'Cấu trúc bị động thì hiện tại tiếp diễn: Subject + is/am/are + being + V3/ed.'
+            },
+            'q27': {
+                original_sentence: "Use a sharp knife to cut the cake.",
+                given_word: "SHOULD",
+                correct_answer: "should be cut with", // 4 words
+                fullSentence: "The cake **should be cut with** a sharp knife.",
+                translation: 'Bánh nên được cắt bằng một con dao sắc.',
+                explanation: 'Câu gốc là câu mệnh lệnh/gợi ý. Câu viết lại dùng động từ khuyết thiếu "should" với cấu trúc bị động để diễn tả lời khuyên về việc cắt bánh.',
+                grammar_note: 'Cấu trúc bị động với động từ khuyết thiếu: Subject + modal + be + V3/ed.'
+            },
+            'q28': {
+                original_sentence: "I'm not interested in what you think!",
+                given_word: "CARE",
+                correct_answer: "do not care for", // 4 words
+                fullSentence: "I **do not care for** what you think!",
+                translation: 'Tôi không quan tâm đến những gì bạn nghĩ!',
+                explanation: '"I\'m not interested in" có thể được viết lại bằng "I do not care for".',
+                grammar_note: 'Cụm động từ "care for" có nghĩa là quan tâm, thích.'
+            },
+            'q29': {
+                original_sentence: "My parents don't let me watch much TV at home.",
+                given_word: "ALLOWED",
+                correct_answer: "am not allowed", // 3 words
+                fullSentence: "I **am not allowed** to watch much TV at home.",
+                translation: 'Bố mẹ tôi không cho phép tôi xem nhiều TV ở nhà.',
+                explanation: '"Don\'t let me" tương đương với "am not allowed to" khi chuyển sang dạng bị động (được phép/không được phép).',
+                grammar_note: 'Cấu trúc "be allowed to do something" (được phép làm gì).'
+            },
+            'q30': {
+                original_sentence: "They're going to invite over a hundred people to the wedding reception.",
+                given_word: "GOING",
+                correct_answer: "are going to be invited", // 5 words
+                fullSentence: "Over a hundred people **are going to be invited** to the wedding reception.",
+                translation: 'Hơn một trăm người sẽ được mời đến tiệc cưới.',
+                explanation: 'Câu gốc dùng thì tương lai gần chủ động. Câu viết lại dùng thì tương lai gần bị động để nhấn mạnh những người được mời.',
+                grammar_note: 'Cấu trúc bị động thì tương lai gần: Subject + is/am/are going to be + V3/ed.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                // Reset feedback classes
+                inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                const userAnswer = inputElement.value.trim().toLowerCase();
+                const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                let isCorrect = false;
+                // Check if the answer is correct and within the word limit (2-5 words)
+                const userAnswerWords = userAnswer.split(/\s+/).filter(word => word.length > 0);
+                if (userAnswer === correctAnswer && userAnswerWords.length >= 2 && userAnswerWords.length <= 5) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-correct');
+                } else {
+                    inputElement.classList.add('is-incorrect');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+
+                // Reconstruct the sentence with the correct answer, bolding and underlining it
+                const fullSentenceHtml = questionInfo.fullSentence.replace(`**${questionInfo.correct_answer}**`, `<span class="correct-answer-text">${questionInfo.correct_answer}</span>`);
+                questionTextSolutionDiv.innerHTML = `<strong>Câu gốc:</strong> ${questionInfo.original_sentence}<br><strong>Từ gợi ý:</strong> <span style="color:#d63384; font-weight:bold;">${questionInfo.given_word}</span><br><strong>Câu hoàn chỉnh:</strong> ${questionNumber}. ${fullSentenceHtml}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br><em>${questionInfo.grammar_note}</em>`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = ''; // Clear text input
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>

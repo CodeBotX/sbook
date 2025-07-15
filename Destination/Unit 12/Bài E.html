@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Điền Từ - Lời Khuyên cho Cha Mẹ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Advice text layout */
+        .advice-text {
+            font-size: 1.1em;
+            color: #34495e;
+            line-height: 2.2; /* Increased line-height for better readability with inputs */
+            text-align: justify;
+        }
+
+        .gap-container {
+            display: inline-flex; /* Use inline-flex to keep input and icon together with text */
+            align-items: baseline; /* Align baseline of text and input */
+            margin: 0 5px; /* Space around the gap */
+            vertical-align: middle; /* Align with surrounding text */
+        }
+
+        .gap-input {
+            width: 100px; /* Adjust width as needed */
+            padding: 0 5px;
+            border: none;
+            border-bottom: 1px solid #ced4da;
+            border-radius: 0;
+            font-size: 1em;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background-color: transparent;
+            text-align: center;
+        }
+        .gap-input:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: none;
+            border-bottom-width: 2px;
+        }
+        /* Styles for correct and incorrect input feedback */
+        .gap-input.is-correct {
+            border-color: #198754;
+            box-shadow: none;
+            border-bottom-width: 2px;
+        }
+        .gap-input.is-incorrect {
+            border-color: #dc3545;
+            box-shadow: none;
+            border-bottom-width: 2px;
+        }
+
+        .feedback-icon {
+            margin-left: 5px; /* Small space between input and icon */
+            font-size: 1em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle; /* Align with input */
+        }
+        .feedback-icon.text-success { color: #198754; }
+        .feedback-icon.text-danger { color: #dc3545; }
+
+        /* Buttons styling */
+        .buttons .btn {
+            padding: 12px 30px;
+            font-size: 1.1em;
+            margin: 0 15px;
+            border-radius: 30px; /* Pill-shaped buttons */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .buttons .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            display: none; /* Hidden by default */
+        }
+        /* Score display color coding */
+        .score-display.text-success { background-color: #d1e7dd; border-color: #a3cfb4; color: #198754; }
+        .score-display.text-warning { background-color: #fff3cd; border-color: #ffeeba; color: #ffc107; }
+        .score-display.text-danger { background-color: #f8d7da; border-color: #f5c2c7; color: #dc3545; }
+
+        /* Detailed solution section styling */
+        .solution-section {
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px dashed #ced4da;
+            display: none; /* Hidden by default */
+        }
+        .solution-section h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .solution-list .solution-item {
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #007bff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .solution-list .solution-item .question-text-solution {
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+        .solution-list .solution-item .correct-answer-text {
+            font-weight: 700;
+            color: #198754;
+            text-decoration: underline;
+            margin-right: 5px;
+        }
+        .solution-list .solution-item .grammar-explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 5px;
+            border-left: 3px solid #6c757d;
+        }
+        .solution-list .solution-item .translation {
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .advice-text {
+                font-size: 1em;
+                line-height: 1.8;
+            }
+            .gap-container {
+                display: block; /* Stack on smaller screens */
+                margin: 5px 0; /* Adjust margin */
+                text-align: left; /* Align text within container */
+            }
+            .gap-input {
+                width: 100%; /* Full width for inputs */
+                text-align: left; /* Align text to left in input */
+            }
+            .feedback-icon {
+                display: block; /* Show on new line */
+                margin-top: 5px;
+                text-align: right; /* Align icon to the right */
+            }
+            .buttons .btn {
+                font-size: 1em;
+                padding: 10px 20px;
+                margin: 0 5px;
+            }
+            .score-display {
+                font-size: 1.2em;
+                padding: 10px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Điền Từ</h1>
+        </div>
+        <h2>Lời khuyên cho cha mẹ của thanh thiếu niên</h2>
+        <p class="instruction">
+            <strong>Instructions:</strong> Write one word in each gap.
+            <br>
+            <strong>Hướng dẫn:</strong> Điền một từ vào mỗi chỗ trống.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="fillInTheBlanksForm">
+            <div class="advice-text mb-4">
+                <p>
+                    You've always (1)
+                    <span class="gap-container">
+                        <input type="text" id="q1" name="q1" class="form-control gap-input">
+                        <i class="feedback-icon fa-solid" id="icon1"></i>
+                    </span>
+                    up your children to come to you when they're in trouble. You feel it's your job to (2)
+                    <span class="gap-container">
+                        <input type="text" id="q2" name="q2" class="form-control gap-input">
+                        <i class="feedback-icon fa-solid" id="icon2"></i>
+                    </span>
+                    after them when they're having problems. But now, as your children are (3)
+                    <span class="gap-container">
+                        <input type="text" id="q3" name="q3" class="form-control gap-input">
+                        <i class="feedback-icon fa-solid" id="icon3"></i>
+                    </span>
+                    up, they often don't want to share their problems with you. That's perfectly normal, so don't worry! Of course, you want to (4)
+                    <span class="gap-container">
+                        <input type="text" id="q4" name="q4" class="form-control gap-input">
+                        <i class="feedback-icon fa-solid" id="icon4"></i>
+                    </span>
+                    on well with your children, but that means you have to give them some freedom.
+                </p>
+                <p>
+                    Maybe they've (5)
+                    <span class="gap-container">
+                        <input type="text" id="q5" name="q5" class="form-control gap-input">
+                        <i class="feedback-icon fa-solid" id="icon5"></i>
+                    </span>
+                    out with their best friend and feel upset and angry. Maybe they've just (6)
+                    <span class="gap-container">
+                        <input type="text" id="q6" name="q6" class="form-control gap-input">
+                        <i class="feedback-icon fa-solid" id="icon6"></i>
+                    </span>
+                    up with the boyfriend or girlfriend they've been (7)
+                    <span class="gap-container">
+                        <input type="text" id="q7" name="q7" class="form-control gap-input">
+                        <i class="feedback-icon fa-solid" id="icon7"></i>
+                    </span>
+                    out with. Maybe they've been (8)
+                    <span class="gap-container">
+                        <input type="text" id="q8" name="q8" class="form-control gap-input">
+                        <i class="feedback-icon fa-solid" id="icon8"></i>
+                    </span>
+                    down by a friend who they trusted. Teenagers go through all these problems. If they want to talk to you about it, then that's fine. But if they don't, don't force them. They'll come to you when they're ready.
+                </p>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra ✨</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại 🔄</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, full sentences, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                correct_answer: 'taught',
+                fullSentence: "You've always **taught** your children to come to you when they're in trouble.",
+                translation: 'Bạn luôn dạy con cái đến với bạn khi chúng gặp rắc rối.',
+                explanation: 'Với ngữ cảnh "đến với bạn khi gặp rắc rối", từ "taught" (dạy) là phù hợp nhất, ám chỉ việc cha mẹ đã hướng dẫn con cái cách ứng xử.',
+                grammar_note: 'Cụm động từ "teach someone to do something" (dạy ai đó làm gì). "Taught" là dạng quá khứ phân từ của "teach".'
+            },
+            'q2': {
+                correct_answer: 'look',
+                fullSentence: "You feel it's your job to **look** after them when they're having problems.",
+                translation: 'Bạn cảm thấy công việc của mình là chăm sóc chúng khi chúng gặp vấn đề.',
+                explanation: 'Cụm động từ "look after" có nghĩa là chăm sóc, phù hợp với vai trò của cha mẹ khi con cái gặp vấn đề.',
+                grammar_note: '"Look after" là một phrasal verb không tách rời.'
+            },
+            'q3': {
+                correct_answer: 'growing',
+                fullSentence: "But now, as your children are **growing** up, they often don't want to share their problems with you.",
+                translation: 'Nhưng bây giờ, khi con bạn đang lớn lên, chúng thường không muốn chia sẻ vấn đề của mình với bạn.',
+                explanation: 'Cụm động từ "grow up" có nghĩa là lớn lên, trưởng thành. "Are growing up" là thì hiện tại tiếp diễn, thể hiện sự phát triển đang diễn ra.',
+                grammar_note: 'Thì hiện tại tiếp diễn "are growing up" nhấn mạnh quá trình phát triển.'
+            },
+            'q4': {
+                correct_answer: 'get',
+                fullSentence: "Of course, you want to **get** on well with your children, but that means you have to give them some freedom.",
+                translation: 'Tất nhiên, bạn muốn hòa thuận với con cái của mình, nhưng điều đó có nghĩa là bạn phải cho chúng một chút tự do.',
+                explanation: 'Cụm động từ "get on well with" có nghĩa là hòa thuận, có mối quan hệ tốt. Đây là điều mà cha mẹ mong muốn với con cái.',
+                grammar_note: '"Get on well with" là một phrasal verb không tách rời.'
+            },
+            'q5': {
+                correct_answer: 'fallen',
+                fullSentence: "Maybe they've **fallen** out with their best friend and feel upset and angry.",
+                translation: 'Có lẽ chúng đã cãi nhau với người bạn thân nhất của mình và cảm thấy buồn bực và tức giận.',
+                explanation: 'Cụm động từ "fall out with someone" có nghĩa là cãi nhau với ai đó, gây ra cảm giác buồn và tức giận.',
+                grammar_note: 'Dạng quá khứ phân từ của "fall" là "fallen", đi với "have" trong thì hiện tại hoàn thành.'
+            },
+            'q6': {
+                correct_answer: 'split',
+                fullSentence: "Maybe they've just **split** up with the boyfriend or girlfriend they've been going out with.",
+                translation: 'Có lẽ chúng vừa chia tay với bạn trai hoặc bạn gái mà chúng đã hẹn hò.',
+                explanation: 'Cụm động từ "split up" có nghĩa là chia tay mối quan hệ. "Just" (vừa mới) gợi ý hành động đã hoàn thành trong quá khứ gần.',
+                grammar_note: '"Split" có cùng dạng ở hiện tại, quá khứ đơn và quá khứ phân từ.'
+            },
+            'q7': {
+                correct_answer: 'going',
+                fullSentence: "Maybe they've just split up with the boyfriend or girlfriend they've been **going** out with.",
+                translation: 'Có lẽ chúng vừa chia tay với bạn trai hoặc bạn gái mà chúng đã hẹn hò.',
+                explanation: 'Cụm động từ "go out with someone" có nghĩa là hẹn hò với ai đó. "Been going out with" là thì hiện tại hoàn thành tiếp diễn, mô tả một hành động đã diễn ra liên tục cho đến hiện tại.',
+                grammar_note: 'Thì hiện tại hoàn thành tiếp diễn "have been + V-ing" diễn tả một hành động bắt đầu trong quá khứ và kéo dài đến hiện tại.'
+            },
+            'q8': {
+                correct_answer: 'let',
+                fullSentence: "Maybe they've been **let** down by a friend who they trusted.",
+                translation: 'Có lẽ chúng đã bị một người bạn mà chúng tin tưởng làm cho thất vọng.',
+                explanation: 'Cụm động từ "let someone down" có nghĩa là làm ai đó thất vọng. "Be let down by someone" là dạng bị động, nghĩa là bị ai đó làm thất vọng.',
+                grammar_note: 'Dạng quá khứ phân từ của "let" là "let", đi với "been" trong thì hiện tại hoàn thành bị động.'
+            }
+        };
+
+        /**
+         * Submits the user's answers, calculates the score, provides feedback,
+         * and displays detailed solutions.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Clear previous solutions
+            document.getElementById('detailedSolution').style.display = 'block'; // Show solution section
+
+            // Iterate through each question
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const inputElement = document.getElementById(qId);
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+
+                // Reset feedback classes
+                inputElement.classList.remove('is-correct', 'is-incorrect');
+
+                const userAnswer = inputElement.value.trim().toLowerCase();
+                const correctAnswer = questionInfo.correct_answer.toLowerCase();
+
+                let isCorrect = false;
+                if (userAnswer === correctAnswer) {
+                    isCorrect = true;
+                    score++;
+                    inputElement.classList.add('is-correct');
+                } else {
+                    inputElement.classList.add('is-incorrect');
+                }
+
+                // Show feedback icon
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Add detailed solution
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1);
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+
+                // Reconstruct the sentence with the correct answer, bolding the answer
+                const fullTextHtml = `${questionNumber}. ${questionInfo.fullSentence.replace(questionInfo.correct_answer, `<span class="correct-answer-text">${questionInfo.correct_answer}</span>`)}`;
+                questionTextSolutionDiv.innerHTML = fullTextHtml;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích ngữ pháp & ngữ cảnh:</strong> ${questionInfo.explanation}<br><em>${questionInfo.grammar_note}</em>`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Display score
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Apply color coding to score display based on performance
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions / 2) {
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Show the score display
+
+            // Scroll to the score display
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Resets the exercise by clearing input fields, hiding feedback, score, and solutions.
+         */
+        function resetExercise() {
+            const textInputs = document.querySelectorAll('input[type="text"]');
+            textInputs.forEach(input => {
+                input.value = ''; // Clear text input
+                input.classList.remove('is-correct', 'is-incorrect'); // Remove feedback classes
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Hide feedback icon
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Clear score text
+            document.getElementById('scoreDisplay').style.display = 'none'; // Hide score display
+            document.getElementById('detailedSolution').style.display = 'none'; // Hide solution section
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Clear solutions list
+        }
+    </script>
+</body>
+</html>
