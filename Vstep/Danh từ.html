@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Ngữ Pháp và Từ Vựng (Bộ Mới)</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for 'Open Sans' -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f0f2f5;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* Main container for the exercise */
+        .container-main {
+            max-width: 950px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            background-color: #ffffff;
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Headings */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Instruction section styling */
+        .instruction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            color: #555;
+            text-align: center;
+            line-height: 1.5;
+            background-color: #e8f5e9;
+            border-left: 6px solid #4CAF50;
+            padding: 20px 25px;
+            border-radius: 10px;
+            color: #388e3c;
+        }
+
+        /* Question item styling */
+        .question-item {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 15px;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+        .question-item .question-number {
+            font-weight: 700;
+            margin-right: 10px;
+            color: #007bff;
+            font-size: 1.1em;
+            flex-shrink: 0;
+            width: 30px; /* Fixed width for alignment */
+            text-align: right;
+        }
+        .question-item .question-content {
+            flex-grow: 1;
+            font-size: 1em;
+            color: #34495e;
+            line-height: 1.5;
+            /* Default to inline-flex for sentence flow */
+            display: inline-flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 5px; /* Small gap between sentence parts and options */
+        }
+        .question-item .question-content > span {
+            display: inline; /* Ensure text parts remain inline */
+        }
+
+        /* Styles for interactive options */
+        .option-group {
+            display: inline-flex; /* Use inline-flex to keep options together in sentence flow */
+            flex-wrap: wrap;
+            gap: 5px; /* Space between options within the group */
+            align-items: baseline;
+        }
+
+        .option-item {
+            padding: 6px 10px; /* Slightly smaller padding for inline options */
+            border: 1px solid #ced4da;
+            border-radius: 15px; /* Rounded pill shape */
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+            font-size: 0.95em;
+            color: #495057;
+            background-color: #f8f9fa;
+            user-select: none; /* Prevent text selection on click */
+            white-space: nowrap; /* Prevent options from breaking mid-word */
+        }
+
+        .option-item:hover {
+            background-color: #e9ecef;
+            transform: translateY(-1px);
+        }
+
+        .option-item.selected-option {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Feedback for options */
+        .option-item.is-correct {
+            background-color: #d4edda; /* Light green */
+            border-color: #28a745;
+            color: #155724;
+        }
+        .option-item.is-correct.selected-option { /* Preserve selected style for correct */
+            background-color: #28a745;
+            color: white;
+        }
+
+
+        .option-item.is-incorrect {
+            background-color: #f8d7da; /* Light red */
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .option-item.is-incorrect.selected-option { /* Preserve selected style for incorrect */
+            background-color: #dc3545;
+            color: white;
+        }
+
+        /* Hide the original select/input for A/B/C/D if using custom options */
+        .question-content select,
+        .question-content input[type="hidden"] { /* Target hidden input for storing values */
+            display: none;
+        }
+
+        /* Ensure feedback icon is always visible when needed */
+        .question-item .feedback-icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            display: none; /* Hidden by default, shown by JS */
+            vertical-align: middle;
+            flex-shrink: 0;
+            align-self: center; /* Align with the center of the options */
+        }
+
+        /* For A/B/C/D questions, make the options display block */
+        .question-item.d-block .question-content {
+            flex-direction: column; /* Stack sentence and options vertically */
+            align-items: flex-start;
+            display: flex; /* Override inline-flex for these questions */
+        }
+        .question-item.d-block .question-content .option-group {
+            margin-top: 10px; /* More space for multiple choice options */
+            display: flex; /* Keep options in a row */
+            gap: 8px; /* Standard gap for A/B/C/D */
+        }
+        .question-item.d-block .question-content .option-item {
+            width: auto; /* Allow options to size naturally */
+            min-width: 50px; /* Smallest width for A/B/C/D */
+            text-align: center;
+            padding: 8px 15px; /* Restore larger padding for A/B/C/D */
+            border-radius: 20px; /* Restore larger border-radius for A/B/C/D */
+        }
+        .question-item.d-block .question-content p {
+            display: inline; /* Keep the sentence text inline */
+        }
+        .question-item.d-block .question-content .placeholder-text {
+            display: inline-block; /* Placeholder for the gap */
+            min-width: 80px; /* Give some width to the placeholder */
+            text-align: center;
+            border-bottom: 1px dashed #ccc;
+            margin: 0 5px;
+        }
+
+
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 25px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            .instruction {
+                font-size: 0.95em;
+                padding: 15px;
+            }
+            .question-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .question-item .question-number {
+                width: auto;
+                text-align: left;
+                margin-bottom: 5px;
+            }
+            .question-item .question-content {
+                width: 100%;
+                display: flex; /* Ensure flex for column layout on small screens */
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .option-group {
+                flex-direction: column;
+                width: 100%;
+                gap: 5px; /* Keep small gap for inline options */
+            }
+            .option-item {
+                width: 100%;
+                text-align: left;
+            }
+            .feedback-icon {
+                margin-left: 0;
+                margin-top: 5px;
+                width: 100%;
+                text-align: right;
+            }
+            .buttons .btn {
+                font-size: 1em;
+                padding: 10px 25px;
+                margin: 0 8px;
+            }
+            .score-display {
+                font-size: 1.2em;
+                padding: 10px;
+            }
+            .solution-list .solution-item {
+                padding: 10px 15px;
+            }
+            .solution-list .solution-item .grammar-explanation,
+            .solution-list .solution-item .translation {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-main">
+        <div class="d-flex align-items-center justify-content-center mb-4">
+            <h1>Bài Tập Ngữ Pháp và Từ Vựng</h1>
+        </div>
+        <p class="instruction">
+            <strong>Hướng dẫn:</strong> Hoàn thành các câu sau bằng cách chọn hoặc điền từ đúng.
+            <br>
+            <span class="text-muted">(Lưu ý: Đáp án và lời giải chi tiết sẽ hiển thị sau khi bạn nhấn "Kiểm tra".)</span>
+        </p>
+
+        <form id="combinedExerciseForm">
+            <h2>I. Chọn dạng đúng của từ/động từ/cụm từ</h2>
+            <div class="mb-4">
+                <div class="question-item">
+                    <span class="question-number">1.</span>
+                    <div class="question-content">
+                        <span>Can I see your </span>
+                        <span class="option-group" id="options-q1">
+                            <span class="option-item" data-question-id="q1" data-value="identification" onclick="selectOption('q1', 'identification', this)">identification</span> /
+                            <span class="option-item" data-question-id="q1" data-value="identify" onclick="selectOption('q1', 'identify', this)">identify</span>
+                        </span>
+                        <span>.</span>
+                        <input type="hidden" id="q1" name="q1">
+                    </div>
+                    <i class="feedback-icon fa-solid" id="icon1"></i>
+                </div>
+
+                <div class="question-item">
+                    <span class="question-number">2.</span>
+                    <div class="question-content">
+                        <span>Where is the </span>
+                        <span class="option-group" id="options-q2">
+                            <span class="option-item" data-question-id="q2" data-value="location" onclick="selectOption('q2', 'location', this)">location</span> /
+                            <span class="option-item" data-question-id="q2" data-value="locate" onclick="selectOption('q2', 'locate', this)">locate</span>
+                        </span>
+                        <span> of your hometown?</span>
+                        <input type="hidden" id="q2" name="q2">
+                    </div>
+                    <i class="feedback-icon fa-solid" id="icon2"></i>
+                </div>
+
+                <div class="question-item">
+                    <span class="question-number">3.</span>
+                    <div class="question-content">
+                        <span>Okay, well, Osaka is considered to be one of the economic centers of Japan and in the past it was famous as a trading center, especially for </span>
+                        <span class="option-group" id="options-q3">
+                            <span class="option-item" data-question-id="q3" data-value="a" onclick="selectOption('q3', 'a', this)">a</span> /
+                            <span class="option-item" data-question-id="q3" data-value="_" onclick="selectOption('q3', '_', this)">_</span>
+                        </span>
+                        <span> rice.</span>
+                        <input type="hidden" id="q3" name="q3">
+                    </div>
+                    <i class="feedback-icon fa-solid" id="icon3"></i>
+                </div>
+
+                <div class="question-item">
+                    <span class="question-number">4.</span>
+                    <div class="question-content">
+                        <span>Are there many large </span>
+                        <span class="option-group" id="options-q4">
+                            <span class="option-item" data-question-id="q4" data-value="cities" onclick="selectOption('q4', 'cities', this)">cities</span> /
+                            <span class="option-item" data-question-id="q4" data-value="city" onclick="selectOption('q4', 'city', this)">city</span>
+                        </span>
+                        <span> in your country?</span>
+                        <input type="hidden" id="q4" name="q4">
+                    </div>
+                    <i class="feedback-icon fa-solid" id="icon4"></i>
+                </div>
+
+                <div class="question-item">
+                    <span class="question-number">5.</span>
+                    <div class="question-content">
+                        <span>Thank you. That’s fine. Now, in the first part of the </span>
+                        <span class="option-group" id="options-q5">
+                            <span class="option-item" data-question-id="q5" data-value="test" onclick="selectOption('q5', 'test', this)">test</span> /
+                            <span class="option-item" data-question-id="q5" data-value="tested" onclick="selectOption('q5', 'tested', this)">tested</span>
+                        </span>
+                        <span>, I’d like to ask you some questions about yourself. Ah, let’s talk about what you do. Are you a student or do you have a job?</span>
+                        <input type="hidden" id="q5" name="q5">
+                    </div>
+                    <i class="feedback-icon fa-solid" id="icon5"></i>
+                </div>
+            </div>
+
+            <hr>
+
+            <h2>II. Chọn đáp án đúng nhất (A, B, C, D)</h2>
+            <div class="mb-4">
+                <div class="question-item d-block">
+                    <span class="question-number d-inline-block">6.</span>
+                    <div class="question-content d-inline">
+                        <p>The bar chart shows the <span class="placeholder-text">_________</span> of mental patients in Vietnam from 2014 to 2017.</p>
+                        <div class="option-group" id="options-q6">
+                            <span class="option-item" data-question-id="q6" data-value="A" onclick="selectOption('q6', 'A', this)">A. number</span>
+                            <span class="option-item" data-question-id="q6" data-value="B" onclick="selectOption('q6', 'B', this)">B. numbering</span>
+                            <span class="option-item" data-question-id="q6" data-value="C" onclick="selectOption('q6', 'C', this)">C. numbered</span>
+                            <span class="option-item" data-question-id="q6" data-value="D" onclick="selectOption('q6', 'D', this)">D. amount</span>
+                        </div>
+                        <input type="hidden" id="q6" name="q6">
+                    </div>
+                    <i class="feedback-icon fa-solid" id="icon6"></i>
+                </div>
+
+                <div class="question-item d-block">
+                    <span class="question-number d-inline-block">7.</span>
+                    <div class="question-content d-inline">
+                        <p>The table provides <span class="placeholder-text">_________</span> about different types of films released in the UK and the Republic of Ireland in 2012.</p>
+                        <div class="option-group" id="options-q7">
+                            <span class="option-item" data-question-id="q7" data-value="A" onclick="selectOption('q7', 'A', this)">A. inform</span>
+                            <span class="option-item" data-question-id="q7" data-value="B" onclick="selectOption('q7', 'B', this)">B. informing</span>
+                            <span class="option-item" data-question-id="q7" data-value="C" onclick="selectOption('q7', 'C', this)">C. information</span>
+                            <span class="option-item" data-question-id="q7" data-value="D" onclick="selectOption('q7', 'D', this)">D. informations</span>
+                        </div>
+                        <input type="hidden" id="q7" name="q7">
+                    </div>
+                    <i class="feedback-icon fa-solid" id="icon7"></i>
+                </div>
+
+                <div class="question-item d-block">
+                    <span class="question-number d-inline-block">8.</span>
+                    <div class="question-content d-inline">
+                        <p>The table illustrates the <span class="placeholder-text">_________</span> of three different branches of a chain of restaurants in three different locations in Vancouver for the year 2016.</p>
+                        <div class="option-group" id="options-q8">
+                            <span class="option-item" data-question-id="q8" data-value="A" onclick="selectOption('q8', 'A', this)">A. performing</span>
+                            <span class="option-item" data-question-id="q8" data-value="B" onclick="selectOption('q8', 'B', this)">B. performs</span>
+                            <span class="option-item" data-question-id="q8" data-value="C" onclick="selectOption('q8', 'C', this)">C. performance</span>
+                            <span class="option-item" data-question-id="q8" data-value="D" onclick="selectOption('q8', 'D', this)">D. performed</span>
+                        </div>
+                        <input type="hidden" id="q8" name="q8">
+                    </div>
+                    <i class="feedback-icon fa-solid" id="icon8"></i>
+                </div>
+
+                <div class="question-item d-block">
+                    <span class="question-number d-inline-block">9.</span>
+                    <div class="question-content d-inline">
+                        <p>The charts below show the results of a <span class="placeholder-text">_________</span> about what people of different age groups say makes them most happy.</p>
+                        <div class="option-group" id="options-q9">
+                            <span class="option-item" data-question-id="q9" data-value="A" onclick="selectOption('q9', 'A', this)">A. survey</span>
+                            <span class="option-item" data-question-id="q9" data-value="B" onclick="selectOption('q9', 'B', this)">B. surveys</span>
+                            <span class="option-item" data-question-id="q9" data-value="C" onclick="selectOption('q9', 'C', this)">C. surveyed</span>
+                            <span class="option-item" data-question-id="q9" data-value="D" onclick="selectOption('q9', 'D', this)">D. surveying</span>
+                        </div>
+                        <input type="hidden" id="q9" name="q9">
+                    </div>
+                    <i class="feedback-icon fa-solid" id="icon9"></i>
+                </div>
+            </div>
+
+            <div class="buttons text-center mt-5">
+                <button type="button" class="btn btn-primary me-3" onclick="submitAnswers()">Kiểm tra ✨</button>
+                <button type="button" class="btn btn-secondary" onclick="resetExercise()">Làm lại 🔄</button>
+            </div>
+        </form>
+
+        <div id="scoreDisplay" class="score-display mt-4"></div>
+
+        <div class="solution-section" id="detailedSolution">
+            <h2>Lời giải chi tiết và Giải thích</h2>
+            <div class="solution-list">
+                <!-- Solutions will be dynamically inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // Define correct answers, context, explanations, and translations for each question.
+        const questionsData = {
+            'q1': {
+                correct_answer: 'identification',
+                context: "Can I see your _________.",
+                translation: 'Tôi có thể xem giấy tờ tùy thân của bạn không?',
+                explanation: 'Sau tính từ sở hữu "your" cần một danh từ. "Identification" là danh từ (giấy tờ tùy thân), còn "identify" là động từ (xác định).',
+                grammar_note: 'Sử dụng danh từ sau tính từ sở hữu.'
+            },
+            'q2': {
+                correct_answer: 'location',
+                context: "Where is the _________ of your hometown?",
+                translation: 'Quê hương của bạn ở đâu?',
+                explanation: 'Sau mạo từ "the" và trước giới từ "of" cần một danh từ. "Location" là danh từ (vị trí), còn "locate" là động từ (định vị).',
+                grammar_note: 'Sử dụng danh từ sau mạo từ.'
+            },
+            'q3': {
+                correct_answer: '_', // Represents no article
+                context: "Osaka is considered to be one of the economic centers of Japan and in the past it was famous as a trading center, especially for a/_________ rice.",
+                translation: 'Osaka được coi là một trong những trung tâm kinh tế của Nhật Bản và trong quá khứ nó nổi tiếng là một trung tâm thương mại, đặc biệt là về gạo.',
+                explanation: '"Rice" (gạo) là danh từ không đếm được, nên không dùng mạo từ "a".',
+                grammar_note: 'Danh từ không đếm được thường không đi với mạo từ "a/an".'
+            },
+            'q4': {
+                correct_answer: 'cities',
+                context: "Are there many large _________ in your country?",
+                translation: 'Có nhiều thành phố lớn ở nước bạn không?',
+                explanation: 'Sau "many large" cần một danh từ đếm được số nhiều. "Cities" là dạng số nhiều của "city".',
+                grammar_note: 'Sử dụng danh từ đếm được số nhiều sau "many".'
+            },
+            'q5': {
+                correct_answer: 'test',
+                context: "Thank you. That’s fine. Now, in the first part of the _________, I’d like to ask you some questions about yourself. Ah, let’s talk about what you do. Are you a student or do you have a job?",
+                translation: 'Cảm ơn. Được rồi. Bây giờ, trong phần đầu tiên của bài kiểm tra, tôi muốn hỏi bạn một vài câu hỏi về bản thân. À, hãy nói về những gì bạn làm. Bạn là sinh viên hay bạn có việc làm?',
+                explanation: 'Trong ngữ cảnh này, "test" (bài kiểm tra) là danh từ phù hợp, còn "tested" là dạng quá khứ của động từ hoặc tính từ.',
+                grammar_note: 'Sử dụng danh từ sau mạo từ "the".'
+            },
+            'q6': {
+                correct_answer: 'A', // number
+                context: "The bar chart shows the _________ of mental patients in Vietnam from 2014 to 2017.",
+                translation: 'Biểu đồ cột cho thấy số lượng bệnh nhân tâm thần ở Việt Nam từ năm 2014 đến 2017.',
+                explanation: '"Mental patients" là danh từ đếm được số nhiều, nên dùng "number of". "Amount" dùng cho danh từ không đếm được.',
+                grammar_note: '"Number of + countable noun (plural)", "amount of + uncountable noun".'
+            },
+            'q7': {
+                correct_answer: 'C', // information
+                context: "The table provides _________ about different types of films released in the UK and the Republic of Ireland in 2012.",
+                translation: 'Bảng cung cấp thông tin về các loại phim khác nhau được phát hành ở Vương quốc Anh và Cộng hòa Ireland vào năm 2012.',
+                explanation: '"Information" là danh từ không đếm được, không có dạng số nhiều "informations".',
+                grammar_note: '"Information" là danh từ không đếm được.'
+            },
+            'q8': {
+                correct_answer: 'C', // performance
+                context: "The table illustrates the _________ of three different branches of a chain of restaurants in three different locations in Vancouver for the year 2016.",
+                translation: 'Bảng minh họa hiệu suất của ba chi nhánh khác nhau của một chuỗi nhà hàng ở ba địa điểm khác nhau tại Vancouver trong năm 2016.',
+                explanation: 'Sau "the" và trước giới từ "of" cần một danh từ. "Performance" (hiệu suất) là danh từ phù hợp với ngữ cảnh.',
+                grammar_note: 'Sử dụng danh từ sau mạo từ "the".'
+            },
+            'q9': {
+                correct_answer: 'A', // survey
+                context: "The charts below show the results of a _________ about what people of different age groups say makes them most happy.",
+                translation: 'Các biểu đồ dưới đây cho thấy kết quả của một cuộc khảo sát về điều gì khiến mọi người ở các nhóm tuổi khác nhau hạnh phúc nhất.',
+                explanation: 'Sau "a" cần một danh từ số ít đếm được. "Survey" (cuộc khảo sát) là danh từ phù hợp.',
+                grammar_note: 'Sử dụng danh từ số ít đếm được sau mạo từ "a".'
+            }
+        };
+
+        /**
+         * Hàm xử lý khi người dùng chọn một tùy chọn.
+         * @param {string} questionId - ID của câu hỏi (ví dụ: 'q1').
+         * @param {string} selectedValue - Giá trị của tùy chọn được chọn.
+         * @param {HTMLElement} clickedElement - Phần tử HTML (span) mà người dùng đã click.
+         */
+        function selectOption(questionId, selectedValue, clickedElement) {
+            // Lấy input ẩn để lưu giá trị đã chọn
+            const hiddenInput = document.getElementById(questionId);
+            hiddenInput.value = selectedValue;
+
+            // Xóa lớp 'selected-option' khỏi tất cả các tùy chọn khác của câu hỏi này
+            const optionGroup = clickedElement.closest('.option-group');
+            if (optionGroup) {
+                const allOptions = optionGroup.querySelectorAll('.option-item');
+                allOptions.forEach(option => {
+                    option.classList.remove('selected-option', 'is-correct', 'is-incorrect');
+                });
+            }
+
+            // Thêm lớp 'selected-option' vào tùy chọn đã click
+            clickedElement.classList.add('selected-option');
+
+            // Ẩn icon phản hồi cũ nếu có
+            const feedbackIcon = document.getElementById(`icon${questionId.substring(1)}`);
+            if (feedbackIcon) {
+                feedbackIcon.style.display = 'none';
+                feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+            }
+        }
+
+        /**
+         * Gửi câu trả lời của người dùng, tính điểm, cung cấp phản hồi
+         * và hiển thị lời giải chi tiết.
+         */
+        function submitAnswers() {
+            let score = 0;
+            const totalQuestions = Object.keys(questionsData).length;
+
+            const solutionListDiv = document.querySelector('#detailedSolution .solution-list');
+            solutionListDiv.innerHTML = ''; // Xóa các lời giải cũ
+            document.getElementById('detailedSolution').style.display = 'block'; // Hiển thị phần lời giải
+
+            // Lặp qua từng câu hỏi
+            Object.keys(questionsData).forEach(qId => {
+                const questionInfo = questionsData[qId];
+                const hiddenInput = document.getElementById(qId); // Lấy input ẩn để lấy giá trị
+                const feedbackIcon = document.getElementById(`icon${qId.substring(1)}`);
+                const selectedOptionElement = document.querySelector(`#options-${qId} .option-item.selected-option`); // Lấy phần tử tùy chọn đang được chọn
+
+                // Xóa các lớp phản hồi cũ trên tất cả các tùy chọn của câu hỏi này
+                const allOptionsForQuestion = document.querySelectorAll(`#options-${qId} .option-item`);
+                allOptionsForQuestion.forEach(option => {
+                    option.classList.remove('is-correct', 'is-incorrect');
+                });
+
+                const userAnswer = hiddenInput.value.trim().toLowerCase();
+                const correctAnswer = String(questionInfo.correct_answer).toLowerCase();
+
+                let isCorrect = false;
+                // For A/B/C/D questions, compare the selected letter. For others, compare the full value.
+                if (['q6', 'q7', 'q8', 'q9'].includes(qId)) { // These are the multiple choice questions (A, B, C, D)
+                    if (userAnswer.charAt(0).toUpperCase() === correctAnswer.charAt(0).toUpperCase()) {
+                        isCorrect = true;
+                        score++;
+                        if (selectedOptionElement) {
+                            selectedOptionElement.classList.add('is-correct');
+                        }
+                    } else {
+                        if (selectedOptionElement) {
+                            selectedOptionElement.classList.add('is-incorrect');
+                        }
+                        // Highlight the correct option if user chose incorrectly
+                        const correctOptionElement = document.querySelector(`#options-${qId} .option-item[data-value="${questionInfo.correct_answer}"]`);
+                        if (correctOptionElement) {
+                            correctOptionElement.classList.add('is-correct');
+                        }
+                    }
+                } else {
+                    // For direct word/phrase selection
+                    if (userAnswer === correctAnswer) {
+                        isCorrect = true;
+                        score++;
+                        if (selectedOptionElement) {
+                            selectedOptionElement.classList.add('is-correct');
+                        }
+                    } else {
+                        if (selectedOptionElement) {
+                            selectedOptionElement.classList.add('is-incorrect');
+                        }
+                        // Highlight the correct option if user chose incorrectly
+                        const correctOptionElement = document.querySelector(`#options-${qId} .option-item[data-value="${questionInfo.correct_answer}"]`);
+                        if (correctOptionElement) {
+                            correctOptionElement.classList.add('is-correct');
+                        }
+                    }
+                }
+
+
+                // Hiển thị icon phản hồi
+                if (feedbackIcon) {
+                    feedbackIcon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                    if (isCorrect) {
+                        feedbackIcon.classList.add('fa-check-circle', 'text-success');
+                    } else {
+                        feedbackIcon.classList.add('fa-times-circle', 'text-danger');
+                    }
+                    feedbackIcon.style.display = 'inline-block';
+                }
+
+                // Thêm lời giải chi tiết
+                const solutionItem = document.createElement('div');
+                solutionItem.classList.add('solution-item');
+
+                const questionNumber = qId.substring(1); // Get the numeric part of the ID
+                const questionTextSolutionDiv = document.createElement('div');
+                questionTextSolutionDiv.classList.add('question-text-solution');
+
+                // Xây dựng câu hoàn chỉnh/cụm từ để hiển thị
+                let fullSentenceHtml = questionInfo.context.replace(/_________/, `<span class="correct-answer-text">${
+                    // For A/B/C/D questions, show the full correct option text, not just the letter
+                    ['q6', 'q7', 'q8', 'q9'].includes(qId)
+                        ? document.querySelector(`#options-${qId} .option-item[data-value="${questionInfo.correct_answer}"]`).textContent
+                        : questionInfo.correct_answer
+                }</span>`);
+                
+                // If it's a multiple choice question (A, B, C, D), also display the letter answer
+                if (['q6', 'q7', 'q8', 'q9'].includes(qId)) {
+                    fullSentenceHtml += ` (Đáp án: ${String(questionInfo.correct_answer).toUpperCase()})`;
+                }
+                questionTextSolutionDiv.innerHTML = `<strong>Câu hỏi:</strong> ${questionNumber}. ${fullSentenceHtml}`;
+                solutionItem.appendChild(questionTextSolutionDiv);
+
+                const grammarExplanationDiv = document.createElement('div');
+                grammarExplanationDiv.classList.add('grammar-explanation');
+                grammarExplanationDiv.innerHTML = `<strong>Giải thích:</strong> ${questionInfo.explanation}<br><em>${questionInfo.grammar_note}</em>`;
+                solutionItem.appendChild(grammarExplanationDiv);
+
+                const translationDiv = document.createElement('div');
+                translationDiv.classList.add('translation');
+                translationDiv.innerHTML = `<strong>Dịch:</strong> ${questionInfo.translation || 'Không có bản dịch.'}`;
+                solutionItem.appendChild(translationDiv);
+
+                solutionListDiv.appendChild(solutionItem);
+            });
+
+            // Hiển thị điểm số
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            scoreDisplay.textContent = `Bạn đã đạt ${score} / ${totalQuestions} điểm.`;
+
+            // Áp dụng mã màu cho hiển thị điểm số dựa trên hiệu suất
+            scoreDisplay.classList.remove('text-success', 'text-warning', 'text-danger');
+            if (score === totalQuestions) {
+                scoreDisplay.classList.add('text-success');
+            } else if (score >= totalQuestions * 0.7) { // 70% hoặc hơn
+                scoreDisplay.classList.add('text-warning');
+            } else {
+                scoreDisplay.classList.add('text-danger');
+            }
+            scoreDisplay.style.display = 'block'; // Hiển thị điểm số
+
+            // Cuộn đến phần hiển thị điểm số
+            scoreDisplay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        /**
+         * Đặt lại bài tập bằng cách xóa các trường nhập liệu, ẩn phản hồi, điểm số và lời giải.
+         */
+        function resetExercise() {
+            const hiddenInputs = document.querySelectorAll('input[type="hidden"]');
+            hiddenInputs.forEach(input => {
+                input.value = ''; // Xóa giá trị input ẩn
+            });
+
+            const allOptions = document.querySelectorAll('.option-item');
+            allOptions.forEach(option => {
+                option.classList.remove('selected-option', 'is-correct', 'is-incorrect'); // Xóa các lớp phản hồi và chọn
+            });
+
+            const feedbackIcons = document.querySelectorAll('.feedback-icon');
+            feedbackIcons.forEach(icon => {
+                icon.classList.remove('fa-check-circle', 'fa-times-circle', 'text-success', 'text-danger');
+                icon.style.display = 'none'; // Ẩn icon phản hồi
+            });
+
+            document.getElementById('scoreDisplay').textContent = ''; // Xóa văn bản điểm số
+            document.getElementById('scoreDisplay').style.display = 'none'; // Ẩn hiển thị điểm số
+            document.getElementById('detailedSolution').style.display = 'none'; // Ẩn phần lời giải
+            document.querySelector('#detailedSolution .solution-list').innerHTML = ''; // Xóa danh sách lời giải
+        }
+    </script>
+</body>
+</html>

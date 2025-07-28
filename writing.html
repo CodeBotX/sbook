@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luyện tập writing</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts for better readability -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- jsPDF for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa; /* Light mode default background */
+        }
+        .container {
+            flex-grow: 1;
+            max-width: 960px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .dark-mode {
+            background-color: #212529; /* Dark mode background */
+            color: #e2e6ea;
+        }
+        .dark-mode .container {
+            background-color: #343a40;
+            color: #e2e6ea;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #007bff; /* Bootstrap primary blue */
+        }
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6 {
+            color: #66b3ff; /* Lighter blue for dark mode */
+        }
+        .toolbar {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            border: 1px solid #dee2e6;
+        }
+        .dark-mode .toolbar {
+            background-color: #495057;
+            border-color: #6c757d;
+        }
+        .editor-area {
+            min-height: 400px;
+            border: 1px solid #ced4da;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fff;
+            overflow-y: auto;
+            flex-grow: 1;
+            line-height: 1.6;
+            font-size: 16px; /* Default font size */
+        }
+        .dark-mode .editor-area {
+            background-color: #2b2f33;
+            border-color: #6c757d;
+            color: #e2e6ea;
+        }
+        .word-count-info {
+            margin-top: 15px;
+            text-align: right;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        .dark-mode .word-count-info {
+            color: #adb5bd;
+        }
+        .btn-toolbar {
+            margin-right: 5px;
+        }
+        .form-select-sm {
+            height: calc(1.5em + .75rem + 2px); /* Adjust height for better alignment */
+        }
+        .highlight-color-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+        .highlight-yellow { background-color: #FFFF00; }
+        .highlight-green { background-color: #90EE90; }
+        .highlight-blue { background-color: #ADD8E6; }
+        .highlight-pink { background-color: #FFC0CB; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-end mb-3">
+            <button class="btn btn-secondary" id="darkModeToggle">
+                <i class="fas fa-adjust me-2"></i>Chế độ tối / sáng
+            </button>
+        </div>
+
+        <h1 class="text-center mb-4">Trình soạn thảo văn bản</h1>
+
+        <div class="toolbar">
+            <div class="btn-group me-2" role="group" aria-label="Text formatting">
+                <button type="button" class="btn btn-outline-primary" onclick="formatDoc('bold')"><i class="fas fa-bold"></i></button>
+                <button type="button" class="btn btn-outline-primary" onclick="formatDoc('italic')"><i class="fas fa-italic"></i></button>
+                <button type="button" class="btn btn-outline-primary" onclick="formatDoc('underline')"><i class="fas fa-underline"></i></button>
+            </div>
+
+            <select class="form-select form-select-sm me-2" style="width: auto;" onchange="formatDoc('fontname', this.value)">
+                <option value="Roboto" selected>Roboto</option>
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Open Sans">Open Sans</option>
+                <option value="Merriweather">Merriweather</option>
+            </select>
+
+            <select class="form-select form-select-sm me-2" style="width: auto;" onchange="formatDoc('fontsize', this.value)">
+                <option value="1">Cỡ chữ nhỏ nhất (8pt)</option>
+                <option value="2">Cỡ chữ nhỏ (10pt)</option>
+                <option value="3" selected>Cỡ chữ bình thường (12pt)</option>
+                <option value="4">Cỡ chữ lớn (14pt)</option>
+                <option value="5">Cỡ chữ rất lớn (18pt)</option>
+                <option value="6">Cỡ chữ cực lớn (24pt)</option>
+                <option value="7">Cỡ chữ khổng lồ (36pt)</option>
+            </select>
+
+            <!-- Highlight Color Buttons -->
+            <div class="btn-group me-2" role="group" aria-label="Highlight colors">
+                <button type="button" class="btn btn-outline-secondary highlight-yellow" onclick="highlightText('#FFFF00')" title="Highlight Vàng"></button>
+                <button type="button" class="btn btn-outline-secondary highlight-green" onclick="highlightText('#90EE90')" title="Highlight Xanh Lá"></button>
+                <button type="button" class="btn btn-outline-secondary highlight-blue" onclick="highlightText('#ADD8E6')" title="Highlight Xanh Dương"></button>
+                <button type="button" class="btn btn-outline-secondary highlight-pink" onclick="highlightText('#FFC0CB')" title="Highlight Hồng"></button>
+                <button type="button" class="btn btn-outline-secondary" onclick="removeHighlight()"><i class="fas fa-eraser" title="Xóa Highlight"></i></button>
+            </div>
+
+            <button type="button" class="btn btn-success me-2" onclick="saveContent()"><i class="fas fa-save me-1"></i>Lưu bài viết</button>
+            <button type="button" class="btn btn-danger me-2" onclick="exportPdf()"><i class="fas fa-file-pdf me-1"></i>Xuất PDF</button>
+            
+            <input type="file" id="fileInput" accept=".txt" style="display: none;" onchange="handleFileSelect(event)">
+            <button type="button" class="btn btn-info" onclick="document.getElementById('fileInput').click();"><i class="fas fa-file-import me-1"></i>Nhập TXT</button>
+        </div>
+
+        <div id="editor" class="editor-area" contenteditable="true" oninput="updateWordCount()">
+            <!-- Nội dung văn bản của bạn sẽ ở đây -->
+        </div>
+
+        <div class="word-count-info">
+            Số từ: <span id="wordCount">0</span>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+            const editor = document.getElementById('editor');
+
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                body.classList.add('dark-mode');
+            }
+
+            darkModeToggle.addEventListener('click', function() {
+                body.classList.toggle('dark-mode');
+                // Save preference to localStorage
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+
+            // Load content and update word count on page load
+            loadContent();
+            updateWordCount();
+        });
+
+        // Function to apply text formatting (bold, italic, underline, fontname, fontsize)
+        function formatDoc(command, value = null) {
+            document.execCommand(command, false, value);
+            // Ensure focus remains on the editor after formatting
+            document.getElementById('editor').focus();
+        }
+
+        // Function to apply highlight (background color)
+        function highlightText(color) {
+            document.execCommand('backcolor', false, color);
+            document.getElementById('editor').focus();
+        }
+
+        // Function to remove highlight
+        function removeHighlight() {
+            document.execCommand('backcolor', false, 'transparent'); // Set background to transparent
+            // Alternatively, document.execCommand('removeFormat', false, 'backcolor');
+            document.getElementById('editor').focus();
+        }
+
+        // Function to update word count
+        function updateWordCount() {
+            const editor = document.getElementById('editor');
+            const text = editor.innerText || editor.textContent; // Get visible plain text
+            // Remove leading/trailing whitespace and split by one or more whitespace characters
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+            document.getElementById('wordCount').textContent = words.length;
+        }
+
+        // Function to save content to localStorage
+        function saveContent() {
+            const editor = document.getElementById('editor');
+            localStorage.setItem('savedTextEditorContent', editor.innerHTML);
+            alert('Bài viết đã được lưu!'); // Use a simple alert for demonstration
+        }
+
+        // Function to load content from localStorage
+        function loadContent() {
+            const editor = document.getElementById('editor');
+            const savedContent = localStorage.getItem('savedTextEditorContent');
+            if (savedContent) {
+                editor.innerHTML = savedContent;
+                updateWordCount(); // Update word count after loading
+                // No alert on initial load to avoid annoyance, only on explicit user action
+            } else {
+                // If no saved content, ensure editor is empty
+                editor.innerHTML = '';
+            }
+        }
+
+        // Function to export content to PDF
+        function exportPdf() {
+            const editor = document.getElementById('editor');
+            // For PDF export, jsPDF primarily handles plain text.
+            // Complex HTML formatting like highlights (background colors)
+            // will not be preserved in the PDF output with this basic implementation.
+            // The PDF will contain the text content without the visual highlights.
+            const text = editor.innerText; // Get plain text content from the editor
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Set basic font and size
+            doc.setFont("helvetica", "normal"); 
+            doc.setFontSize(12); 
+
+            // Split text into lines to handle long content and wrap text
+            const lines = doc.splitTextToSize(text, 180); // 180mm width for text, standard A4 width is 210mm, leaving margins
+
+            let y = 10; // Initial Y position, 10mm from top
+            const lineHeight = 7; // Approximate line height in mm
+            const pageHeight = doc.internal.pageSize.height; // Get current page height
+
+            for (let i = 0; i < lines.length; i++) {
+                if (y + lineHeight > pageHeight - 10) { // Check if new page is needed (10mm from bottom margin)
+                    doc.addPage();
+                    y = 10; // Reset Y position for new page
+                }
+                doc.text(lines[i], 10, y); // Add text at X=10mm, Y=y mm
+                y += lineHeight; // Increment Y for next line
+            }
+
+            doc.save('bai_viet_cua_ban.pdf');
+            alert('Bài viết đã được xuất ra PDF! Lưu ý: Định dạng phức tạp như highlight có thể không được giữ nguyên trong file PDF.');
+        }
+
+        // Function to handle file selection for import
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.type === "text/plain") { // Check if it's a plain text file
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const editor = document.getElementById('editor');
+                        editor.innerText = e.target.result; // Set plain text content
+                        updateWordCount();
+                        alert('File văn bản (.txt) đã được nhập!');
+                    };
+                    reader.readAsText(file);
+                } else {
+                    alert('Chỉ hỗ trợ nhập file văn bản thuần túy (.txt). Không hỗ trợ file .docx.');
+                }
+            }
+            // Clear the file input to allow selecting the same file again if needed
+            event.target.value = ''; 
+        }
+    </script>
+</body>
+</html>
