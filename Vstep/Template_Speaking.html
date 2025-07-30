@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VSTEP Speaking Test Simulation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f2f5;
+      color: #333;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3 {
+      color: #1a73e8;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .instructions {
+      background-color: #e8f0fe;
+      border-left: 6px solid #1a73e8;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      font-size: 1.05em;
+    }
+    .timer {
+      font-size: 2.2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #ea4335;
+      text-align: center;
+      padding: 10px;
+      background-color: #fff0f0;
+      border-radius: 8px;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+    button {
+      background-color: #1a73e8;
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.2em;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: block;
+      margin: 0 auto;
+    }
+    button:hover {
+      background-color: #0d47a1;
+      transform: translateY(-2px);
+    }
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+    .question-section {
+      display: none;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .question-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .audio-playback-section {
+      margin-top: 30px;
+      padding-top: 30px;
+      border-top: 1px solid #e0e0e0;
+    }
+    .audio-playback-section audio {
+      width: 100%;
+      margin-top: 15px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    @media (max-width: 768px) {
+      .container { padding: 20px; }
+      h1 { font-size: 1.8em; }
+      h2 { font-size: 1.5em; }
+      .timer { font-size: 1.8em; }
+      button { padding: 12px 20px; font-size: 1em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-3xl text-center mb-8">VSTEP Speaking Test Simulation</h1>
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="text-center">
+      <div class="instructions">
+        <p>Welcome to the VSTEP Speaking Test Simulation.</p>
+        <p>This test consists of 3 parts. Once you click "Start Test", the timer will begin automatically, and you will proceed through each part without interruption.</p>
+        <p>Please ensure your microphone is working.</p>
+        <p>Upload an image for each test part below.</p>
+        <p>Good luck!</p>
+      </div>
+
+      <!-- Image Uploads -->
+      <div class="mb-6 text-left">
+        <label class="block font-semibold mb-2">Upload Part 1 Image:</label>
+        <input type="file" accept="image/*" id="image-part1" class="mb-4 w-full" required>
+
+        <label class="block font-semibold mb-2">Upload Part 2 Image:</label>
+        <input type="file" accept="image/*" id="image-part2" class="mb-4 w-full" required>
+
+        <label class="block font-semibold mb-2">Upload Part 3 Image:</label>
+        <input type="file" accept="image/*" id="image-part3" class="mb-4 w-full" required>
+      </div>
+
+      <button id="start-test-btn">Start Test</button>
+    </div>
+
+    <!-- Part 1 -->
+    <div id="part1-section" class="question-section">
+      <h2 class="text-2xl">Part 1: Social Interaction</h2>
+      <div class="timer" id="part1-timer">00:00</div>
+      <div id="part1-preparation">
+        <img id="part1-image" class="w-full max-h-[500px] object-contain rounded shadow" alt="Part 1 Question Image" />
+      </div>
+      <div id="part1-recording" style="display: none;">
+        <h3 class="text-xl">Recording Time:</h3>
+        <p>Please answer the questions aloud.</p>
+        <p>Status: <span id="part1-status" class="font-semibold text-green-600"></span></p>
+      </div>
+      <audio id="part1-audio-playback" controls class="mt-4" style="display: none;"></audio>
+    </div>
+
+    <!-- Part 2 -->
+    <div id="part2-section" class="question-section">
+      <h2 class="text-2xl">Part 2: Solution Discussion</h2>
+      <div class="timer" id="part2-timer">00:00</div>
+      <div id="part2-preparation">
+        <img id="part2-image" class="w-full max-h-[500px] object-contain rounded shadow" alt="Part 2 Question Image" />
+      </div>
+      <div id="part2-recording" style="display: none;">
+        <h3 class="text-xl">Recording Time:</h3>
+        <p>Please present your chosen option and explain it.</p>
+        <p>Status: <span id="part2-status" class="font-semibold text-green-600"></span></p>
+      </div>
+      <audio id="part2-audio-playback" controls class="mt-4" style="display: none;"></audio>
+    </div>
+
+    <!-- Part 3 -->
+    <div id="part3-section" class="question-section">
+      <h2 class="text-2xl">Part 3: Topic Development</h2>
+      <div class="timer" id="part3-timer">00:00</div>
+      <div id="part3-preparation">
+        <img id="part3-image" class="w-full max-h-[500px] object-contain rounded shadow" alt="Part 3 Question Image" />
+      </div>
+      <div id="part3-recording" style="display: none;">
+        <h3 class="text-xl">Recording Time:</h3>
+        <p>Please discuss the topic and answer the related questions.</p>
+        <p>Status: <span id="part3-status" class="font-semibold text-green-600"></span></p>
+      </div>
+      <audio id="part3-audio-playback" controls class="mt-4" style="display: none;"></audio>
+    </div>
+
+    <!-- End Screen -->
+    <div id="end-screen" class="text-center" style="display: none;">
+      <h2 class="text-2xl text-green-700">Test Completed!</h2>
+      <p class="text-lg">You have finished the VSTEP Speaking Test Simulation.</p>
+      <div class="audio-playback-section" id="final-playback-section">
+        <h3 class="text-xl">Your Recordings:</h3>
+        <h4 class="text-lg font-semibold mt-4">Part 1:</h4>
+        <audio id="final-part1-audio" controls></audio>
+        <h4 class="text-lg font-semibold mt-4">Part 2:</h4>
+        <audio id="final-part2-audio" controls></audio>
+        <h4 class="text-lg font-semibold mt-4">Part 3:</h4>
+        <audio id="final-part3-audio" controls></audio>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const testParts = [
+      { id: 'part1', prepTime: 60, responseTime: 120 },
+      { id: 'part2', prepTime: 60, responseTime: 180 },
+      { id: 'part3', prepTime: 60, responseTime: 240 }
+    ];
+
+    const startScreen = document.getElementById('start-screen');
+    const startTestBtn = document.getElementById('start-test-btn');
+    let currentPartIndex = 0;
+    let mediaRecorder;
+    let audioChunks = [];
+    const recordedAudios = {};
+
+    const imageInputs = {
+      part1: document.getElementById('image-part1'),
+      part2: document.getElementById('image-part2'),
+      part3: document.getElementById('image-part3'),
+    };
+    const imageDisplays = {
+      part1: document.getElementById('part1-image'),
+      part2: document.getElementById('part2-image'),
+      part3: document.getElementById('part3-image'),
+    };
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function loadSelectedImages() {
+      for (const part in imageInputs) {
+        const file = imageInputs[part].files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            imageDisplays[part].src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        } else {
+          alert(`Please select an image for ${part.toUpperCase()}`);
+          return false;
+        }
+      }
+      return true;
+    }
+
+    async function startTest() {
+      if (!loadSelectedImages()) {
+        return;
+      }
+
+      startTestBtn.disabled = true;
+      startScreen.style.display = 'none';
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = event => {
+          audioChunks.push(event.data);
+        };
+
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          audioChunks = [];
+          const audioUrl = URL.createObjectURL(audioBlob);
+          recordedAudios[testParts[currentPartIndex].id] = audioUrl;
+
+          const playback = document.getElementById(`${testParts[currentPartIndex].id}-audio-playback`);
+          playback.src = audioUrl;
+          playback.style.display = 'block';
+
+          document.getElementById(`final-${testParts[currentPartIndex].id}-audio`).src = audioUrl;
+
+          if (currentPartIndex < testParts.length - 1) {
+            currentPartIndex++;
+            startNextPart();
+          } else {
+            endTest();
+          }
+        };
+
+        startNextPart();
+
+      } catch (err) {
+        console.error('Error accessing microphone:', err);
+        alert('Could not access microphone. Please ensure it is connected and you have granted permission.');
+        startTestBtn.disabled = false;
+        startScreen.style.display = 'block';
+      }
+    }
+
+    function startNextPart() {
+      const part = testParts[currentPartIndex];
+      const section = document.getElementById(`${part.id}-section`);
+      const prepTimerEl = document.getElementById(`${part.id}-timer`);
+      const recordingDiv = document.getElementById(`${part.id}-recording`);
+      const statusSpan = document.getElementById(`${part.id}-status`);
+
+      section.style.display = 'block';
+      let prepTime = part.prepTime;
+      prepTimerEl.textContent = formatTime(prepTime);
+
+      const prepInterval = setInterval(() => {
+        prepTime--;
+        prepTimerEl.textContent = formatTime(prepTime);
+        if (prepTime <= 0) {
+          clearInterval(prepInterval);
+
+          // Start Recording
+          recordingDiv.style.display = 'block';
+          statusSpan.textContent = 'Recording...';
+          let responseTime = part.responseTime;
+          prepTimerEl.textContent = formatTime(responseTime);
+          mediaRecorder.start();
+
+          const responseInterval = setInterval(() => {
+            responseTime--;
+            prepTimerEl.textContent = formatTime(responseTime);
+            if (responseTime <= 0) {
+              clearInterval(responseInterval);
+              mediaRecorder.stop();
+              statusSpan.textContent = 'Recording finished.';
+            }
+          }, 1000);
+        }
+      }, 1000);
+    }
+
+    function endTest() {
+      document.getElementById('end-screen').style.display = 'block';
+    }
+
+    startTestBtn.addEventListener('click', startTest);
+  </script>
+</body>
+</html>

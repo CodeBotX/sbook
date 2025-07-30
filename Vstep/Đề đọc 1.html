@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ứng dụng Luyện Đọc Tiếng Anh</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for better appearance */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- React, ReactDOM, Babel CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Dữ liệu các bài đọc, câu hỏi và đáp án
+        const quizData = [
+          {
+            id: 'passage1',
+            title: 'Bài đọc 1: Thuốc kháng sinh và Kháng thuốc',
+            passage: `Antibiotics block the life cycle of bacteria that invade the human body. The first of these antibiotics, penicillin, works by blocking the molecules that construct the cell walls of particular bacteria. The bacteria, with incomplete cell walls, are not able to reproduce. When penicillin was introduced during World War II, it was truly a "miracle drug." Until that time, anyone who was cut or wounded stood a great risk of infection. Once penicillin became available, the situation changed. Wounded soldiers, children with ear infections, and many others began to benefit from the ability to block the growth of bacteria.
+While humanity may have won that particular battle against bacteria, the war is far from over. The reason is that in any bacterial population, there are bound to be a few bacteria that, for one reason or another, are not affected by a particular antibiotic. For example, they may have a slightly differently shaped enzyme that builds cell walls, so that penicillin will not fit onto that particular shape of the enzyme. These bacteria will not be affected by that particular drug. For that small group, the antibiotic is a real godsend. It doesn't affect them, but it does wipe out all of their competition. They are thus free to multiply, and, over time, all of the bacteria will have whatever properties that made those individuals resistant.
+Traditionally, medical scientists have dealt with this phenomenon by developing a large number of antibiotics, each of which intervenes in the bacterial life cycle in a slightly different way. Consequently, if you happen to have a bacterium that is resistant to one antibiotic, probably it will succumb to the action of another. You may, in fact, have had the experience of going to a doctor with an infection, being given an antibiotic, and then finding that it didn't work. In all likelihood, all your doctor had to do then was prescribe a different antibiotic and everything was fine.
+The problem is that as time has passed, more and more bacteria have become resistant to antibiotics. In fact, currently, there is one strain of bacteria Staphylococcus - that is resistant to every commercially available antibiotic except one, and in 1996, a bacterium with lowered resistance to that last antibiotic appeared in Japan. The appearance of drug-resistant bacteria is not particularly surprising; in fact, it probably should have been anticipated. Nevertheless, in the late 1980s, there was a general sense of complacency among scientists on the antibiotic question. Little profit was to be made by developing the one-hundred-and-first antibiotic. Drug companies concentrated their efforts on other areas. Therefore, a gap developed between the production of new antibiotics and the development of drug-resistant bacteria.`,
+            questions: [
+              {
+                qId: 'q1_p1',
+                text: 'QUESTION 1: According to paragraph 4, why do some bacteria benefit from antibiotics?',
+                options: [
+                  'A. The antibiotic eliminates competing bacteria, allowing resistant bacteria to reproduce.',
+                  'B. The resistant bacteria compete with the antibiotic, and the bacteria become stronger.',
+                  'C. The competition helps the resistant bacteria to multiply by reproducing with the resistant type.',
+                  'D. The properties of the antibiotic are acquired by the bacteria, making it resistant to the competition.',
+                ],
+                correctAnswer: 'A',
+              },
+              {
+                qId: 'q2_p1',
+                text: 'QUESTION 2: The word "complacency" in the passage is closest in meaning to',
+                options: [
+                  'A. Consensus of agreement',
+                  'B. Fear of consequences',
+                  'C. Lack of concern',
+                  'D. Awareness of potential',
+                ],
+                correctAnswer: 'C',
+              },
+              {
+                qId: 'q3_p1',
+                text: 'QUESTION 3: Which of the sentences below best expresses the information in the highlighted statement in the passage? ("The reason is that in any bacterial population, there are bound to be a few bacteria that, for one reason or another, are not affected by a particular antibiotic.")',
+                options: [
+                  'A. Some antibiotics affect a population of bacteria more efficiently than others.',
+                  'B. There are several reasons why some bacteria do not respond to most antibiotics.',
+                  'C. The effect of antibiotics on bacteria is to bind them together into one population.',
+                  'D. A small number of bacteria in any sample will probably be resistant to a specific antibiotic.',
+                ],
+                correctAnswer: 'D',
+              },
+              {
+                qId: 'q4_p1',
+                text: 'QUESTION 4: The author mentions all of the following reasons for drug resistant bacteria to appear EXCEPT',
+                options: [
+                  'A. little profit for drug companies to develop new antibiotics',
+                  'B. natural mutations in bacterial populations',
+                  'C. the newer antibiotics were not as strong and effective as the original penicillin-based drugs',
+                  'D. the elimination of competing bacteria by antibiotics',
+                ],
+                correctAnswer: 'C',
+              },
+              {
+                qId: 'q5_p1',
+                text: 'QUESTION 5: Which of the following statements is NOT a main idea of the passage?',
+                options: [
+                  'A. Drug-resistant bacteria are becoming increasingly prevalent.',
+                  'B. Funding for the production of new antibiotics has been allocated to drug companies.',
+                  'C. Penicillin was once a highly effective antibiotic.',
+                  'D. New antibiotics are being developed to combat resistance.',
+                ],
+                correctAnswer: 'B',
+              },
+              {
+                qId: 'q6_p1',
+                text: 'QUESTION 6: The word "them" in paragraph 4 refers to',
+                options: [
+                  'A. all bacteria',
+                  'B. resistant bacteria',
+                  'C. competing bacteria',
+                  'D. individuals',
+                ],
+                correctAnswer: 'B',
+              },
+              {
+                qId: 'q7_p1',
+                text: 'QUESTION 7: The word "anticipated" in the passage is closest in meaning to',
+                options: [
+                  'A. predicted',
+                  'B. concealed',
+                  'C. investigated',
+                  'D. disregarded',
+                ],
+                correctAnswer: 'A',
+              },
+              {
+                qId: 'q8_p1',
+                text: 'QUESTION 8: Which of the following best expresses the main idea of this passage?',
+                options: [
+                  'A. The history of penicillin as a miracle drug.',
+                  'B. The growing threat of drug-resistant bacteria.',
+                  'C. How medical scientists develop new antibiotics.',
+                  'D. The importance of government funding for drug research.',
+                ],
+                correctAnswer: 'B',
+              },
+              {
+                qId: 'q9_p1',
+                text: 'QUESTION 9: It can be inferred from the passage that it takes a long time for a drug to be made available because',
+                options: [
+                  'A. the cost of development is very high.',
+                  'B. scientists are often surprised by bacterial mutations.',
+                  'C. drug companies are not interested in new antibiotics.',
+                  'D. there is a lengthy testing and approval process.',
+                ],
+                correctAnswer: 'D',
+              },
+              {
+                qId: 'q10_p1',
+                text: 'QUESTION 10: According to paragraph 1, how do antibiotics like penicillin work?',
+                options: [
+                  'A. By blocking molecules that construct bacterial cell walls.',
+                  'B. By directly killing all bacteria in the body.',
+                  'C. By strengthening the human immune system.',
+                  'D. By preventing bacteria from absorbing nutrients.',
+                ],
+                correctAnswer: 'A',
+              },
+            ],
+          },
+          {
+            id: 'passage2',
+            title: 'Bài đọc 2: Giải pháp nóng lên toàn cầu',
+            passage: `The evidence that humans are causing global warming is strong, but the question of what to do about it remains controversial. Economics, sociology, and politics are all important factors in planning for the future. Even if we stopped emitting greenhouse gases (GHGs) today, the Earth would still warm by another degree Fahrenheit or so. But what we do from today forward makes a big difference. Depending on our choices, scientists predict that the Earth could eventually warm by as little as 2.5 degrees or as much as 10 degrees Fahrenheit.
+A commonly cited goal is to stabilize GHG concentrations around 450-550 parts per million (ppm), or about twice pre-industrial levels. This is the point at which many believe the most damaging impacts of climate change can be avoided. Current concentrations are about 380 ppm, which means there isn't much time to lose. According to the IPCC, we'd have to reduce GHG emissions by 50% to 80% of what they're on track to be in the next century to reach this level. Is this possible?
+Many people and governments are already working hard to cut greenhouse gases, and everyone can help. Researchers Stephen Pacala and Robert Socolow at Princeton University have suggested one approach that they call "stabilization wedges." This means reducing GHG emissions from a variety of sources with technologies available in the next few decades, rather than relying on an enormous change in a single area. They suggest 7 wedges that could each reduce emissions, and all of them together could hold emissions at approximately current levels for the next 50 years, putting us on a potential path to stabilize around 500 ppm. There are many possible wedges, including improvements to biofuels, wind/solar power, carbon sequestration, nuclear power, and fuel efficiency.`,
+            questions: [
+              {
+                qId: 'q1_p2',
+                text: 'QUESTION 1: The word "we" in paragraph 2 refers to',
+                options: [
+                  'A. Humans',
+                  'B. Economists, sociologists, and politicians',
+                  'C. Animals',
+                  'D. Scientists',
+                ],
+                correctAnswer: 'A',
+              },
+              {
+                qId: 'q2_p2',
+                text: 'QUESTION 2: According to paragraph 2, how many degrees could the Earth warm up?',
+                options: [
+                  'A. 2.5',
+                  'B. 2.5 or 10',
+                  'C. 10',
+                  'D. From 2.5 to 10',
+                ],
+                correctAnswer: 'D',
+              },
+              {
+                qId: 'q3_p2',
+                text: 'QUESTION 3: According to paragraph 3, why should we stabilize GHG concentrations around 450-550 parts per million?',
+                options: [
+                  'A. To avoid the most serious effects of climate change',
+                  'B. To avoid all damaging impacts of climate change',
+                  'C. To mend the most damaging impacts of climate change',
+                  'D. To stop climate change',
+                ],
+                correctAnswer: 'A',
+              },
+              {
+                qId: 'q4_p2',
+                text: 'QUESTION 4: What does "which" in paragraph 3 refer to? ("Current concentrations are about 380 ppm, which means there isn\'t much time to lose.")',
+                options: [
+                  'A. Current concentrations',
+                  'B. That current concentrations are about 380 ppm',
+                  'C. 380 ppm',
+                  'D. Ppm',
+                ],
+                correctAnswer: 'B',
+              },
+              {
+                qId: 'q5_p2',
+                text: 'QUESTION 5: Why does the author mention Stephen Pacala and Robert Socolow?',
+                options: [
+                  'A. To introduce two researchers in the field.',
+                  'B. To criticize their approach to climate change.',
+                  'C. To introduce a specific approach to reducing GHG emissions.',
+                  'D. To explain the concept of "stabilization wedges".',
+                ],
+                correctAnswer: 'C',
+              },
+              {
+                qId: 'q6_p2',
+                text: 'QUESTION 6: All of the following are mentioned as possible "wedges" EXCEPT',
+                options: [
+                  'A. environment-friendly materials',
+                  'B. biofuels',
+                  'C. wind/solar power',
+                  'D. nuclear power',
+                ],
+                correctAnswer: 'A',
+              },
+              {
+                qId: 'q7_p2',
+                text: 'QUESTION 7: The word "them" in paragraph 5 refers to',
+                options: [
+                  'A. researchers',
+                  'B. technologies',
+                  'C. emissions',
+                  'D. wedges',
+                ],
+                correctAnswer: 'D',
+              },
+              {
+                qId: 'q8_p2',
+                text: 'QUESTION 8: What is the main idea of the passage?',
+                options: [
+                  'A. The causes of global warming and its historical impact.',
+                  'B. The controversy surrounding climate change solutions.',
+                  'C. The urgency of reducing GHG emissions and various approaches to do so.',
+                  'D. The role of scientists in predicting future climate scenarios.',
+                ],
+                correctAnswer: 'C',
+              },
+              {
+                qId: 'q9_p2',
+                text: 'QUESTION 9: The word "sequestering" in paragraph 5 is closest in meaning to',
+                options: [
+                  'A. absorbing and retaining',
+                  'B. isolating',
+                  'C. releasing',
+                  'D. emitting',
+                ],
+                correctAnswer: 'A',
+              },
+              {
+                qId: 'q10_p2',
+                text: 'QUESTION 10: What is the author\'s attitude toward the solutions for climate change?',
+                options: [
+                  'A. Skeptical about their effectiveness.',
+                  'B. Pessimistic about finding viable options.',
+                  'C. Indifferent to the proposed solutions.',
+                  'D. Optimistic about the variety of available options despite drawbacks.',
+                ],
+                correctAnswer: 'D',
+              },
+            ],
+          },
+          {
+            id: 'passage3',
+            title: 'Bài đọc 3: Cảm thụ nghệ thuật',
+            passage: `Art communicates to us primarily through our eyes. We look at art, and we try to find some meaning in the experience. If we are to begin to think about art more seriously, we might do well to become more aware of the process of seeing itself. Science tells us that seeing is a mode of perception, or the recognition and interpretation of sensory data in other words, how information comes in our senses, and what we make of it. In visual perception our eyes take in information in the form of light patterns; the brain processes these patterns to give them meaning. The mechanics of perception work much the same way for everyone, yet in a given situation we do not all see the same things.
+We can take great pleasure in merely looking at art, just as we take pleasure in the view of a distant mountain range or watching the sun set over the ocean. But art, unlike nature, is a human creation. It is one of the many ways we express ourselves and attempt to communicate. A work of art is the product of human intelligence, and we can meet it with our own intelligence on equal footing. This is where study comes in. The understanding of process the how often contributes quite a lot to our appreciation of art. If you understand why painting in watercolor may be different from painting in oil, why clay responds differently to the artist's hands than does wood or glass you will have a richer appreciation of the artist's expression.
+Knowing the place of a work of art in history - what went before and came after can also deepen your understanding. Artists learn to make art by studying the achievements of the past and observing the efforts of their contemporaries. They adapt ideas to serve their own needs and then bequeath those ideas to future generations of artists. For example, Matisse assumed that his audience would know that Venus was the ancient Roman goddess of love. But he also hoped that they would be familiar with one Venus in particular, a famous Greek statue known as the Venus de Milo.
+An artist may create a specific work for any of a thousand reasons. An awareness of the why may give some insight as well. Looking at Van Gogh's The Starry Night, it might help you know that Van Gogh was intrigued by the belief that people journeyed to a star after their death, and that there they continued their lives. "Just as we take the train to get to Tarascon or Rouen," he wrote in a letter, "we take death to reach a star." This knowledge might help you understand why Van Gogh felt so strongly about the night sky, and what his painting might have meant to him. But no matter how much you study, Van Gogh's painting will never mean for you exactly what it meant for him nor should it.`,
+            questions: [
+              {
+                qId: 'q1_p3',
+                text: 'QUESTION 1: The author mentions all of the following ways to enhance the appreciation of art EXCEPT',
+                options: [
+                  'A. Understanding the artistic process',
+                  'B. Becoming familiar with the history',
+                  'C. Experiencing the art by copying',
+                  'D. Knowing about the life of the artist',
+                ],
+                correctAnswer: 'C',
+              },
+              {
+                qId: 'q2_p3',
+                text: 'QUESTION 2: What is the main topic of this passage?',
+                options: [
+                  'A. Visual perception of sensory material',
+                  'B. The historical context for artistic expression',
+                  'C. Studying Van Gogh\'s The Starry Night',
+                  'D. The appreciation of works of art',
+                ],
+                correctAnswer: 'D',
+              },
+              {
+                qId: 'q3_p3',
+                text: 'QUESTION 3: Which of the sentences below best expresses the information in the highlighted statement in the passage? ("The mechanics of perception work much the same way for everyone, yet in a given situation we do not all see the same things.")',
+                options: [
+                  'A. We see images differently because of the mode of perception',
+                  'B. Although we see images differently, the mode of perception is similar.',
+                  'C. Since the mode of perception is similar, we see images in the same way.',
+                  'D. When the mode of perception is the same, we see the same images',
+                ],
+                correctAnswer: 'B',
+              },
+              {
+                qId: 'q4_p3',
+                text: 'QUESTION 4: Why might Van Gogh have painted The Starry Night?',
+                options: [
+                  'A. To symbolize the journey of life after death',
+                  'B. To create a dramatic contrast with the sky',
+                  'C. To place a strong image in the foreground',
+                  'D. To explore the mechanics of perception',
+                ],
+                correctAnswer: 'A',
+              },
+              {
+                qId: 'q5_p3',
+                text: 'QUESTION 5: The word "intrigued" in the passage is closest in meaning to',
+                options: [
+                  'A. confused',
+                  'B. bored',
+                  'C. very interested',
+                  'D. surprised',
+                ],
+                correctAnswer: 'C',
+              },
+              {
+                qId: 'q6_p3',
+                text: 'QUESTION 6: According to the last paragraph, the meaning of a work of art',
+                options: [
+                  'A. is universal and fixed for all viewers.',
+                  'B. is solely determined by the artist\'s intention.',
+                  'C. can only be understood through extensive study.',
+                  'D. is subjective and depends on individual experience and emotion.',
+                ],
+                correctAnswer: 'D',
+              },
+              {
+                qId: 'q7_p3',
+                text: 'QUESTION 7: The word "them" in paragraph 3 refers to',
+                options: [
+                  'A. ideas',
+                  'B. artists',
+                  'C. achievements',
+                  'D. great works of art',
+                ],
+                correctAnswer: 'D',
+              },
+              {
+                qId: 'q8_p3',
+                text: 'QUESTION 8: What did Matisse hope his audience would be familiar with, besides Venus as the goddess of love?',
+                options: [
+                  'A. His other paintings.',
+                  'B. The history of Roman mythology.',
+                  'C. A famous Greek statue known as the Venus de Milo.',
+                  'D. The concept of artistic adaptation.',
+                ],
+                correctAnswer: 'C',
+              },
+              {
+                qId: 'q9_p3',
+                text: 'QUESTION 9: The word "bequeath" in the passage is closest in meaning to',
+                options: [
+                  'A. Make out',
+                  'B. Pass on',
+                  'C. Look over',
+                  'D. Take in',
+                ],
+                correctAnswer: 'B',
+              },
+              {
+                qId: 'q10_p3',
+                text: 'QUESTION 10: What is implied about the appreciation of art in the passage?',
+                options: [
+                  'A. It requires a natural talent for artistic expression.',
+                  'B. It is enhanced by understanding the artist\'s techniques and historical context.',
+                  'C. It is purely an emotional response without intellectual involvement.',
+                  'D. It is best achieved by replicating famous artworks.',
+                ],
+                correctAnswer: 'B',
+              },
+            ],
+          },
+        ];
+
+        // Component cho một câu hỏi
+        const Question = ({ question, selectedAnswers, handleAnswerChange, showResults }) => {
+          const isCorrect = selectedAnswers[question.qId] === question.correctAnswer;
+          const isAnswered = selectedAnswers[question.qId] !== undefined;
+
+          return (
+            <div className={`p-4 mb-4 rounded-lg shadow-sm
+              ${showResults ? (isCorrect ? 'bg-green-100 border border-green-300' : 'bg-red-100 border border-red-300') : 'bg-white border border-gray-200'}
+            `}>
+              <p className="font-semibold text-lg mb-3 text-gray-800">{question.text}</p>
+              <div className="space-y-2">
+                {question.options.map((option, index) => (
+                  <label
+                    key={index}
+                    className={`flex items-center p-2 rounded-md cursor-pointer transition-colors duration-200
+                      ${showResults && option.charAt(0) === question.correctAnswer ? 'bg-green-200 text-green-800 font-medium' : ''}
+                      ${showResults && isAnswered && option.charAt(0) === selectedAnswers[question.qId] && !isCorrect ? 'bg-red-200 text-red-800' : ''}
+                      ${!showResults ? 'hover:bg-gray-50' : ''}
+                    `}
+                  >
+                    <input
+                      type="radio"
+                      name={question.qId}
+                      value={option.charAt(0)}
+                      checked={selectedAnswers[question.qId] === option.charAt(0)}
+                      onChange={() => handleAnswerChange(question.qId, option.charAt(0))}
+                      disabled={showResults}
+                      className="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500"
+                    />
+                    <span className="text-gray-700">{option}</span>
+                  </label>
+                ))}
+              </div>
+              {showResults && !isCorrect && (
+                <p className="mt-3 text-sm font-medium text-green-700">
+                  Đáp án đúng: <span className="font-bold">{question.correctAnswer}</span>
+                </p>
+              )}
+            </div>
+          );
+        };
+
+        // Component chính của ứng dụng
+        const App = () => {
+          const [selectedAnswers, setSelectedAnswers] = useState({});
+          const [showResults, setShowResults] = useState(false);
+          const [score, setScore] = useState(0);
+          const [answeredCount, setAnsweredCount] = useState(0);
+          const [currentPassageIndex, setCurrentPassageIndex] = useState(0); // State để quản lý bài đọc hiện tại
+
+          const currentPassage = quizData[currentPassageIndex];
+
+          // Đếm tổng số câu hỏi của bài đọc hiện tại
+          const getTotalQuestionsCurrentPassage = () => {
+            return currentPassage.questions.length;
+          };
+
+          // Đếm tổng số câu hỏi của toàn bộ bài đọc
+          const getTotalQuestionsOverall = () => {
+            return quizData.reduce((total, passage) => total + passage.questions.length, 0);
+          };
+
+          // Xử lý khi người dùng chọn đáp án
+          const handleAnswerChange = (questionId, answer) => {
+            setSelectedAnswers((prevAnswers) => ({
+              ...prevAnswers,
+              [questionId]: answer,
+            }));
+          };
+
+          // Xử lý khi người dùng nhấn nút "Kiểm tra đáp án"
+          const handleSubmit = () => {
+            let currentScore = 0;
+            let currentAnswered = 0;
+            currentPassage.questions.forEach((question) => {
+              if (selectedAnswers[question.qId] !== undefined) {
+                currentAnswered++;
+                if (selectedAnswers[question.qId] === question.correctAnswer) {
+                  currentScore++;
+                }
+              }
+            });
+
+            setScore(currentScore);
+            setAnsweredCount(currentAnswered);
+            setShowResults(true);
+
+            if (currentAnswered < getTotalQuestionsCurrentPassage()) {
+                const messageBox = document.createElement('div');
+                messageBox.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50';
+                messageBox.innerHTML = `
+                    <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
+                        <p class="text-lg font-semibold mb-4">Bạn chưa trả lời tất cả các câu hỏi của bài đọc này!</p>
+                        <p class="mb-4">Bạn đã trả lời ${currentAnswered} trên tổng số ${getTotalQuestionsCurrentPassage()} câu hỏi.</p>
+                        <button id="closeMessageBox" class="px-5 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">Đóng</button>
+                    </div>
+                `;
+                document.body.appendChild(messageBox);
+
+                document.getElementById('closeMessageBox').onclick = () => {
+                    document.body.removeChild(messageBox);
+                };
+            }
+          };
+
+          // Xử lý chuyển bài đọc
+          const handleNextPassage = () => {
+            if (currentPassageIndex < quizData.length - 1) {
+              setCurrentPassageIndex(prevIndex => prevIndex + 1);
+              setShowResults(false); // Reset kết quả khi chuyển bài
+              setSelectedAnswers({}); // Xóa đáp án đã chọn
+              setScore(0);
+              setAnsweredCount(0);
+            }
+          };
+
+          const handlePrevPassage = () => {
+            if (currentPassageIndex > 0) {
+              setCurrentPassageIndex(prevIndex => prevIndex - 1);
+              setShowResults(false); // Reset kết quả khi chuyển bài
+              setSelectedAnswers({}); // Xóa đáp án đã chọn
+              setScore(0);
+              setAnsweredCount(0);
+            }
+          };
+
+
+          return (
+            <div className="min-h-screen bg-gray-100 p-4 sm:p-6 font-inter flex flex-col">
+              <h1 className="text-4xl font-extrabold text-center text-blue-700 mb-6 border-b-4 border-blue-200 pb-4">
+                Luyện Đọc Tiếng Anh
+              </h1>
+
+              {/* Navigation for passages */}
+              <div className="flex justify-center items-center space-x-4 mb-6">
+                <button
+                  onClick={handlePrevPassage}
+                  disabled={currentPassageIndex === 0}
+                  className="px-6 py-2 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  &larr; Bài đọc trước
+                </button>
+                <span className="text-xl font-bold text-gray-700">
+                  {`Bài đọc ${currentPassageIndex + 1} / ${quizData.length}`}
+                </span>
+                <button
+                  onClick={handleNextPassage}
+                  disabled={currentPassageIndex === quizData.length - 1}
+                  className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Bài đọc tiếp theo &rarr;
+                </button>
+              </div>
+
+              <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
+                {/* Left pane: Reading Passage */}
+                <div className="md:w-1/2 flex-shrink-0 bg-white p-6 rounded-xl shadow-lg mb-6 md:mb-0 md:mr-6 overflow-y-auto max-h-[calc(100vh-180px)]">
+                  <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-gray-200 pb-3">
+                    {currentPassage.title}
+                  </h2>
+                  <div className="bg-blue-50 p-6 rounded-lg shadow-md prose max-w-none text-gray-700 leading-relaxed">
+                    {currentPassage.passage.split('\n').map((paragraph, idx) => (
+                      <p key={idx} className="mb-3">{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right pane: Questions */}
+                <div className="md:w-1/2 flex-shrink-0 bg-white p-6 rounded-xl shadow-lg overflow-y-auto max-h-[calc(100vh-180px)]">
+                  <h3 className="text-2xl font-semibold text-gray-700 mb-5">Câu hỏi:</h3>
+                  {currentPassage.questions.map((question) => (
+                    <Question
+                      key={question.qId}
+                      question={question}
+                      selectedAnswers={selectedAnswers}
+                      handleAnswerChange={handleAnswerChange}
+                      showResults={showResults}
+                    />
+                  ))}
+
+                  <button
+                    onClick={handleSubmit}
+                    className="w-full py-4 bg-blue-600 text-white font-bold text-xl rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 mt-6"
+                    disabled={showResults}
+                  >
+                    {showResults ? 'Đã kiểm tra' : 'Kiểm tra đáp án'}
+                  </button>
+
+                  {showResults && (
+                    <div className="mt-8 p-6 bg-green-50 rounded-lg shadow-lg text-center border-2 border-green-300">
+                      <h2 className="text-3xl font-bold text-green-700 mb-4">Kết quả của bạn</h2>
+                      <p className="text-2xl text-gray-800">
+                        Bạn đã trả lời đúng <span className="font-extrabold text-green-800">{score}</span> trên tổng số <span className="font-extrabold text-blue-800">{getTotalQuestionsCurrentPassage()}</span> câu hỏi của bài này.
+                      </p>
+                      {answeredCount < getTotalQuestionsCurrentPassage() && (
+                          <p className="text-lg text-red-600 mt-2">
+                              Bạn đã bỏ qua {getTotalQuestionsCurrentPassage() - answeredCount} câu hỏi.
+                          </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
