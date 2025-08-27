@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Study Planner — Lộ trình 8 tuần</title>
+  <style>
+    /* Theme variables for light & dark. Dark uses neutral deep blue/teal accents (no purple). */
+    :root{
+      --bg:#f7fafc; --card:#ffffff; --muted:#475569; --text:#0b1220; --accent:#06b6d4; --accent-2:#34d399; --muted-2:#94a3b8;
+      --glass: rgba(2,6,23,0.03);
+    }
+    [data-theme="dark"]{ --bg:#071327; --card:#071827; --muted:#9fb6c6; --text:#e6f6fb; --accent:#06b6d4; --accent-2:#34d399; --muted-2:#7fb0c3; --glass: rgba(255,255,255,0.02); }
+
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+
+    .wrap{max-width:980px;margin:20px auto;padding:18px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    h1{font-size:18px;margin:0}
+    .controls{display:flex;gap:10px;align-items:center}
+    button{padding:8px 12px;border-radius:8px;border:0;background:var(--accent);color:white;cursor:pointer}
+
+    .theme-toggle{display:flex;align-items:center;gap:8px}
+    .toggle-btn{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:6px 8px;border-radius:999px;cursor:pointer}
+
+    .grid{display:grid;grid-template-columns:260px 1fr;gap:18px;margin-top:18px}
+    .sidebar{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 4px 18px rgba(2,6,23,0.04)}
+    .sidebar strong{color:var(--text);display:block;font-size:14px;margin-bottom:8px}
+    .weeklist{display:flex;flex-wrap:wrap;gap:8px}
+    .weekbtn{padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(2,6,23,0.04);cursor:pointer;color:var(--text)}
+    .weekbtn.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border-color:transparent}
+    .weeklist{display:flex;flex-wrap:wrap;gap:8px}
+    .weekbtn{padding:8px;border-radius:8px;background:transparent;border:1px solid rgba(2,6,23,0.04);cursor:pointer}
+    .weekbtn.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border-color:transparent}
+    .summary{margin-top:14px;font-size:13px;color:var(--muted)}
+    .main{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 24px rgba(2,6,23,0.04)}
+    .day{margin-bottom:12px;padding:10px;border-radius:10px;background:linear-gradient(180deg,var(--glass),transparent)}
+    .day h3{margin:0 0 8px 0;font-size:14px}
+    ul.tasks{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+    li.task{display:flex;align-items:flex-start;gap:8px}
+    input[type=checkbox]{transform:scale(1.15);margin-top:4px}
+    .task .meta{font-size:12px;color:var(--muted)}
+    .progressbar{height:10px;background:rgba(2,6,23,0.06);border-radius:999px;overflow:hidden;margin-top:8px}
+    .progress{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%}
+    .row{display:flex;gap:10px;align-items:center}
+    .small{font-size:13px;color:var(--muted)}
+    footer{margin-top:14px;color:var(--muted);font-size:13px}
+    @media (max-width:880px){.grid{grid-template-columns:1fr;}.sidebar{order:2}}
+  </style>
+</head>
+<body>
+  <div class="wrap" id="app">
+    <header>
+      <h1>Study Planner — Lộ trình 8 tuần</h1>
+      <div class="controls">
+        <!-- Fixed start values displayed compactly -->
+        <div class="small" style="margin-right:8px">(Tactics U2 → U24, Destination U22 → U42, Speaking L1→L24, Writing L1→L24)</div>
+        <div class="theme-toggle">
+          <button id="themeBtn" class="toggle-btn" title="Chuyển giao diện">🌗</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <aside class="sidebar">
+        <div><strong>Chọn tuần</strong></div>
+        <div class="weeklist" id="weekList"></div>
+      </aside>
+
+      <main class="main">
+        <div class="row">
+          <div style="flex:1">
+            <strong id="weekTitle">Tuần 1</strong>
+            <div class="small">Tất cả trạng thái lưu trực tiếp trong trình duyệt. Không cần export/import.</div>
+          </div>
+          <div style="width:260px">
+            <div class="small">Tiến độ tuần</div>
+            <div class="progressbar"><div id="weekProgress" class="progress"></div></div>
+            <div class="small" id="weekCounts">0 / 0</div>
+          </div>
+        </div>
+
+        <div id="daysContainer"></div>
+
+        <div style="margin-top:12px">
+          <strong>Tổng tiến độ (8 tuần)</strong>
+          <div class="progressbar"><div id="totalProgress" class="progress"></div></div>
+          <div class="small" id="totalCounts">0 / 0</div>
+        </div>
+      </main>
+    </div>
+
+    <footer>
+      Mẹo: kế hoạch dùng sẵn các giá trị bắt đầu theo tài liệu của bạn.
+    </footer>
+  </div>
+
+<script>
+(function(){
+  // theme management (saved in localStorage)
+  const themeBtn = document.getElementById('themeBtn');
+  const savedTheme = localStorage.getItem('studyPlanner_theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let theme = savedTheme || (prefersDark? 'dark':'light');
+  function applyTheme(t){
+    if(t==='dark') document.documentElement.setAttribute('data-theme','dark');
+    else document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('studyPlanner_theme', t);
+    themeBtn.textContent = t==='dark'? '🌙' : '☀️';
+  }
+  applyTheme(theme);
+  themeBtn.onclick = ()=>{ theme = (theme==='dark')? 'light':'dark'; applyTheme(theme); };
+
+  // Fixed start values as requested
+  const START = { TACTICS: 2, DESTINATION: 22, SPEAK: 1, WRITE: 1 };
+
+  const weekListEl = document.getElementById('weekList');
+  const daysContainer = document.getElementById('daysContainer');
+  const weekTitle = document.getElementById('weekTitle');
+  const weekProgressEl = document.getElementById('weekProgress');
+  const weekCounts = document.getElementById('weekCounts');
+  const totalProgressEl = document.getElementById('totalProgress');
+  const totalCounts = document.getElementById('totalCounts');
+
+  let plan = null;
+  let curWeek = 1;
+
+  function makeWeekButtons(){
+    weekListEl.innerHTML = '';
+    for(let i=1;i<=8;i++){
+      const b = document.createElement('button');
+      b.textContent = 'Tuần '+i;
+      b.className = 'weekbtn' + (i===curWeek? ' active':'');
+      b.onclick = ()=>{curWeek=i; render();}
+      weekListEl.appendChild(b);
+    }
+  }
+
+  function generatePlan(){
+    const startT = START.TACTICS;
+    const startD = START.DESTINATION;
+    const startS = START.SPEAK;
+    const startW = START.WRITE;
+    const weeks = [];
+    let speakCounter = startS;
+    let writeCounter = startW;
+    for(let w=0;w<8;w++){
+      const tBase = startT + w*3;
+      const dBase = startD + w*2;
+      const week = {week: w+1, days: []};
+      week.days.push({name:'Mon',tasks:[
+        {type:'Tactics',label:`Tactics U${tBase} (A) — 25'`},
+        {type:'Destination',label:`Destination U${dBase} (A) — 20'`},
+        {type:'Speaking',label:`Speaking L${speakCounter} — 15'`}
+      ]});
+      week.days.push({name:'Tue',tasks:[
+        {type:'Tactics',label:`Tactics U${tBase} (B) — 20'`},
+        {type:'Destination',label:`Destination U${dBase} (B) — 20'`},
+        {type:'Writing',label:`Writing L${writeCounter} — 20'`}
+      ]});
+      speakCounter++; writeCounter++;
+      week.days.push({name:'Wed',tasks:[
+        {type:'Tactics',label:`Tactics U${tBase+1} (A) — 25'`},
+        {type:'Destination',label:`Destination U${dBase+1} (A) — 20'`},
+        {type:'Speaking',label:`Speaking L${speakCounter} — 15'`}
+      ]});
+      week.days.push({name:'Thu',tasks:[
+        {type:'Tactics',label:`Tactics U${tBase+1} (B) — 20'`},
+        {type:'Destination',label:`Destination U${dBase+1} (B) — 20'`},
+        {type:'Writing',label:`Writing L${writeCounter} — 20'`}
+      ]});
+      speakCounter++; writeCounter++;
+      week.days.push({name:'Fri',tasks:[
+        {type:'Tactics',label:`Tactics U${tBase+2} (A) — 25'`},
+        {type:'Destination',label:`Review Destination U${dBase}–U${dBase+1} — 15'`},
+        {type:'Speaking',label:`Speaking L${speakCounter} — 15'`}
+      ]});
+      week.days.push({name:'Sat',tasks:[
+        {type:'Tactics',label:`Tactics U${tBase+2} (B) — 20'`},
+        {type:'Writing',label:`Writing L${writeCounter} — 20'`},
+        {type:'Reading',label:`Đọc transcript (gạch 6 từ) — 10–15'`}
+      ]});
+      speakCounter++; writeCounter++;
+      week.days.push({name:'Sun',tasks:[
+        {type:'Review',label:`Ôn nghe U${tBase}–U${tBase+2} — 20'`},
+        {type:'Journal',label:`Journal 6–8 câu (viết tay) — 10–15'`},
+        {type:'Flashcard',label:`Flashcard từ/grammar — 10–15'`}
+      ]});
+      weeks.push(week);
+    }
+    const stored = {meta:{startT,startD,startS,startW,generatedAt:Date.now()},weeks:[]};
+    for(const w of weeks){
+      const wObj = {week:w.week,days:[]};
+      for(const d of w.days){
+        const dObj = {name:d.name,tasks:d.tasks.map(t=>({type:t.type,label:t.label,done:false}))};
+        wObj.days.push(dObj);
+      }
+      stored.weeks.push(wObj);
+    }
+    plan = stored;
+    saveToLocal();
+    render();
+  }
+
+  function saveToLocal(){
+    localStorage.setItem('studyPlanner_v1', JSON.stringify(plan));
+  }
+  function loadFromLocal(){
+    const raw = localStorage.getItem('studyPlanner_v1');
+    if(raw){
+      try{plan = JSON.parse(raw);}catch(e){plan=null}
+    }
+    if(!plan) generatePlan();
+  }
+
+  function render(){
+    makeWeekButtons();
+    weekTitle.textContent = 'Tuần '+curWeek;
+    Array.from(document.querySelectorAll('.weekbtn')).forEach((b,i)=>{
+      b.classList.toggle('active', i+1===curWeek);
+    });
+
+    const weekObj = plan.weeks[curWeek-1];
+    daysContainer.innerHTML = '';
+    let totalTasksWeek=0, doneTasksWeek=0;
+    for(const d of weekObj.days){
+      const dayEl = document.createElement('div');
+      dayEl.className='day';
+      const h = document.createElement('h3');
+      h.textContent = d.name;
+      dayEl.appendChild(h);
+      const ul = document.createElement('ul'); ul.className='tasks';
+      d.tasks.forEach((t,ti)=>{
+        totalTasksWeek++;
+        if(t.done) doneTasksWeek++;
+        const li = document.createElement('li'); li.className='task';
+        const cb = document.createElement('input'); cb.type='checkbox'; cb.checked = !!t.done;
+        cb.onchange = ()=>{ t.done = cb.checked; saveToLocal(); render(); };
+        const div = document.createElement('div');
+        const label = document.createElement('div'); label.textContent = t.label;
+        const meta = document.createElement('div'); meta.className='meta'; meta.textContent = t.type;
+        div.appendChild(label); div.appendChild(meta);
+        li.appendChild(cb); li.appendChild(div); ul.appendChild(li);
+      });
+      dayEl.appendChild(ul);
+      daysContainer.appendChild(dayEl);
+    }
+    const pctWeek = totalTasksWeek? Math.round(doneTasksWeek/totalTasksWeek*100):0;
+    weekProgressEl.style.width = pctWeek + '%';
+    weekCounts.textContent = `${doneTasksWeek} / ${totalTasksWeek}`;
+
+    let tot=0, done=0;
+    for(const w of plan.weeks){
+      for(const d of w.days){
+        for(const t of d.tasks){ tot++; if(t.done) done++; }
+      }
+    }
+    const pctTot = tot? Math.round(done/tot*100):0;
+    totalProgressEl.style.width = pctTot + '%';
+    totalCounts.textContent = `${done} / ${tot}`;
+  }
+
+  // Load or create plan
+  loadFromLocal();
+  makeWeekButtons();
+  render();
+})();
+</script>
+</body>
+</html>
